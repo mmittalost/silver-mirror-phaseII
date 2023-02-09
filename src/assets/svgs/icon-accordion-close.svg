@@ -1,0 +1,13 @@
+<svg class="icon-accordion-close" width="16px" height="2px" viewBox="0 0 16 2" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-1082.000000, -476.000000)" fill="#000000" fill-rule="nonzero">
+            <g transform="translate(328.000000, 455.000000)">
+                <g transform="translate(740.000000, 0.000000)">
+                    <g transform="translate(14.221935, 14.221379)">
+                        <path d="M3.21684306,13.116843 C3.00189598,13.3317895 2.65412395,13.3317895 2.43893664,13.116843 C2.22398956,12.9018964 2.22398956,12.5541244 2.43893664,12.3389366 L12.3399684,2.43996883 C12.5549149,2.22502123 12.902687,2.22502123 13.1178748,2.43996883 C13.3328213,2.65491539 13.3328213,3.00268742 13.1178748,3.2178742 L3.21684306,13.116843 Z" transform="translate(7.778406, 7.778406) rotate(45.000000) translate(-7.778406, -7.778406) "></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

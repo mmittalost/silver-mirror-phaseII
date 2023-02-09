@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Icon/UI/Form Dropdown</title>
+    <g id="📖-Booking-Flow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icon/UI/Form-Dropdown" transform="translate(11.000000, 11.000000) scale(-1, 1) translate(-11.000000, -11.000000) ">
+            <circle id="Oval" fill="#404040" cx="11" cy="11" r="11"></circle>
+            <g id="" transform="translate(7.875638, 9.500000)" fill="#F9F9F9" fill-rule="nonzero">
+                <path d="M6.06576885,1.06640637 L3.58334686,3.56640637 C3.44467486,3.68945301 3.28451867,3.75 3.12436248,3.75 C2.96420629,3.75 2.80444051,3.68896484 2.6823702,3.56689453 L0.199948206,1.06689453 C0.00374521284,0.888671875 -0.0497782681,0.619140565 0.0469794419,0.38671881 C0.143737152,0.154297054 0.371822968,0 0.624362185,0 L5.60678418,0 C5.8595186,0 6.08764346,0.151972771 6.18451829,0.385742188 C6.28139313,0.619511604 6.2454557,0.888671875 6.06576855,1.06640637 L6.06576885,1.06640637 Z" id="Path"></path>
+            </g>
+        </g>
+    </g>
+</svg>

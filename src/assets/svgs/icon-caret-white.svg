@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="9px" height="6px" viewBox="0 0 9 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>chevron</title>
+    <g id="📖-Booking-Flow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Congrats" transform="translate(-900.000000, -528.000000)" fill="#FFFFFF" fill-rule="nonzero">
+            <g id="Details" transform="translate(760.000000, 304.000000)">
+                <g id="Details-Panel" transform="translate(0.000000, 36.000000)">
+                    <g id="Add-to-Calendar" transform="translate(30.000000, 172.000000)">
+                        <g id="Text-+-Drop" transform="translate(20.000000, 11.000000)">
+                            <g id="chevron" transform="translate(90.281264, 5.530639)">
+                                <path d="M8.29295525,0.807251491 L4.56053326,4.38342378 C4.43553338,4.48889182 4.31834588,4.53186081 4.21873638,4.53186081 C4.11912689,4.53186081 3.9849473,4.48852108 3.89471302,4.40123604 L0.144713016,0.807251491 C-0.0427087227,0.629516997 -0.0488024035,0.315064051 0.130650791,0.145141938 C0.308873447,-0.0428463436 0.606822761,-0.0489599921 0.79295555,0.131104448 L4.21873668,3.41467307 L7.64451781,0.133423068 C7.83006469,-0.0466354109 8.12850216,-0.0405223585 8.30682257,0.147459962 C8.48631481,0.315064051 8.48045567,0.629516997 8.29295555,0.807251491 L8.29295525,0.807251491 Z" id="Path"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

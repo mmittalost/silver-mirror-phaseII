@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="6px" height="6px" viewBox="0 0 6 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Path</title>
+    <g id="📖-Booking-Flow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Services---Single---Filter---30-Min" transform="translate(-512.000000, -809.000000)" fill="#000000" fill-rule="nonzero">
+            <g id="Service-Card-04" transform="translate(268.000000, 746.000000)">
+                <g id="Best-Seller-Copy-2" transform="translate(234.000000, 57.000000)">
+                    <g id="" transform="translate(10.000000, 6.625000)">
+                        <path d="M0.75,3 L0.466406286,2.71640611 C0.167578161,2.41757816 0,2.01328129 0,1.59140611 C0,0.712499857 0.712500036,0 1.59140629,0 C2.01328129,0 2.41757816,0.167577982 2.71640629,0.466406107 L3,0.75 L3.28359389,0.466406107 C3.58242202,0.167577982 3.98671889,0 4.40859389,0 C5.28750014,0 6,0.712499857 6,1.59140611 C6,2.01328129 5.83242202,2.41757816 5.53359389,2.71640611 L5.25,3 L3,5.25 L0.75,3 Z" id="Path"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
