@@ -17,6 +17,7 @@ import { ReviewComponent } from './review/review.component';
 import { CongratsComponent } from './congrats/congrats.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { LocationGroupPipe } from './location-group.pipe';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     ServicesComponent,
     SchedulingComponent,
     ReviewComponent,
-    CongratsComponent
+    CongratsComponent,
+    LocationGroupPipe
   ],
   imports: [
     BrowserModule,
