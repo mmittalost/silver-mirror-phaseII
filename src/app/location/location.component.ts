@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SilverMirrorService } from '../silver-mirror.service';
 
 @Component({
   selector: 'app-location',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./location.component.scss']
 })
 export class LocationComponent {
+  constructor(
+    public silverService: SilverMirrorService
+) { }
 
 }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule,ReactiveFormsModule  }   from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BookAnAppointmentComponent } from './book-an-appointment/book-an-appointment.component';
@@ -15,6 +15,8 @@ import { ServicesComponent } from './services/services.component';
 import { SchedulingComponent } from './scheduling/scheduling.component';
 import { ReviewComponent } from './review/review.component';
 import { CongratsComponent } from './congrats/congrats.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +36,10 @@ import { CongratsComponent } from './congrats/congrats.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

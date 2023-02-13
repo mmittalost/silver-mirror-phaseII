@@ -21,7 +21,7 @@ import { CongratsComponent } from './congrats/congrats.component';
       { path: 'scheduling', component: SchedulingComponent },
       { path: 'review', component: ReviewComponent },
       { path: 'congrats', component: CongratsComponent },
-      { path: '**', redirectTo: '/' }
+      { path: '**', redirectTo: '/location' } 
     ])],
   exports: [RouterModule]
 })

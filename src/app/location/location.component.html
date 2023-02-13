@@ -36,86 +36,12 @@
 
     <ul class="accordions">
         
-        <!--New York-->
+     
         
-        <li>
+        <li *ngFor="let location of silverService.locationList$ | async">
             <h3>
                 <button class="flex-container heading-6">
-                    New York City
-                    <span>
-                     Vinay Sir
-                    </span>
-                </button>
-            </h3>
-            
-            <ul class="content">
-                <li class="flex-container">
-                    <h4>
-                        <strong>Flatiron</strong>
-                        <span>20 West 22nd Street</span>
-                    </h4>
-                    
-                    <a class="btn black small" href="#">Book Now</a>
-                </li>
-                
-                <li class="flex-container">
-                    <h4>
-                        <strong>Manhattan West</strong>
-                        <span>431 5th Avenue</span>
-                    </h4>
-                    
-                    <a class="btn black small" href="#">Book Now</a>
-                </li>
-                
-                <li class="flex-container">
-                    <h4>
-                        <strong>Brooklyn Heights</strong>
-                        <span>703 6th Avenue</span>
-                    </h4>
-                    
-                    <a class="btn black small" href="#">Book Now</a>
-                </li>
-                
-                <li class="flex-container">
-                    <h4>
-                        <strong>Upper East Side</strong>
-                        <span>862 Lexington Avenue</span>
-                    </h4>
-                    
-                    <a class="btn black small" href="#">Book Now</a>
-                </li>
-                
-                <li class="flex-container">
-                    <h4>
-                        <strong>Bryant Park</strong>
-                        <span>431 5th Avenue</span>
-                    </h4>
-                    
-                    <a class="btn black small" href="#">Book Now</a>
-                </li>
-            </ul>
-        </li>
-        
-        <!--D.C.-->
-        
-        <li>
-            <h3>
-                <button class="flex-container heading-6">
-                    Washington, D.C.
-                    <span>
-                      Vinay sir
-                    </span>
-                </button>
-            </h3>
-            <article></article>
-        </li>
-        
-        <!--Miami-->
-        
-        <li>
-            <h3>
-                <button class="flex-container heading-6">
-                    Miami
+                    {{location.node.address.city}}
                     <span>
                         
                       Vinay Sir
@@ -128,5 +54,3 @@
 </div>
 </section>
 </main>
-
-<app-footer></app-footer>

@@ -13,10 +13,20 @@
         
                     <h1 class="heading-4">Login or Create an Account</h1>
         
-                    <form action="" class="login-form">
-                        <input type="email" id="email" name="email" placeholder="Email Address">
-                        <input disabled class="btn" type="submit" value="Continue">
-                    </form>
+                    <div class="login-form" *ngIf='silverService.otp==0'>
+                        <input type="email" id="email" name="email" placeholder="Email Address" [(ngModel)]="email">
+                        <input  class="btn" type="submit" value="Continue" (click)="generateOTP()">
+                       OTP: {{silverService.otp}}<br>
+                       Loginstatus:{{loginStatus}}
+                     <!--  {{silverService.locationList$|async}} -->
+                    </div>
+                    <div class="login-form" *ngIf='silverService.otp>0'>
+                        <input type="text" id="email" name="otp" placeholder="Enter OTP" [(ngModel)]="enteredotp">
+                       
+                        <input  class="btn" type="submit" value="Continue" (click)="checkOTP()">
+                       OTP: {{silverService.otp}}<br>
+                       Loginstatus:{{loginStatus}}
+                    </div>
                 </article>
         
                 <div class="grid">
@@ -27,5 +37,3 @@
         </section>
 
     </main>
-
-    <app-footer></app-footer>
