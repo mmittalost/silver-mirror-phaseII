@@ -36,17 +36,21 @@
 
     <ul class="accordions">
         
-     
-        
-        <li *ngFor="let location of silverService.locationList$ | async">
+        <li *ngFor="let location of silverService.locationList$ | async let i = index;" 
+        (click)='this.silverService.selectLocation(location.node.id)'>
             <h3>
-                <button class="flex-container heading-6">
-                    {{location.node.address.city}}
+               <!--  <button class="flex-container heading-6">
+                    app
                     <span>
                         
                       Vinay Sir
                     </span>
-                </button>
+                </button> -->
+                <button class="flex-container heading-6 accordion" (click) = "expand(i)">{{location.node.address.city}}</button>
+                    <div class="panel"
+                        [ngClass]="{ 'visible' : currentIndex === i }">
+                        <p>{{location.node.id}}</p>
+                    </div>
             </h3>
             <article></article>
         </li>

@@ -2,7 +2,7 @@
 
 <section class="services-flow">
 	<div class="container grid">
-        <div class="breadcrumbs-container">
+        <div class="breadcrumbs-container" style="width: 100%;">
 
             <a class="back-btn" href="#"><span class="accessibility">Back</span></a>
         
@@ -36,15 +36,11 @@
                 <li><button>Microneedling</button></li>
                 <li><button>Peels</button></li>
             </ul>
-
-
-
-
-            <ul class="services-list">
-                <li>
+          <ul class="services-list">
+                <li  *ngFor="let service of silverService.serviceList$ | async">
                     <button class="add-to-cart desktop-only">
                     vinay sir
-                                
+                         <br><br>
                         <span class="accessibility">Add this service to your cart</span>
                     </button>
                         
@@ -52,7 +48,7 @@
                         <img src="../../assets/images/signature-facial.jpg" alt=""/>
                         
                         <div>
-                            <h2 class="heading-6">Signature Facial</h2>
+                            <h2 class="heading-6">{{service.node.name}}00</h2>
                             <span class="pill fill small yellow">Best Seller</span>
                             <p class="pill">All Types</p>
                             <span class="heading-6 small price">$95</span>
@@ -62,67 +58,7 @@
                     </button>
                 </li>
                 
-                <li>
-                    <button class="add-to-cart desktop-only">
-                        Vinay Sir
-                                
-                        <span class="accessibility">Add this service to your cart</span>
-                    </button>
-                        
-                    <button class="flex-container open-services-pop">
-                        <img src="../../assets/images/party-prep-facial.jpg" alt=""/>
-                        
-                        <div>
-                            <h2 class="heading-6">Party-Prep Facial</h2>
-                            <span class="pill fill small yellow">Best Seller</span>
-                            <p class="pill">All Types</p>
-                            <span class="heading-6 small price">$85</span>
-                        </div>
-                        
-                        
-                    </button>
-                </li>
-                
-                <li>
-                    <button class="add-to-cart desktop-only">
-                        Vinay Sir
-                                
-                        <span class="accessibility">Add this service to your cart</span>
-                    </button>
-                        
-                    <button class="flex-container open-services-pop">
-                        <img src="../../assets/images/just-for-men-facial.jpg" alt=""/>
-                        
-                        <div>
-                            <h2 class="heading-6">Just For Men Facial</h2>
-                            <p class="pill">All Types</p>
-                            <span class="heading-6 small price">$105</span>
-                        </div>
-                        
-                        
-                    </button>
-                </li>
-                
-                <li>
-                    <button class="add-to-cart desktop-only">
-                       Vinay Sir
-                                
-                        <span class="accessibility">Add this service to your cart</span>
-                    </button>
-                        
-                    <button class="flex-container open-services-pop">
-                        <img src="../../assets/images/brightening-facial.jpg" alt=""/>
-                        
-                        <div>
-                            <h2 class="heading-6">Brightening Facial</h2>
-                            <span class="pill fill small pink">Giving</span>
-                            <p class="pill">Dull, Dry Skin</p>
-                            <span class="heading-6 small price">$105</span>
-                        </div>
-                        
-                        
-                    </button>
-                </li>
+            
             </ul>
 
 
