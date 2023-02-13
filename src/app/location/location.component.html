@@ -4,18 +4,7 @@
     <section class="location-flow">
         <div class="container grid">
 
-            <div class="breadcrumbs-container">
-
-                <a class="back-btn" href="#"><span class="accessibility">Back</span></a>
-            
-                <ul class="flex-container breadcrumbs">
-                    <li class="completed"><a class="eyebrow small" href="#">Location</a></li>
-                    <li class="completed"><a class="eyebrow small" href="#">Who's Coming</a></li>
-                    <li class="completed"><a class="eyebrow small" href="#">Services</a></li>
-                    <li class="active"><a class="eyebrow small" href="#">Scheduling</a></li>
-                    <li><a class="eyebrow small" href="#">Review</a></li>
-                </ul>
-            </div>
+            <app-breadcrumbs class="breadcrumbs-container"></app-breadcrumbs>
 
 
             <div class="flex-container quick-rebook">
@@ -36,16 +25,26 @@
 
     <ul class="accordions">
         
-        <li *ngFor="let location of silverService.locationList$  | async   let i = index;" 
+        <li *ngFor="let location of silverService.locationList$ | async let i = index;" 
         (click)='this.silverService.selectLocation(location.node.id)'>
             <h3>
+               <!--  <button class="flex-container heading-6">
+                    app
+                    <span>
+                        
+                      Vinay Sir
+                    </span>
+                </button> -->
                 <button class="flex-container heading-6 accordion" (click) = "expand(i)">{{location.node.address.city}}</button>
                     <div class="panel"
                         [ngClass]="{ 'visible' : currentIndex === i }">
                         <p>{{location.node.id}}</p>
                     </div>
             </h3>
-            <article></article>
+            <div class="panel" [ngClass]="{ 'visible' : currentIndex === i }">
+                <div class="content">{{location.node.id}}</div>
+            </div>
+
         </li>
     </ul>
 </div>
