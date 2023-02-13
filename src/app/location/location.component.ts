@@ -10,5 +10,12 @@ export class LocationComponent {
   constructor(
     public silverService: SilverMirrorService
 ) { }
-
+currentIndex: any;
+expand(index: any) {
+  if(this.currentIndex === index) {
+    this.currentIndex = null;
+    return;
+  }
+  this.currentIndex = index;
+}
 }

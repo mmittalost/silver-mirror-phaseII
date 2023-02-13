@@ -7,29 +7,47 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class SilverMirrorService {
+  apiURL:any="http://blvd.ost.agency";
+  //apiURL:any="http://localhost:50000";
   otp:any='';
   locationList$: BehaviorSubject<any> = new BehaviorSubject([]);
   serviceList$: BehaviorSubject<any> = new BehaviorSubject([]);
   getClientByEmail$: BehaviorSubject<any> = new BehaviorSubject([]);
   addNewClient$: BehaviorSubject<any> = new BehaviorSubject([]);
+  loginStatus:boolean=false;
+  selectedLocation: string='';
   constructor(private http:HttpClient,private router:Router) {
     this.getLocations();
    }
    getLocations() {
     this.http
-      .get('http://blvd.ost.agency/get_locations')
+      .get(this.apiURL+'/get_locations')
       .subscribe((res: any) => {
         this.locationList$.next(res.data.locations.edges);
         console.log(res.data);
       });
   }
 
-  getServices() {
+  createCart(id:any) {
+    const payload = {
+      locationID:id,
+      client_id:''
+    }; 
     this.http
-      .get('http://blvd.ost.agency/get_services')
+      .post('http://localhost:50000/create_cart',payload)
       .subscribe((res: any) => {
-        this.serviceList$.next(res.data);
-        console.log(res.data);
+        localStorage.setItem('cartID',res.data.createCart.cart.id);
+      });
+  }
+  cartDetail(){
+    const payload = {
+      cartID:localStorage.getItem('cartID'),
+      client_id:''
+    }; 
+    this.http
+      .post('http://localhost:50000/get_cart_detail',payload)
+      .subscribe((res: any) => {
+        console.log(res);
       });
   }
   getClientByEmail(email:any) {
@@ -66,5 +84,9 @@ export class SilverMirrorService {
        // this.serviceList$.next(res.data);
         console.log(">>",res);
       });
+  }
+  selectLocation(id:any){
+    localStorage.setItem('selectedLocation',id);
+    this.createCart(id);
   }
 }

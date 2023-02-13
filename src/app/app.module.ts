@@ -16,7 +16,7 @@ import { SchedulingComponent } from './scheduling/scheduling.component';
 import { ReviewComponent } from './review/review.component';
 import { CongratsComponent } from './congrats/congrats.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
   declarations: [
@@ -39,7 +39,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxSkeletonLoaderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

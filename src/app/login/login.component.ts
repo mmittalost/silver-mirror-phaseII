@@ -12,7 +12,7 @@ export class LoginComponent {
   email:any='';
   otp:any='';
   enteredotp:any='';
-  loginStatus:boolean=false;
+ 
   constructor(public silverService: SilverMirrorService,private router: Router) {
    
    }
@@ -24,10 +24,10 @@ export class LoginComponent {
   {
     console.log(localStorage.getItem('otp') , this.enteredotp);    
     if (localStorage.getItem('otp') == this.enteredotp) {      
-      this.loginStatus = true;      
+      this.silverService.loginStatus = true;      
     }
       else {      
-        this.loginStatus = false;      
+        this.silverService.loginStatus = false;      
        }      
        
   }
