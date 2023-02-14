@@ -7,11 +7,11 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class SilverMirrorService {
-  apiURL:any="http://blvd.ost.agency";
-  //apiURL:any="http://localhost:50000";
+  //apiURL:any="http://blvd.ost.agency";
+  apiURL:any="http://localhost:50000";
   otp:any='';
   locationList$: BehaviorSubject<any> = new BehaviorSubject([]);
-  serviceList$: BehaviorSubject<any> = new BehaviorSubject([]);
+  cartDetail$: BehaviorSubject<any> = new BehaviorSubject([]);
   getClientByEmail$: BehaviorSubject<any> = new BehaviorSubject([]);
   addNewClient$: BehaviorSubject<any> = new BehaviorSubject([]);
   loginStatus:boolean=false;
@@ -34,7 +34,7 @@ export class SilverMirrorService {
       client_id:''
     }; 
     this.http
-      .post('http://localhost:50000/create_cart',payload)
+      .post(this.apiURL+'/create_cart',payload)
       .subscribe((res: any) => {
         localStorage.setItem('cartID',res.data.createCart.cart.id);
       });
@@ -45,9 +45,10 @@ export class SilverMirrorService {
       client_id:''
     }; 
     this.http
-      .post('http://localhost:50000/get_cart_detail',payload)
+      .post(this.apiURL+'/get_cart_detail',payload)
       .subscribe((res: any) => {
-        console.log(res);
+        this.cartDetail$.next(res.data.cart.availableCategories);
+        console.log(">>",res);
       });
   }
   getClientByEmail(email:any) {
@@ -55,7 +56,7 @@ export class SilverMirrorService {
       emails:[email]
     };    
     this.http
-      .post('http://localhost:50000/get_client_by_email',payload)
+      .post(this.apiURL+'/get_client_by_email',payload)
       .subscribe((res: any) => {
         this.getClientByEmail$.next(res);
         console.log("resl",res.data.clients.edges.length);
@@ -79,7 +80,7 @@ export class SilverMirrorService {
     }}; 
     console.log(">>Pay",payload); 
     this.http
-      .post('http://localhost:50000/createClient',payload)
+      .post(this.apiURL+'/createClient',payload)
       .subscribe((res: any) => {
        // this.serviceList$.next(res.data);
         console.log(">>",res);

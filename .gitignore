@@ -1,3 +1,11 @@
+
+# Compiled output
+/dist
+/tmp
+/out-tsc
+/bazel-out
+/.angular
+
 # Logs
 logs
 *.log

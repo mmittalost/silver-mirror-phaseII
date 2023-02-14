@@ -22,9 +22,9 @@
                 <li><button>Peels</button></li>
             </ul>
 
-            <ul class="time-filters desktop-only">
-                <li><button class="pill fill active">30-Minute</button></li>
-                <li><button class="pill fill">50-Minute</button></li>
+            <ul class="time-filters desktop-only"  *ngFor="let service of silverService.cartDetail$ | async">
+                <li><button class="pill fill active">{{service.name}}</button></li>
+                <!-- <li><button class="pill fill">50-Minute</button></li> -->
             </ul>
 
 
@@ -36,8 +36,12 @@
                 <li><button>Microneedling</button></li>
                 <li><button>Peels</button></li>
             </ul>
+            <ul class="time-filters desktop-only"  *ngFor="let service of silverService.cartDetail$ | async">
+                <li><button class="pill fill active">{{service.name}}</button></li>
+                <!-- <li><button class="pill fill">50-Minute</button></li> -->
+           
           <ul class="services-list">
-                <li  *ngFor="let service of silverService.serviceList$ | async">
+                <li  *ngFor="let servicedtl of service.availableItems">
                     <button class="add-to-cart desktop-only">
                     vinay sir
                          <br><br>
@@ -48,7 +52,7 @@
                         <img src="../../assets/images/signature-facial.jpg" alt=""/>
                         
                         <div>
-                            <h2 class="heading-6">{{service.node.name}}00</h2>
+                            <h2 class="heading-6">{{servicedtl.name}}</h2>
                             <span class="pill fill small yellow">Best Seller</span>
                             <p class="pill">All Types</p>
                             <span class="heading-6 small price">$95</span>
@@ -62,7 +66,7 @@
             </ul>
 
 
-
+        </ul>
 
 
 
