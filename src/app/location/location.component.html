@@ -41,7 +41,7 @@
                 <button class="flex-container heading-6 accordion" (click) = "expand(i)">{{location.key}}</button>
                     <div class="panel" [ngClass]="{ 'visible' : currentIndex === i }">
                         <p *ngFor="let loc of location.value" (click)='this.silverService.selectLocation(loc.id)'>
-                            {{loc.name}}</p>
+                            {{loc.name}}</p> 
 
                     </div>
             </h3>
