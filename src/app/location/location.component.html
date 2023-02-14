@@ -25,11 +25,11 @@
 
     <ul class="accordions">
         
-        <li *ngFor="let location of silverService.locationList$ | async let i = index;" 
+        <li *ngFor="let location of silverService.locationList$ | async | locationGroup :'city' let i = index;" 
         (click)='this.silverService.selectLocation(location.node.id)' [ngClass]="{ 'active' : currentIndex === i }">
             <h3>
 
-                <button class="flex-container heading-6 accordion" (click) = "expand(i)">{{location.node.address.city}}
+                <button class="flex-container heading-6 accordion" (click) = "expand(i)">{{location.key}}
                     <span>
                         <svg class="icon-accordion-open" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -58,7 +58,16 @@
                     
             </h3>
             <div class="panel" [ngClass]="{ 'visible' : currentIndex === i }">
-                <div class="content">{{location.node.id}}</div>
+                <div class="content">
+                 
+                 
+                    <p *ngFor="let loc of location.value" (click)='this.silverService.selectLocation(loc.id)'>
+                        {{loc.name}}<br>
+                    {{loc.address.line1}}  <a (click)='this.silverService.selectLocation(loc.id)' 
+                    class="btn black small" href="#">Book Now</a>
+                    
+                    </p> 
+                </div>
             </div>
 
         </li>
