@@ -22,18 +22,37 @@
                 <li><button>Peels</button></li>
             </ul>
 
-           <ul>
-                <li (click)="facialName = service.name" class="time-filters desktop-only"  
-                *ngFor="let service of silverService.cartDetail$ | async "><button [class.active]="facialName === service.name"
-                     class="pill fill" >{{serviceName(service.name )}}</button></li>
-                 
+           <ul class="time-filters desktop-only">
+                <li (click)="facialName = service.name" *ngFor="let service of silverService.cartDetail$ | async ">
+                    <button [class.active]="facialName === service.name" class="pill fill" >{{serviceName(service.name )}}</button>
+                </li>
+            </ul>
+            <!--Mobile Tabs/Filters-->
+            <ul class="mobile-only mobile-services-tabs">
+                <li (click)="facialName = service.name" *ngFor="let service of silverService.cartDetail$ | async ">
+                    <button [class.active]="facialName === service.name">{{serviceName(service.name )}}</button>
+                </li>
             </ul> 
 
           <ul class="services-list">
                 <li  *ngFor="let servicedtl of silverService.cartDetail$ | async | facialFilter:facialName">
                     <button class="add-to-cart desktop-only">
-                    vinay sir
-                         <br><br>
+                        <svg class="icon-accordion-open" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(-14.000000, -14.000000)" fill="#000000" fill-rule="nonzero">
+                                    <g transform="translate(14.221935, 14.220650)">
+                                        <path d="M13.1171807,13.1177869 C12.9022342,13.3327334 12.5544622,13.3327334 12.3392743,13.1177869 L7.77874366,8.55622501 L3.21718126,13.1177869 C3.00223418,13.3327334 2.65446215,13.3327334 2.43927484,13.1177869 C2.22432776,12.9028403 2.22432776,12.5550683 2.43927484,12.3398805 L7.00186845,7.77934981 L2.43996249,3.21778689 C2.22501541,3.00284033 2.22501541,2.6550683 2.43996249,2.43988152 C2.65490957,2.22493391 3.0026816,2.22493391 3.21786891,2.43988152 L7.77874366,7.0024746 L12.3403066,2.44091272 C12.5552531,2.22596512 12.9030252,2.22596512 13.118213,2.44091272 C13.3331595,2.65585928 13.3331595,3.00363131 13.118213,3.21881809 L8.55561887,7.77934981 L13.1171807,12.3409127 C13.3337439,12.5540371 13.3337439,12.9046625 13.1171807,13.1177869 Z" transform="translate(7.778834, 7.778834) rotate(45.000000) translate(-7.778834, -7.778834) "></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                        <svg class="icon-selected" width="16px" height="12px" viewBox="0 0 16 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(-15.000000, -16.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                    <path d="M21.1176306,27.3299268 C21.0069191,27.4421027 20.8604941,27.5 20.7140686,27.5 C20.5676431,27.5 20.4216464,27.4434775 20.3101491,27.3303619 L15.167407,22.1196216 C14.9441977,21.893461 14.9441977,21.5268997 15.167407,21.3011013 C15.3906163,21.075303 15.7523941,21.0749407 15.9752464,21.3011013 L20.7140691,26.1032319 L30.0245757,16.6696205 C30.247785,16.4434598 30.6095628,16.4434598 30.8324146,16.6696205 C31.0552664,16.8957811 31.0566952,17.2630668 30.8316996,17.4874174 L21.1176306,27.3299268 Z"></path>
+                                </g>
+                            </g>
+                        </svg>
                         <span class="accessibility">Add this service to your cart</span>
                     </button>
                         
