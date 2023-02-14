@@ -2279,6 +2279,7 @@ aside .btn {
 	border-radius: 16px;
 	gap: 20px;
 	padding: 23px 30px 30px;
+	border: 1px solid transparent;
 }
 
 .accordions li .content h4 {
@@ -2293,6 +2294,25 @@ aside .btn {
 	display: block;
 }
 
+.accordions li .panel .content li:not(.active):hover {
+	background-color: var(--white);
+	border-color: var(--bright-blue);
+}
+
+.accordions li .panel .content li.active {
+	background-color: var(--light-blue);
+	position: relative;
+}
+
+.accordions li .panel .content li.active:after {
+	background: url('assets/svgs/icon-selected.svg') no-repeat;
+	content: '';
+	height: 44px;
+	position: absolute;
+	right: -22px;
+	top: -22px;
+	width: 44px;
+}
 /***************************************************************************************************************************************************************************************/
 
 /*WHO'S COMING STYLES*/
@@ -4861,7 +4881,7 @@ section.congrats {
 		transform: translate3d(-50%, -50%, 0);
 		width: 15px;
 	}
-
+	
 	/***Who's Coming***/
 
 	.whos-coming h2 {
