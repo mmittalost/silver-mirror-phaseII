@@ -58,16 +58,17 @@
                     
             </h3>
             <div class="panel" [ngClass]="{ 'visible' : currentIndex === i }">
-                <div class="content">
+                <ul class="content">
                  
                  
-                    <p *ngFor="let loc of location.value" (click)='this.silverService.selectLocation(loc.id)'>
-                        {{loc.name}}<br>
-                    {{loc.address.line1}}  <a (click)='this.silverService.selectLocation(loc.id)' 
-                    class="btn black small" href="#">Book Now</a>
-                    
-                    </p> 
-                </div>
+                    <li class="flex-container" *ngFor="let loc of location.value" (click)='this.silverService.selectLocation(loc.id)'>
+                        <h4>
+                            <strong>{{loc.name}}</strong>
+                            <span>{{loc.address.line1}}</span>
+                        </h4>
+                        <a (click)='this.silverService.selectLocation(loc.id)' class="btn black small" href="#">Book Now</a>                 
+                    </li> 
+                </ul>
             </div>
 
         </li>
