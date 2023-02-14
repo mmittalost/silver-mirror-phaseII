@@ -18,6 +18,7 @@ import { CongratsComponent } from './congrats/congrats.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { LocationGroupPipe } from './location-group.pipe';
+import { FacialFilterPipe } from './facial-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { LocationGroupPipe } from './location-group.pipe';
     SchedulingComponent,
     ReviewComponent,
     CongratsComponent,
-    LocationGroupPipe
+    LocationGroupPipe,
+    FacialFilterPipe
   ],
   imports: [
     BrowserModule,

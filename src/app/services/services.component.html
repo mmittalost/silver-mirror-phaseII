@@ -22,10 +22,12 @@
                 <li><button>Peels</button></li>
             </ul>
 
-            <ul class="time-filters desktop-only"  *ngFor="let service of silverService.cartDetail$ | async">
-                <li><button class="pill fill active">{{service.name}}</button></li>
-                <!-- <li><button class="pill fill">50-Minute</button></li> -->
-            </ul>
+           <ul
+           (click)="facialName = service.name" class="time-filters desktop-only"  
+           *ngFor="let service of silverService.cartDetail$ | async ">
+                <li  [ngClass]="{'active': facialName === '1. Facials 30 Minutes'}" ><button class="pill fill ">{{service.name}}</button></li>
+                 <!--<li><button class="pill fill">50-Minute</button></li> -->
+            </ul> 
 
 
 
@@ -36,12 +38,12 @@
                 <li><button>Microneedling</button></li>
                 <li><button>Peels</button></li>
             </ul>
-            <ul class="time-filters desktop-only"  *ngFor="let service of silverService.cartDetail$ | async">
-                <li><button class="pill fill active">{{service.name}}</button></li>
+           <!-- <ul class="time-filters desktop-only"  *ngFor="let service of silverService.cartDetail$ | async">-->
+                <!--<li><button class="pill fill active">{{service.name}}</button></li>-->
                 <!-- <li><button class="pill fill">50-Minute</button></li> -->
            
           <ul class="services-list">
-                <li  *ngFor="let servicedtl of service.availableItems">
+                <li  *ngFor="let servicedtl of silverService.cartDetail$ | async | facialFilter:facialName">
                     <button class="add-to-cart desktop-only">
                     vinay sir
                          <br><br>
@@ -61,15 +63,8 @@
                         
                     </button>
                 </li>
-                
-            
+
             </ul>
-
-
-        </ul>
-
-
-
             </div>
 
 

@@ -7,8 +7,8 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class SilverMirrorService {
-  //apiURL:any="http://blvd.ost.agency";
-  apiURL:any="http://localhost:50000";
+  apiURL:any="http://blvd.ost.agency";
+  //apiURL:any="http://localhost:50000";
   otp:any='';
   locationList$: BehaviorSubject<any> = new BehaviorSubject([]);
   cartDetail$: BehaviorSubject<any> = new BehaviorSubject([]);
