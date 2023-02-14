@@ -16,6 +16,7 @@ export class SilverMirrorService {
   addNewClient$: BehaviorSubject<any> = new BehaviorSubject([]);
   loginStatus:boolean=false;
   selectedLocation: string='';
+  noOfGuest:any='';
   constructor(private http:HttpClient,private router:Router) {
     this.getLocations();
    }
@@ -33,10 +34,13 @@ export class SilverMirrorService {
       locationID:id,
       client_id:''
     }; 
+    console.log("Pay",payload);
     this.http
       .post(this.apiURL+'/create_cart',payload)
       .subscribe((res: any) => {
+        console.log(res);
         localStorage.setItem('cartID',res.data.createCart.cart.id);
+        this.router.navigate(['/whoscoming']);
       });
   }
   cartDetail(){
@@ -88,6 +92,8 @@ export class SilverMirrorService {
   }
   selectLocation(id:any){
     localStorage.setItem('selectedLocation',id);
+    console.log("ID",id);
     this.createCart(id);
+  
   }
 }

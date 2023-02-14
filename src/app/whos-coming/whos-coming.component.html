@@ -7,30 +7,32 @@
 	<div class="container grid">
 		
 		<!--Breadcrumbs-->
-        <div class="breadcrumbs-container">
-
-            <a class="back-btn" href="#"><span class="accessibility">Back</span></a>
-        
-            <ul class="flex-container breadcrumbs">
-                <li class="completed"><a class="eyebrow small" href="#">Location</a></li>
-                <li class="completed"><a class="eyebrow small" href="#">Who's Coming</a></li>
-                <li class="completed"><a class="eyebrow small" href="#">Services</a></li>
-                <li class="active"><a class="eyebrow small" href="#">Scheduling</a></li>
-                <li><a class="eyebrow small" href="#">Review</a></li>
-            </ul>
-        </div>
+        <app-breadcrumbs class="breadcrumbs-container"></app-breadcrumbs>
 		
 		<h2 class="heading-4">Who should we expect?</h2>
 		
 		<ul class="grid">
 			<li>
-				<button class="eyebrow">Just Me</button>
+				<button [ngClass]="statusMe ? 'active' : ''" class="eyebrow" (click)="whosComingMe('statusMe')">Just Me</button>
 			</li>
 			
 			<li>
-				<button class="eyebrow">Me &amp; Guests</button>
+				<button [ngClass]="statusMeandGuest ? 'active' : ''" class="eyebrow" (click)="whosComingMeandGuest('statusMeandGuest')">Me &amp; Guests</button>
 			</li>
 		</ul>
+		<div class="guest-counter">
+			<div *ngIf="statusMeandGuestDropdown">
+			<label class="pill" for="guest-count">How Many Guests?</label>
+		
+			<select id="guest-count" [(ngModel)]="guestCount">
+				<option value="1" selected="selected">1 Guest</option>
+				<option value="2">2 Guests</option>
+				<option value="3">3 Guests</option>
+			</select>
+		</div>
+			<input  type="submit" class="btn" value="Continue" *ngIf="btnStatus" (click)="gotoServices()">
+			<input  type="submit" class="btn" value="Continue" *ngIf="!btnStatus" disabled>
+		</div>
 		
 	</div>
 </section>

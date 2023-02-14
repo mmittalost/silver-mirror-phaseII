@@ -18,4 +18,13 @@ expand(index: any) {
   }
   this.currentIndex = index;
 }
+locationSelected(id:any){
+  if(localStorage.getItem('selectedLocation')==id)
+  {
+    return "active";
+  }
+  else{
+    return "";
+  }
+}
 }

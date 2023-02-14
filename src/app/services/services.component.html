@@ -2,18 +2,8 @@
 
 <section class="services-flow">
 	<div class="container grid">
-        <div class="breadcrumbs-container" style="width: 100%;">
-
-            <a class="back-btn" href="#"><span class="accessibility">Back</span></a>
-        
-            <ul class="flex-container breadcrumbs">
-                <li class="completed"><a class="eyebrow small" href="#">Location</a></li>
-                <li class="completed"><a class="eyebrow small" href="#">Who's Coming</a></li>
-                <li class="completed"><a class="eyebrow small" href="#">Services</a></li>
-                <li class="active"><a class="eyebrow small" href="#">Scheduling</a></li>
-                <li><a class="eyebrow small" href="#">Review</a></li>
-            </ul>
-        </div>
+       <!--Breadcrumbs-->
+       <app-breadcrumbs class="breadcrumbs-container"></app-breadcrumbs>
         <div class="content-container">
             <ul class="small services-tabs desktop-only">
                 <li class="active"><button>Facials</button></li>
@@ -21,7 +11,15 @@
                 <li><button>Microneedling</button></li>
                 <li><button>Peels</button></li>
             </ul>
-
+            <div class="guest-different-services">
+				<input checked="" id="guest-different" type="checkbox">
+				<label for="guest-different">My guests want different services</label>
+			</div>
+            <ul class="guest-tabs">
+                <li class="active"><button class="pill">Me </button></li>
+                <li><button class="pill">Guest 1 </button></li>
+                <li><button class="pill">Guest 2 </button></li>
+            </ul>
            <ul class="time-filters desktop-only">
                 <li (click)="facialName = service.name" *ngFor="let service of silverService.cartDetail$ | async ">
                     <button [class.active]="facialName === service.name" class="pill fill" >{{serviceName(service.name )}}</button>
@@ -33,7 +31,7 @@
                     <button>{{serviceName(service.name )}}</button>
                 </li>
             </ul> 
-
+            
           <ul class="services-list">
                 <li  *ngFor="let servicedtl of silverService.cartDetail$ | async | facialFilter:facialName">
                     <button class="add-to-cart desktop-only">
