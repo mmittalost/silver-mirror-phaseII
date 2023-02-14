@@ -7,11 +7,15 @@ import { SilverMirrorService } from '../silver-mirror.service';
   styleUrls: ['./services.component.scss']
 })
 export class ServicesComponent {
-  facialName = "1. Facials 30 Minutes";
+  facialName = "Facials 30 Minutes";
   constructor(
     public silverService: SilverMirrorService
 ) { }
 ngOnInit() {
   this.silverService.cartDetail()
+}
+serviceName(service:any){
+ return service.replace('Facials ','')
+
 }
 }

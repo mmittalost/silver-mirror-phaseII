@@ -25,8 +25,9 @@
            <ul
            (click)="facialName = service.name" class="time-filters desktop-only"  
            *ngFor="let service of silverService.cartDetail$ | async ">
-                <li  [ngClass]="{'active': facialName === '1. Facials 30 Minutes'}" ><button class="pill fill ">{{service.name}}</button></li>
-                 <!--<li><button class="pill fill">50-Minute</button></li> -->
+                <li><button [class.active]="facialName === service.name"
+                     class="pill fill" >{{serviceName(service.name )}}</button></li>
+                 
             </ul> 
 
 
@@ -57,7 +58,7 @@
                             <h2 class="heading-6">{{servicedtl.name}}</h2>
                             <span class="pill fill small yellow">Best Seller</span>
                             <p class="pill">All Types</p>
-                            <span class="heading-6 small price">$95</span>
+                            <span class="heading-6 small price">${{servicedtl.listPrice/100 | number }}</span>
                         </div>
                         
                         
