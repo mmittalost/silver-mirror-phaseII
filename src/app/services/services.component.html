@@ -29,8 +29,8 @@
             </ul>
             <!--Mobile Tabs/Filters-->
             <ul class="mobile-only mobile-services-tabs">
-                <li (click)="facialName = service.name" *ngFor="let service of silverService.cartDetail$ | async ">
-                    <button [class.active]="facialName === service.name">{{serviceName(service.name )}}</button>
+                <li  [class.active]="facialName === service.name" (click)="facialName = service.name" *ngFor="let service of silverService.cartDetail$ | async ">
+                    <button>{{serviceName(service.name )}}</button>
                 </li>
             </ul> 
 
