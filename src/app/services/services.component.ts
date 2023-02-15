@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { SilverMirrorService } from '../silver-mirror.service';
-import { AlertComponent } from '../alert/alert.component';
+import { ModalComponent  } from '../modal/modal.component';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+
 
 
 
@@ -11,11 +13,16 @@ import { AlertComponent } from '../alert/alert.component';
 })
 export class ServicesComponent {
   facialName = "Facials 30 Minutes";
+  modalRef: MdbModalRef<ModalComponent> | null = null;
   constructor(
-    public silverService: SilverMirrorService
+    public silverService: SilverMirrorService,private modalService: MdbModalService
 ) { }
 ngOnInit() {
   this.silverService.cartDetail()
+  
+}
+openModal() {
+  this.modalRef = this.modalService.open(ModalComponent)
 }
 serviceName(service:any){
  return service.replace('Facials ','')

@@ -20,6 +20,9 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { LocationGroupPipe } from './location-group.pipe';
 import { FacialFilterPipe } from './facial-filter.pipe';
 import { AlertComponent } from './alert/alert.component';
+import { MdbCheckboxModule } from 'mdb-angular-ui-kit/checkbox';
+import { ModalComponent } from './modal/modal.component';
+import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +41,7 @@ import { AlertComponent } from './alert/alert.component';
     LocationGroupPipe,
     FacialFilterPipe,
     AlertComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +50,8 @@ import { AlertComponent } from './alert/alert.component';
     ReactiveFormsModule,
     HttpClientModule,
     NgxSkeletonLoaderModule,
+    MdbCheckboxModule,
+    MdbModalModule
   ],
   entryComponents: [
     AlertComponent,
