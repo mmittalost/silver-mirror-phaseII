@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { SilverMirrorService } from '../silver-mirror.service';
-import { AlertComponent } from '../alert/alert.component';
 
 
 

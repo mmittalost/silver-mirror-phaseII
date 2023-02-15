@@ -19,7 +19,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { LocationGroupPipe } from './location-group.pipe';
 import { FacialFilterPipe } from './facial-filter.pipe';
-import { AlertComponent } from './alert/alert.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +36,6 @@ import { AlertComponent } from './alert/alert.component';
     CongratsComponent,
     LocationGroupPipe,
     FacialFilterPipe,
-    AlertComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,9 +44,6 @@ import { AlertComponent } from './alert/alert.component';
     ReactiveFormsModule,
     HttpClientModule,
     NgxSkeletonLoaderModule,
-  ],
-  entryComponents: [
-    AlertComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
