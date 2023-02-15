@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { SilverMirrorService } from '../silver-mirror.service';
+<<<<<<< HEAD
 import { ModalComponent  } from '../modal/modal.component';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 
+=======
+>>>>>>> ea6a8d43a443e541376843947f819293397c7fc1
 
 
 

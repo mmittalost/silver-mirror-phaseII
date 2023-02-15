@@ -19,10 +19,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { LocationGroupPipe } from './location-group.pipe';
 import { FacialFilterPipe } from './facial-filter.pipe';
+<<<<<<< HEAD
 import { AlertComponent } from './alert/alert.component';
 import { MdbCheckboxModule } from 'mdb-angular-ui-kit/checkbox';
 import { ModalComponent } from './modal/modal.component';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
+=======
+>>>>>>> ea6a8d43a443e541376843947f819293397c7fc1
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,8 +43,11 @@ import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
     CongratsComponent,
     LocationGroupPipe,
     FacialFilterPipe,
+<<<<<<< HEAD
     AlertComponent,
     ModalComponent
+=======
+>>>>>>> ea6a8d43a443e541376843947f819293397c7fc1
   ],
   imports: [
     BrowserModule,
@@ -52,9 +58,6 @@ import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
     NgxSkeletonLoaderModule,
     MdbCheckboxModule,
     MdbModalModule
-  ],
-  entryComponents: [
-    AlertComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
