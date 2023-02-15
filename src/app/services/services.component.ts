@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { SilverMirrorService } from '../silver-mirror.service';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
-import{ModalComponent} from '../modal/modal.component'
+import{ModalComponent} from '../modal/modal.component';
+import{ServiceDetailModelComponent} from '../service-detail-model/service-detail-model.component'
 
 
 @Component({
@@ -12,6 +13,7 @@ import{ModalComponent} from '../modal/modal.component'
 export class ServicesComponent {
   facialName = "Facials 30 Minutes";
   modalRef: MdbModalRef<ModalComponent> | null = null;
+  modalRefService: MdbModalRef<ServiceDetailModelComponent> | null = null;
 
   config = {
     animation: true,
@@ -24,15 +26,23 @@ export class ServicesComponent {
     keyboard: true,
     modalClass: 'modal-top-right'
   }
+  configService:any= {
+    animation: true,
+    backdrop: true,
+    containerClass: 'right',
+    data: {
+      
+    },
+    ignoreBackdropClick: false,
+    keyboard: true,
+    modalClass: 'modal-top-right'
+  }
   constructor(
     public silverService: SilverMirrorService,private modalService: MdbModalService
 ) { }
-openModal() {
-  this.modalRef = this.modalService.open(ModalComponent, this.config);
-}
+
 ngOnInit() {
   this.silverService.cartDetail()
-  
 }
 
 serviceName(service:any){
@@ -51,5 +61,22 @@ guestList(){
     });
 }
 
+openModal() {
+  this.modalRef = this.modalService.open(ModalComponent, this.config);
+}
+
+serviceDetail(servicedtl:any) {
+  this.configService.data.service=servicedtl;
+  this.modalRefService = this.modalService.open(ServiceDetailModelComponent, this.configService);
+}
+
+addToCart(elem: any){
+  /* let box = document.getElementById(elem);
+  if (box != null) {
+    console.log("box.classList",box.classList);
+    box.classList.add('active');
+  } */
+  elem.active=!elem.active;
+}
 
 }

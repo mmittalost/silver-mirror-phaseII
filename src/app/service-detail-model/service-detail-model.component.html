@@ -1,0 +1,19 @@
+<!--Popup-->
+
+<div class="popup-screen"></div>
+
+<div class="popup card-details">
+	<button class="close" (click)="modalRefService.close()"><span class="accessibility">Close Popup</span></button>
+	
+	<img src="images/signature-facial.jpg" alt=""/>
+	
+	<article>
+		<h2 class="heading-6 flex-container">{{service.name}} <span class="heading-6 small">${{service.listPrice/100 | number }}</span></h2>
+		<span class="pill fill outline">30-Minute</span>
+		
+		<p class="x-small skin-types"><span class="pill">Skin Type</span> All types, including rosacea or sensitive skin.</p>
+		<p class="x-small">{{service.description}}</p>
+		
+		<button class="btn black">Add Service</button>
+	</article>
+</div>

@@ -22,6 +22,8 @@ import { FacialFilterPipe } from './facial-filter.pipe';
 import { MdbCheckboxModule } from 'mdb-angular-ui-kit/checkbox';
 import { ModalComponent } from './modal/modal.component';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
+import { ServiceDetailModelComponent } from './service-detail-model/service-detail-model.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +41,7 @@ import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
     CongratsComponent,
     LocationGroupPipe,
     FacialFilterPipe,
+    ServiceDetailModelComponent,
   ],
   imports: [
     BrowserModule,

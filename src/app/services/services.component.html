@@ -37,8 +37,8 @@
             </ul> 
             
           <ul class="services-list">
-                <li  *ngFor="let servicedtl of silverService.cartDetail$ | async | facialFilter:facialName">
-                    <button class="add-to-cart desktop-only">
+                <li #{{servicedtl.id}} id="{{servicedtl.id}}" [ngClass]="servicedtl.active?'active':''" *ngFor="let servicedtl of silverService.cartDetail$ | async | facialFilter:facialName">
+                    <button class="add-to-cart desktop-only" (click)="addToCart(servicedtl)">
                         <svg class="icon-accordion-open" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                 <g transform="translate(-14.000000, -14.000000)" fill="#000000" fill-rule="nonzero">
@@ -58,7 +58,7 @@
                         <span class="accessibility">Add this service to your cart</span>
                     </button>
                         
-                    <button class="flex-container open-services-pop">
+                    <button class="flex-container open-services-pop"  (click)="serviceDetail(servicedtl)">
                         <img src="../../assets/images/signature-facial.jpg" alt=""/>
                         
                         <div>
