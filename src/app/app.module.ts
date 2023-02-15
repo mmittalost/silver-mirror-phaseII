@@ -19,7 +19,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { LocationGroupPipe } from './location-group.pipe';
 import { FacialFilterPipe } from './facial-filter.pipe';
-
 import { AlertComponent } from './alert/alert.component';
 @NgModule({
   declarations: [
