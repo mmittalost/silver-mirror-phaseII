@@ -14,9 +14,10 @@ export class SilverMirrorService {
   cartDetail$: BehaviorSubject<any> = new BehaviorSubject([]);
   getClientByEmail$: BehaviorSubject<any> = new BehaviorSubject([]);
   addNewClient$: BehaviorSubject<any> = new BehaviorSubject([]);
+  guestList$: BehaviorSubject<any> = new BehaviorSubject([]);
   loginStatus:boolean=false;
   selectedLocation: string='';
-  noOfGuest:any='';
+  noOfGuest:number=0;
   constructor(private http:HttpClient,private router:Router) {
     this.getLocations();
    }
@@ -53,6 +54,29 @@ export class SilverMirrorService {
       .subscribe((res: any) => {
         this.cartDetail$.next(res.data.cart.availableCategories);
         console.log(">>",res);
+      });
+  }
+  createGuest(){
+    const payload = {
+      cartID:localStorage.getItem('cartID'),
+      "client":{
+        "firstName":"",
+        "lastName":"",
+        "mobileNumber":"",
+        "email":"guest@silvermirror.com"
+        },
+      client_id:''
+    }; 
+    const request = this.http.post(this.apiURL+'/create_cart_guest',payload);
+    const requestArray:any = [];
+    let i;
+    for(i = 1; i<=this.noOfGuest;i++) {
+      requestArray.push(request);
+   }
+    console.log("Payload",payload);
+    forkJoin(requestArray).subscribe((res: any) => {
+      console.log(">>>>>>>>><<<<<",res[0]);
+        this.guestList$.next(res[0].data.createCartGuest.cart.guests);
       });
   }
   getClientByEmail(email:any) {

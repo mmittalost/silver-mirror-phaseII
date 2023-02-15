@@ -7,18 +7,22 @@
         <div class="content-container">
             <ul class="small services-tabs desktop-only">
                 <li class="active"><button>Facials</button></li>
-                <li><button>Add-ons</button></li>
+                <li><button (click)="dialog.showModal()">Add-ons</button></li>
                 <li><button>Microneedling</button></li>
                 <li><button>Peels</button></li>
             </ul>
+      
             <div class="guest-different-services">
 				<input checked="" id="guest-different" type="checkbox">
 				<label for="guest-different">My guests want different services</label>
 			</div>
             <ul class="guest-tabs">
+                
                 <li class="active"><button class="pill">Me </button></li>
-                <li><button class="pill">Guest 1 </button></li>
-                <li><button class="pill">Guest 2 </button></li>
+                <li *ngFor="let guest of silverService.guestList$ | async; index as i">
+                    <button class="pill" id="{{guest.id}}">Guest {{i+1}}</button>
+                </li>
+                
             </ul>
            <ul class="time-filters desktop-only">
                 <li (click)="facialName = service.name" *ngFor="let service of silverService.cartDetail$ | async ">
@@ -71,7 +75,33 @@
             </ul>
             </div>
 
+            <ng-template #mymodal let-modal>
 
+                <div class="modal-header">
+              
+                  <h4 class="modal-title" id="modal-basic-title">Bootstrap Modal</h4>
+              
+                  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              
+                    <span aria-hidden="true">×</span>
+              
+                  </button>
+              
+                </div>
+              
+                <div class="modal-body">
+              
+                  This is example from ItSolutionStuff.com
+              
+                </div>
+              
+                <div class="modal-footer">
+              
+                  <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+              
+                </div>
+              
+              </ng-template>
 
             <aside class="empty">
                 <div class="cart-info">
@@ -109,3 +139,20 @@
             <p class="x-small">Not sure what to book?</p>
             <p class="xx-small"><a class="text-link" href="#">Ask Aida.</a> Our AI skin assessment will pick a facial for you.</p>
         </div>
+
+
+
+<dialog #dialog>
+  <div>
+    Your country:
+    <select>
+      <option value="default">Choose…</option>
+      <option>United States</option>
+      <option>France</option>
+      <option>Australia</option>
+    </select>
+  </div>
+  <div>
+    <button (click)="dialog.close()">OK</button>
+  </div>
+</dialog>
