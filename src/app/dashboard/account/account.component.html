@@ -1,0 +1,92 @@
+<section class="client-portal account-info">
+	<div class="container grid">
+		
+		<!--Sidebar-->
+		<!-- <?php include('includes/client-portal/sidebar.php'); ?> -->
+		
+		<!--Content-->
+		<div class="content">
+			<h1 class="heading-4">Welcome back, Tamara!</h1>
+			
+			<form [formGroup]="accountForm" class="flex-container" (ngSubmit)="updateClient()">
+				<div class="column-2">
+					<label class="pill" for="first-name">First Name*</label>
+					<input formControlName="firstName" required type="text" id="first-name" placeholder="First Name"/>
+				</div>
+				
+				<div class="column-2">
+					<label class="pill" for="last-name">Last Name*</label>
+					<input formControlName="lastName" required type="text" id="last-name" placeholder="Last Name"/>
+				</div>
+				
+				<div class="column-2">
+					<label class="pill" for="email-address">Email Address*</label>
+					<input formControlName="email" required type="email" id="email-address" placeholder="example@email.com"/>
+				</div>
+				
+				<!-- <div class="column-2">
+					<label class="pill" for="street-address">Street Address</label>
+					<input type="text" id="street-address" placeholder="Enter-Address"/>
+				</div>
+				
+				<div class="column-3">
+					<label class="pill" for="city">City</label>
+					<input type="text" id="city" placeholder="Enter City"/>
+				</div>
+				
+				<div class="column-3">
+					<label class="pill" for="state">State</label>
+					
+					<select id="state">
+						<option>Select State</option>
+					</select>
+				</div>
+				
+				<div class="column-3">
+					<label class="pill" for="zip">Zip/Postal Code</label>
+					<input type="text" id="zip" placeholder="Enter Zip"/>
+				</div>
+				
+				<div class="column-2 help-text">
+					<label class="pill" for="display-name">Display Name*</label>
+					<input required type="text" id="display-name" placeholder="tamara-1856"/>
+					<p class="xx-small">How your name is displayed in the account section and reviews</p>
+				</div> -->
+				
+				<div class="column-2">
+					<label class="pill" for="birthdate">Date of Birth</label>
+					<input formControlName="dob" type="text" id="birthdate" placeholder="Enter Birthday (YYYY-MM-DD)"/>
+				</div>
+				
+				<!-- <div class="column-2">
+					<label class="pill" for="pref-location">Preferred Location</label>
+					
+					<select id="pref-location">
+						<option>Bryant Park</option>
+					</select>
+				</div> -->
+				
+				<div class="column-2">
+					<label class="pill" for="phone-num">Phone Number*</label>
+					<input formControlName="mobilePhone" required type="tel" id="phone-num" placeholder="555.555.5555"/>
+				</div>
+				
+				<div class="column-1 credit-card-options">
+					<h3>Payment Method</h3>
+					
+					<ul id="card-detail-options" class="x-small">
+						<li class="active visa">
+							<strong>VISA •••• 0458 <span>Expires 11/23</span></strong>
+							<span class="pill fill small">Expired</span>
+						</li>
+					</ul>
+				</div>
+				
+				<button [disabled]="accountForm.invalid" class="btn" type="submit">Save Changes</button>
+				
+			</form>
+			
+		</div>
+		
+	</div>
+</section>

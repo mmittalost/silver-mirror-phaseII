@@ -25,6 +25,11 @@ import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 import { ServiceDetailModelComponent } from './service-detail-model/service-detail-model.component';
 import { CartComponent } from './cart/cart.component';
 import { CommonModule } from '@angular/common';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AppointmentComponent } from './dashboard/appointment/appointment.component';
+import { DashboardHeaderComponent } from './dashboard/dashboard-header/dashboard-header.component';
+import { PastAppointmentsPipe, UpcomingAppointmentsPipe } from './dashboard/appointments.pipe';
+import { AccountComponent } from './dashboard/account/account.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +50,13 @@ import { CommonModule } from '@angular/common';
     FacialFilterPipe,
     ServiceDetailModelComponent,
     CartComponent,
-    ModalComponent
+    ModalComponent,
+    DashboardComponent,
+    AppointmentComponent,
+    DashboardHeaderComponent,
+    PastAppointmentsPipe,
+    UpcomingAppointmentsPipe,
+    AccountComponent,
   ],
   imports: [
     BrowserModule,
