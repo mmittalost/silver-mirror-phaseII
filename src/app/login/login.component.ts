@@ -23,11 +23,13 @@ export class LoginComponent {
   checkOTP()
   {
     console.log(localStorage.getItem('otp') , this.enteredotp);    
-    if (localStorage.getItem('otp') == this.enteredotp) {      
-      this.silverService.loginStatus = true;      
+    if (localStorage.getItem('otp') == this.enteredotp) {  
+      this.silverService.loginStatus='true';    
+      localStorage.setItem('loginStatus','true');
+      this.router.navigate(['/location']);   
     }
       else {      
-        this.silverService.loginStatus = false;      
+        localStorage.setItem('loginStatus','false');    
        }      
        
   }

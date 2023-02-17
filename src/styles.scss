@@ -6695,3 +6695,14 @@ dialog {
 	height: 300px;
 	width: 400px;
  }*/
+ #time-filters-desktop-only li:last-child,
+ #time-filters-desktop-only li:nth-last-child(2), 
+ #time-filters-desktop-only li:nth-last-child(3){
+	display: none;
+  } 
+
+  #small-services-tabs-desktop-only li:last-child,
+  #small-services-tabs-desktop-only li:nth-last-child(4), 
+  #small-services-tabs-desktop-only li:nth-last-child(5){
+	display: none;
+  } 

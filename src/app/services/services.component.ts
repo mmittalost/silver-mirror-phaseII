@@ -20,7 +20,7 @@ export class ServicesComponent {
     backdrop: true,
     containerClass: 'right',
     data: {
-      title: 'Custom title'
+      
     },
     ignoreBackdropClick: false,
     keyboard: true,
@@ -42,9 +42,14 @@ export class ServicesComponent {
 ) { }
 
 ngOnInit() {
-  this.silverService.cartDetail()
+  this.silverService.cartDetail();
 }
-
+activeButton=0;
+guestSelect(event:number,guestID:any){
+  this.activeButton = event;
+  this.silverService.guestID=guestID;
+  this.silverService.guestName="Guest"+event;
+}
 serviceName(service:any){
  return service.replace('Facials ','')
 
@@ -57,7 +62,7 @@ createRange(){
 }
 guestList(){
   this.silverService.guestList$.subscribe((res: any) => {
-    console.log("mmm",res[0]);
+    console.log("mmm",res);
     });
 }
 
@@ -71,11 +76,9 @@ serviceDetail(servicedtl:any) {
 }
 
 addToCart(elem: any){
-  /* let box = document.getElementById(elem);
-  if (box != null) {
-    console.log("box.classList",box.classList);
-    box.classList.add('active');
-  } */
+  console.log("ADDCART CONDITION",this.silverService.cartDetails$.value);
+  this.silverService.addItemInCart(elem.id);
+  this.modalRef = this.modalService.open(ModalComponent, this.config);
   elem.active=!elem.active;
 }
 

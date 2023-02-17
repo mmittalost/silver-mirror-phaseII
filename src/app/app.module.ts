@@ -23,6 +23,8 @@ import { MdbCheckboxModule } from 'mdb-angular-ui-kit/checkbox';
 import { ModalComponent } from './modal/modal.component';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 import { ServiceDetailModelComponent } from './service-detail-model/service-detail-model.component';
+import { CartComponent } from './cart/cart.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { ServiceDetailModelComponent } from './service-detail-model/service-deta
     LocationGroupPipe,
     FacialFilterPipe,
     ServiceDetailModelComponent,
+    CartComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +55,8 @@ import { ServiceDetailModelComponent } from './service-detail-model/service-deta
     HttpClientModule,
     NgxSkeletonLoaderModule,
     MdbCheckboxModule,
-    MdbModalModule
+    MdbModalModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

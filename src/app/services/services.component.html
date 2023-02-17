@@ -5,11 +5,10 @@
        <!--Breadcrumbs-->
        <app-breadcrumbs class="breadcrumbs-container"></app-breadcrumbs>
         <div class="content-container">
-            <ul class="small services-tabs desktop-only">
+            <ul class="small services-tabs desktop-only" id="small-services-tabs-desktop-only">
                 <li class="active"><button>Facials</button></li>
                 <li><button (click)="openModal()">Add-ons</button></li>
-                <li><button id="myBtn">Microneedling</button></li>
-                <li><button>Peels</button></li>
+                <li [class.active]="facialName === service.name" (click)="facialName = service.name" *ngFor="let service of silverService.cartDetail$ | async "><button id="myBtn">{{service.name}}</button></li>
             </ul>
    
             <div class="guest-different-services">
@@ -18,13 +17,15 @@
 			</div>
             <ul class="guest-tabs">
                 
-                <li class="active"><button class="pill">Me </button></li>
-                <li *ngFor="let guest of silverService.guestList$ | async; index as i">
+                <li (click)="guestSelect(0,'me')" 
+                [class.active]="activeButton === 0"><button class="pill">Me </button></li>
+                <li [class.active]="activeButton === i+1" (click)="guestSelect(i+1,guest.id)" 
+                *ngFor="let guest of silverService.guestList$ | async; index as i">
                     <button class="pill" id="{{guest.id}}">Guest {{i+1}}</button>
                 </li>
                 
             </ul>
-           <ul class="time-filters desktop-only">
+           <ul class="time-filters desktop-only" id="time-filters-desktop-only">
                 <li (click)="facialName = service.name" *ngFor="let service of silverService.cartDetail$ | async ">
                     <button [class.active]="facialName === service.name" class="pill fill" >{{serviceName(service.name )}}</button>
                 </li>
@@ -102,33 +103,9 @@
                 </div>
               
               </ng-template>
-
-            <aside class="empty">
-                <div class="cart-info">
-                    <h2 class="eyebrow small flex-container">Cart <span>0 Service Added</span></h2>
-                    
-                    <span class="heading-6 small empty-cart">Your cart is empty</span>
-                    
-                    <ul class="small">
-                        <li class="flex-container">
-                            <span class="pill location">Location</span>
-                            <span>
-                                <strong>NYC - Flatiron</strong>
-                                <address>20 W 22nd St</address>
-                                <a href="tel:212-702-8742">(212) 702-8742</a>
-                            </span>
-                            
-                            <span class="cost">
-                                <button class="edit-location"><span class="accessibility">Edit Location</span></button>
-                            </span>
-                        </li>
-                    </ul>
-                    
-                </div>
-                
-                <a class="btn inactive" href="#">Add to Continue</a>
-            </aside>
-
+              <aside class="empty">
+                    <app-cart></app-cart>
+               </aside>
 
         </div>
         </section>

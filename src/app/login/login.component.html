@@ -16,16 +16,13 @@
                     <div class="login-form" *ngIf='silverService.otp==0'>
                         <input type="email" id="email" name="email" placeholder="Email Address" [(ngModel)]="email">
                         <input  class="btn" type="submit" value="Continue" (click)="generateOTP()">
-                       OTP: {{silverService.otp}}<br>
-                       Loginstatus:{{silverService.loginStatus}}
-                     <!--  {{silverService.locationList$|async}} -->
+                       OTP: {{silverService.otp}}<br><br>
                     </div>
                     <div class="login-form" *ngIf='silverService.otp>0'>
                         <input type="text" id="email" name="otp" placeholder="Enter OTP" [(ngModel)]="enteredotp">
                        
                         <input  class="btn" type="submit" value="Continue" (click)="checkOTP()">
-                       OTP: {{silverService.otp}}<br>
-                       Loginstatus:{{silverService.loginStatus}}
+                       OTP: {{silverService.otp}}<br><br>
                     </div>
                 </article>
         

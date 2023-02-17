@@ -1,111 +1,43 @@
-<!-- <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-    <button
-      type="button"
-      class="btn-close"
-      aria-label="Close"
-      (click)="modalRef.close()"
-    ></button>
-  </div>
-  <div class="modal-body">...</div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="modalRef.close()">
-      Close
-    </button>
-    <button type="button" class="btn btn-primary">Save changes</button>
-  </div> -->
-
-  <!--Popup-->
-
 <div class="popup-screen"></div>
 
 <div class="popup addon-pop">
 	<button class="close" (click)="modalRef.close()"><span class="accessibility">Close Popup</span></button>
-	
+
 	<div class="scroller">
 		<h2 class="heading-5">Targeted add-ons for a truly custom facial.</h2>
-		
-		<h3><span>Deeper Exfoliation Enhancements</span></h3>
-		
-		<ul class="grid">
-			<li>
-				<button>
-					<h4>
-						Dermaplanning
-						<span class="pill small fill yellow">Best Seller</span>
-						<span class="price">$85</span>
-					</h4>
-					
-					<p class="xx-small">Lorem ipsum dolor amet adipiscing elit maecenas varius tortor nibh. <a href="#">Learn more</a>.</p>
-				</button>
-			</li>
-			
-			<li>
-				<button class="active">
-					<h4>
-						Antioxidant Peel
-						<span class="price">$45</span>
-					</h4>
-					
-					<p class="xx-small">Lorem ipsum dolor amet adipiscing elit maecenas varius tortor nibh. <a href="#">Learn more</a>.</p>
-				</button>
-			</li>
-		</ul>
-		
-		<h3><span>CUSTOM-FOR-ALL ENHANCEMENTS</span></h3>
-		
-		<ul class="grid">
-			<li>
-				<button>
-					<h4>
-						Extra Extractions
- 						<span class="price">$25</span>
-					</h4>
-					
-					<p class="xx-small">Lorem ipsum dolor amet adipiscing elit maecenas varius tortor nibh. <a href="#">Learn more</a>.</p>
-				</button>
-			</li>
-			
-			<li>
-				<button>
-					<h4>
-						Custom Jelly Mask
-						<span class="pill small fill yellow">Best Seller</span>
-						<span class="price">$45</span>
-					</h4>
-					
-					<p class="xx-small">Lorem ipsum dolor amet adipiscing elit maecenas varius tortor nibh. <a href="#">Learn more</a>.</p>
-				</button>
-			</li>
-			
-			<li>
-				<button>
-					<h4>
-						Extra Extractions
- 						<span class="price">$25</span>
-					</h4>
-					
-					<p class="xx-small">Lorem ipsum dolor amet adipiscing elit maecenas varius tortor nibh. <a href="#">Learn more</a>.</p>
-				</button>
-			</li>
-			
-			<li>
-				<button>
-					<h4>
-						Custom Jelly Mask
-						<span class="pill small fill yellow">Best Seller</span>
-						<span class="price">$45</span>
-					</h4>
-					
-					<p class="xx-small">Lorem ipsum dolor amet adipiscing elit maecenas varius tortor nibh. <a href="#">Learn more</a>.</p>
-				</button>
-			</li>
-		</ul>
-		
+
+		<span *ngFor="let addon of silverService.selectedAddons$ | async; let i = index; ">
+
+			<span *ngIf="addon.item.id==silverService.addonsItemId">{{i}}
+
+				{{addon.item.id}}<br>{{silverService.addonsItemId}}
+
+				<span *ngFor="let add of addon.addons">
+					<h3><span>{{add.name}}</span></h3>
+					<ul class="grid" *ngFor="let option of add.optionGroups">
+						<li *ngFor="let modifier of option.options">
+							<button [class.active]="modifier.selected" (click)="addonSelected(modifier)">
+								<h4>
+									{{modifier.name}}
+									<span class="pill small fill yellow">Best Seller</span>
+									<span class="price">${{modifier.priceDelta/100 | number}}</span>
+								</h4>
+
+								<p class="xx-small">Lorem ipsum dolor amet adipiscing elit maecenas varius tortor nibh.
+									<a href="#">Learn more</a>.</p>
+							</button>
+						</li>
+
+					</ul>
+
+				</span>
+			</span>
+		</span>
 	</div>
-	
+
 	<div class="fixed-info">
-		<button class="btn black">Add To Cart <span class="counter">1</span></button>
-		<a class="#">No thanks, I’m not interested in add-ons</a>
+		<button class="btn black">Add To Cart <span
+				class="counter">{{this.silverService.selectedAddonsId.size}}</span></button>
+		<a href="javascript:void(0)" class="#" (click)="modalRef.close()">No thanks, I’m not interested in add-ons</a>
 	</div>
 </div>

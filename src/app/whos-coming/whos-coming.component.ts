@@ -28,12 +28,17 @@ export class WhosComingComponent {
     this.statusMeandGuestDropdown  = true;
     this.btnStatus=true;
   }
-  async gotoServices()
+ gotoServices()
   {
-
-    
+   
+    this.silverService.cartDetail();
+    this.silverService.removeGuest();
     this.silverService.noOfGuest=this.guestCount;
-    this.silverService.createGuest();
-    this.router.navigate(['/services']);
+    //this.silverService.createGuest();
+   /*  setTimeout(() =>{
+      this.router.navigate(['/services'])
+    },2000); */
+    
+    
   }
 }
