@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { SilverMirrorService } from '../silver-mirror.service';
 
@@ -8,6 +8,9 @@ import { SilverMirrorService } from '../silver-mirror.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+
+  @Input() title:string = '';
+
   constructor(
     public silverService: SilverMirrorService,private router:Router
 ) { }

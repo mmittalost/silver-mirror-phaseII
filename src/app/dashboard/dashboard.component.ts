@@ -8,6 +8,8 @@ import { DashboardService } from './dashboard.service';
 })
 export class DashboardComponent implements OnInit {
 
+  selectedTab:string='appointments';
+
   constructor(public dashboardService:DashboardService){}
 
   ngOnInit(): void {
@@ -23,6 +25,12 @@ export class DashboardComponent implements OnInit {
         alert(res.errors[0].message);
       }
     })
+  }
+
+  changeTab(tab:string){
+    if(this.selectedTab != tab){
+      this.selectedTab = tab;
+    }
   }
 
 }

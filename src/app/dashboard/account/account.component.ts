@@ -24,7 +24,7 @@ export class AccountComponent implements OnInit {
     this.accountForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      dob: ['', Validators.required],
+      // dob: ['', Validators.required],
       email: ['', Validators.compose([Validators.required, Validators.email])],
       mobilePhone: ['', Validators.required],
     });
@@ -35,7 +35,7 @@ export class AccountComponent implements OnInit {
       email: client.email,
       firstName: client.firstName,
       lastName: client.lastName,
-      dob: "",
+      // dob: "",
       mobilePhone: client.mobilePhone
     })
   }
