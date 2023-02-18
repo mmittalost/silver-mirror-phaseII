@@ -8,6 +8,8 @@ import { ServicesComponent } from './services/services.component';
 import { SchedulingComponent } from './scheduling/scheduling.component';
 import { ReviewComponent } from './review/review.component';
 import { CongratsComponent } from './congrats/congrats.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 @NgModule({
@@ -21,6 +23,7 @@ import { CongratsComponent } from './congrats/congrats.component';
       { path: 'scheduling', component: SchedulingComponent },
       { path: 'review', component: ReviewComponent },
       { path: 'congrats', component: CongratsComponent },
+      { path: 'dashboard', component: DashboardComponent, canActivate:[AuthGuard] },
       { path: '**', redirectTo: '/location' } 
     ])],
   exports: [RouterModule]

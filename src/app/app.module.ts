@@ -26,6 +26,15 @@ import { ServiceDetailModelComponent } from './service-detail-model/service-deta
 import { CartComponent } from './cart/cart.component';
 import { CommonModule } from '@angular/common';
 import { FooterTopComponent } from './footer-top/footer-top.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AppointmentComponent } from './dashboard/appointment/appointment.component';
+import { DashboardHeaderComponent } from './dashboard/dashboard-header/dashboard-header.component';
+import { PastAppointmentsPipe, UpcomingAppointmentsPipe } from './dashboard/appointments.pipe';
+import { AccountComponent } from './dashboard/account/account.component';
+import { MembershipsComponent } from './dashboard/memberships/memberships.component';
+import { FilterMembershipPipe, MembershipServicesPipe } from './dashboard/memberships/filter-membership.pipe';
+import { MembershipProductsComponent } from './dashboard/memberships/membership-products/membership-products.component';
+import { AppointmentTileComponent } from './dashboard/appointment/appointment-tile/appointment-tile.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +56,18 @@ import { FooterTopComponent } from './footer-top/footer-top.component';
     ServiceDetailModelComponent,
     CartComponent,
     ModalComponent,
-    FooterTopComponent
+    FooterTopComponent,
+    DashboardComponent,
+    AppointmentComponent,
+    DashboardHeaderComponent,
+    PastAppointmentsPipe,
+    UpcomingAppointmentsPipe,
+    AccountComponent,
+    MembershipsComponent,
+    FilterMembershipPipe,
+    MembershipServicesPipe,
+    MembershipProductsComponent,
+    AppointmentTileComponent
   ],
   imports: [
     BrowserModule,

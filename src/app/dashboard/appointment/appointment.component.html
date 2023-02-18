@@ -1,0 +1,13 @@
+<div class="content">
+	<h1 class="heading-4">Welcome back, Tamara!</h1>
+	
+	<h2 class="eyebrow">Upcoming Appointments</h2>
+	
+	<ul class="appointment-list">
+		<app-appointment-tile *ngFor="let appt of dashboardService.$myAppointments | async | upcomingappointments" [appointment]="appt?.node"></app-appointment-tile>
+	</ul>
+	
+	<h2 class="eyebrow">Past Appointments</h2>
+	
+	<app-appointment-tile *ngFor="let appt of dashboardService.$myAppointments | async | pastappointments" [appointment]="appt?.node"></app-appointment-tile>
+</div>
