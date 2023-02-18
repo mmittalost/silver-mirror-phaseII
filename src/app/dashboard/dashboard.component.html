@@ -6,28 +6,20 @@
 		<!--Sidebar-->
 		<ul class="small portal-links">
             <li [ngClass]="selectedTab =='appointments' ? 'active' : ''" (click)="changeTab('appointments')"><a>My Appointments</a></li>
-            <li [ngClass]="selectedTab =='membership' ? 'active' : ''" (click)="changeTab('membership')"><a>Silver Mirror Membership</a></li>
+            <li [ngClass]="selectedTab =='memberships' ? 'active' : ''" (click)="changeTab('memberships')"><a>Silver Mirror Membership</a></li>
             <li [ngClass]="selectedTab =='purchases' ? 'active' : ''" (click)="changeTab('purchases')"><a>Purchases</a></li>
             <li [ngClass]="selectedTab =='account' ? 'active' : ''" (click)="changeTab('account')"><a>Account Information</a></li>
+            <li routerLink="/location"><a>Book A Facial</a></li>
         </ul>
 
 		<span [ngSwitch] = "selectedTab">
 			<app-account *ngSwitchCase="'account'"></app-account>
 			<!-- Appointments Section -->
 			<!--Content-->
-			<div class="content" *ngSwitchCase="'appointments'">
-				<h1 class="heading-4">Welcome back, Tamara!</h1>
-				
-				<h2 class="eyebrow">Upcoming Appointments</h2>
-				
-				<ul class="appointment-list">
-					<app-appointment *ngFor="let appt of dashboardService.$myAppointments | async | upcomingappointments" [appointment]="appt?.node"></app-appointment>
-				</ul>
-				
-				<h2 class="eyebrow">Past Appointments</h2>
-				
-				<app-appointment *ngFor="let appt of dashboardService.$myAppointments | async | pastappointments" [appointment]="appt?.node"></app-appointment>
-			</div>
+			<app-appointment *ngSwitchCase="'appointments'"></app-appointment>
+
+			<app-memberships *ngSwitchCase="'memberships'"></app-memberships>
+
 		</span>
 		
 	</div>

@@ -30,6 +30,10 @@ import { AppointmentComponent } from './dashboard/appointment/appointment.compon
 import { DashboardHeaderComponent } from './dashboard/dashboard-header/dashboard-header.component';
 import { PastAppointmentsPipe, UpcomingAppointmentsPipe } from './dashboard/appointments.pipe';
 import { AccountComponent } from './dashboard/account/account.component';
+import { MembershipsComponent } from './dashboard/memberships/memberships.component';
+import { FilterMembershipPipe, MembershipServicesPipe } from './dashboard/memberships/filter-membership.pipe';
+import { MembershipProductsComponent } from './dashboard/memberships/membership-products/membership-products.component';
+import { AppointmentTileComponent } from './dashboard/appointment/appointment-tile/appointment-tile.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +61,11 @@ import { AccountComponent } from './dashboard/account/account.component';
     PastAppointmentsPipe,
     UpcomingAppointmentsPipe,
     AccountComponent,
+    MembershipsComponent,
+    FilterMembershipPipe,
+    MembershipServicesPipe,
+    MembershipProductsComponent,
+    AppointmentTileComponent
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 
 const BASE_URL = "http://localhost:50000";
 const CLIENT_ID = "103b0694-709c-4949-afc0-a45822467bae"; // himanshu.sharma@opensourcetechnologies.com
+// const CLIENT_ID = "0b9b1658-d8f2-4f3e-aabc-0574ef6a8af9" // testost1@gmail.com
 
 @Injectable({
   providedIn: 'root'
@@ -53,23 +54,7 @@ export class DashboardService {
                     }
                   });
                 })
-              })
-            
-            // res.data.myAppointments.edges.map((apt:any)=>{
-            //     apt.node.appointmentServiceOptions.map((appointmentServiceOption:any)=>{
-            //         services.map((service:any)=> {
-            //             if(service.node.serviceOptionGroups.length){
-            //                 service.node.serviceOptionGroups.map((optionGroup:any)=>{
-            //                     console.log("Option Group : ", optionGroup.serviceOptions);
-            //                     if(optionGroup.serviceOptions.length){
-            //                         const Serviceoption = optionGroup.seviceOptions.find((option:any)=> option.id == appointmentServiceOption.id)
-            //                         appointmentServiceOption.name = Serviceoption.name;
-            //                     }
-            //                 })
-            //             }
-            //         });
-            //     })
-            // })
+              });
             return res;
         }));
     }
@@ -96,5 +81,12 @@ export class DashboardService {
             "client": client
           }
         return this.httpClient.post<HttpResponse<any>>(BASE_URL + '/update_client', payload);
+    }
+
+    myMembershipsList(){
+        const payload = {
+            "clientId": CLIENT_ID
+          }
+        return this.httpClient.post<HttpResponse<any>>(BASE_URL + '/my_memberships', payload);
     }
 }

@@ -1,0 +1,56 @@
+<section class="client-portal membership" *ngIf="($memberships | async).length">
+	<div class="container grid">
+		
+		<!--Content-->
+		<div class="content">
+			<h1 class="heading-4">Welcome back, Tamara!</h1>
+			
+			<h2 class="eyebrow">Active Membership</h2>
+			
+			<ul class="active-membership">
+				<li *ngFor="let membership of $memberships | async | filterMembership">
+					<h3 class="heading-6">{{membership.node.name}}</h3>
+					<span class="pill">$116 per month (normally $145)</span>
+					
+					<ul class="flex-container plan-details">
+						<li>
+							<span class="pill fill small gray">Start Date</span>
+							<span class="ui-date">{{membership.node.startOn | date:'MMMM dd, YYYY'}}</span>
+						</li>
+						
+						<li>
+							<span class="pill fill small gray">Next Billing Date</span>
+							<span class="ui-date">{{membership.node.endOn | date:'MMMM dd, YYYY'}}</span>
+						</li>
+						
+						<!-- <li>
+							<span class="pill fill small gray">Payment Method</span>
+							<span class="ui-date">Card ending in 5585 <a href="#">Change</a></span>
+						</li> -->
+					</ul>
+				</li>
+			</ul>
+			
+			<p class="xx-small">
+				<span class="pill small fill yellow">Membership Points</span>
+				To receive an updated tally of your Perk points, please call <a href="tel:555-555-5555">555.555.5555</a> 
+			</p>
+			
+			<h2 class="eyebrow">Facial Credits</h2>
+			
+			<ul class="facial-credits">
+				<li class="flex-container" *ngFor="let service of $memberships | async | filterMembership | MembershipServices">
+					<h3 class="heading-6">
+						{{service?.name}}
+						
+						<span class="pill"><span class="pill fill small dark-blue">Expires</span> {{service?.endOn | date:'MMMM dd, YYYY'}}</span>
+					</h3>
+					
+					<a class="btn black small">Book a Facial</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</section>
+
+<app-membership-products *ngIf="!($memberships | async).length"></app-membership-products>

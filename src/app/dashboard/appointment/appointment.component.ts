@@ -8,21 +8,13 @@ import { DashboardService } from '../dashboard.service';
 })
 export class AppointmentComponent {
 
-  @Input() appointment:any;
+  
 
-  constructor(private dashboardService: DashboardService){ }
+  constructor(public dashboardService: DashboardService){
+    this.getAppointments();
+  }
 
-   cancelAppointment(){
-    this.dashboardService.cancelAppointment(this.appointment.id).subscribe((res:any)=>{
-      if(!res.errors){
-        this.updateAppointments();
-      }else{
-        alert(res.errors[0].message);
-      }
-    })
-   }
-
-   updateAppointments(){
+  getAppointments(){
     this.dashboardService.getAppointmentsList().subscribe((res:any)=>{
       if(!res.errors){
         this.dashboardService.$myAppointments.next(res.data.myAppointments.edges);
