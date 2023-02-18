@@ -916,7 +916,7 @@ header.client-portal-header .sub-menu a:hover {
 /***************************************************************************************************************************************************************************************/
 
 footer {
-	background: #121212;
+	background: var(--black);
 	color: var(--white);
 	padding: 98px 0 40px;
 	position: relative;
@@ -955,7 +955,10 @@ footer .intro input[type=email],
 }
 
 /*Intro*/
-
+footer .introspace {
+	grid-column: span 3;
+	text-align: center;
+}
 footer .intro {
 	grid-column: span 3;
 	text-align: center;
@@ -6697,12 +6700,14 @@ dialog {
  }*/
  #time-filters-desktop-only li:last-child,
  #time-filters-desktop-only li:nth-last-child(2), 
- #time-filters-desktop-only li:nth-last-child(3){
+ #time-filters-desktop-only li:nth-last-child(3),
+ #time-filters-desktop-only li:nth-last-child(4){
 	display: none;
   } 
 
   #small-services-tabs-desktop-only li:last-child,
-  #small-services-tabs-desktop-only li:nth-last-child(4), 
-  #small-services-tabs-desktop-only li:nth-last-child(5){
+  #small-services-tabs-desktop-only li:nth-last-child(5),
+  #small-services-tabs-desktop-only li:nth-last-child(2), 
+  #small-services-tabs-desktop-only li:nth-last-child(6){
 	display: none;
   } 

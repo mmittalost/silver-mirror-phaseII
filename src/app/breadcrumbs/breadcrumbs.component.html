@@ -3,9 +3,9 @@
 	<a class="back-btn" href="#"><span class="accessibility">Back</span></a>
 
 	<ul class="flex-container breadcrumbs">
-		<li class="completed" routerLinkActive="active"><a class="eyebrow small" href="/location">Location</a></li>
-		<li class="completed" routerLinkActive="active"><a class="eyebrow small" href="/whoscoming">Who's Coming</a></li>
-		<li class="completed" routerLinkActive="active"><a class="eyebrow small" href="/services">Services</a></li>
-		<li class="completed" routerLinkActive="active"><a class="eyebrow small" href="/scheduling">Scheduling</a></li>
-		<li routerLinkActive="active"><a class="eyebrow small" href="/review">Review</a></li>
+		<li [ngClass]="{'active': route == '/location'}" class="completed" routerLinkActive="active"><a class="eyebrow small" routerLink="/location">Location</a></li>
+		<li [ngClass]="{'active': route == '/whoscoming'}" class="completed" routerLinkActive="active"><a class="eyebrow small" routerLink="/whoscoming">Who's Coming</a></li>
+		<li [ngClass]="{'active': route == '/services'}" class="completed" routerLinkActive="active"><a class="eyebrow small" routerLink="/services">Services</a></li>
+		<li [ngClass]="{'active': route == '/scheduling'}" class="completed" routerLinkActive="active"><a class="eyebrow small" routerLink="/scheduling">Scheduling</a></li>
+		<li routerLinkActive="active"><a class="eyebrow small" routerLink="/review">Review</a></li>
 	</ul>

@@ -19,6 +19,7 @@
                        OTP: {{silverService.otp}}<br><br>
                     </div>
                     <div class="login-form" *ngIf='silverService.otp>0'>
+                        <p *ngIf="silverService.otpMessage" style="color: green; margin-bottom: 0px;">{{silverService.otpMessage}}</p>
                         <input type="text" id="email" name="otp" placeholder="Enter OTP" [(ngModel)]="enteredotp">
                        
                         <input  class="btn" type="submit" value="Continue" (click)="checkOTP()">
@@ -34,3 +35,4 @@
         </section>
 
     </main>
+<app-footer></app-footer>

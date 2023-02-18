@@ -13,9 +13,12 @@ export class SilverMirrorService {
   loginLogoutText:any='Sign In';
   otp:any='';
   selectedAddonsId: Set<number> = new Set<number>();
+  otpMessage:any;
+  
   locationList$: BehaviorSubject<any> = new BehaviorSubject([]);
   cartDetail$: BehaviorSubject<any> = new BehaviorSubject([]);
   cartDetails$: BehaviorSubject<any> = new BehaviorSubject([]);
+  cartSummary$: BehaviorSubject<any> = new BehaviorSubject([]);
   getClientByEmail$: BehaviorSubject<any> = new BehaviorSubject([]);
   addNewClient$: BehaviorSubject<any> = new BehaviorSubject([]);
   guestList$: BehaviorSubject<any> = new BehaviorSubject([]);
@@ -28,6 +31,10 @@ export class SilverMirrorService {
   guestID:any='';
   guestName:any='';
   addonsItemId:any='';
+  checkAddedServices:any="Guest0";
+  selectedServices: Set<number> = new Set<number>();
+  selectedServiceID:any;
+  addOns:any;
   constructor(private http:HttpClient,private router:Router) {
     this.getLocations();
    }
@@ -64,13 +71,13 @@ export class SilverMirrorService {
       .subscribe((res: any) => {
         this.cartDetail$.next(res.data.cart.availableCategories);
         this.cartDetails$.next(res.data.cart.selectedItems);
+        this.cartSummary$.next(res.data.cart.summary);
         console.log("res.data.cart.selectedItems",res.data.cart.selectedItems);
         this.guestList$.next(res.data.cart.guests);
         this.location$.next(res.data.cart.location);
-        //console.log(">>",res);
       });
   }
-  async createGuest(){
+  createGuest(){
     const payload = {
       cartID:localStorage.getItem('cartID'),
       "client":{
@@ -105,22 +112,25 @@ export class SilverMirrorService {
 
   removeGuest(){
     const requestArray:any = [];
-    let i:number=0;
-    this.guestList$.subscribe((res: any) => {
-      const payload = {
-        cartId:localStorage.getItem('cartID'),
-        guestId:res[i].id,
-        clientId:localStorage.getItem("clientID")
-      }; 
-      const request = this.http.post(this.apiURL+'/remove_cart_guest',payload);
-      console.log("Guest",res[i].id);
-      requestArray.push(request);
-      i++;
+      console.log("Remove Guest Payload", this.guestList$.value);
+      this.guestList$.value.forEach((guest: any) => {
+        console.log(guest.id);
+        let payload = {
+          cartId:localStorage.getItem('cartID'),
+          guestId:guest.id,
+          clientId:localStorage.getItem("clientID")
+        };
+        let request = this.http.post(this.apiURL+'/remove_cart_guest',payload);
+        requestArray.push(request);
       });
+
       forkJoin(requestArray)
       .pipe(finalize(() => {
-        // Navigate to home screen
-        this.createGuest();
+        if (localStorage.getItem("selectedWhoscoming") != "me") {
+          this.createGuest();
+        } else {
+          this.router.navigate(["/services"]);
+        }
       }))
       .subscribe(response => {
         // Handle the response here
@@ -146,25 +156,36 @@ export class SilverMirrorService {
         localStorage.setItem('otp',this.otp);
         localStorage.setItem("clientID",res.data.clients.edges[0].node.id.replace('urn:blvd:Client:',''));
         localStorage.setItem("clientEmail",res.data.clients.edges[0].node.email);
+        localStorage.setItem("clientName",res.data.clients.edges[0].node.firstName);
+        this.sendOTPEmail(res.data.clients.edges[0].node.email,this.otp,res.data.clients.edges[0].node.firstName);
       }
       else{
         this.router.navigate(['/register']);
       }
       });
   }
-
+  sendOTPEmail(email:any,otp:any,name:any){
+    const payload = {
+      email:email,
+      otp:otp,
+      name:name
+    };  
+    this.http
+      .post(this.apiURL+'/login',payload)
+      .subscribe((res: any) => {
+        this.otpMessage=res.message;
+      });
+  }
   addNewClient(data:any) {
     const payload = {client:{
       email:data.email,
       firstName:data.firstName,
       lastName:data.lastName,
       mobilePhone:data.phone
-    }}; 
-    console.log(">>Pay",payload); 
+    }};  
     this.http
       .post(this.apiURL+'/createClient',payload)
       .subscribe((res: any) => {
-       // this.serviceList$.next(res.data);
         console.log(">>",res);
       });
   }
@@ -176,16 +197,14 @@ export class SilverMirrorService {
   }
   addItemInCart(itemId:any)
   {
-    //this.selectedAddons$.next([]);
     this.addonsItemId =itemId;
     let payload={};
-    if(this.guestID)
+    if(this.guestID !='me')
     {
       payload = {
         cartId:localStorage.getItem('cartID'),
         itemGuestId:this.guestID,
         itemId:itemId,
-        //itemStaffVariantId:'',
         clientId:''
       }; 
     }else{
@@ -193,20 +212,61 @@ export class SilverMirrorService {
       cartId:localStorage.getItem('cartID'),
       itemGuestId:'',
       itemId:itemId,
-      //itemStaffVariantId:'',
       clientId:''
     }; 
     }
-    console.log(">>Pay",payload); 
     this.http
       .post(this.apiURL+'/add_item_in_cart',payload)
       .subscribe((res: any) => {
         this.cartItem$.next(res.data);
         this.selectedAddons$.next(res.data.addCartSelectedBookableItem.cart.selectedItems);
+        this.selectedServices.add(this.checkAddedServices);
+        localStorage.setItem(this.checkAddedServices, "yes");
         this.cartDetail();
-        console.log(">><<",res);
       });
   }
+
+  addAddonsInCart()
+  {
+    const requestArray:any = [];
+    this.addOns.forEach((res: any) => {
+      let payload = {
+        cartId:localStorage.getItem('cartID'),
+        guestId:this.guestID,
+        itemId:res.addon,
+        itemOptionIds:res.modifier,
+        clientId:localStorage.getItem("clientID")
+      };
+      let request = this.http.post(this.apiURL+'/add_item_in_cart',payload);
+        requestArray.push(request);
+    });
+      forkJoin(requestArray)
+      .pipe(finalize(() => {
+          this.router.navigate(["/services"]);
+      }))
+      .subscribe(response => {
+        // Handle the response here
+        console.log(response);
+      }, error => {
+        // Handle the error here
+        console.error(error);
+      });
+
+   
+   //let itemOptionIds =  Array.from(this.selectedAddonsId);
+   
+     
+  /*   this.http
+    .post(this.apiURL+'/add_item_in_cart',payload)
+    .subscribe((res: any) => {
+      console.log(">><<",res);
+      
+    }); */
+
+  }
+
+
+
   removeItemFromCart(itemId:any)
   {
     this.addonsItemId =itemId;
@@ -225,4 +285,11 @@ export class SilverMirrorService {
         this.cartDetail();
       });
   }
+
+  imageURL(serviceID: any, type:any) {
+    let imgURL =
+      "https://blvd.silvermirror.com/assets/"+type+"-" + serviceID + ".jpg";
+    return imgURL;
+  }
+
 }

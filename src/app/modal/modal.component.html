@@ -8,23 +8,24 @@
 
 		<span *ngFor="let addon of silverService.selectedAddons$ | async; let i = index; ">
 
-			<span *ngIf="addon.item.id==silverService.addonsItemId">{{i}}
-
-				{{addon.item.id}}<br>{{silverService.addonsItemId}}
-
+			<span *ngIf="addon.item.id==silverService.addonsItemId">
 				<span *ngFor="let add of addon.addons">
 					<h3><span>{{add.name}}</span></h3>
 					<ul class="grid" *ngFor="let option of add.optionGroups">
 						<li *ngFor="let modifier of option.options">
-							<button [class.active]="modifier.selected" (click)="addonSelected(modifier)">
+							<button [class.active]="modifier.selected" (click)="addonSelected(add,modifier)">
 								<h4>
 									{{modifier.name}}
 									<span class="pill small fill yellow">Best Seller</span>
 									<span class="price">${{modifier.priceDelta/100 | number}}</span>
 								</h4>
 
-								<p class="xx-small">Lorem ipsum dolor amet adipiscing elit maecenas varius tortor nibh.
-									<a href="#">Learn more</a>.</p>
+								<p class="xx-small">
+									{{(readMore && modifier.id==modifierID) ? modifier.description : modifier.description | slice:0:75}}
+									<a href="javascript:;" *ngIf="!readMore" (click)="learnMore(modifier.id)">
+										Learn more</a>
+										<a href="javascript:;" *ngIf="readMore" (click)="learnMore(modifier.id)">
+											Learn less</a></p>
 							</button>
 						</li>
 
@@ -36,7 +37,7 @@
 	</div>
 
 	<div class="fixed-info">
-		<button class="btn black">Add To Cart <span
+		<button class="btn black" (click)="addonAddtoCart()">Add To Cart <span
 				class="counter">{{this.silverService.selectedAddonsId.size}}</span></button>
 		<a href="javascript:void(0)" class="#" (click)="modalRef.close()">No thanks, I’m not interested in add-ons</a>
 	</div>

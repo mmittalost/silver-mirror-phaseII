@@ -8,18 +8,45 @@ import { SilverMirrorService } from '../silver-mirror.service';
 })
 export class ModalComponent {
   addonName:any='';
-  
+  readMore = false;
+  addOns:any;
+  addonObject = [{}];
+  modifierID:any;
   constructor(public modalRef: MdbModalRef<ModalComponent>,public silverService: SilverMirrorService) {}
-  addonSelected(modifier:any){
+
+  learnMore(id:any){
+    this.readMore=!this.readMore;
+    this.modifierID=id;
+  }
+
+addObjectWithModifier(objects:any, addon: string, value: string):any {
+    const existingObject = objects.find((obj: { addon: string; }) => obj.addon === addon);
+  
+    if (existingObject) {
+      existingObject.modifier.push(value);
+    } else {
+      objects.push({ addon, modifier: [value] });
+    }
+    let obj= objects.filter((value: any) => JSON.stringify(value) !== '{}');
+    return obj;
+  }
+
+  addonSelected(add:any,modifier:any){
+
+    
     if(modifier.selected==true)
     {
-      this.silverService.selectedAddonsId.delete(modifier.id);
       modifier.selected=false;
     }else
-    {
-      this.silverService.selectedAddonsId.add(modifier.id);
+    {  
+      this.silverService.addOns = this.addObjectWithModifier(this.addonObject,add.id,modifier.id);
       modifier.selected=true;
+      //this.silverService.addAddonsInCart();
     }
-    console.log("selectedAddonsId",this.silverService.selectedAddonsId);
+    console.log("addOns",this.silverService.addOns);
   }
+  addonAddtoCart(){
+
+  this.silverService.addAddonsInCart()
+}
 }

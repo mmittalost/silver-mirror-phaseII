@@ -14,31 +14,39 @@ export class WhosComingComponent {
   statusMeandGuestDropdown:boolean=false
   btnStatus:boolean=false;
   guestCount:any='1';
+  noOfguest:any='1'
   constructor(private router:Router,public silverService: SilverMirrorService) {
+    this.whosComingMe(localStorage.getItem('selectedWhoscoming'));
    }
-  whosComingMe(meandg:any){
-    this.statusMe = true;  
-    this.statusMeandGuest  = false;
-    this.statusMeandGuestDropdown  = false;
-    this.btnStatus=true;
+   
+  whosComingMe(selected:any){
+    localStorage.setItem('selectedWhoscoming',selected);
+    if(selected=='me')
+    {
+      this.statusMe = true; 
+      this.statusMeandGuest  = false;
+      this.statusMeandGuestDropdown  = false;
+      this.btnStatus=true; 
+     
+    }
+    else
+    {
+      this.statusMe = false;  
+      this.statusMeandGuest  = true;
+      this.statusMeandGuestDropdown  = true;
+      this.btnStatus=true; 
+      this.noOfguest=localStorage.getItem('noOfguestSelected');
+      
+    }
   }
-  whosComingMeandGuest(meandg:any){
-    this.statusMe = false;  
-    this.statusMeandGuest  = true;
-    this.statusMeandGuestDropdown  = true;
-    this.btnStatus=true;
-  }
+ 
  gotoServices()
   {
-   
     this.silverService.cartDetail();
     this.silverService.removeGuest();
-    this.silverService.noOfGuest=this.guestCount;
-    //this.silverService.createGuest();
-   /*  setTimeout(() =>{
-      this.router.navigate(['/services'])
-    },2000); */
-    
-    
+    this.silverService.noOfGuest=this.noOfguest;
+  }
+  guestChange(value:any){
+    localStorage.setItem('noOfguestSelected',value)
   }
 }

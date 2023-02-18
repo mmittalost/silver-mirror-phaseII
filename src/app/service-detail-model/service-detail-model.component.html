@@ -5,7 +5,7 @@
 <div class="popup card-details">
 	<button class="close" (click)="modalRefService.close()"><span class="accessibility">Close Popup</span></button>
 	
-	<img src="images/signature-facial.jpg" alt=""/>
+	<img [src]="silverService.imageURL(service.id,'cover')" alt=""/>
 	
 	<article>
 		<h2 class="heading-6 flex-container">{{service.name}} <span class="heading-6 small">${{service.listPrice/100 | number }}</span></h2>

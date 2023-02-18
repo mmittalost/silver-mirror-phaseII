@@ -25,6 +25,7 @@ import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 import { ServiceDetailModelComponent } from './service-detail-model/service-detail-model.component';
 import { CartComponent } from './cart/cart.component';
 import { CommonModule } from '@angular/common';
+import { FooterTopComponent } from './footer-top/footer-top.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { CommonModule } from '@angular/common';
     FacialFilterPipe,
     ServiceDetailModelComponent,
     CartComponent,
-    ModalComponent
+    ModalComponent,
+    FooterTopComponent
   ],
   imports: [
     BrowserModule,

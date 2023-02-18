@@ -8,13 +8,15 @@
             <ul class="small services-tabs desktop-only" id="small-services-tabs-desktop-only">
                 <li class="active"><button>Facials</button></li>
                 <li><button (click)="openModal()">Add-ons</button></li>
-                <li [class.active]="facialName === service.name" (click)="facialName = service.name" *ngFor="let service of silverService.cartDetail$ | async "><button id="myBtn">{{service.name}}</button></li>
+                <li [class.active]="facialName === service.name" 
+                (click)="facialName = service.name" *ngFor="let service of silverService.cartDetail$ | async "><button id="myBtn">{{service.name}}</button></li>
             </ul>
-   
-            <div class="guest-different-services">
+            <div class="guest-different-services" *ngIf="this.numberOfGuest!='me'">
 				<input checked="" id="guest-different" type="checkbox">
 				<label for="guest-different">My guests want different services</label>
 			</div>
+
+
             <ul class="guest-tabs">
                 
                 <li (click)="guestSelect(0,'me')" 
@@ -60,11 +62,11 @@
                     </button>
                         
                     <button class="flex-container open-services-pop"  (click)="serviceDetail(servicedtl)">
-                        <img src="../../assets/images/signature-facial.jpg" alt=""/>
+                        <img [src]="silverService.imageURL(servicedtl.id,'thumb')"/>
                         
                         <div>
                             <h2 class="heading-6">{{servicedtl.name}}</h2>
-                            <span class="pill fill small yellow">Best Seller</span>
+                            <span class=""><img style="width: 100%; aspect-ratio: auto;" [src]="silverService.imageURL(servicedtl.id,'badge')"/></span>
                             <p class="pill">All Types</p>
                             <span class="heading-6 small price">${{servicedtl.listPrice/100 | number }}</span>
                         </div>
@@ -119,3 +121,4 @@
 
 
 
+        <app-footer></app-footer>
