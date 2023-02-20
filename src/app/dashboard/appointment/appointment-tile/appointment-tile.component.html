@@ -38,7 +38,7 @@
 				<span *ngIf="!appointment?.reschedulable" class="pill rebook">Quick Rebook</span>
 				<a *ngIf="!appointment?.reschedulable" class="btn black small" href="#">Search Availability</a>
 				
-				<a *ngIf="appointment?.reschedulable" class="btn black small reschedule" href="#">Reschedule</a>
+				<span (click)="navigateToReschedule()"><a *ngIf="appointment?.reschedulable" class="btn black small reschedule">Reschedule</a></span>
 				<span (click)="cancelAppointment()"><a *ngIf="appointment?.cancellable" class="text-link">Cancel</a></span>
 		</div>
 	</li>

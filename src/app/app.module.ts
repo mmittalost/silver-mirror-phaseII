@@ -26,7 +26,7 @@ import { ServiceDetailModelComponent } from './service-detail-model/service-deta
 import { CartComponent } from './cart/cart.component';
 import { CommonModule } from '@angular/common';
 import { FooterTopComponent } from './footer-top/footer-top.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+// import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppointmentComponent } from './dashboard/appointment/appointment.component';
 import { DashboardHeaderComponent } from './dashboard/dashboard-header/dashboard-header.component';
 import { PastAppointmentsPipe, UpcomingAppointmentsPipe } from './dashboard/appointments.pipe';
@@ -35,6 +35,11 @@ import { MembershipsComponent } from './dashboard/memberships/memberships.compon
 import { FilterMembershipPipe, MembershipServicesPipe } from './dashboard/memberships/filter-membership.pipe';
 import { MembershipProductsComponent } from './dashboard/memberships/membership-products/membership-products.component';
 import { AppointmentTileComponent } from './dashboard/appointment/appointment-tile/appointment-tile.component';
+import { RescheduleComponent } from './dashboard/reschedule/reschedule.component';
+import { CalendarComponent } from './dashboard/reschedule/calendar/calendar.component';
+import { ToggleCalendarPipe } from './dashboard/reschedule/calendar/toggle-calendar.pipe';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { SharedComponentModule } from './shared-component/shared-component.module';
 
 @NgModule({
   declarations: [
@@ -42,7 +47,7 @@ import { AppointmentTileComponent } from './dashboard/appointment/appointment-ti
     BookAnAppointmentComponent,
     LoginComponent,
     RegisterComponent,
-    HeaderComponent,
+    // HeaderComponent,
     FooterComponent,
     BreadcrumbsComponent,
     LocationComponent,
@@ -57,7 +62,7 @@ import { AppointmentTileComponent } from './dashboard/appointment/appointment-ti
     CartComponent,
     ModalComponent,
     FooterTopComponent,
-    DashboardComponent,
+    // DashboardComponent,
     AppointmentComponent,
     DashboardHeaderComponent,
     PastAppointmentsPipe,
@@ -67,7 +72,10 @@ import { AppointmentTileComponent } from './dashboard/appointment/appointment-ti
     FilterMembershipPipe,
     MembershipServicesPipe,
     MembershipProductsComponent,
-    AppointmentTileComponent
+    AppointmentTileComponent,
+    RescheduleComponent,
+    CalendarComponent,
+    ToggleCalendarPipe
   ],
   imports: [
     BrowserModule,
@@ -78,8 +86,11 @@ import { AppointmentTileComponent } from './dashboard/appointment/appointment-ti
     NgxSkeletonLoaderModule,
     MdbCheckboxModule,
     MdbModalModule,
-    CommonModule
+    CommonModule,
+    DashboardModule,
+    SharedComponentModule
   ],
+  exports:[ SharedComponentModule ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -89,4 +89,15 @@ export class DashboardService {
           }
         return this.httpClient.post<HttpResponse<any>>(BASE_URL + '/my_memberships', payload);
     }
+
+    getRescheduleDates(aptId:string, lowerRange:string, upperRange:string){
+        const payload = {
+            "clientId": CLIENT_ID,
+            "appointmentId":aptId,
+            "searchRangeLower":lowerRange,
+            "searchRangeUpper":upperRange,
+            "timeZone":'EST'
+          }
+        return this.httpClient.post<HttpResponse<any>>(BASE_URL + '/appointment_reschedule_available_dates', payload);
+    }
 }

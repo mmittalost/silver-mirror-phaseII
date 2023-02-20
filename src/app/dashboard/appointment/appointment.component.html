@@ -11,3 +11,5 @@
 	
 	<app-appointment-tile *ngFor="let appt of dashboardService.$myAppointments | async | pastappointments" [appointment]="appt?.node"></app-appointment-tile>
 </div>
+
+<!-- <app-reschedule [appointmentId]="appointmentId"></app-reschedule> -->
