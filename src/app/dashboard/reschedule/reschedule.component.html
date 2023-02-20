@@ -5,7 +5,7 @@
 
 
 
-            <app-calendar></app-calendar>
+            <app-calendar [availableDates] = "availableDates | async" (changeMonthEvent)="monthChange($event)" (dateSelectEvent)="selectDate($event)"></app-calendar>
 
 
 
@@ -18,13 +18,15 @@
             <div class="time-slots">
 
                 <div class="time-slot-container">
-                    <h2 class="heading-6 small">Claudia E.</h2>
+                    <h2 class="heading-6 small">Available Time</h2>
                     
                     <fieldset class="flex-container">
-                        <input id="claudia-time1100" checked class="accessibility" name="time-chooser" type="radio"/>
-                        <label for="claudia-time1100">11:00 am</label>
+                        <span style="display: flex;" *ngFor="let time of availableTimes | async">
+                            <input (change)="selectTime(time)" [id]="time?.bookableTimeId" [checked]="time.selected" class="accessibility" name="time-chooser" type="radio"/>
+                            <label [for]="time?.bookableTimeId">{{time?.startTime | date:'hh:mm a':'EST'}}</label>
+                        </span>
                         
-                        <input id="claudia-time1130" class="accessibility" name="time-chooser" type="radio"/>
+                        <!-- <input id="claudia-time1130" class="accessibility" name="time-chooser" type="radio"/>
                         <label for="claudia-time1130">11:30 am</label>
                         
                         <input id="claudia-time1200" class="accessibility" name="time-chooser" type="radio"/>
@@ -40,11 +42,11 @@
                         <label for="claudia-time1330">1:30 pm</label>
                         
                         <input id="claudia-time1400" class="accessibility" name="time-chooser" type="radio"/>
-                        <label for="claudia-time1400">2:00 pm</label>
+                        <label for="claudia-time1400">2:00 pm</label> -->
                     </fieldset>
                 </div>
             
-                <div class="time-slot-container">
+                <!-- <div class="time-slot-container">
                     <h2 class="heading-6 small">Nick W.</h2>
                     
                     <fieldset class="flex-container">
@@ -105,29 +107,9 @@
                         <input id="samantha-time1600" class="accessibility" name="time-chooser" type="radio"/>
                         <label for="samantha-time1600">5:00 pm</label>
                     </fieldset>
-                </div>
+                </div> -->
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
+            <span (click)="reschedule()"><a class="btn black small">Reschedule Appointment</a></span>
             </div>
-
-
-            <aside class="empty">
-                <!-- <app-cart></app-cart> -->
-           </aside>
-
-
-
-
         </div>
 </section>

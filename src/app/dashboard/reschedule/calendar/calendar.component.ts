@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import * as moment from 'moment';
 
 @Component({
@@ -13,6 +13,11 @@ export class CalendarComponent implements OnInit {
   selectedWeek:number = 0;
   currentMonth: moment.Moment = moment().startOf('month');
 
+  @Input() availableDates = [];
+
+  @Output() changeMonthEvent = new EventEmitter<moment.Moment>();
+  @Output() dateSelectEvent = new EventEmitter<moment.Moment>();
+
   constructor(){}
 
   ngOnInit(): void {
@@ -21,6 +26,15 @@ export class CalendarComponent implements OnInit {
     setTimeout(() => {
       console.log("Calendar : ", this.calendar);
     }, 1000);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.generateCalendar(this.currentMonth);
+  }
+
+  selectDate(day:any){
+    console.log("select Date event : ", day);
+    this.dateSelectEvent.emit(day);
   }
 
   toggleCalendarView() {
@@ -62,6 +76,8 @@ export class CalendarComponent implements OnInit {
       for (let i = 0; i < 7; i++) {
         const day = {
           date: currentDay.date(),
+          fullDate: currentDay.format('YYYY-MM-D'),
+          isAvailable: this.availableDates.findIndex((date:any)=> date.date == currentDay.format('YYYY-MM-DD')) >= 0 ? true : false,
           isToday: currentDay.isSame(moment(), 'day'),
           day: currentDay.format('ddd'),
           isDisabled: currentDay.isBefore(moment().startOf('day')),
@@ -94,6 +110,7 @@ export class CalendarComponent implements OnInit {
       this.currentMonth = this.currentMonth.clone().subtract(1, 'month');
       this.generateCalendar(this.currentMonth);
       this.selectedWeek = this.calendar.length - 1;
+      this.changeMonthEvent.emit(this.currentMonth);
     }
   }
 
@@ -106,6 +123,7 @@ export class CalendarComponent implements OnInit {
       this.currentMonth = this.currentMonth.clone().add(1, 'month');
       this.generateCalendar(this.currentMonth);
       this.selectedWeek = 0;
+      this.changeMonthEvent.emit(this.currentMonth);
     }
   }
 
