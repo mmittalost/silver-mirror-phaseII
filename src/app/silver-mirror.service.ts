@@ -323,7 +323,7 @@ getCartStaffVarients(cartId:string, bookableTimeId:string, serviceId:string, loc
     "locationId":locationId,
     "clientId": localStorage.getItem('clientID')
   }
-  return this.http.post<HttpResponse<any>>('http://localhost:50000' + '/get_cart_staff_variants', payload);
+  return this.http.post<HttpResponse<any>>(this.apiURL + '/get_cart_staff_variants', payload);
 }
 
   updateItemInCart(itemId:any, staffId:string){
@@ -334,7 +334,7 @@ getCartStaffVarients(cartId:string, bookableTimeId:string, serviceId:string, loc
       clientId:'',
       itemStaffVariantId:staffId
     };
-    return this.http.post('http://localhost:50000'+'/update_item_in_cart',payload);
+    return this.http.post(this.apiURL+'/update_item_in_cart',payload);
   }
 
 }

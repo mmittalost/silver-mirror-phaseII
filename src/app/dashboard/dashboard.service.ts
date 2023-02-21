@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
-import { BehaviorSubject, concat, forkJoin, Subject, map, Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 
 const BASE_URL = "https://blvd.silvermirror.com";
 const CLIENT_ID = localStorage.getItem('clientID'); // himanshu.sharma@opensourcetechnologies.com
