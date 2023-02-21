@@ -12,6 +12,7 @@ export class LocationComponent {
 ) { }
 currentIndex: any;
 greeting = 'Hello, world!';
+isActive = false;
 expand(index: any) {
   if(this.currentIndex === index) {
     this.currentIndex = null;
@@ -28,4 +29,5 @@ locationSelected(id:any){
     return "";
   }
 }
+
 }

@@ -1,4 +1,4 @@
-<app-header title="Book an Appointment"></app-header>
+<app-header title="Book an Appointmemt"></app-header>
 <main id="main">
 <section class="schedule-flow">
 	<div class="container grid">
@@ -67,10 +67,11 @@
                     <div class="filter-pop">
                         <h3 class="flex-container eyebrow small">
                             <span class="mobile-only">Filter </span>Time 
-                            <button class="close-filter"><span class="accessibility">Close filter</span></button>
+                            <button class="close-filter" (click)="openFilter('time',className)"><span class="accessibility">Close filter</span></button>
+                      
                         </h3>
                         
-                        <div class="range-slider">
+                        <div class="range-slider" [ngClass]="visible == 'time' ? 'displayBlock': 'displayNone'">
                             <!--Note: input[type=range] did would not work here, so assuming this'll be 100% JS controlled-->
                             
                             <span class="range-bar">
@@ -92,9 +93,9 @@
                 <!--Esthetician-->
                 
                 <li class="esthetician-filter">
-                    <button class="filter-button">Esthetician <span class="counter">0</span></button>
+                    <button class="filter-button" (click)="openFilter('esthetician',className)">Esthetician <span class="counter">0</span></button>
                     
-                    <div class="filter-pop">
+                    <div class="filter-pop"  [ngClass]="visible == 'esthetician' ? 'displayBlock': 'displayNone'">
                         <h3 class="flex-container eyebrow small">
                             <span class="mobile-only">Filter </span>Esthetician 
                             <button class="close-filter"><span class="accessibility">Close filter</span></button>
@@ -151,13 +152,10 @@
 
 
             <ul class="guest-tabs">
-                
-                <li class="active"><button class="pill">Me </button></li>
-                <li class="active"><button class="pill">Guest 1 </button></li>
-                <!-- <li [class.active]="activeButton === i+1" (click)="guestSelect(i+1,guest.id)" 
-                *ngFor="let guest of silverService.guestList$ | async; index as i">
-                    <button class="pill" id="{{guest.id}}">Guest {{i+1}}</button>
-                </li> -->
+               
+                <li class="active" *ngFor="let guest of silverService.selectedTabWithServices | keyvalue index as i">
+                    <button class="pill">{{guest.key}} </button></li>
+               
                 
             </ul>
 

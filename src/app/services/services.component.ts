@@ -51,7 +51,10 @@ export class ServicesComponent {
   constructor(
     public silverService: SilverMirrorService,
     private modalService: MdbModalService
-  ) {}
+  ) {
+
+    console.log(this.silverService.greeting);
+  }
 
   ngOnInit() {
     this.silverService.cartDetail();

@@ -8,9 +8,10 @@
             <app-breadcrumbs class="breadcrumbs-container"></app-breadcrumbs>
 
 
-            <div *ngIf="silverService.loginStatus=='true'" class="flex-container quick-rebook">
+            <div *ngIf="silverService.loginStatus=='true'" class="flex-container quick-rebook" [class.active]="isActive">
                 <h2 class="heading-6 desktop-only">Quick Rebook</h2>
-                <button class="mobile-only quick-rebook-accordion-btn eyebrow">Quick Rebook</button>
+                <button class="mobile-only quick-rebook-accordion-btn eyebrow" (click)="isActive = !isActive">Quick Rebook</button>
+          
                 
                 <ul class="flex-container x-small">
                     <li class="service">Party-Prep Facial</li>

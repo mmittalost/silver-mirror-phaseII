@@ -15,6 +15,8 @@ export class SchedulingComponent implements OnInit {
   selectedTime:any;
   selectedStaff:any;
   cartDetail:any = [];
+  visible:any='';
+  className:any='displayNone'
 
   ngOnInit(): void {
     this.bookingService.cartDetail$.subscribe((detail:any)=>{
@@ -27,7 +29,7 @@ export class SchedulingComponent implements OnInit {
     this.getBookableDates();
   }
 
-  constructor(private bookingService: SilverMirrorService){}
+  constructor(private bookingService: SilverMirrorService,public silverService:SilverMirrorService){}
 
   getStaffVariantByServiceId(serviceId:string){
     console.log("Filter Staff Variants");
@@ -100,6 +102,12 @@ export class SchedulingComponent implements OnInit {
         alert(res.errors[0].message);
       }
     })
+  }
+  openFilter(filterName:any,className:any){
+
+    this.visible=filterName;
+    this.className=className;
+    console.log(this.visible,this.className);
   }
 
 }
