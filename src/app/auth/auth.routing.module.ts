@@ -8,7 +8,6 @@ import { RegisterComponent } from "./register/register.component";
     RouterModule.forChild([
       {
         path: "auth",
-        component: LoginComponent,
         children: [
           { path: "", redirectTo: "/auth/login", pathMatch: 'full' },
           {

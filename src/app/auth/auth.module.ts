@@ -15,10 +15,10 @@ import { HeaderComponent } from './header/header.component';
   declarations: [LoginComponent, RegisterComponent, HeaderComponent, FooterComponent],
   imports: [
     CommonModule,
-    // BrowserModule,
+    BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    AuthRoutingModule,
+    AuthRoutingModule
     // SharedComponentModule
   ]
 })
