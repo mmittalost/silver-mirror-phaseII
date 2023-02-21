@@ -90,4 +90,31 @@ export class DashboardService {
           }
         return this.httpClient.post<HttpResponse<any>>(BASE_URL + '/my_memberships', payload);
     }
+
+    getRescheduleDates(aptId:string, lowerRange:string, upperRange:string){
+        const payload = {
+            "appointmentId":aptId,
+            "searchRangeLower":lowerRange,
+            "searchRangeUpper":upperRange,
+            "timeZone":'EST'
+          }
+        return this.httpClient.post<HttpResponse<any>>(BASE_URL + '/appointment_reschedule_available_dates', payload);
+    }
+
+    getRescheduleTimes(aptId:string, date:string){
+        const payload = {
+            "appointmentId":aptId,
+            "date":date,
+            "timeZone":'EST'
+          }
+        return this.httpClient.post<HttpResponse<any>>(BASE_URL + '/appointment_reschedule_available_times', payload);
+    }
+
+    reschedule(aptId:string, timeId:string){
+        const payload = {
+            "appointmentId":aptId,
+            "bookableTimeId":timeId
+          }
+        return this.httpClient.post<HttpResponse<any>>(BASE_URL + '/rechedule_appointment', payload);
+    }
 }

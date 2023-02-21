@@ -8,20 +8,10 @@ import { DashboardService } from './dashboard.service';
 })
 export class DashboardComponent implements OnInit {
 
-  selectedTab:string='memberships';
-
   constructor(public dashboardService:DashboardService){
     this.dashboardService.getServices();
   }
 
-  ngOnInit(): void {
-    
-  }
-
-  changeTab(tab:string){
-    if(this.selectedTab != tab){
-      this.selectedTab = tab;
-    }
-  }
+  ngOnInit(): void { }
 
 }

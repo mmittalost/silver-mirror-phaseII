@@ -1,0 +1,115 @@
+<section class="schedule-flow">
+	<div class="container grid">
+
+        <div class="content-container">
+
+
+
+            <app-calendar [availableDates] = "availableDates | async" (changeMonthEvent)="monthChange($event)" (dateSelectEvent)="selectDate($event)"></app-calendar>
+
+
+
+
+
+
+
+
+
+            <div class="time-slots">
+
+                <div class="time-slot-container">
+                    <h2 class="heading-6 small">Available Time</h2>
+                    
+                    <fieldset class="flex-container">
+                        <span style="display: flex;" *ngFor="let time of availableTimes | async">
+                            <input (change)="selectTime(time)" [id]="time?.bookableTimeId" [checked]="time.selected" class="accessibility" name="time-chooser" type="radio"/>
+                            <label [for]="time?.bookableTimeId">{{time?.startTime | date:'hh:mm a':'EST'}}</label>
+                        </span>
+                        
+                        <!-- <input id="claudia-time1130" class="accessibility" name="time-chooser" type="radio"/>
+                        <label for="claudia-time1130">11:30 am</label>
+                        
+                        <input id="claudia-time1200" class="accessibility" name="time-chooser" type="radio"/>
+                        <label for="claudia-time1200">12:00 pm</label>
+                        
+                        <input id="claudia-time1230" class="accessibility" name="time-chooser" type="radio"/>
+                        <label for="claudia-time1230">12:30 pm</label>
+                        
+                        <input id="claudia-time1300" class="accessibility" name="time-chooser" type="radio"/>
+                        <label for="claudia-time1300">1:00 pm</label>
+                        
+                        <input id="claudia-time1330" class="accessibility" name="time-chooser" type="radio"/>
+                        <label for="claudia-time1330">1:30 pm</label>
+                        
+                        <input id="claudia-time1400" class="accessibility" name="time-chooser" type="radio"/>
+                        <label for="claudia-time1400">2:00 pm</label> -->
+                    </fieldset>
+                </div>
+            
+                <!-- <div class="time-slot-container">
+                    <h2 class="heading-6 small">Nick W.</h2>
+                    
+                    <fieldset class="flex-container">
+                        <input id="nick-time1100" class="accessibility" name="time-chooser" type="radio"/>
+                        <label for="nick-time1100">11:00 am</label>
+                        
+                        <input id="nick-time1130" class="accessibility" name="time-chooser" type="radio"/>
+                        <label for="nick-time1130">11:30 am</label>
+                        
+                        <input id="nick-time1200" class="accessibility" name="time-chooser" type="radio"/>
+                        <label for="nick-time1200">12:00 pm</label>
+                        
+                        <input id="nick-time1230" class="accessibility" name="time-chooser" type="radio"/>
+                        <label for="nick-time1230">12:30 pm</label>
+                        
+                        <input id="nick-time1300" class="accessibility" name="time-chooser" type="radio"/>
+                        <label for="nick-time1300">1:00 pm</label>
+                        
+                        <input id="nick-time1330" class="accessibility" name="time-chooser" type="radio"/>
+                        <label for="nick-time1330">1:30 pm</label>
+                        
+                        <input id="nick-time1400" class="accessibility" name="time-chooser" type="radio"/>
+                        <label for="nick-time1400">2:00 pm</label>
+                        
+                        <input id="nick-time1430" class="accessibility" name="time-chooser" type="radio"/>
+                        <label for="nick-time1430">2:30 pm</label>
+                        
+                        <input id="nick-time1500" class="accessibility" name="time-chooser" type="radio"/>
+                        <label for="nick-time1500">3:00 pm</label>
+                        
+                        <input id="nick-time1530" class="accessibility" name="time-chooser" type="radio"/>
+                        <label for="nick-time1530">4:30 pm</label>
+                        
+                        <input id="nick-time1600" class="accessibility" name="time-chooser" type="radio"/>
+                        <label for="nick-time1600">5:00 pm</label>
+                    </fieldset>
+                </div>
+                
+                <div class="time-slot-container">
+                    <h2 class="heading-6 small">Samantha J.</h2>
+                    
+                    <fieldset class="flex-container">
+                        <input id="samantha-time1100" class="accessibility" name="time-chooser" type="radio"/>
+                        <label for="samantha-time1100">11:00 am</label>
+                        
+                        <input id="samantha-time1230" class="accessibility" name="time-chooser" type="radio"/>
+                        <label for="samantha-time1230">12:30 pm</label>
+                        
+                        <input id="samantha-time1300" class="accessibility" name="time-chooser" type="radio"/>
+                        <label for="samantha-time1300">1:00 pm</label>
+                        
+                        <input id="samantha-time1400" class="accessibility" name="time-chooser" type="radio"/>
+                        <label for="samantha-time1400">2:00 pm</label>
+                        
+                        <input id="samantha-time1430" class="accessibility" name="time-chooser" type="radio"/>
+                        <label for="samantha-time1430">2:30 pm</label>
+                        
+                        <input id="samantha-time1600" class="accessibility" name="time-chooser" type="radio"/>
+                        <label for="samantha-time1600">5:00 pm</label>
+                    </fieldset>
+                </div> -->
+            </div>
+            <span (click)="reschedule()"><a class="btn black small">Reschedule Appointment</a></span>
+            </div>
+        </div>
+</section>

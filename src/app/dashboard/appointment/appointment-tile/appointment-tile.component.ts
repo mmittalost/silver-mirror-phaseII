@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
 import { DashboardService } from '../../dashboard.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class AppointmentTileComponent {
 
   @Input() appointment:any;
 
-  constructor(private dashboardService: DashboardService){}
+  constructor(private dashboardService: DashboardService, private router:Router){}
 
   cancelAppointment(){
     this.dashboardService.cancelAppointment(this.appointment.id).subscribe((res:any)=>{
@@ -30,6 +31,16 @@ export class AppointmentTileComponent {
           alert(res.errors[0].message);
         }
       })
+    }
+
+    navigateToReschedule(){
+      const params:any = {
+        state:{
+          appointmentId:this.appointment.id
+        }
+      }
+      console.log(params);
+      this.router.navigateByUrl('/dashboard/reschedule', params)
     }
 
 }
