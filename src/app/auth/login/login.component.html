@@ -13,14 +13,22 @@
         
                     <h1 class="heading-4">Login or Create an Account</h1>
         
-                    <div class="login-form" *ngIf='!(authService.$otp | async)'>
-                        <input type="email" id="email" name="email" placeholder="Email Address" [(ngModel)]="email">
-                        <input  class="btn" type="submit" value="Continue" (click)="generateOTP()">
+                    
+                    <div [formGroup]="emailForm" class="login-form" *ngIf='!(authService.$otp | async)'>
+                        <input type="email" formControlName="email" id="email" name="email" placeholder="Email Address" [(ngModel)]="email">
+                        <div *ngIf="emailForm.controls.email.invalid && (emailForm.controls.email.dirty || emailForm.controls.email.touched)">
+                            <div *ngIf="emailForm.controls.email.errors?.required">Email is required</div>
+                            <div *ngIf="emailForm.controls.email.errors?.email">Invalid Email</div>
+                        </div>
+                        <input class="btn" type="submit" value="Continue" (click)="generateOTP()">
                     </div>
-                    <div class="login-form" *ngIf='authService.$otp | async'>
+                    <div [formGroup]="otpForm" class="login-form" *ngIf='authService.$otp | async'>
                         <p *ngIf="silverService.otpMessage" style="color: green; margin-bottom: 0px;">{{silverService.otpMessage}}</p>
-                        <input type="text" id="otp" name="otp" placeholder="Enter OTP" [(ngModel)]="enteredotp">
-                       
+                        <input maxLength="6" minLength="4" formControlName="otp" type="text" id="otp" name="otp" placeholder="Enter OTP" [(ngModel)]="enteredotp">
+                        <div *ngIf="otpForm.controls.otp.invalid && (otpForm.controls.otp.dirty || otpForm.controls.otp.touched)">
+                            <div *ngIf="otpForm.controls.otp.errors?.required">OTP is required</div>
+                            <div *ngIf="otpForm.controls.otp.errors?.minlength || otpForm.controls.otp.errors?.maxlength">Invalid OTP</div>
+                        </div>
                         <input  class="btn" type="submit" value="Continue" (click)="checkOTP()">
                     </div>
                 </article>

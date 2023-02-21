@@ -27,7 +27,7 @@ export class AuthService {
     this.http
       .post(BASE_URL + "/get_client_by_email", payload)
       .subscribe((res: any) => {
-        if (!res.erros) {
+        if (!res.erros && res.data.clients.edges.length) {
           const user = res.data.clients.edges[0].node;
           user.authId = user.id.replace("urn:blvd:Client:", "");
           localStorage.setItem("AuthUser", JSON.stringify(user));
@@ -36,8 +36,7 @@ export class AuthService {
           this.$otp.next(otp);
           this.sendOTPEmail(user.email, otp, user.firstName);
         } else {
-          alert("User does not exist!");
-          this.router.navigate(["/register"]);
+          this.router.navigate(["/auth/register"]);
         }
       });
   }

@@ -12,16 +12,26 @@
 				<div class="column-2">
 					<label class="pill" for="first-name">First Name*</label>
 					<input formControlName="firstName" required type="text" id="first-name" placeholder="First Name"/>
+					<div *ngIf="accountForm.controls.firstName.invalid && (accountForm.controls.firstName.dirty || accountForm.controls.firstName.touched)">
+						<div *ngIf="accountForm.controls.firstName.errors?.required">First Name is required</div>
+					</div>
 				</div>
 				
 				<div class="column-2">
 					<label class="pill" for="last-name">Last Name*</label>
 					<input formControlName="lastName" required type="text" id="last-name" placeholder="Last Name"/>
+					<div *ngIf="accountForm.controls.lastName.invalid && (accountForm.controls.lastName.dirty || accountForm.controls.lastName.touched)">
+						<div *ngIf="accountForm.controls.lastName.errors?.required">Last Name is required</div>
+					</div>
 				</div>
 				
 				<div class="column-2">
 					<label class="pill" for="email-address">Email Address*</label>
 					<input formControlName="email" required type="email" id="email-address" placeholder="example@email.com"/>
+					<div *ngIf="accountForm.controls.email.invalid && (accountForm.controls.email.dirty || accountForm.controls.email.touched)">
+						<div *ngIf="accountForm.controls.email.errors?.required">Email is required</div>
+						<div *ngIf="accountForm.controls.email.errors?.email">Invalid Email</div>
+					</div>
 				</div>
 				
 				<!-- <div class="column-2">
@@ -69,6 +79,9 @@
 				<div class="column-2">
 					<label class="pill" for="phone-num">Phone Number*</label>
 					<input formControlName="mobilePhone" required type="tel" id="phone-num" placeholder="555.555.5555"/>
+					<div *ngIf="accountForm.controls.mobilePhone.invalid && (accountForm.controls.mobilePhone.dirty || accountForm.controls.mobilePhone.touched)">
+						<div *ngIf="accountForm.controls.mobilePhone.errors?.required">Mobile number is required</div>
+					</div>
 				</div>
 				
 				<!-- <div class="column-1 credit-card-options">
