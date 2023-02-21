@@ -14,9 +14,9 @@
                 <!--Location-->
                 
                 <li class="location-filte">
-                    <button class="filter-button">Location <span class="counter">1</span></button>
+                    <!-- <button class="filter-button">Location <span class="counter">1</span></button> -->
                     
-                    <div class="filter-pop">
+                    <!-- <div class="filter-pop">
                         <h3 class="flex-container eyebrow small">
                             <span class="mobile-only">Filter </span>Location 
                             <button class="close-filter"><span class="accessibility">Close filter</span></button>
@@ -56,7 +56,7 @@
                         </ul>
             
                         <button class="btn black submit-btn mobile-only">Apply</button>
-                    </div>
+                    </div> -->
                 </li>
                 
                 <!--Time-->
@@ -150,158 +150,44 @@
             </ul>
 
 
-
-            <div class="date-slots">
-                <div class="week-chooser">
-                    <button class="arrow last-week"><span class="accessibility">Last Week</span></button>
-                    <span class="eyebrow small">September 2022</span>
-                    <button class="arrow next-week"><span class="accessibility">Next Week</span></button>
-                    
-                    <button class="show-calendar"><span>Show Calendar</span></button>
-                    
-                    <!--Calendar Popup-->
-                  
-                </div>
+            <ul class="guest-tabs">
                 
-                <!--Days of the Week-->
+                <li class="active"><button class="pill">Me </button></li>
+                <li class="active"><button class="pill">Guest 1 </button></li>
+                <!-- <li [class.active]="activeButton === i+1" (click)="guestSelect(i+1,guest.id)" 
+                *ngFor="let guest of silverService.guestList$ | async; index as i">
+                    <button class="pill" id="{{guest.id}}">Guest {{i+1}}</button>
+                </li> -->
+                
+            </ul>
+
+            <div class="time-slots">
+
+                <div class="time-slot-container" *ngIf="(staffVarients | async).length">
+                    <h2 class="heading-6 small">Available Staff</h2>
                     
-                <div class="week-container">
                     <fieldset class="flex-container">
-                        <input id="sunday" checked class="accessibility" name="weekday" type="radio"/>
-                        <label for="sunday" class="heading-6">
-                            <span class="pill">Sun</span> 19
-                        </label>
-                        
-                        <input id="monday" disabled class="accessibility" name="weekday" type="radio"/>
-                        <label for="monday" class="heading-6">
-                            <span class="pill">Mon</span> 20
-                        </label>
-                        
-                        <input id="tuesday" disabled class="accessibility" name="weekday" type="radio"/>
-                        <label for="tuesday" class="heading-6">
-                            <span class="pill">Tue</span> 21
-                        </label>
-                        
-                        <input id="wednesday" class="accessibility" name="weekday" type="radio"/>
-                        <label for="wednesday" class="heading-6">
-                            <span class="pill">Wed</span> 22
-                        </label>
-                        
-                        <input id="thursday" class="accessibility" name="weekday" type="radio"/>
-                        <label for="thursday" class="heading-6">
-                            <span class="pill">Thu</span> 23
-                        </label>
-                        
-                        <input id="friday" class="accessibility" name="weekday" type="radio"/>
-                        <label for="friday" class="heading-6">
-                            <span class="pill">Fri</span> 24
-                        </label>
-                        
-                        <input id="saturday" class="accessibility" name="weekday" type="radio"/>
-                        <label for="saturday" class="heading-6">
-                            <span class="pill">Sat</span> 25
-                        </label>
+                        <span style="display: flex;" *ngFor="let staff of staffVarients | async">
+                            <input (change)="selectStaff(staff)" [id]="staff?.id" [checked]="staff.selected" class="accessibility" name="staff-chooser" type="radio"/>
+                            <label [for]="staff?.id">{{staff?.staff?.displayName}}</label>
+                        </span>
                     </fieldset>
                 </div>
             </div>
 
-
-
-
-
-
-
+            <app-calendar [availableDates] = "availableDates | async" (changeMonthEvent)="monthChange($event)" (dateSelectEvent)="selectDate($event)"></app-calendar>
 
 
             <div class="time-slots">
 
-                <div class="time-slot-container">
-                    <h2 class="heading-6 small">Claudia E.</h2>
+                <div class="time-slot-container" *ngIf="(availableTimes | async).length">
+                    <h2 class="heading-6 small">Available Time</h2>
                     
                     <fieldset class="flex-container">
-                        <input id="claudia-time1100" checked class="accessibility" name="time-chooser" type="radio"/>
-                        <label for="claudia-time1100">11:00 am</label>
-                        
-                        <input id="claudia-time1130" class="accessibility" name="time-chooser" type="radio"/>
-                        <label for="claudia-time1130">11:30 am</label>
-                        
-                        <input id="claudia-time1200" class="accessibility" name="time-chooser" type="radio"/>
-                        <label for="claudia-time1200">12:00 pm</label>
-                        
-                        <input id="claudia-time1230" class="accessibility" name="time-chooser" type="radio"/>
-                        <label for="claudia-time1230">12:30 pm</label>
-                        
-                        <input id="claudia-time1300" class="accessibility" name="time-chooser" type="radio"/>
-                        <label for="claudia-time1300">1:00 pm</label>
-                        
-                        <input id="claudia-time1330" class="accessibility" name="time-chooser" type="radio"/>
-                        <label for="claudia-time1330">1:30 pm</label>
-                        
-                        <input id="claudia-time1400" class="accessibility" name="time-chooser" type="radio"/>
-                        <label for="claudia-time1400">2:00 pm</label>
-                    </fieldset>
-                </div>
-            
-                <div class="time-slot-container">
-                    <h2 class="heading-6 small">Nick W.</h2>
-                    
-                    <fieldset class="flex-container">
-                        <input id="nick-time1100" class="accessibility" name="time-chooser" type="radio"/>
-                        <label for="nick-time1100">11:00 am</label>
-                        
-                        <input id="nick-time1130" class="accessibility" name="time-chooser" type="radio"/>
-                        <label for="nick-time1130">11:30 am</label>
-                        
-                        <input id="nick-time1200" class="accessibility" name="time-chooser" type="radio"/>
-                        <label for="nick-time1200">12:00 pm</label>
-                        
-                        <input id="nick-time1230" class="accessibility" name="time-chooser" type="radio"/>
-                        <label for="nick-time1230">12:30 pm</label>
-                        
-                        <input id="nick-time1300" class="accessibility" name="time-chooser" type="radio"/>
-                        <label for="nick-time1300">1:00 pm</label>
-                        
-                        <input id="nick-time1330" class="accessibility" name="time-chooser" type="radio"/>
-                        <label for="nick-time1330">1:30 pm</label>
-                        
-                        <input id="nick-time1400" class="accessibility" name="time-chooser" type="radio"/>
-                        <label for="nick-time1400">2:00 pm</label>
-                        
-                        <input id="nick-time1430" class="accessibility" name="time-chooser" type="radio"/>
-                        <label for="nick-time1430">2:30 pm</label>
-                        
-                        <input id="nick-time1500" class="accessibility" name="time-chooser" type="radio"/>
-                        <label for="nick-time1500">3:00 pm</label>
-                        
-                        <input id="nick-time1530" class="accessibility" name="time-chooser" type="radio"/>
-                        <label for="nick-time1530">4:30 pm</label>
-                        
-                        <input id="nick-time1600" class="accessibility" name="time-chooser" type="radio"/>
-                        <label for="nick-time1600">5:00 pm</label>
-                    </fieldset>
-                </div>
-                
-                <div class="time-slot-container">
-                    <h2 class="heading-6 small">Samantha J.</h2>
-                    
-                    <fieldset class="flex-container">
-                        <input id="samantha-time1100" class="accessibility" name="time-chooser" type="radio"/>
-                        <label for="samantha-time1100">11:00 am</label>
-                        
-                        <input id="samantha-time1230" class="accessibility" name="time-chooser" type="radio"/>
-                        <label for="samantha-time1230">12:30 pm</label>
-                        
-                        <input id="samantha-time1300" class="accessibility" name="time-chooser" type="radio"/>
-                        <label for="samantha-time1300">1:00 pm</label>
-                        
-                        <input id="samantha-time1400" class="accessibility" name="time-chooser" type="radio"/>
-                        <label for="samantha-time1400">2:00 pm</label>
-                        
-                        <input id="samantha-time1430" class="accessibility" name="time-chooser" type="radio"/>
-                        <label for="samantha-time1430">2:30 pm</label>
-                        
-                        <input id="samantha-time1600" class="accessibility" name="time-chooser" type="radio"/>
-                        <label for="samantha-time1600">5:00 pm</label>
+                        <span style="display: flex;" *ngFor="let time of availableTimes | async">
+                            <input (change)="selectTime(time)" [id]="time?.id" [checked]="time.selected" class="accessibility" name="time-chooser" type="radio"/>
+                            <label [for]="time?.id">{{time?.startTime | date:'hh:mm a':'EST'}}</label>
+                        </span>
                     </fieldset>
                 </div>
             </div>
@@ -320,9 +206,9 @@
             </div>
 
 
-            <aside class="empty">
+            <!-- <aside class="empty">
                 <app-cart></app-cart>
-           </aside>
+           </aside> -->
 
 
 

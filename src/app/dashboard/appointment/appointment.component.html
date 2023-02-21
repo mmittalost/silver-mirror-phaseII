@@ -1,5 +1,5 @@
-<div class="content">
-	<h1 class="heading-4">Welcome back, {{dashboardService.loggedInclientName}}!</h1>
+<!-- <div class="content"> -->
+	<!-- <h1 class="heading-4">Welcome back, Tamara!</h1> -->
 	
 	<h2 class="eyebrow">Upcoming Appointments</h2>
 	
@@ -10,6 +10,6 @@
 	<h2 class="eyebrow">Past Appointments</h2>
 	
 	<app-appointment-tile *ngFor="let appt of dashboardService.$myAppointments | async | pastappointments" [appointment]="appt?.node"></app-appointment-tile>
-</div>
+<!-- </div> -->
 
 <!-- <app-reschedule [appointmentId]="appointmentId"></app-reschedule> -->

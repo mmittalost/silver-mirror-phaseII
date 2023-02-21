@@ -1,5 +1,5 @@
 <section class="schedule-flow">
-	<div class="container grid">
+	<!-- <div class="container grid"> -->
 
         <div class="content-container">
 
@@ -109,7 +109,7 @@
                     </fieldset>
                 </div> -->
             </div>
-            <span (click)="reschedule()"><a class="btn black small">Reschedule Appointment</a></span>
+            <span (click)="reschedule()"><button [disabled]="!this.selectedTime" class="btn black small">Reschedule Appointment</button></span>
             </div>
-        </div>
+        <!-- </div> -->
 </section>

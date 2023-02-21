@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { BookAnAppointmentComponent } from './book-an-appointment/book-an-appointment.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { LocationComponent } from './location/location.component';
@@ -26,7 +25,6 @@ import { ServiceDetailModelComponent } from './service-detail-model/service-deta
 import { CartComponent } from './cart/cart.component';
 import { CommonModule } from '@angular/common';
 import { FooterTopComponent } from './footer-top/footer-top.component';
-// import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppointmentComponent } from './dashboard/appointment/appointment.component';
 import { DashboardHeaderComponent } from './dashboard/dashboard-header/dashboard-header.component';
 import { PastAppointmentsPipe, UpcomingAppointmentsPipe } from './dashboard/appointments.pipe';
@@ -39,8 +37,6 @@ import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from "ngx-ui-loader";
 import { ServiceNotificationComponent } from './service-notification/service-notification.component';
 import { ServiceAddonNotificationComponent } from './service-addon-notification/service-addon-notification.component';
 import { RescheduleComponent } from './dashboard/reschedule/reschedule.component';
-import { CalendarComponent } from './dashboard/reschedule/calendar/calendar.component';
-import { ToggleCalendarPipe } from './dashboard/reschedule/calendar/toggle-calendar.pipe';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { SharedComponentModule } from './shared-component/shared-component.module';
 
@@ -50,7 +46,6 @@ import { SharedComponentModule } from './shared-component/shared-component.modul
     BookAnAppointmentComponent,
     LoginComponent,
     RegisterComponent,
-    // HeaderComponent,
     FooterComponent,
     BreadcrumbsComponent,
     LocationComponent,
@@ -65,7 +60,6 @@ import { SharedComponentModule } from './shared-component/shared-component.modul
     CartComponent,
     ModalComponent,
     FooterTopComponent,
-    // DashboardComponent,
     AppointmentComponent,
     DashboardHeaderComponent,
     PastAppointmentsPipe,
@@ -79,8 +73,7 @@ import { SharedComponentModule } from './shared-component/shared-component.modul
     ServiceNotificationComponent,
     ServiceAddonNotificationComponent,
     RescheduleComponent,
-    CalendarComponent,
-    ToggleCalendarPipe
+    RescheduleComponent
   ],
   imports: [
     BrowserModule,

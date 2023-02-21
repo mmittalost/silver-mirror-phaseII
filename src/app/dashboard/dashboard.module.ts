@@ -6,7 +6,6 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard.routing.module';
-import { HeaderComponent } from '../header/header.component';
 import { SharedComponentModule } from '../shared-component/shared-component.module';
 
 @NgModule({

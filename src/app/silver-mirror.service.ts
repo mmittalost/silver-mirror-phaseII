@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { BehaviorSubject, concat, forkJoin, Subject, map } from 'rxjs';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
@@ -292,6 +292,49 @@ export class SilverMirrorService {
     let imgURL =
       "https://blvd.silvermirror.com/assets/"+type+"-" + serviceID + ".jpg";
     return imgURL;
+  }
+
+  getScheduleDates(cartId:string, locationId:string){
+    const payload = {
+      "cartID":cartId,
+      "locationID":locationId,
+      "timeZone":"EST",
+      "limit":8,
+      "clientId": localStorage.getItem('clientID')
+    }
+    return this.http.post<HttpResponse<any>>(this.apiURL + '/get_cart_bookable_dates', payload);
+}
+
+getScheduleTimes(cartId:string, date:string){
+  const payload = {
+    "cartID":cartId,
+    "searchDate":date,
+    "timeZone":"EST",
+    "clientId": localStorage.getItem('clientID')
+  }
+  return this.http.post<HttpResponse<any>>(this.apiURL + '/get_cart_bookable_times', payload);
+}
+
+getCartStaffVarients(cartId:string, bookableTimeId:string, serviceId:string, locationId:string, ){
+  const payload = {
+    "cartId":cartId,
+    "bookableTimeId":bookableTimeId,
+    "serviceId":serviceId,
+    "locationId":locationId,
+    "clientId": localStorage.getItem('clientID')
+  }
+  return this.http.post<HttpResponse<any>>('http://localhost:50000' + '/get_cart_staff_variants', payload);
+}
+
+  updateItemInCart(itemId:any, staffId:string){
+    const payload = {
+      cartId:localStorage.getItem('cartID'),
+      itemGuestId:'',
+      itemId:itemId,
+      clientId:'',
+      itemStaffVariantId:staffId
+    };
+    return this.http.post('http://localhost:50000'+'/update_item_in_cart',payload);
   }
 
 }
