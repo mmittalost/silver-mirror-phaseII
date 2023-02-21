@@ -47,6 +47,7 @@ export class ServicesComponent {
     keyboard: true,
     modalClass: "modal-top-right",
   };
+  greeting:any="hi";
   constructor(
     public silverService: SilverMirrorService,
     private modalService: MdbModalService

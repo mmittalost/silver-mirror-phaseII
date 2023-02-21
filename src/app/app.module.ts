@@ -84,7 +84,6 @@ import { SharedComponentModule } from './shared-component/shared-component.modul
     NgxUiLoaderModule,
     NgxUiLoaderHttpModule.forRoot({
       showForeground:true,
-      exclude: [""]
     }),
     DashboardModule,
     SharedComponentModule
