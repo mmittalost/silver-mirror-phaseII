@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { SilverMirrorService } from '../../silver-mirror.service';
-
+import { NotificationService, Notification } from 'src/app/notification.service';
+import { ToastrService } from "ngx-toastr";
 @Component({
   selector: 'app-alert',
   templateUrl: './alert.component.html',
@@ -9,8 +8,16 @@ import { SilverMirrorService } from '../../silver-mirror.service';
 })
 export class AlertComponent {
 
-  @Input() message:string | undefined;
+  @Input() message!:string;
+  @Input() title!:string;
+  // title!:string;
+  // message!:string;
   
-
-  constructor(public silverService: SilverMirrorService) { }
+  constructor(private toastrService:ToastrService /*private notificationService:NotificationService*/) {
+    // this.notificationService.$notification.subscribe((notification:Notification)=>{
+    //   this.title = notification.title;
+    //   this.message = notification.message;
+    //   console.log("Notification Message : ", notification);
+    // })
+  }
 }

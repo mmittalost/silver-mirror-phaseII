@@ -21,7 +21,7 @@ export class LoginComponent {
     public authService: AuthService,
     public silverService: SilverMirrorService,
     private router: Router,
-    private formBuilder:FormBuilder
+    private formBuilder:FormBuilder,
   ) {
     this._buildForm();
   }
@@ -36,11 +36,11 @@ export class LoginComponent {
   }
   
   generateOTP() {
-    if(this.emailForm.valid){
-      this.authService.getClientByEmail(this.email);
-    }else{
-      alert('Invalid Email');
-    }
+    // if(this.emailForm.valid){
+    //   this.authService.getClientByEmail(this.email);
+    // }else{
+    //   alert('Invalid Email');
+    // }
   }
 
   checkOTP() {

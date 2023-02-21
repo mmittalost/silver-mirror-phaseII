@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-
+import { NotificationService } from './notification.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,8 +7,12 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'silver-mirror-phaseII';
-  constructor(private router: Router) {}
-  ngOnInit() {
-    // this.router.navigate([''])
-  }
+
+  constructor(private notificationService:NotificationService) {
+    // setTimeout(() => {
+    //   this.notificationService.$notification.next({title:'Test Title', message:'Test Message!'});
+    // }, 3000);
+   }
+  
+  ngOnInit() { }
 }

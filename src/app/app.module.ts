@@ -35,7 +35,9 @@ import { ServiceAddonNotificationComponent } from './service-addon-notification/
 import { RescheduleComponent } from './dashboard/reschedule/reschedule.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { SharedComponentModule } from './shared-component/shared-component.module';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { AlertComponent } from './shared-component/alert/alert.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,7 +84,14 @@ import { SharedComponentModule } from './shared-component/shared-component.modul
       showForeground:true,
     }),
     DashboardModule,
-    SharedComponentModule
+    SharedComponentModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      toastComponent: AlertComponent,
+      // autoDismiss: true,
+      positionClass:'toast-top-right',
+      tapToDismiss:true,
+    })
   ],
   exports:[ SharedComponentModule ],
   providers: [],

@@ -24,6 +24,6 @@ import { AuthModule } from '../auth/auth.module';
     RouterModule,
     AuthModule
   ],
-  exports:[HeaderComponent,AlertComponent, FooterComponent, CalendarComponent, ToggleCalendarPipe]
+  exports:[HeaderComponent, AlertComponent, FooterComponent, CalendarComponent, ToggleCalendarPipe]
 })
 export class SharedComponentModule { }
