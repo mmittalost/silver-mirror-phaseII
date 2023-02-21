@@ -35,6 +35,7 @@ export class SilverMirrorService {
   selectedServiceID:any;
   addOns:any;
   selectedTabWithServices:any=[];
+  greeting:any='';
   constructor(private http:HttpClient,private router:Router) {
     this.getLocations();
    }
@@ -221,9 +222,11 @@ export class SilverMirrorService {
         this.cartItem$.next(res.data);
         this.selectedAddons$.next(res.data.addCartSelectedBookableItem.cart.selectedItems);
         this.selectedServices.add(this.checkAddedServices);
-    
         this.selectedTabWithServices.push({[this.guestName]:itemId });
         localStorage.setItem(this.checkAddedServices, "yes");
+        if(res.data){
+          this.greeting="Added to cart"
+        }
         this.cartDetail();
       });
   }
