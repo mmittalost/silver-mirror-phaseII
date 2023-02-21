@@ -13,59 +13,74 @@
 			<h2 class="heading-6">Payment Details</h2>
 			<p class="xx-small">Have an account? <a class="text-link" href="#">Login or create an account</a></p>
 			
-			<ul class="flex-container credit-card-details">
-				<li>
-					<label class="pill" for="card-details">Card Details</label>
-					<input type="text" id="card-details" placeholder="Card Number"/>
-				</li>
+			<form [formGroup]="paymentForm" (ngSubmit)="updatePaymentMethod()">
+				<ul class="flex-container credit-card-details">
+					<li>
+						<label class="pill" for="name">Name</label>
+						<input formControlName="name" type="text" id="name" placeholder="Name"/>
+					</li>
+					<li>
+						<label class="pill" for="card-details">Card Details</label>
+						<input maxLength="16" minLength="15" formControlName="number" type="text" id="card-details" placeholder="Card Number"/>
+					</li>
 
-				<li class="mobile-only">
-					<p class="xx-small info">Your credit card is only used to hold the reservation and won't be charged unless you cancel late or don't show up.</p>
-				</li>
-				
-				<li>
-					<label class="pill" for="card-exp">Expiration Date</label>
-					<input type="text" id="card-exp" placeholder="MM/YY"/>
-				</li>
-				
-				<li>
-					<label class="pill" for="card-cvv">CVV</label>
-					<input type="text" id="card-cvv" placeholder="***"/>
-				</li>
-			</ul>
+					<li class="mobile-only">
+						<p class="xx-small info">Your credit card is only used to hold the reservation and won't be charged unless you cancel late or don't show up.</p>
+					</li>
+					
+					<li>
+						<label class="pill" for="card-exp">Expiration Date</label>
+						<input maxLength="7" minLength="7" formControlName="expiry" type="text" id="card-exp" placeholder="MM/YYYY"/>
+					</li>
+					
+					<li>
+						<label class="pill" for="card-cvv">CVV</label>
+						<input maxLength="3" minLength="3" formControlName="cvv" type="text" id="card-cvv" placeholder="***"/>
+					</li>
+
+					<li>
+						<label class="pill" for="postal-code">Postal Code</label>
+						<input maxLength="5" minLength="5" formControlName="postal_code" type="text" id="postal-code" placeholder="Postal Code"/>
+					</li>
+				</ul>
+				<button type="submit" class="text-link large">Save Changes</button>
+			</form>
 			
 			<p class="xx-small info">Your credit card is only used to hold the reservation and won't be charged unless you cancel late or don't show up.</p>
 			
 			<!--Additional Fields-->
 			<h2 class="heading-6">Additional Information</h2>
 
-<ul class="grid additional-info">
-	<li>
-		<label class="pill" for="first-name">First Name</label>
-		<input type="text" id="first-name" placeholder="First Name"/>
-	</li>
-	
-	<li>
-		<label class="pill" for="last-name">Last Name</label>
-		<input type="text" id="last-name" placeholder="Last Name"/>
-	</li>
-	
-	<li>
-		<label class="pill" for="phone">Phone Number</label>
-		<input type="tel" id="phone" placeholder="(555) 555-5555"/>
-	</li>
-	
-	<li>
-		<label class="pill" for="email">Email Address</label>
-		<input type="email" id="email" placeholder="email@address.com"/>
-	</li>
-	
-	<li>
-		<label class="pill" for="notes">Notes</label>
-		<p class="xx-small">Preferences? Celebrations? Secrets you want to share? Let us know.</p>
-		<input type="text" id="notes" placeholder="Write any notes for us"/>
-	</li>
-</ul>
+			<form [formGroup]="userInfoForm" (ngSubmit)="updateUserInfo()">
+				<ul class="grid additional-info">
+					<li>
+						<label class="pill" for="first-name">First Name</label>
+						<input formControlName="firstName" type="text" id="first-name" placeholder="First Name"/>
+					</li>
+					
+					<li>
+						<label class="pill" for="last-name">Last Name</label>
+						<input formControlName="lastName" type="text" id="last-name" placeholder="Last Name"/>
+					</li>
+					
+					<li>
+						<label class="pill" for="phone">Phone Number</label>
+						<input type="tel" formControlName="mobilePhone" id="phone" placeholder="(555) 555-5555"/>
+					</li>
+					
+					<li>
+						<label class="pill" for="email">Email Address</label>
+						<input formControlName="email" type="email" id="email" placeholder="email@address.com"/>
+					</li>
+					
+					<li>
+						<label class="pill" for="notes">Notes</label>
+						<p class="xx-small">Preferences? Celebrations? Secrets you want to share? Let us know.</p>
+						<input formControlName="note" type="text" id="notes" placeholder="Write any notes for us"/>
+					</li>
+					<button type="submit" class="text-link large">Save Changes</button>
+				</ul>
+			</form>
 
 <div class="mobile-only flex-container promo-code">
 	<label class="pill" for="promo-code">Promo Code</label>
@@ -79,9 +94,9 @@
 		</div>
 		
 		<!--Sidebar-->
-		<aside class="empty">
+		<!-- <aside class="empty">
 			<app-cart></app-cart>
-	   </aside>
+	   </aside> -->
 		
 	</form>
 </section>

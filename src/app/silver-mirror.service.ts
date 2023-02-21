@@ -337,4 +337,42 @@ getCartStaffVarients(cartId:string, bookableTimeId:string, serviceId:string, loc
     return this.http.post(this.apiURL+'/update_item_in_cart',payload);
   }
 
+  tokenizeCard(card:any){
+    const tokenize_url = "https://pci.boulevard.app/cards/tokenize";
+    const payload = {
+      "card": {
+        "name": card.name,
+        "number": card.number,
+        "cvv": card.cvv,
+        "exp_month": card.expiry.substring(0,2),
+        "exp_year": card.expiry.substring(3,7),
+        "address_postal_code": card.postal_code
+      }
+    }
+    return this.http.post(tokenize_url,payload);
+  }
+
+  addCartPaymentMethod(token:string){
+    const payload = {
+      "cartId": localStorage.getItem("cartID"),
+      "select":true,
+      "token":token
+    }
+    return this.http.post(this.apiURL+ '/add_cart_card_payment_method',payload);
+  }
+
+  updateClientCartInfo(client:any){
+    const payload = {
+      "cartId": localStorage.getItem("cartID"),
+      "clientInfo":{
+        "email": client.email,
+        "firstName":client.firstName,
+        "lastName":client.lastName,
+        "phoneNumber":client.mobileNumber
+      },
+      "clientNote":client.note
+    }
+    return this.http.post(this.apiURL+ '/update_cart_client_info',payload);
+  }
+
 }
