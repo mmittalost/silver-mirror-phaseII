@@ -6711,3 +6711,20 @@ dialog {
   #small-services-tabs-desktop-only li:nth-last-child(6){
 	display: none;
   } 
+  #mobile-only-mobile-services-tabs li:last-child,
+  #mobile-only-mobile-services-tabs li:nth-last-child(2){
+	display: none;
+  }
+
+  .loggedin-menu{
+	position: absolute;
+right: 3rem;
+top: 4.1rem;
+list-style: none;
+background: var(--bright-blue);
+font-size: 12px;
+padding: 5px 10px 5px 10px;
+  }
+  .loggedin-menu li {
+   cursor: pointer;
+}

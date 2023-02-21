@@ -10,6 +10,9 @@ import { SilverMirrorService } from '../silver-mirror.service';
 export class HeaderComponent {
 
   @Input() title:string = '';
+  
+  ReadMore:boolean = true
+  visible:boolean = false
 
   constructor(
     public silverService: SilverMirrorService,private router:Router
@@ -21,4 +24,9 @@ logout(){
   localStorage.clear(); 
   this.router.navigate(['/login']);
  }
+  onclick()
+  {
+    this.ReadMore = !this.ReadMore; 
+    this.visible = !this.visible
+  }
 }

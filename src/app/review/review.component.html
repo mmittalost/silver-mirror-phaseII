@@ -79,66 +79,9 @@
 		</div>
 		
 		<!--Sidebar-->
-		<aside>
-            <button class="mobile-only cart-summary flex-container">
-                <span class="eyebrow small">Summary</span>
-                <span class="cost">$255</span>
-            </button>
-        
-            <div class="cart-info">
-                <h2 class="eyebrow small flex-container desktop-only">Cart <span>3 Services Added</span></h2>
-                
-                <ul class="small">
-                    <li class="flex-container">
-                        <span class="user">Me <span class="counter gray">2</span></span>
-                        <span>
-                            <strong>Party-Prep Facial</strong>
-                            <span class="pill">30-min</span>
-                        </span>
-                        
-                        <span class="cost">$85</span>
-                    </li>
-                    
-                    <li class="flex-container add-on">
-                        <span>
-                            <strong>Dermaplanning</strong>
-                            <span class="pill fill small">Add On</span>
-                        </span>
-                        
-                        <span class="cost">$85</span>
-                    </li>
-                    
-                    <li class="flex-container">
-                        <span class="user">Guest 1 <span class="counter gray">1</span></span>
-                        <span>
-                            <strong>Just For Men Facial</strong>
-                            <span class="pill">60-min</span>
-                        </span>
-                        
-                        <span class="cost">$185</span>
-                    </li>
-                </ul>
-                
-                <div class="flex-container cart-total">
-                    <span class="eyebrow small">Total</span>
-                    <p class="small">$255</p>
-                </div>
-                
-                <ul class="xx-small cart-details">
-                    <li>Sunday, September 18 @ 4:15 PM</li>
-                    <li>Esthetician: Veronica G.</li>
-                    <li>NYC - Flatiron</li>
-                </ul>
-            </div>
-            
-            <div class="desktop-only flex-container promo-code">
-                <label class="pill small" for="promo-code">Promo Code</label>
-                <input type="text" id="promo-code" placeholder="Enter Code"/>
-                <button class="text-link large">Apply</button>
-            </div>
-            
-            <a class="btn black" href="#">Book Now</a>
-        </aside>
+		<aside class="empty">
+			<app-cart></app-cart>
+	   </aside>
 		
 	</form>
 </section>

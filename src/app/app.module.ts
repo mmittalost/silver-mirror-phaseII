@@ -35,7 +35,9 @@ import { MembershipsComponent } from './dashboard/memberships/memberships.compon
 import { FilterMembershipPipe, MembershipServicesPipe } from './dashboard/memberships/filter-membership.pipe';
 import { MembershipProductsComponent } from './dashboard/memberships/membership-products/membership-products.component';
 import { AppointmentTileComponent } from './dashboard/appointment/appointment-tile/appointment-tile.component';
-
+import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from "ngx-ui-loader";
+import { ServiceNotificationComponent } from './service-notification/service-notification.component';
+import { ServiceAddonNotificationComponent } from './service-addon-notification/service-addon-notification.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,7 +69,9 @@ import { AppointmentTileComponent } from './dashboard/appointment/appointment-ti
     FilterMembershipPipe,
     MembershipServicesPipe,
     MembershipProductsComponent,
-    AppointmentTileComponent
+    AppointmentTileComponent,
+    ServiceNotificationComponent,
+    ServiceAddonNotificationComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +82,13 @@ import { AppointmentTileComponent } from './dashboard/appointment/appointment-ti
     NgxSkeletonLoaderModule,
     MdbCheckboxModule,
     MdbModalModule,
-    CommonModule
+    CommonModule,
+    HttpClientModule,
+    NgxUiLoaderModule,
+    NgxUiLoaderHttpModule.forRoot({
+      showForeground:true,
+      exclude: ["https://rest.caveday.org/restapp/getServiceDescription"]
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

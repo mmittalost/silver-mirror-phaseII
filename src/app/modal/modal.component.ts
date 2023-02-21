@@ -7,6 +7,7 @@ import { SilverMirrorService } from '../silver-mirror.service';
   templateUrl: './modal.component.html',
 })
 export class ModalComponent {
+  selectedAddonsId: Set<number> = new Set<number>();
   addonName:any='';
   readMore = false;
   addOns:any;
@@ -39,9 +40,9 @@ addObjectWithModifier(objects:any, addon: string, value: string):any {
       modifier.selected=false;
     }else
     {  
+      this.selectedAddonsId.add(modifier.id);
       this.silverService.addOns = this.addObjectWithModifier(this.addonObject,add.id,modifier.id);
       modifier.selected=true;
-      //this.silverService.addAddonsInCart();
     }
     console.log("addOns",this.silverService.addOns);
   }

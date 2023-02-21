@@ -1,7 +1,5 @@
 <!--Skip to main content-->
-		
-<a class="accessibility" href="#main">Skip To Content</a>
-		
+<a class="accessibility" href="#main">Skip To Content</a>	
 <!--Header-->
 <header class="flex-container">
     <a class="logo" routerLink="/"><img src="/assets/svgs/logo.svg" alt="Book an appointment with Silver Mirror Facial Bar"/></a>
@@ -18,7 +16,7 @@
             </g>
         </g>
     </svg></span>{{silverService.loginStatus=='true'?'Sign Out':'Sign In'}}</a>
-    <a *ngIf="silverService.loginStatus=='true'" class="data-ui sign-in" (click)="logout()" href="javascript:void(0)"><span><svg width="8px" height="8px" viewBox="0 0 8 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <a *ngIf="silverService.loginStatus=='true'" class="data-ui sign-in" (click)="onclick()" href="javascript:void(0)"><span><svg width="8px" height="8px" viewBox="0 0 8 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
             <g transform="translate(-1328.000000, -36.000000)" fill="#000000" fill-rule="nonzero">
                 <g transform="translate(1321.000000, 29.000000)">
@@ -28,8 +26,14 @@
                 </g>
             </g>
         </g>
-    </svg></span>{{silverService.loginStatus=='true'?'Sign Out':'Sign In'}}</a>
-
+    </svg></span>{{silverService.loginStatus=='true'?silverService.loggedInclientName:'Sign In'}}</a>
+           <ul class="loggedin-menu" *ngIf="visible && silverService.loginStatus=='true'">
+            <li  routerLink="/dashboard">Client Portal</li>
+            <li  routerLink="/location">Book a Facial</li>
+            <li  (click)="logout()">Sign Out</li>
+           </ul>
+        
+    
 
 </header>
 

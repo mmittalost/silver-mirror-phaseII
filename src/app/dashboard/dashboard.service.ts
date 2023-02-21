@@ -3,9 +3,10 @@ import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/comm
 import { BehaviorSubject, concat, forkJoin, Subject, map, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
-const BASE_URL = "http://localhost:50000";
-const CLIENT_ID = "103b0694-709c-4949-afc0-a45822467bae"; // himanshu.sharma@opensourcetechnologies.com
+const BASE_URL = "https://blvd.silvermirror.com";
+const CLIENT_ID = localStorage.getItem('clientID'); // himanshu.sharma@opensourcetechnologies.com
 // const CLIENT_ID = "0b9b1658-d8f2-4f3e-aabc-0574ef6a8af9" // testost1@gmail.com
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class DashboardService {
 
     $myAppointments:BehaviorSubject<any> = new BehaviorSubject([]);
     $servicesList:BehaviorSubject<any> = new BehaviorSubject([]);
-
+    loggedInclientName:any = localStorage.getItem('clientName');
     constructor(private httpClient: HttpClient){}
 
     getServices(){

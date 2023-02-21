@@ -7,12 +7,13 @@
         <div class="content-container">
             <ul class="small services-tabs desktop-only" id="small-services-tabs-desktop-only">
                 <li class="active"><button>Facials</button></li>
-                <li><button (click)="openModal()">Add-ons</button></li>
+                <li>
+                 <button (click)="openModal()">Add-ons</button></li>
                 <li [class.active]="facialName === service.name" 
                 (click)="facialName = service.name" *ngFor="let service of silverService.cartDetail$ | async "><button id="myBtn">{{service.name}}</button></li>
             </ul>
             <div class="guest-different-services" *ngIf="this.numberOfGuest!='me'">
-				<input checked="" id="guest-different" type="checkbox">
+				<input checked="" id="guest-different" type="checkbox" (click)="guestCheck()">
 				<label for="guest-different">My guests want different services</label>
 			</div>
 
@@ -33,14 +34,14 @@
                 </li>
             </ul>
             <!--Mobile Tabs/Filters-->
-            <ul class="mobile-only mobile-services-tabs">
+            <ul class="mobile-only mobile-services-tabs" id="mobile-only-mobile-services-tabs">
                 <li  [class.active]="facialName === service.name" (click)="facialName = service.name" *ngFor="let service of silverService.cartDetail$ | async ">
                     <button>{{serviceName(service.name )}}</button>
                 </li>
             </ul> 
             
           <ul class="services-list">
-                <li #{{servicedtl.id}} id="{{servicedtl.id}}" [ngClass]="servicedtl.active?'active':''" *ngFor="let servicedtl of silverService.cartDetail$ | async | facialFilter:facialName">
+                <li #{{servicedtl.id}} id="{{servicedtl.id}}" [ngClass]="selectedService(servicedtl.id)?'active':''" *ngFor="let servicedtl of silverService.cartDetail$ | async | facialFilter:facialName">
                     <button class="add-to-cart desktop-only" (click)="addToCart(servicedtl)">
                         <svg class="icon-accordion-open" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">

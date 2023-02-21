@@ -12,9 +12,7 @@ export class SilverMirrorService {
   //apiURL:any="http://localhost:50000";
   loginLogoutText:any='Sign In';
   otp:any='';
-  selectedAddonsId: Set<number> = new Set<number>();
   otpMessage:any;
-  
   locationList$: BehaviorSubject<any> = new BehaviorSubject([]);
   cartDetail$: BehaviorSubject<any> = new BehaviorSubject([]);
   cartDetails$: BehaviorSubject<any> = new BehaviorSubject([]);
@@ -26,15 +24,17 @@ export class SilverMirrorService {
   location$: BehaviorSubject<any> = new BehaviorSubject([]);
   selectedAddons$: BehaviorSubject<any> = new BehaviorSubject([]);
   loginStatus:any=localStorage.getItem('loginStatus');
+  loggedInclientName:any=localStorage.getItem('clientName');
   selectedLocation: string='';
   noOfGuest:number=0;
   guestID:any='';
-  guestName:any='';
+  guestName:any='Guest0';
   addonsItemId:any='';
   checkAddedServices:any="Guest0";
   selectedServices: Set<number> = new Set<number>();
   selectedServiceID:any;
   addOns:any;
+  selectedTabWithServices:any=[];
   constructor(private http:HttpClient,private router:Router) {
     this.getLocations();
    }
@@ -221,6 +221,8 @@ export class SilverMirrorService {
         this.cartItem$.next(res.data);
         this.selectedAddons$.next(res.data.addCartSelectedBookableItem.cart.selectedItems);
         this.selectedServices.add(this.checkAddedServices);
+    
+        this.selectedTabWithServices.push({[this.guestName]:itemId });
         localStorage.setItem(this.checkAddedServices, "yes");
         this.cartDetail();
       });
