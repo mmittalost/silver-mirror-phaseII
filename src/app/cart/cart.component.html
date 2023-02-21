@@ -1,5 +1,7 @@
 <div class="cart-info">
-    <h2 class="eyebrow small flex-container">Cart <span>{{silverService.cartDetails$.value.length}} Service Added</span>
+
+    <button class="close-cart mobile-only"><span class="accessibility">Close Cart</span></button>
+    <h2 class="eyebrow small flex-container"><span>Cart</span> <span>{{silverService.cartDetails$.value.length}} Service Added</span>
     </h2>
 
     <ul class="small">
@@ -74,3 +76,7 @@
     </ul>
 
 </div>
+
+<a class="btn inactive" href="#">Add to Continue</a>
+
+<button class="btn black view-cart mobile-only">View Cart<span class="item-count">{{silverService.cartDetails$.value.length}}</span></button>
