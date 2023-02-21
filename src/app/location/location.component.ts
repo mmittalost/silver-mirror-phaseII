@@ -11,6 +11,7 @@ export class LocationComponent {
     public silverService: SilverMirrorService
 ) { }
 currentIndex: any;
+greeting = 'Hello, world!';
 expand(index: any) {
   if(this.currentIndex === index) {
     this.currentIndex = null;

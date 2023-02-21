@@ -6,11 +6,13 @@ import { ToggleCalendarPipe } from './calendar/toggle-calendar.pipe';
 import { FooterComponent } from './footer/footer.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { AlertComponent } from './alert/alert.component';
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
+    AlertComponent,
     FooterComponent,
     CalendarComponent,
     ToggleCalendarPipe
@@ -20,6 +22,6 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     RouterModule
   ],
-  exports:[HeaderComponent, FooterComponent, CalendarComponent, ToggleCalendarPipe]
+  exports:[HeaderComponent,AlertComponent, FooterComponent, CalendarComponent, ToggleCalendarPipe]
 })
 export class SharedComponentModule { }
