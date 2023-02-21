@@ -4,8 +4,8 @@
 
     <ul class="small">
         <li class="flex-container" *ngFor="let service of silverService.cartDetails$ | async ">
-            <span *ngIf="!service.guestId">
-                <span *ngIf="service.selectedOptions.length==0">
+            <span style="width: 100%;" *ngIf="!service.guestId">
+                <span class="flex-container" *ngIf="service.selectedOptions.length==0">
                     <span class="user">Me <span class="counter gray">1</span></span>
 
                     <span>
