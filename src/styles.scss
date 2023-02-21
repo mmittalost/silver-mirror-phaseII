@@ -208,7 +208,7 @@ ol,
 .popup.addon-pop h4,
 .congrats h2 span,
 .account-info .credit-card-options h3 {
-	font: calc(18rem/16)/calc(30/18) var(--body-font);
+	font: calc(17rem/16)/calc(30/18) var(--body-font);
 	letter-spacing: .2px;
 	margin: 0 0 30px;
 }
@@ -960,8 +960,8 @@ footer .introspace {
 	text-align: center;
 }
 footer .intro {
-	grid-column: span 3;
-	text-align: center;
+	grid-column: span 6;
+	text-align: left;
 }
 
 footer .intro form {
@@ -1010,7 +1010,7 @@ footer .intro p {
 footer .intro ul {
 	display: flex;
 	gap: 15px;
-	justify-content: center;
+	justify-content: right;
 }
 
 footer .intro ul a {
@@ -3053,7 +3053,7 @@ aside .pill.location {
 	text-align: center;
 	top: 20px;
 	width: calc(100% - 40px);
-	z-index: 1;
+	z-index: 99;
 }
 
 .selection-confirmation .heading-6.small {
@@ -3527,7 +3527,7 @@ section.congrats {
 /***************************************************************************************************************************************************************************************/
 
 .login {
-	height: calc(100vh - 77px);
+	height: calc(100% - 77px);
 	padding-bottom: 40px;
 }
 
@@ -3667,12 +3667,15 @@ section.congrats {
 .create-account-form input[type="email"],
 .create-account-form input[type="tel"],
 .create-account-form input[type="submit"],
+.create-account-form .formGroup,
 .subscription-checkbox {
 	grid-column: 1 / -1;
 }
 
 .create-account-form #first-name,
-.create-account-form #last-name {
+.create-account-form #last-name,
+.create-account-form .formGroup.first-name,
+.create-account-form .formGroup.last-name{
 	grid-column: span 3;
 }
 
@@ -4782,7 +4785,7 @@ section.congrats {
 		transform: translateY(calc(100% - 71px));
 		transition: all 0.25s ease;
 		width: 100vw;
-		z-index: 1;
+		z-index: 9;
 	}
 
 	.quick-rebook.active {
@@ -5604,9 +5607,17 @@ section.congrats {
 		grid-column: 1;
 	}
 
+	footer .intro ul {
+		justify-content: center;
+	  }
+
 	footer .intro {
 		padding-bottom: 40px;
 		position: relative;
+		text-align: center;
+	}
+	footer .intro.social-section {
+		padding-bottom: 0px;
 	}
 
 	footer .intro:before {
@@ -6353,6 +6364,7 @@ section.congrats {
 		right: unset;
 		top: 20px;
 		width: 44px;
+		z-index:999;
 	}
 
 	.popup.addon-pop .scroller {
@@ -6666,6 +6678,10 @@ section.congrats {
 
 	.subscription-checkbox {
 		margin: 10px 0;
+	}
+	.create-account-form .formGroup.first-name,
+	.create-account-form .formGroup.last-name{
+		grid-column: 1/-1;
 	}
 
 }
