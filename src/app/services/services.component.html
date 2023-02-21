@@ -80,7 +80,7 @@
             </ul>
             </div>
 
-              <aside class="empty">
+              <aside  [class]="silverService.classAddtocatMobile" [ngClass]="(silverService.selectedTabWithServices.length > 0) ? '' : 'empty'">
                     <app-cart></app-cart>
                </aside>
 

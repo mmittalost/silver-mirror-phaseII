@@ -256,17 +256,6 @@ export class SilverMirrorService {
         console.error(error);
       });
 
-   
-   //let itemOptionIds =  Array.from(this.selectedAddonsId);
-   
-     
-  /*   this.http
-    .post(this.apiURL+'/add_item_in_cart',payload)
-    .subscribe((res: any) => {
-      console.log(">><<",res);
-      
-    }); */
-
   }
 
 
@@ -375,6 +364,14 @@ getCartStaffVarients(cartId:string, bookableTimeId:string, serviceId:string, loc
       "clientNote":client.note
     }
     return this.http.post(this.apiURL+ '/update_cart_client_info',payload);
+  }
+  classAddtocatMobile = '';
+  toggleClassAddtocart(){
+    if (this.classAddtocatMobile == '') {
+      this.classAddtocatMobile = 'active';
+    } else {
+      this.classAddtocatMobile = '';
+    }
   }
 
 }

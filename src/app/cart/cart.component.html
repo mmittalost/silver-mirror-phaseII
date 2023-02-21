@@ -1,6 +1,6 @@
 <div class="cart-info">
 
-    <button class="close-cart mobile-only"><span class="accessibility">Close Cart</span></button>
+    <button class="close-cart mobile-only" (click)="silverService.classAddtocatMobile=''"><span class="accessibility">Close Cart</span></button>
     <h2 class="eyebrow small flex-container"><span>Cart</span> <span>{{silverService.cartDetails$.value.length}} Service Added</span>
     </h2>
 
@@ -77,6 +77,6 @@
 
 </div>
 
-<a class="btn inactive" href="#">Add to Continue</a>
+<a class="btn" routerLink="/scheduling" [ngClass]="(silverService.selectedTabWithServices.length > 0) ? 'active' : 'inactive'">Add to Continue</a>
 
-<button class="btn black view-cart mobile-only">View Cart<span class="item-count">{{silverService.cartDetails$.value.length}}</span></button>
+<button class="btn black view-cart mobile-only" (click)="silverService.toggleClassAddtocart()" >View Cart<span class="item-count">{{silverService.cartDetails$.value.length}}</span></button>
