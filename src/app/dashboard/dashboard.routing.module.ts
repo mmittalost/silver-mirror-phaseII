@@ -4,6 +4,7 @@ import { AuthGuard } from "../guards/auth.guard";
 import { AccountComponent } from "./account/account.component";
 import { AppointmentComponent } from "./appointment/appointment.component";
 import { DashboardComponent } from "./dashboard.component";
+import { MembershipProductsComponent } from "./membership-products/membership-products.component";
 import { MembershipsComponent } from "./memberships/memberships.component";
 import { RescheduleComponent } from "./reschedule/reschedule.component";
 
@@ -26,6 +27,10 @@ import { RescheduleComponent } from "./reschedule/reschedule.component";
           {
             path: "memberships",
             component: MembershipsComponent,
+          },
+          {
+            path: "membership-products",
+            component: MembershipProductsComponent,
           },
           {
             path: "account",

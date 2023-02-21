@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void { }
 
   getClientName(){
-    return localStorage.getItem("clientName");
+    return this.dashboardService.authUser.firstName;
   }
 
 }

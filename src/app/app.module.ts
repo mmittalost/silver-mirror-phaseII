@@ -4,8 +4,6 @@ import { FormsModule,ReactiveFormsModule  }   from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BookAnAppointmentComponent } from './book-an-appointment/book-an-appointment.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { LocationComponent } from './location/location.component';
 import { WhosComingComponent } from './whos-coming/whos-coming.component';
@@ -29,7 +27,7 @@ import { PastAppointmentsPipe, UpcomingAppointmentsPipe } from './dashboard/appo
 import { AccountComponent } from './dashboard/account/account.component';
 import { MembershipsComponent } from './dashboard/memberships/memberships.component';
 import { FilterMembershipPipe, MembershipServicesPipe } from './dashboard/memberships/filter-membership.pipe';
-import { MembershipProductsComponent } from './dashboard/memberships/membership-products/membership-products.component';
+import { MembershipProductsComponent } from './dashboard/membership-products/membership-products.component';
 import { AppointmentTileComponent } from './dashboard/appointment/appointment-tile/appointment-tile.component';
 import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from "ngx-ui-loader";
 import { ServiceNotificationComponent } from './service-notification/service-notification.component';
@@ -42,8 +40,6 @@ import { SharedComponentModule } from './shared-component/shared-component.modul
   declarations: [
     AppComponent,
     BookAnAppointmentComponent,
-    LoginComponent,
-    RegisterComponent,
     BreadcrumbsComponent,
     LocationComponent,
     WhosComingComponent,
@@ -68,7 +64,7 @@ import { SharedComponentModule } from './shared-component/shared-component.modul
     AppointmentTileComponent,
     ServiceNotificationComponent,
     ServiceAddonNotificationComponent,
-    RescheduleComponent
+    RescheduleComponent,
   ],
   imports: [
     BrowserModule,

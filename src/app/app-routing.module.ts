@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { LoginComponent } from "./login/login.component";
-import { RegisterComponent } from "./register/register.component";
+// import { LoginComponent } from "./auth/login/login.component";
+// import { RegisterComponent } from "./auth/register/register.component";
 import { LocationComponent } from "./location/location.component";
 import { WhosComingComponent } from "./whos-coming/whos-coming.component";
 import { ServicesComponent } from "./services/services.component";
@@ -12,8 +12,8 @@ import { CongratsComponent } from "./congrats/congrats.component";
 @NgModule({
   imports: [
     RouterModule.forRoot([
-      { path: "login", component: LoginComponent },
-      { path: "register", component: RegisterComponent },
+      // { path: "login", component: LoginComponent },
+      // { path: "register", component: RegisterComponent },
       { path: "location", component: LocationComponent },
       { path: "whoscoming", component: WhosComingComponent },
       { path: "services", component: ServicesComponent },

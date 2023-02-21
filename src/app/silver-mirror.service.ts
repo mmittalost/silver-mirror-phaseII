@@ -10,7 +10,6 @@ import { finalize } from 'rxjs/operators';
 export class SilverMirrorService {
   apiURL:any="https://blvd.silvermirror.com";
   //apiURL:any="http://localhost:50000";
-  loginLogoutText:any='Sign In';
   otp:any='';
   otpMessage:any;
   locationList$: BehaviorSubject<any> = new BehaviorSubject([]);
@@ -23,8 +22,8 @@ export class SilverMirrorService {
   cartItem$: BehaviorSubject<any> = new BehaviorSubject([]);
   location$: BehaviorSubject<any> = new BehaviorSubject([]);
   selectedAddons$: BehaviorSubject<any> = new BehaviorSubject([]);
-  loginStatus:any=localStorage.getItem('loginStatus');
-  loggedInclientName:any=localStorage.getItem('clientName');
+  loginStatus:BehaviorSubject<string | null>= new BehaviorSubject(localStorage.getItem('loginStatus'));
+  loggedInclientName:BehaviorSubject<string | null>=new BehaviorSubject(localStorage.getItem('clientName'));
   selectedLocation: string='';
   noOfGuest:number=0;
   guestID:any='';
@@ -143,53 +142,53 @@ export class SilverMirrorService {
    
   }
 
-  getClientByEmail(email:any) {
-    const payload = {
-      emails:[email]
-    };    
-    this.http
-      .post(this.apiURL+'/get_client_by_email',payload)
-      .subscribe((res: any) => {
-        this.getClientByEmail$.next(res);
-      if(res.data.clients.edges.length==1)
-      {
-        this.otp = Math.floor((Math.random() * 1000000) + 1);
-        localStorage.setItem('otp',this.otp);
-        localStorage.setItem("clientID",res.data.clients.edges[0].node.id.replace('urn:blvd:Client:',''));
-        localStorage.setItem("clientEmail",res.data.clients.edges[0].node.email);
-        localStorage.setItem("clientName",res.data.clients.edges[0].node.firstName);
-        this.sendOTPEmail(res.data.clients.edges[0].node.email,this.otp,res.data.clients.edges[0].node.firstName);
-      }
-      else{
-        this.router.navigate(['/register']);
-      }
-      });
-  }
-  sendOTPEmail(email:any,otp:any,name:any){
-    const payload = {
-      email:email,
-      otp:otp,
-      name:name
-    };  
-    this.http
-      .post(this.apiURL+'/login',payload)
-      .subscribe((res: any) => {
-        this.otpMessage=res.message;
-      });
-  }
-  addNewClient(data:any) {
-    const payload = {client:{
-      email:data.email,
-      firstName:data.firstName,
-      lastName:data.lastName,
-      mobilePhone:data.phone
-    }};  
-    this.http
-      .post(this.apiURL+'/createClient',payload)
-      .subscribe((res: any) => {
-        console.log(">>",res);
-      });
-  }
+  // getClientByEmail(email:any) {
+  //   const payload = {
+  //     emails:[email]
+  //   };    
+  //   this.http
+  //     .post(this.apiURL+'/get_client_by_email',payload)
+  //     .subscribe((res: any) => {
+  //       this.getClientByEmail$.next(res);
+  //     if(res.data.clients.edges.length==1)
+  //     {
+  //       this.otp = Math.floor((Math.random() * 1000000) + 1);
+  //       localStorage.setItem('otp',this.otp);
+  //       localStorage.setItem("clientID",res.data.clients.edges[0].node.id.replace('urn:blvd:Client:',''));
+  //       localStorage.setItem("clientEmail",res.data.clients.edges[0].node.email);
+  //       localStorage.setItem("clientName",res.data.clients.edges[0].node.firstName);
+  //       this.sendOTPEmail(res.data.clients.edges[0].node.email,this.otp,res.data.clients.edges[0].node.firstName);
+  //     }
+  //     else{
+  //       this.router.navigate(['/register']);
+  //     }
+  //     });
+  // }
+  // sendOTPEmail(email:any,otp:any,name:any){
+  //   const payload = {
+  //     email:email,
+  //     otp:otp,
+  //     name:name
+  //   };  
+  //   this.http
+  //     .post(this.apiURL+'/login',payload)
+  //     .subscribe((res: any) => {
+  //       this.otpMessage=res.message;
+  //     });
+  // }
+  // addNewClient(data:any) {
+  //   const payload = {client:{
+  //     email:data.email,
+  //     firstName:data.firstName,
+  //     lastName:data.lastName,
+  //     mobilePhone:data.phone
+  //   }};  
+  //   this.http
+  //     .post(this.apiURL+'/createClient',payload)
+  //     .subscribe((res: any) => {
+  //       console.log(">>",res);
+  //     });
+  // }
   selectLocation(id:any){
     localStorage.setItem('selectedLocation',id);
     console.log("ID",id);
