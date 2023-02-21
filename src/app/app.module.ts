@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { BookAnAppointmentComponent } from './book-an-appointment/book-an-appointment.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { FooterComponent } from './footer/footer.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { LocationComponent } from './location/location.component';
 import { WhosComingComponent } from './whos-coming/whos-coming.component';
@@ -24,7 +23,6 @@ import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 import { ServiceDetailModelComponent } from './service-detail-model/service-detail-model.component';
 import { CartComponent } from './cart/cart.component';
 import { CommonModule } from '@angular/common';
-import { FooterTopComponent } from './footer-top/footer-top.component';
 import { AppointmentComponent } from './dashboard/appointment/appointment.component';
 import { DashboardHeaderComponent } from './dashboard/dashboard-header/dashboard-header.component';
 import { PastAppointmentsPipe, UpcomingAppointmentsPipe } from './dashboard/appointments.pipe';
@@ -46,7 +44,6 @@ import { SharedComponentModule } from './shared-component/shared-component.modul
     BookAnAppointmentComponent,
     LoginComponent,
     RegisterComponent,
-    FooterComponent,
     BreadcrumbsComponent,
     LocationComponent,
     WhosComingComponent,
@@ -59,7 +56,6 @@ import { SharedComponentModule } from './shared-component/shared-component.modul
     ServiceDetailModelComponent,
     CartComponent,
     ModalComponent,
-    FooterTopComponent,
     AppointmentComponent,
     DashboardHeaderComponent,
     PastAppointmentsPipe,
@@ -72,7 +68,6 @@ import { SharedComponentModule } from './shared-component/shared-component.modul
     AppointmentTileComponent,
     ServiceNotificationComponent,
     ServiceAddonNotificationComponent,
-    RescheduleComponent,
     RescheduleComponent
   ],
   imports: [

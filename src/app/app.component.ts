@@ -10,6 +10,6 @@ export class AppComponent {
   title = 'silver-mirror-phaseII';
   constructor(private router: Router) {}
   ngOnInit() {
-    this.router.navigate([''])
+    // this.router.navigate([''])
   }
 }

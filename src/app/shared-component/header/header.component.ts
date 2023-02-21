@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { SilverMirrorService } from '../silver-mirror.service';
+import { SilverMirrorService } from '../../silver-mirror.service';
 
 @Component({
   selector: 'app-header',

@@ -14,6 +14,7 @@ import { RescheduleComponent } from "./reschedule/reschedule.component";
         path: "dashboard",
         component: DashboardComponent,
         children: [
+          { path: "", redirectTo: "/dashboard/appointments", pathMatch: 'full' },
           {
             path: "appointments",
             component: AppointmentComponent,
