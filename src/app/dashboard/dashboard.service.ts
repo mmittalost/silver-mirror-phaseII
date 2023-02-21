@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { BehaviorSubject, map, Observable } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 
 const BASE_URL = "https://blvd.silvermirror.com";
-const CLIENT_ID = localStorage.getItem('clientID'); // himanshu.sharma@opensourcetechnologies.com
-// const CLIENT_ID = "0b9b1658-d8f2-4f3e-aabc-0574ef6a8af9" // testost1@gmail.com
+// const this.authUser.authId = localStorage.getItem('clientID'); // himanshu.sharma@opensourcetechnologies.com
+// const this.authUser.authId = "0b9b1658-d8f2-4f3e-aabc-0574ef6a8af9" // testost1@gmail.com
 
 
 @Injectable({
@@ -15,7 +16,13 @@ export class DashboardService {
     $myAppointments:BehaviorSubject<any> = new BehaviorSubject([]);
     $servicesList:BehaviorSubject<any> = new BehaviorSubject([]);
     loggedInclientName:any = localStorage.getItem('clientName');
-    constructor(private httpClient: HttpClient){}
+    authUser:any;
+    
+    constructor(private httpClient: HttpClient, private authService:AuthService){
+      authService.$AuthUser.subscribe(user=>{
+        this.authUser = user;
+      });
+    }
 
     getServices(){
         this.httpClient.get<HttpResponse<any>>(BASE_URL + '/get_services').subscribe((res:any)=>{
@@ -29,7 +36,7 @@ export class DashboardService {
 
     getAppointmentsList():Observable<HttpResponse<any>>{
         const payload = {
-            "clientId": CLIENT_ID
+            "clientId": this.authUser.authId
         }
         return this.httpClient.post<HttpResponse<any>>(BASE_URL + '/my_appointments', payload).pipe(map((res:any)=>{
             const services = this.$servicesList.value;
@@ -61,7 +68,7 @@ export class DashboardService {
 
     cancelAppointment(aptId:string):Observable<HttpResponse<any>>{
         const payload = {
-            "clientId": CLIENT_ID,
+            "clientId": this.authUser.authId,
             "appointmentId": aptId,
             "notes":""
         }
@@ -70,14 +77,14 @@ export class DashboardService {
 
     getClientInfo():Observable<HttpResponse<any>>{
         const payload = {
-            "clientId": CLIENT_ID
+            "clientId": this.authUser.authId
         }
         return this.httpClient.post<HttpResponse<any>>(BASE_URL + '/get_client_by_id', payload);
     }
 
     updateClientInfo(client:any):Observable<HttpResponse<any>>{
         const payload = {
-            "clientId": CLIENT_ID,
+            "clientId": this.authUser.authId,
             "client": client
           }
         return this.httpClient.post<HttpResponse<any>>(BASE_URL + '/update_client', payload);
@@ -85,7 +92,7 @@ export class DashboardService {
 
     myMembershipsList(){
         const payload = {
-            "clientId": CLIENT_ID
+            "clientId": this.authUser.authId
           }
         return this.httpClient.post<HttpResponse<any>>(BASE_URL + '/my_memberships', payload);
     }

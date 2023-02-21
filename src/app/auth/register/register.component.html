@@ -1,0 +1,51 @@
+<!-- <app-header title="Book an Appointmemt"></app-header> -->
+
+<main id="main">
+<section class="login create-account">
+    <div class="container flex-container">
+
+        <article class="grid">
+            <h1 class="heading-4">Login or Create an Account to Check Availability</h1>
+
+            <form [formGroup]="form" (ngSubmit)="createAccount()" class="create-account-form">
+                <div class="formGroup email">
+                    <input type="email" id="email" name="email" placeholder="Email Address" formControlName="email" >
+                    <div *ngIf="submitted && form.controls.email.errors" class="invalid-feedback">
+                        <div *ngIf="form.controls.email.errors.required">Email is required</div>
+                    </div>
+                </div>
+                <div class="formGroup first-name">
+                    <input type="text" id="first-name" name="first-name" placeholder="First Name" formControlName="firstName" 
+                    [ngClass]="{ 'is-invalid': submitted && form.controls.firstName.errors }">
+                    <div *ngIf="submitted && form.controls.firstName.errors" class="invalid-feedback">
+                        <div *ngIf="form.controls.firstName.errors.required">First Name is required</div>
+                    </div>
+                </div>
+                <div class="formGroup last-name">
+                    <input type="text" id="last-name" name="last-name" placeholder="Last Name" formControlName="lastName">
+                    <div *ngIf="submitted && form.controls.lastName.errors" class="invalid-feedback">
+                        <div *ngIf="form.controls.lastName.errors.required">Last Name is required</div>
+                    </div>
+                </div>
+                <div class="formGroup phone-number">
+                    <input type="tel" id="phone-number" name="phone-number" placeholder="Phone Number" formControlName="phone">
+                    <div *ngIf="submitted && form.controls.phone.errors" class="invalid-feedback">
+                        <div *ngIf="form.controls.phone.errors.required">Phone is required</div>
+                    </div>
+                </div>
+                <!--<div class="subscription-checkbox">
+                    <input type="checkbox" id="email-subscription" name="email-subscription" value="yes">
+                    <label for="email-subscription">Join Our Email List</label>
+                </div>-->
+                <input class="btn" type="submit" value="Continue">
+            </form>
+        </article>
+
+        <div class="grid">
+            <p class="xx-small">Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our <a href="#">privacy policy</a>.</p>
+        </div>
+
+    </div>
+</section>
+</main>
+<app-footer></app-footer>

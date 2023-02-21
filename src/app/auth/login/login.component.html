@@ -1,0 +1,36 @@
+<app-header title="Book an Appointmemt"></app-header>
+
+<!--Main Content-->
+		
+    <main id="main">
+
+        <section class="login">
+            <div class="container flex-container">
+        
+                <article class="grid">
+        
+                    <span class="login-sparkles"></span>
+        
+                    <h1 class="heading-4">Login or Create an Account</h1>
+        
+                    <div class="login-form" *ngIf='!(authService.$otp | async)'>
+                        <input type="email" id="email" name="email" placeholder="Email Address" [(ngModel)]="email">
+                        <input  class="btn" type="submit" value="Continue" (click)="generateOTP()">
+                    </div>
+                    <div class="login-form" *ngIf='authService.$otp | async'>
+                        <p *ngIf="silverService.otpMessage" style="color: green; margin-bottom: 0px;">{{silverService.otpMessage}}</p>
+                        <input type="text" id="otp" name="otp" placeholder="Enter OTP" [(ngModel)]="enteredotp">
+                       
+                        <input  class="btn" type="submit" value="Continue" (click)="checkOTP()">
+                    </div>
+                </article>
+        
+                <div class="grid">
+                    <p class="xx-small">Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our <a href="#">privacy policy</a>.</p>
+                </div>
+        
+            </div>
+        </section>
+
+    </main>
+<app-footer></app-footer>

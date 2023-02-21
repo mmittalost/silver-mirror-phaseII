@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { DashboardService } from '../dashboard.service';
 
@@ -11,7 +12,7 @@ export class MembershipsComponent {
 
   $memberships:BehaviorSubject<any> = new BehaviorSubject([]);
 
-  constructor(private dashboardService:DashboardService){
+  constructor(private dashboardService:DashboardService, private router:Router){
     this.getMembershipsList();
   }
 
@@ -20,6 +21,9 @@ export class MembershipsComponent {
       if(!res.errors){
         this.$memberships.next(res.data.myMemberships.edges);
         console.log(this.$memberships.value);
+        if(!this.$memberships.value.length){
+          this.router.navigateByUrl("/dashboard/membership-products");
+        }
       }else{
         alert(res.errors[0].message);
       }

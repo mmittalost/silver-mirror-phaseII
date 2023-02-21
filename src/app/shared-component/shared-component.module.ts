@@ -7,6 +7,7 @@ import { FooterComponent } from './footer/footer.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { AlertComponent } from './alert/alert.component';
+import { AuthModule } from '../auth/auth.module';
 
 
 @NgModule({
@@ -18,9 +19,10 @@ import { AlertComponent } from './alert/alert.component';
     ToggleCalendarPipe
   ],
   imports: [
-    BrowserModule,
+    // BrowserModule,
     CommonModule,
-    RouterModule
+    RouterModule,
+    AuthModule
   ],
   exports:[HeaderComponent,AlertComponent, FooterComponent, CalendarComponent, ToggleCalendarPipe]
 })
