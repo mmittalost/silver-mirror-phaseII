@@ -293,7 +293,7 @@ export class SilverMirrorService {
 
   imageURL(serviceID: any, type:any) {
     let imgURL =
-      "https://blvd.silvermirror.com/assets/"+type+"-" + serviceID + ".jpg";
+      "https://blvd.silvermirror.com/assets/"+type+"-" + serviceID + ".png";
     return imgURL;
   }
 
