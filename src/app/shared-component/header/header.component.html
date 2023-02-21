@@ -28,8 +28,8 @@
         </g>
     </svg></span>{{silverService.loginStatus=='true'?silverService.loggedInclientName:'Sign In'}}</a>
            <ul class="loggedin-menu" *ngIf="visible && silverService.loginStatus=='true'">
-            <li><a href="/dashboard">Client Portal</a></li>
-            <li><a href="/location">Book a Facial</a></li>
+            <li routerLink="/dashboard">Client Portal</li>
+            <li routerLink="/location">Book a Facial</li>
             <li  (click)="logout()">Sign Out</li>
            </ul>
         

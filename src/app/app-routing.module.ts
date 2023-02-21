@@ -8,9 +8,6 @@ import { ServicesComponent } from "./services/services.component";
 import { SchedulingComponent } from "./scheduling/scheduling.component";
 import { ReviewComponent } from "./review/review.component";
 import { CongratsComponent } from "./congrats/congrats.component";
-import { DashboardComponent } from "./dashboard/dashboard.component";
-import { AuthGuard } from "./guards/auth.guard";
-import { AppointmentComponent } from "./dashboard/appointment/appointment.component";
 
 @NgModule({
   imports: [
