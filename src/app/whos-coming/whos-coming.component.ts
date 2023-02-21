@@ -20,7 +20,9 @@ export class WhosComingComponent {
    }
    
   whosComingMe(selected:any){
+    if(selected){
     localStorage.setItem('selectedWhoscoming',selected);
+    }
     if(selected=='me')
     {
       this.statusMe = true; 
@@ -29,7 +31,7 @@ export class WhosComingComponent {
       this.btnStatus=true; 
      
     }
-    else
+    if(selected=='meandGuest')
     {
       this.statusMe = false;  
       this.statusMeandGuest  = true;

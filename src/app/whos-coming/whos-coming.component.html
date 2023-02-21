@@ -23,7 +23,7 @@
 		<div class="guest-counter">
 			<div *ngIf="statusMeandGuestDropdown">
 			<label class="pill" for="guest-count">How Many Guests?</label>
-			<select id="guest-count" [(ngModel)]="noOfguest" (change)="guestChange(noOfguestSelected.value)" #noOfguestSelected>
+			<select id="guest-count" (change)="guestChange(noOfguestSelected.value)" #noOfguestSelected>
 				<option [value]="1" [selected]="noOfguest =='1'">1 Guest</option>
 				<option [value]="2" [selected]="noOfguest =='2'">2 Guests</option>
 				<option [value]="3" [selected]="noOfguest =='3'">3 Guests</option>
