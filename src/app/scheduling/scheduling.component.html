@@ -72,16 +72,17 @@
                         </h3>
                         
                         <div class="range-slider" *ngIf="toggleTimeFilter">
+                            <ngx-slider (userChangeEnd)="changeTimeRange($event)" [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ngx-slider>
                             <!--Note: input[type=range] did would not work here, so assuming this'll be 100% JS controlled-->
                             
-                            <span class="range-bar">
+                            <!-- <span class="range-bar">
                                 <span class="progress"></span>
                             </span>
                             
                             <span class="time active start-time">9AM</span>
                             <span class="time mid-time">12PM</span>
                             <span class="time active chosen-end-time">5PM</span>
-                            <span class="time end-time">8PM</span>
+                            <span class="time end-time">8PM</span> -->
             
                             <button class="text-link clear-time-range mobile-only">Clear</button>
                         </div>
@@ -159,6 +160,25 @@
                 
             </ul>
 
+            <app-calendar [availableDates] = "availableDates | async" (changeMonthEvent)="monthChange($event)" (dateSelectEvent)="selectDate($event)"></app-calendar>
+
+
+            <div class="time-slots">
+
+                <div class="time-slot-container" *ngIf="(availableTimes | async).length">
+                    <h2 class="heading-6 small">Available Time</h2>
+                    
+                    <fieldset class="flex-container">
+                        <span style="display: flex;" *ngFor="let time of availableTimes | async | timeFilter:{min:minValue, max:maxValue}">
+                            <input (change)="selectTime(time)" [id]="time?.id" [checked]="time.selected" class="accessibility" name="time-chooser" type="radio"/>
+                            <label [for]="time?.id">{{time?.startTime | date:'hh:mm a':'EST'}}</label>
+                        </span>
+                    </fieldset>
+                </div>
+            </div>
+
+
+
             <div class="time-slots available-staff">
 
                 <div class="time-slot-container" *ngIf="(staffVarients | async).length">
@@ -172,27 +192,6 @@
                     </fieldset>
                 </div>
             </div>
-
-            <app-calendar [availableDates] = "availableDates | async" (changeMonthEvent)="monthChange($event)" (dateSelectEvent)="selectDate($event)"></app-calendar>
-
-
-            <div class="time-slots">
-
-                <div class="time-slot-container" *ngIf="(availableTimes | async).length">
-                    <h2 class="heading-6 small">Available Time</h2>
-                    
-                    <fieldset class="flex-container">
-                        <span style="display: flex;" *ngFor="let time of availableTimes | async">
-                            <input (change)="selectTime(time)" [id]="time?.id" [checked]="time.selected" class="accessibility" name="time-chooser" type="radio"/>
-                            <label [for]="time?.id">{{time?.startTime | date:'hh:mm a':'EST'}}</label>
-                        </span>
-                    </fieldset>
-                </div>
-            </div>
-
-
-
-
 
 
 

@@ -38,6 +38,8 @@ import { SharedComponentModule } from './shared-component/shared-component.modul
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { AlertComponent } from './shared-component/alert/alert.component';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { TimeFilterPipe } from './scheduling/time-filter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,6 +69,7 @@ import { AlertComponent } from './shared-component/alert/alert.component';
     ServiceNotificationComponent,
     ServiceAddonNotificationComponent,
     RescheduleComponent,
+    TimeFilterPipe,
   ],
   imports: [
     BrowserModule,
@@ -91,7 +94,8 @@ import { AlertComponent } from './shared-component/alert/alert.component';
       // autoDismiss: true,
       positionClass:'toast-top-right',
       tapToDismiss:true,
-    })
+    }),
+    NgxSliderModule,
   ],
   exports:[ SharedComponentModule ],
   providers: [],

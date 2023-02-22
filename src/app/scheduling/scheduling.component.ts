@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { Notification, NotificationService } from '../notification.service';
 import { SilverMirrorService } from '../silver-mirror.service';
-
+import { Options, ChangeContext, PointerType } from '@angular-slider/ngx-slider';
 @Component({
   selector: 'app-scheduling',
   templateUrl: './scheduling.component.html',
@@ -21,13 +21,29 @@ export class SchedulingComponent implements OnInit {
   toggleTimeFilter:boolean = false;
   toggleStaffFilter:boolean = false;
 
+  minValue: number = 9;
+  maxValue: number = 20;
+  options: Options = {
+    floor: 9,
+    ceil: 20,
+    step:1,
+    noSwitching: true,
+    translate: (value: number): string => {
+      if(value >= 9 && value <=12){
+        return value + 'AM';
+      }else{
+        return (value - 12) + 'PM'
+      }
+    }
+  };
+
   ngOnInit(): void {
     this.silverService.cartDetail();
     this.bookingService.cartDetail$.subscribe((detail:any)=>{
       console.log("Cart Detail : ", detail);
       if(detail.length){
         this.cartDetail = detail;
-        this.getStaffVariantByServiceId("urn:blvd:Service:09ac1b50-2dc7-47d5-ac30-c1a0f523cbdc");
+        // this.getStaffVariantByServiceId("urn:blvd:Service:09ac1b50-2dc7-47d5-ac30-c1a0f523cbdc");
       }
     });
     this.bookingService.cartDetails$.subscribe((detail:any)=>{
@@ -100,17 +116,18 @@ export class SchedulingComponent implements OnInit {
   selectTime(time:any){
     time.selected = !time.selected;
     this.selectedTime = time;
-    // const cartId:any = localStorage.getItem('cartID');
-    // const serviceId:string = "urn:blvd:Service:09ac1b50-2dc7-47d5-ac30-c1a0f523cbdc";
-    // const locationId = this.bookingService.location$.value.id;
-    // this.bookingService.getCartStaffVarients(cartId, time.id, serviceId, locationId).subscribe((res:any)=>{
-    //   if(!res.errors){
-    //     this.staffVarients.next(res.data);
-    //     console.log(this.staffVarients.value);
-    //   }else{
-    //     alert(res.errors[0].message);
-    //   }
-    // })
+    const cartId:any = localStorage.getItem('cartID');
+    const serviceId:string = this.selectedItems[0].id;
+    const locationId = this.bookingService.location$.value.id;
+    this.bookingService.getCartStaffVarients(cartId, time.id, serviceId, locationId).subscribe((res:any)=>{
+      if(!res.errors){
+        this.staffVarients.next(res.data.cartBookableStaffVariants);
+        this.ifStaffVariantSelected();
+        console.log(this.staffVarients.value);
+      }else{
+        alert(res.errors[0].message);
+      }
+    })
   }
 
   selectStaff(staff:any){
@@ -148,6 +165,12 @@ export class SchedulingComponent implements OnInit {
   filterStaff(staff:any){
     console.log(staff);
     staff.filter = !staff.filter;
+  }
+
+  changeTimeRange(changeContext: ChangeContext): void {
+    // const min = changeContext.value;
+    // const max = changeContext.highValue;
+    // const date = new Date()
   }
 
 }

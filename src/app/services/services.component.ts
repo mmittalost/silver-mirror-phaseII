@@ -127,8 +127,8 @@ export class ServicesComponent {
     alert("Guest checked!!!");
   }
   selectedService(serviceId:any){
-    console.log("this.silverService.selectedTabWithServices",this.silverService.selectedTabWithServices);
-    console.log("this.silverService.guestName",this.silverService.guestName);
+    // console.log("this.silverService.selectedTabWithServices",this.silverService.selectedTabWithServices);
+    // console.log("this.silverService.guestName",this.silverService.guestName);
     //let obj:any;
     const result = this.silverService.selectedTabWithServices.filter((obj: { [x: string]: any; }) => obj[this.silverService.guestName] === serviceId);
     
