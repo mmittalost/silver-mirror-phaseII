@@ -48,6 +48,8 @@ export class ServicesComponent {
     modalClass: "modal-top-right",
   };
   greeting:any=this.silverService.greeting;
+  activeFacial:boolean = true;
+
   constructor(
     public silverService: SilverMirrorService,
     private modalService: MdbModalService
@@ -93,6 +95,7 @@ export class ServicesComponent {
 
   serviceDetail(servicedtl: any) {
     this.configService.data.service = servicedtl;
+    this.configService.data.category = servicedtl;
     this.modalRefService = this.modalService.open(
       ServiceDetailModelComponent,
       this.configService
@@ -140,6 +143,16 @@ export class ServicesComponent {
       return false;
     }
    
+  }
+
+  selectCatTab(service:any){
+    this.activeFacial = false;
+    this.facialName = service.name
+  }
+
+  selectFacial(){
+    this.activeFacial = true;
+    this.facialName = "Facials 30 Minutes";
   }
   // if(this.silverService.cartDetails$.value.length==0)
   //{

@@ -26,6 +26,8 @@ export class ServiceDetailModelComponent {
    
     setTimeout(() => {
       console.log("this.modalRefServicedata",this.service);
+      const catName = this.getCategoryByServiceId(this.service.id);
+      console.log("Category Name : ", catName);
   }, 1000);
     
   }
@@ -33,6 +35,7 @@ export class ServiceDetailModelComponent {
     this.silverService.selectedServiceID = elem.id;
     if (this.silverService.cartDetails$.value.length == 0) {
       this.silverService.addItemInCart(elem.id);
+      this.modalRefService.close();
       this.modalRef = this.modalService.open(ModalComponent, this.config);
       elem.active = !elem.active;
     } else {
@@ -46,5 +49,19 @@ export class ServiceDetailModelComponent {
         this.modalRef = this.modalService.open(ModalComponent, this.config);
       }
     }
-}
+  }
+
+  getCategoryByServiceId(serviceId:string){
+    const availableCat = this.silverService.cartDetail$.value;
+    console.log("Available Cat : ", availableCat);
+    availableCat.map((cat:any)=>{
+      const index = cat.availableItems.findIndex((item:any)=>item.id == serviceId);
+      if(index >= 0){
+        this.service.categoryName = cat.name.replace("Facials ", "");;
+        return;
+      }
+    })
+    console.log("Service with catname : ", this.service);
+  }
+
 }

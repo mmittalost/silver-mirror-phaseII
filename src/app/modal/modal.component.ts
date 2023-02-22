@@ -48,6 +48,7 @@ addObjectWithModifier(objects:any, addon: string, value: string):any {
   }
   addonAddtoCart(){
 
-  this.silverService.addAddonsInCart()
+  this.silverService.addAddonsInCart();
+  this.modalRef.close();
 }
 }

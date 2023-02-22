@@ -7,11 +7,11 @@
        <app-breadcrumbs class="breadcrumbs-container"></app-breadcrumbs>
         <div class="content-container">
             <ul class="small services-tabs desktop-only" id="small-services-tabs-desktop-only">
-                <li class="active"><button>Facials</button></li>
+                <li [ngClass]="activeFacial ? 'active' : '' "><button (click)="selectFacial()">Facials</button></li>
                 <li>
                  <button (click)="openModal()">Add-ons</button></li>
                 <li [class.active]="facialName === service.name" 
-                (click)="facialName = service.name" *ngFor="let service of silverService.cartDetail$ | async "><button id="myBtn">{{service.name}}</button></li>
+                (click)="selectCatTab(service)" *ngFor="let service of silverService.cartDetail$ | async "><button id="myBtn">{{service.name}}</button></li>
             </ul>
             <div class="guest-different-services" *ngIf="this.numberOfGuest!='me'">
 				<input checked="" id="guest-different" type="checkbox" (click)="guestCheck()">
@@ -29,7 +29,7 @@
                 </li>
                 
             </ul>
-           <ul class="time-filters desktop-only" id="time-filters-desktop-only">
+           <ul *ngIf="activeFacial" class="time-filters desktop-only" id="time-filters-desktop-only">
                 <li (click)="facialName = service.name" *ngFor="let service of silverService.cartDetail$ | async ">
                     <button [class.active]="facialName === service.name" class="pill fill" >{{serviceName(service.name )}}</button>
                 </li>
