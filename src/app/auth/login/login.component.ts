@@ -36,11 +36,11 @@ export class LoginComponent {
   }
   
   generateOTP() {
-    // if(this.emailForm.valid){
-    //   this.authService.getClientByEmail(this.email);
-    // }else{
-    //   alert('Invalid Email');
-    // }
+    if(this.emailForm.valid){
+      this.authService.getClientByEmail(this.email);
+    }else{
+      alert('Invalid Email');
+    }
   }
 
   checkOTP() {
