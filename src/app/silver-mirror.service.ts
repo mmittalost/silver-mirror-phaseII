@@ -112,6 +112,43 @@ export class SilverMirrorService {
 
   removeGuest(){
     const requestArray:any = [];
+    this.guestList$.subscribe(
+      (response: any) => {
+        // Iterate through the data from the HTTP response
+        for (let i = 0; i < response.length; i++) {
+          console.log("response",response);
+          let payload = {
+            cartId:localStorage.getItem('cartID'),
+            guestId:response[i].id,
+            clientId:localStorage.getItem("clientID")
+          };
+          let request = this.http.post(this.apiURL+'/remove_cart_guest',payload);
+          requestArray.push(request);
+        }
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+    forkJoin(requestArray)
+      .pipe(finalize(() => {
+        if (localStorage.getItem("selectedWhoscoming") != "me") {
+          this.createGuest();
+        } else {
+          this.router.navigate(["/services"]);
+        }
+      }))
+      .subscribe(response => {
+        // Handle the response here
+        console.log(response);
+      }, error => {
+        // Handle the error here
+        console.error(error);
+      });
+    
+    
+    /* 
+    const requestArray:any = [];
       console.log("Remove Guest Payload", this.guestList$.value);
       this.guestList$.value.forEach((guest: any) => {
         console.log(guest.id);
@@ -139,7 +176,7 @@ export class SilverMirrorService {
         // Handle the error here
         console.error(error);
       });
-   
+    */
   }
 
   // getClientByEmail(email:any) {
