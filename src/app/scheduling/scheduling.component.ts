@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { Notification, NotificationService } from '../notification.service';
 import { SilverMirrorService } from '../silver-mirror.service';
 
 @Component({
@@ -15,10 +17,12 @@ export class SchedulingComponent implements OnInit {
   selectedTime:any;
   selectedStaff:any;
   cartDetail:any = [];
-  visible:any='';
-  className:any='displayNone'
+  selectedItems:any = [];
+  toggleTimeFilter:boolean = false;
+  toggleStaffFilter:boolean = false;
 
   ngOnInit(): void {
+    this.silverService.cartDetail();
     this.bookingService.cartDetail$.subscribe((detail:any)=>{
       console.log("Cart Detail : ", detail);
       if(detail.length){
@@ -26,10 +30,16 @@ export class SchedulingComponent implements OnInit {
         this.getStaffVariantByServiceId("urn:blvd:Service:09ac1b50-2dc7-47d5-ac30-c1a0f523cbdc");
       }
     });
+    this.bookingService.cartDetails$.subscribe((detail:any)=>{
+      if(detail.length){
+        this.selectedItems = detail;
+        this.ifStaffVariantSelected();
+      }
+    });
     this.getBookableDates();
   }
 
-  constructor(private bookingService: SilverMirrorService,public silverService:SilverMirrorService){}
+  constructor(private bookingService: SilverMirrorService,public silverService:SilverMirrorService, private router:Router, private notificationService:NotificationService){}
 
   getStaffVariantByServiceId(serviceId:string){
     console.log("Filter Staff Variants");
@@ -42,9 +52,23 @@ export class SchedulingComponent implements OnInit {
     console.log("this.staffVariants : ", this.staffVarients.value);
   }
 
+  ifStaffVariantSelected(){
+    const selectedStaff = this.selectedItems.length && this.selectedItems[0].selectedStaffVariant? this.selectedItems[0]?.selectedStaffVariant?.staff : null;
+    console.log('Selected Staff',selectedStaff);
+    const staffVariants = this.staffVarients.value;
+    console.log('this.staff', staffVariants);
+    staffVariants.map((variant:any)=> {
+      if(variant.staff.id == selectedStaff.id){
+        variant.selected = true;
+      }
+    })
+    this.staffVarients.next(staffVariants);
+    console.log('this.staff', this.staffVarients.value);
+  }
+
   getBookableDates(){
     const cartId:any = localStorage.getItem('cartID');
-    const locationId = "urn:blvd:Location:24a2fac0-deef-4f7f-8bf6-52368be42d65";
+    const locationId = this.bookingService.location$.value.id;
     this.bookingService.getScheduleDates(cartId, locationId).subscribe((res:any)=>{
       if(!res.errors){
         this.availableDates.next(res.data.cartBookableDates);
@@ -56,6 +80,7 @@ export class SchedulingComponent implements OnInit {
   }
 
   monthChange(ev:any){
+    this.getBookableDates();
     console.log("Month Change : ", ev);
   }
 
@@ -75,24 +100,25 @@ export class SchedulingComponent implements OnInit {
   selectTime(time:any){
     time.selected = !time.selected;
     this.selectedTime = time;
-    const cartId:any = localStorage.getItem('cartID');
-    const serviceId:string = "urn:blvd:Service:09ac1b50-2dc7-47d5-ac30-c1a0f523cbdc";
-    const locationId = "urn:blvd:Location:24a2fac0-deef-4f7f-8bf6-52368be42d65";
-    this.bookingService.getCartStaffVarients(cartId, time.id, serviceId, locationId).subscribe((res:any)=>{
-      if(!res.errors){
-        this.staffVarients.next(res.data);
-        console.log(this.staffVarients.value);
-      }else{
-        alert(res.errors[0].message);
-      }
-    })
+    // const cartId:any = localStorage.getItem('cartID');
+    // const serviceId:string = "urn:blvd:Service:09ac1b50-2dc7-47d5-ac30-c1a0f523cbdc";
+    // const locationId = this.bookingService.location$.value.id;
+    // this.bookingService.getCartStaffVarients(cartId, time.id, serviceId, locationId).subscribe((res:any)=>{
+    //   if(!res.errors){
+    //     this.staffVarients.next(res.data);
+    //     console.log(this.staffVarients.value);
+    //   }else{
+    //     alert(res.errors[0].message);
+    //   }
+    // })
   }
 
   selectStaff(staff:any){
     staff.selected = !staff.selected;
     this.selectedStaff = staff;
-    const itemId:string = "urn:blvd:Service:2c3ef44d-341d-4a15-8f9e-28e3e6022c9c";
-    const locationId = "urn:blvd:Location:24a2fac0-deef-4f7f-8bf6-52368be42d65";
+    const itemId:string = this.selectedItems.length ? this.selectedItems[0].id : "";
+
+    console.log("Selected Items : ", this.selectedItems);
     this.bookingService.updateItemInCart(itemId, this.selectedStaff.id).subscribe((res:any)=>{
       if(!res.errors){
         console.log(res);
@@ -103,11 +129,25 @@ export class SchedulingComponent implements OnInit {
       }
     })
   }
-  openFilter(filterName:any,className:any){
 
-    this.visible=filterName;
-    this.className=className;
-    console.log(this.visible,this.className);
+  reserveCart(){
+    const bookableTimeId = this.selectedTime.id;
+    this.silverService.reserveCartItems(bookableTimeId).subscribe((res:any)=>{
+      if(!res.errors){
+        this.router.navigateByUrl('/review');
+      }else{
+        const notification:Notification = {
+          title:"Error",
+          message:res.errors[0].message
+        }
+        this.notificationService.$notification.next(notification);
+      }
+    })
+  }
+
+  filterStaff(staff:any){
+    console.log(staff);
+    staff.filter = !staff.filter;
   }
 
 }

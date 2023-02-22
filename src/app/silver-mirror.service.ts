@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/comm
 import { BehaviorSubject, concat, forkJoin, Subject, map } from 'rxjs';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
+import { AuthService } from './auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +36,11 @@ export class SilverMirrorService {
   addOns:any;
   selectedTabWithServices:any=[];
   greeting:any='';
-  constructor(private http:HttpClient,private router:Router) {
+
+  availablePaymentMethods$:BehaviorSubject<any> = new BehaviorSubject([]);
+  cartClientInfo$:BehaviorSubject<any> = new BehaviorSubject(null);
+
+  constructor(private http:HttpClient,private router:Router, private authService: AuthService) {
     this.getLocations();
    }
    getLocations() {
@@ -50,7 +55,7 @@ export class SilverMirrorService {
   createCart(id:any) {
     const payload = {
       locationID:id,
-      client_id:localStorage.getItem("clientID")
+      client_id:this.authService.$AuthUser.value?.authId
     }; 
     console.log("Pay",payload);
     this.http
@@ -64,13 +69,18 @@ export class SilverMirrorService {
   cartDetail(){
     const payload = {
       cartID:localStorage.getItem('cartID'),
-      clientId:localStorage.getItem("clientID")
+      clientId: this.authService.$AuthUser.value?.authId
     }; 
     this.http
       .post(this.apiURL+'/get_cart_detail',payload)
       .subscribe((res: any) => {
         this.cartDetail$.next(res.data.cart.availableCategories);
         this.cartDetails$.next(res.data.cart.selectedItems);
+        this.availablePaymentMethods$.next(res.data.cart.availablePaymentMethods);
+        this.cartClientInfo$.next(res.data.cart.clientInformation);
+        if(res.data.cart.clientInformation){
+          res.data.cart.clientInformation.clientNote = res.data.cart.clientMessage
+        }
         this.cartSummary$.next(res.data.cart.summary);
         console.log("res.data.cart.selectedItems",res.data.cart.selectedItems);
         this.guestList$.next(res.data.cart.guests);
@@ -120,7 +130,7 @@ export class SilverMirrorService {
           let payload = {
             cartId:localStorage.getItem('cartID'),
             guestId:response[i].id,
-            clientId:localStorage.getItem("clientID")
+            clientId:this.authService.$AuthUser.value?.authId
           };
           let request = this.http.post(this.apiURL+'/remove_cart_guest',payload);
           requestArray.push(request);
@@ -155,7 +165,7 @@ export class SilverMirrorService {
         let payload = {
           cartId:localStorage.getItem('cartID'),
           guestId:guest.id,
-          clientId:localStorage.getItem("clientID")
+          clientId:this.authService.$AuthUser.value?.authId
         };
         let request = this.http.post(this.apiURL+'/remove_cart_guest',payload);
         requestArray.push(request);
@@ -276,7 +286,7 @@ export class SilverMirrorService {
         guestId:this.guestID,
         itemId:res.addon,
         itemOptionIds:res.modifier,
-        clientId:localStorage.getItem("clientID")
+        clientId:this.authService.$AuthUser.value?.authId
       };
       let request = this.http.post(this.apiURL+'/add_item_in_cart',payload);
         requestArray.push(request);
@@ -327,7 +337,7 @@ export class SilverMirrorService {
       "cartID":cartId,
       "locationID":locationId,
       "timeZone":"EST",
-      "limit":8,
+      "limit":31,
       "clientId": localStorage.getItem('clientID')
     }
     return this.http.post<HttpResponse<any>>(this.apiURL + '/get_cart_bookable_dates', payload);
@@ -341,6 +351,14 @@ getScheduleTimes(cartId:string, date:string){
     "clientId": localStorage.getItem('clientID')
   }
   return this.http.post<HttpResponse<any>>(this.apiURL + '/get_cart_bookable_times', payload);
+}
+
+reserveCartItems(bookableTimeId:string){
+  const payload = {
+    "cartId":localStorage.getItem('cartID'),
+    "bookableTimeId":bookableTimeId
+  }
+  return this.http.post<HttpResponse<any>>(this.apiURL + '/reserve_cart_bookable_items', payload);
 }
 
 getCartStaffVarients(cartId:string, bookableTimeId:string, serviceId:string, locationId:string, ){
@@ -396,13 +414,31 @@ getCartStaffVarients(cartId:string, bookableTimeId:string, serviceId:string, loc
         "email": client.email,
         "firstName":client.firstName,
         "lastName":client.lastName,
-        "phoneNumber":client.mobileNumber
+        "phoneNumber":client.mobilePhone
       },
       "clientNote":client.note
     }
     return this.http.post(this.apiURL+ '/update_cart_client_info',payload);
   }
+
+  addCartOffer(offerCode:string){
+    const payload = {
+      "cartId": localStorage.getItem("cartID"),
+      "offerCode":offerCode
+    }
+    return this.http.post(this.apiURL+ '/add_cart_offer',payload);
+  }
+
+  checkoutCart(){
+    const payload = {
+      "cartId": localStorage.getItem('cartID'),
+      "clientId": this.authService.$AuthUser.value?.authId
+    }
+    return this.http.post(this.apiURL+ '/checkout_cart',payload);
+  }
+  
   classAddtocatMobile = '';
+  
   toggleClassAddtocart(){
     if (this.classAddtocatMobile == '') {
       this.classAddtocatMobile = 'active';

@@ -24,6 +24,9 @@ export class LoginComponent {
     private formBuilder:FormBuilder,
   ) {
     this._buildForm();
+    authService.$otp.subscribe((otp:string)=>{
+      this.otp = otp;
+    });
   }
 
   _buildForm(){

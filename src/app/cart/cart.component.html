@@ -63,9 +63,9 @@
         <li class="flex-container">
             <span class="pill location">Location</span>
             <span *ngIf="silverService.location$ | async as location">
-                <strong>{{location.address.city}} - {{location.name}}</strong>
-                <address>{{location.address.line1}}</address>
-                <a href="tel:{{location.phoneNumber}}">{{location.phoneNumber}}</a>
+                <strong>{{location?.address?.city}} - {{location?.name}}</strong>
+                <address>{{location?.address?.line1}}</address>
+                <a href="tel:{{location?.phoneNumber}}">{{location?.phoneNumber}}</a>
             </span>
 
             <span class="cost">
@@ -77,6 +77,6 @@
 
 </div>
 
-<a class="btn" routerLink="/scheduling" [ngClass]="(silverService.selectedTabWithServices.length > 0) ? 'active' : 'inactive'">Add to Continue</a>
+<!-- <a class="btn" routerLink="/scheduling" [ngClass]="(silverService.selectedTabWithServices.length > 0) ? 'active' : 'inactive'">Add to Continue</a> -->
 
 <button class="btn black view-cart mobile-only" (click)="silverService.toggleClassAddtocart()" >View Cart<span class="item-count">{{silverService.cartDetails$.value.length}}</span></button>

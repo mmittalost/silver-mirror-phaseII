@@ -62,16 +62,16 @@
                 <!--Time-->
                 
                 <li class="time-filter">
-                    <button class="filter-button">Time <span class="counter">0</span></button>
+                    <button class="filter-button" (click)="toggleTimeFilter = !toggleTimeFilter">Time <span class="counter">0</span></button>
                     
-                    <div class="filter-pop">
+                    <div class="filter-pop" [ngStyle]="{'display':toggleTimeFilter ? 'block' : 'none'}">
                         <h3 class="flex-container eyebrow small">
                             <span class="mobile-only">Filter </span>Time 
-                            <button class="close-filter" (click)="openFilter('time',className)"><span class="accessibility">Close filter</span></button>
+                            <button class="close-filter" (click)="toggleTimeFilter = !toggleTimeFilter"><span class="accessibility">Close filter</span></button>
                       
                         </h3>
                         
-                        <div class="range-slider" [ngClass]="visible == 'time' ? 'displayBlock': 'displayNone'">
+                        <div class="range-slider" *ngIf="toggleTimeFilter">
                             <!--Note: input[type=range] did would not work here, so assuming this'll be 100% JS controlled-->
                             
                             <span class="range-bar">
@@ -93,21 +93,21 @@
                 <!--Esthetician-->
                 
                 <li class="esthetician-filter">
-                    <button class="filter-button" (click)="openFilter('esthetician',className)">Esthetician <span class="counter">0</span></button>
+                    <button class="filter-button" (click)="toggleStaffFilter = !toggleStaffFilter">Esthetician <span class="counter">0</span></button>
                     
-                    <div class="filter-pop"  [ngClass]="visible == 'esthetician' ? 'displayBlock': 'displayNone'">
+                    <div class="filter-pop" [ngStyle]="{'display':toggleStaffFilter ? 'block' : 'none'}">
                         <h3 class="flex-container eyebrow small">
                             <span class="mobile-only">Filter </span>Esthetician 
-                            <button class="close-filter"><span class="accessibility">Close filter</span></button>
+                            <button class="close-filter" (click)="toggleStaffFilter = !toggleStaffFilter"><span class="accessibility">Close filter</span></button>
                         </h3>
                         
                         <ul class="grid">
-                            <li>
-                                <input checked id="filter-claudia" class="accessibility" type="checkbox"/>
-                                <label for="filter-claudia">Claudia E.</label>
+                            <li *ngFor="let staff of staffVarients | async">
+                                <input checked (change)="filterStaff(staff)" [id]="'flt'+staff?.id" class="accessibility" type="checkbox"/>
+                                <label [for]="'flt'+staff?.id">{{staff?.staff?.displayName}}</label>
                             </li>
                             
-                            <li>
+                            <!-- <li>
                                 <input id="filter-nick" class="accessibility" type="checkbox"/>
                                 <label for="filter-nick">Nick W.</label>
                             </li>
@@ -140,7 +140,7 @@
                             <li>
                                 <input id="filter-megan" class="accessibility" type="checkbox"/>
                                 <label for="filter-megan">Megan V.</label>
-                            </li>
+                            </li> -->
                         </ul>
                         
                         <button class="text-link clear-selections">Clear</button>
@@ -166,8 +166,8 @@
                     
                     <fieldset class="flex-container">
                         <span style="display: flex;" *ngFor="let staff of staffVarients | async">
-                            <input (change)="selectStaff(staff)" [id]="staff?.id" [checked]="staff.selected" class="accessibility" name="staff-chooser" type="radio"/>
-                            <label [for]="staff?.id">{{staff?.staff?.displayName}}</label>
+                            <input *ngIf="!staff.filter" (change)="selectStaff(staff)" [id]="staff?.id" [checked]="staff.selected" class="accessibility" name="staff-chooser" type="radio"/>
+                            <label *ngIf="!staff.filter" [for]="staff?.id">{{staff?.staff?.displayName}}</label>
                         </span>
                     </fieldset>
                 </div>
@@ -204,9 +204,10 @@
             </div>
 
 
-            <!-- <aside class="empty">
+            <aside class="empty">
                 <app-cart></app-cart>
-           </aside> -->
+                <a class="btn" (click)="reserveCart()">Continue</a>
+           </aside>
 
 
 

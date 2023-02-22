@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
+import { Notification, NotificationService } from '../notification.service';
 import { SilverMirrorService } from '../silver-mirror.service';
 
 @Component({
@@ -11,13 +14,37 @@ export class ReviewComponent implements OnInit {
 
   paymentForm!:FormGroup;
   userInfoForm!: FormGroup;
+  couponForm!:FormGroup;
+  
+  availablePaymentMethods:any = [];
+  togglePaymentMethodForm:boolean = false;
+  user:any = []
 
 
-  ngOnInit(): void {
-    this._buildForm();    
+  ngOnInit(): void { 
+    this._buildForm()
   }
 
-  constructor(private formBuilder:FormBuilder, private bookingService:SilverMirrorService){}
+  constructor(private formBuilder:FormBuilder, private bookingService:SilverMirrorService, private authService:AuthService, private notificationService: NotificationService, private router:Router){
+    bookingService.cartDetail();
+    authService.$AuthUser.subscribe((user:any)=>{
+      if(user){
+        this.user = user;
+        this._buildForm();
+        this._patchAdditionalInfoForm(user);
+      }
+    })
+    bookingService.availablePaymentMethods$.subscribe((methods)=>{
+      if(methods.length){
+        this.availablePaymentMethods = methods;
+      }
+    });
+    bookingService.cartClientInfo$.subscribe((info)=>{
+      if(info){
+        this._patchAdditionalInfoForm(info);
+      }
+    });
+  }
 
   _buildForm(){
     // PaymentForm
@@ -38,6 +65,22 @@ export class ReviewComponent implements OnInit {
       mobilePhone: ['', Validators.required],
       note: [''],
     });
+
+    // couponForm
+    this.couponForm = this.formBuilder.group({
+      promoCode: ['', Validators.required]
+    });
+  }
+
+  _patchAdditionalInfoForm(user:any){
+    console.log("user to patch : ", user);
+    this.userInfoForm.patchValue({
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      mobilePhone: user.mobilePhone || user.phoneNumber,
+      note: user.clientNote ? user.clientNote : ''
+    });
   }
 
   updatePaymentMethod(){
@@ -49,6 +92,8 @@ export class ReviewComponent implements OnInit {
           this.bookingService.addCartPaymentMethod(res.token).subscribe((res:any)=>{
             if(!res.errors){
               this.bookingService.cartDetail();
+              this.paymentForm.reset();
+              this.togglePaymentMethodForm = false;
             }else{
               alert(res.errors[0].message);
             }
@@ -73,5 +118,38 @@ export class ReviewComponent implements OnInit {
     }else{
       alert("Fill the correct details!");
     }
+  }
+
+  applyPromoCode(){
+    const code = this.couponForm.value.promoCode;
+    if(this.couponForm.valid && code!=''){
+      this.bookingService.addCartOffer(code).subscribe((res:any)=>{
+        if(!res.errors){
+          this.bookingService.cartDetail();
+        }else{
+          const notification:Notification = {
+            title:'Error',
+            message: res.errors[0].message
+          }
+          this.notificationService.$notification.next(notification);
+        }
+      })
+    }
+    console.log("Apply Promo Code TESTPROMOTIONOST", this.couponForm.value, code, this.couponForm.valid);
+  }
+
+  checkout(){
+    this.bookingService.checkoutCart().subscribe((res:any)=>{
+      if(!res.errors){
+        this.router.navigateByUrl('/congrats');
+        this.bookingService.cartDetail();
+      }else{
+        const notification:Notification = {
+          title:'Error',
+          message: res.errors[0].message
+        }
+        this.notificationService.$notification.next(notification);
+      }
+    })
   }
 }

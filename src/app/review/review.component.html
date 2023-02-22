@@ -12,6 +12,19 @@
 			
 			<h2 class="heading-6">Payment Details</h2>
 			<p class="xx-small">Have an account? <a class="text-link" href="#">Login or create an account</a></p>
+
+			<label class="pill" for="card-detail-options" *ngIf="availablePaymentMethods.length">Card Details</label>
+			
+			<div class="flex-container credit-card-options" *ngIf="availablePaymentMethods.length">
+				<ul id="card-detail-options" class="x-small" *ngFor="let card of availablePaymentMethods">
+					<li class="active visa">
+						<strong>{{card?.cardBrand}} •••• {{card?.cardLast4}} <span>Expires {{card?.cardExpMonth}}/{{card?.cardExpYear}}</span></strong>
+						<span *ngIf="card?.cardIsDefault" class="pill fill small">Default</span>
+					</li>
+				</ul>
+				
+				<button class="text-link large" *ngIf="availablePaymentMethods.length" (click)="togglePaymentMethodForm = true">Add a new card</button>
+			</div>
 			
 			<form [formGroup]="paymentForm" (ngSubmit)="updatePaymentMethod()">
 				<ul class="flex-container credit-card-details">
@@ -94,9 +107,17 @@
 		</div>
 		
 		<!--Sidebar-->
-		<!-- <aside class="empty">
+		<aside class="empty">
 			<app-cart></app-cart>
-	   </aside> -->
+
+			<div [formGroup]="couponForm" class="desktop-only flex-container promo-code">
+				<label class="pill small" for="promo-code">Promo Code</label>
+				<input formControlName="promoCode" type="text" id="promo-code" placeholder="Enter Code"/>
+				<button (click)="applyPromoCode()" type="submit" class="text-link large">Apply</button>
+			</div>
+			
+			<span (click)="checkout()"><a class="btn black">Book Now</a></span>
+	   </aside>
 		
 	</form>
 </section>

@@ -82,6 +82,7 @@
 
               <aside  [class]="silverService.classAddtocatMobile" [ngClass]="(silverService.selectedTabWithServices.length > 0) ? '' : 'empty'">
                     <app-cart></app-cart>
+                    <a class="btn" routerLink="/scheduling" [ngClass]="(silverService.selectedTabWithServices.length > 0) ? 'active' : 'inactive'">Continue</a>
                </aside>
 
         </div>
