@@ -27,10 +27,11 @@
 			</div>
 			
 			<form [formGroup]="paymentForm" (ngSubmit)="updatePaymentMethod()">
-				<ul class="flex-container credit-card-details">
+
+				<ul class="grid credit-card-details">
 					<li>
-						<label class="pill" for="name">Name</label>
-						<input formControlName="name" type="text" id="name" placeholder="Name"/>
+						<label class="pill" for="name">Name On The Card</label>
+						<input formControlName="name" type="text" id="name" placeholder="Name On The Card"/>
 					</li>
 					<li>
 						<label class="pill" for="card-details">Card Details</label>
@@ -56,7 +57,7 @@
 						<input maxLength="5" minLength="5" formControlName="postal_code" type="text" id="postal-code" placeholder="Postal Code"/>
 					</li>
 				</ul>
-				<button type="submit" class="text-link large">Save Changes</button>
+				<button type="submit" class="btn black cc-btn">Apply</button>
 			</form>
 			
 			<p class="xx-small info">Your credit card is only used to hold the reservation and won't be charged unless you cancel late or don't show up.</p>
@@ -91,19 +92,18 @@
 						<p class="xx-small">Preferences? Celebrations? Secrets you want to share? Let us know.</p>
 						<input formControlName="note" type="text" id="notes" placeholder="Write any notes for us"/>
 					</li>
-					<button type="submit" class="text-link large">Save Changes</button>
 				</ul>
-			</form>
-
-<div class="mobile-only flex-container promo-code">
-	<label class="pill" for="promo-code">Promo Code</label>
-	<input type="text" id="promo-code" placeholder="Enter Code"/>
-	<button class="text-link large">Apply</button>
-</div>
-
-<h3>Disclaimer</h3>
-<p class="xx-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. Vestibulum aliquam hendrerit molestie. Mauris malesuada nisi sit amet augue accumsan tincidunt. Maecenas tincidunt, velit ac porttitor pulvinar, tortor eros facilisis libero, vitae commodo nunc quam et ligula. Ut nec ipsum sapien. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer id nisi nec nulla luctus lacinia non eu turpis. Etiam in ex imperdiet justo tincidunt egestas. Ut porttitor urna ac augue cursus tincidunt sit amet sed orci.</p>
 			
+				
+				<div class="mobile-only flex-container promo-code">
+					<label class="pill" for="promo-code">Promo Code</label>
+					<input type="text" id="promo-code" placeholder="Enter Code"/>
+					<button class="text-link large">Apply</button>
+				</div>
+				<button type="submit" class="btn black cc-btn">Save Changes</button>
+				<h3>Disclaimer</h3>
+				<p class="xx-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. Vestibulum aliquam hendrerit molestie. Mauris malesuada nisi sit amet augue accumsan tincidunt. Maecenas tincidunt, velit ac porttitor pulvinar, tortor eros facilisis libero, vitae commodo nunc quam et ligula. Ut nec ipsum sapien. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer id nisi nec nulla luctus lacinia non eu turpis. Etiam in ex imperdiet justo tincidunt egestas. Ut porttitor urna ac augue cursus tincidunt sit amet sed orci.</p>
+			</form>			
 		</div>
 		
 		<!--Sidebar-->

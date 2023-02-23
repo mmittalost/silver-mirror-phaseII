@@ -244,6 +244,8 @@ select,
 .cart-info .add-services,
 .additional-info + h3,
 .additional-info + .promo-code + h3,
+.additional-info + button + h3,
+.additional-info + .promo-code + button + h3,
 .accordions li .content h4 span,
 .date-slots .show-calendar,
 .calendar-pop table,
@@ -2434,6 +2436,7 @@ aside .btn {
 	padding: 0 0 0 28px;
 	position: relative;
 	text-align: left;
+	cursor: pointer;
 }
 
 .services-flow .services-tabs .active button,
@@ -3113,10 +3116,10 @@ aside .pill.location {
 }
 
 .credit-card-details {
-	flex-wrap: nowrap;
-	gap: 30px;
+	gap: 24px 30px;
+	grid-template-columns: 1fr 1fr;
 	list-style: none;
-	margin: 0;
+	margin: 24px 0;
 	padding: 0;
 }
 
@@ -3125,12 +3128,16 @@ aside .pill.location {
 }
 
 .credit-card-details li:first-child {
-	flex-shrink: 0;
+	grid-column: span 2;
+  }
+
+.credit-card-details li:nth-child(2) {
+	/*flex-shrink: 0;*/
 	position: relative;
-	width: calc(372/784*100%);
+	/*width: calc(372/784*100%);*/
 }
 
-.credit-card-details li:first-child:before {
+.credit-card-details.grid li:nth-child(2):before {
 	background: url('assets/svgs/icon-cc.svg') no-repeat center/100% auto;
 	bottom: 20px;
 	content: '';
@@ -3141,7 +3148,7 @@ aside .pill.location {
 	width: 16px;
 }
 
-.credit-card-details li:first-child input {
+.credit-card-details.grid li:nth-child(2) input {
 	padding-left: 45px;
 }
 
@@ -3161,6 +3168,9 @@ aside .pill.location {
 	position: absolute;
 	top: 3px;
 	width: 11px;
+}
+.cc-btn{
+	margin-bottom:15px;
 }
 
 /*Logged In View*/
@@ -3228,7 +3238,7 @@ aside .pill.location {
 	gap: 24px 30px;
 	grid-template-columns: 1fr 1fr;
 	list-style: none;
-	margin: 24px 0 0;
+	margin: 24px 0;
 	padding: 0;
 }
 
@@ -6468,12 +6478,14 @@ section.congrats {
 	/*Unlogged In View*/
 
 	.credit-card-details {
-		flex-wrap: wrap;
-		gap: 20px;
+		/*flex-wrap: wrap;
+		gap: 20px;*/
+		grid-template-columns: 1fr;
 	}
 
 	.credit-card-details li {
-		width: calc(50% - 10px);
+		/*width: calc(50% - 10px);*/
+		width: 100%;
 	}
 
 	.credit-card-details li:first-child {
@@ -6492,6 +6504,9 @@ section.congrats {
 
 	.credit-card-details + p.info {
 		display: none;
+	}
+	.credit-card-details li:first-child {
+		grid-column: 1;
 	}
 
 	.review-flow .content-container p.info + h2.heading-6 {
