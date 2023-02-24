@@ -13,7 +13,7 @@
 	
                 <!--Location-->
                 
-                <li class="location-filte">
+                <!-- <li class="location-filte"> -->
                     <!-- <button class="filter-button">Location <span class="counter">1</span></button> -->
                     
                     <!-- <div class="filter-pop">
@@ -57,12 +57,12 @@
             
                         <button class="btn black submit-btn mobile-only">Apply</button>
                     </div> -->
-                </li>
+                <!-- </li> -->
                 
                 <!--Time-->
                 
                 <li class="time-filter">
-                    <button class="filter-button" (click)="toggleTimeFilter = !toggleTimeFilter">Time <span class="counter">0</span></button>
+                    <button class="filter-button" (click)="toggleTimeFilter = !toggleTimeFilter; toggleStaffFilter = false">Time <span class="counter">0</span></button>
                     
                     <div class="filter-pop" [ngStyle]="{'display':toggleTimeFilter ? 'block' : 'none'}">
                         <h3 class="flex-container eyebrow small">
@@ -94,7 +94,7 @@
                 <!--Esthetician-->
                 
                 <li class="esthetician-filter">
-                    <button class="filter-button" (click)="toggleStaffFilter = !toggleStaffFilter">Esthetician <span class="counter">0</span></button>
+                    <button class="filter-button" (click)="toggleStaffFilter = !toggleStaffFilter; toggleTimeFilter = false">Esthetician <span class="counter">0</span></button>
                     
                     <div class="filter-pop" [ngStyle]="{'display':toggleStaffFilter ? 'block' : 'none'}">
                         <h3 class="flex-container eyebrow small">

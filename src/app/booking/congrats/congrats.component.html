@@ -14,26 +14,28 @@
 				
 				<div class="cart-info">
 					<ul class="small">
-						<li class="flex-container">
-							<span class="user">Me <span class="counter gray">2</span></span>
+						<li class="flex-container" *ngFor="let apt of appointment?.appointmentServices">
+							<span class="user">Me <span class="counter gray">{{getServicesCount()}}</span></span>
 							<span>
-								<strong>Party-Prep Facial</strong>
-								<span class="pill">30-min</span>
+								<strong>{{apt?.service?.name}}</strong>
+								<span class="pill">{{appointment?.duration}}-min</span>
 							</span>
 							
-							<span class="cost">$85</span>
+							<span class="cost">
+								{{sharedService.formatPrice(getServicePrice()) | currency:'USD':'symbol' : '1.0-0'}}
+							</span>
 						</li>
 						
-						<li class="flex-container add-on">
+						<li class="flex-container add-on" *ngFor="let opt of appointment?.appointmentServiceOptions">
 							<span>
-								<strong>Dermaplanning</strong>
+								<strong>ADDON NAME</strong>
 								<span class="pill fill small">Add On</span>
 							</span>
 							
-							<span class="cost">$85</span>
+							<span class="cost">{{sharedService.formatPrice(opt?.priceDelta) | currency:'USD':'symbol' : '1.0-0'}}</span>
 						</li>
 						
-						<li class="flex-container">
+						<!-- <li class="flex-container">
 							<span class="user">Guest 1 <span class="counter gray">1</span></span>
 							<span>
 								<strong>Just For Men Facial</strong>
@@ -41,12 +43,12 @@
 							</span>
 							
 							<span class="cost">$185</span>
-						</li>
+						</li> -->
 					</ul>
 					
 					<div class="flex-container cart-total">
 						<span class="eyebrow small">Total</span>
-						<p class="small">$255</p>
+						<p class="small">{{sharedService.formatPrice(appointment?.appointmentServices[0]?.price) | currency:'USD':'symbol' : '1.0-0'}}</p>
 					</div>
 				</div>
 			</li>
@@ -58,13 +60,13 @@
 				
 				<div class="cart-info">
 					<ul class="x-small cart-details">
-						<li>Sunday, September 18 @ 4:15 PM</li>
-						<li>Esthetician: Veronica G.</li>
+						<li>{{appointment?.startAt | date:'EEEE, MMMM, d @ h:mm a':'EST'}}</li>
+						<li>Esthetician: {{appointment?.appointmentServices[0]?.staff?.displayName}}</li>
 						
 						<li>
-							NYC - Flatiron
-							<address>20 W 22nd St</address>
-							<a href="tel:212-702-8742">(212) 702-8742</a>
+							{{appointment?.location?.address.city}} - {{appointment?.location?.name}}
+							<address>{{appointment?.location?.address?.line1}}</address>
+							<a *ngIf="appointment?.location?.phoneNumber" href="tel:{{appointment?.location?.phoneNumber}}">{{appointment?.location?.phoneNumber}}</a>
 						</li>
 					</ul>
 					

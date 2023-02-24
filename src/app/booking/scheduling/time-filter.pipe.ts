@@ -9,12 +9,9 @@ export class TimeFilterPipe implements PipeTransform {
     if(timeArray.length){
       return timeArray.filter((time:any)=>{
         const _time = time.startTime.slice(0, -6);
-  
-        // fix the minhour issue
         let hour = new Date(_time).getHours();
         const minutes = new Date(_time).getMinutes();
-        minutes > 0 ? ++hour : null;
-        if(hour >=range.min && hour <= range.max){
+          if((hour > range.min || (hour === range.min && minutes >= 0)) && (hour < range.max || (hour === range.max && minutes === 0))){
           return time;
         }
       })

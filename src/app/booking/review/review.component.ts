@@ -158,6 +158,9 @@ export class ReviewComponent implements OnInit {
           const message = 'your appointment is scheduled successfully.';
           this.sharedService.showNotification(title, message);
           this.router.navigateByUrl('/booking/congrats');
+          this.bookingService.checkoutBookingResponse$.next(res.data.checkoutCart);
+          this.sharedService.removeLocalStorageItem('cartId');
+          this.sharedService.removeLocalStorageItem('selectedLocation');
           this.bookingService.updateCartDetail();
   
         }else{

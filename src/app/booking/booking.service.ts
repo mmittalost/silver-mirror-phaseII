@@ -15,6 +15,7 @@ export class BookingService {
 
   locationList$: BehaviorSubject<any> = new BehaviorSubject([]);
   clientCart$: BehaviorSubject<any> = new BehaviorSubject([]);
+  checkoutBookingResponse$: BehaviorSubject<any> = new BehaviorSubject(null);
 
   getLocations() {
     return this.http.get(BASE_URL+'/get_locations');
@@ -210,6 +211,16 @@ export class BookingService {
   checkoutComplete(){
     this.sharedService.removeLocalStorageItem('cartId');
     this.sharedService.removeLocalStorageItem('selectedLocation');
+  }
+
+  getAppointmentDetail(aptId:string, cartId:string)
+  {
+    const payload = { 
+      "cartId": cartId,
+      "appointmentId": aptId,
+      "clientId": this.authService.$AuthUser.value?.authId
+    }
+    return this.http.post(BASE_URL+ '/appointment_detail',payload);
   }
 
 }

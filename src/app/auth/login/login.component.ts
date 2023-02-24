@@ -1,3 +1,4 @@
+import { Location } from "@angular/common";
 import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
@@ -22,6 +23,7 @@ export class LoginComponent {
     public silverService: SilverMirrorService,
     private router: Router,
     private formBuilder:FormBuilder,
+    private _location: Location
   ) {
     this._buildForm();
     authService.$otp.subscribe((otp:string)=>{
@@ -51,7 +53,7 @@ export class LoginComponent {
     if (localStorage.getItem("otp") == this.enteredotp) {
       localStorage.removeItem("otp");
       this.authService.$otp.next(null);
-      this.router.navigateByUrl("/booking", { replaceUrl: true });
+      this._location.back();
     } else {
       alert("OTP does not match!");
     }

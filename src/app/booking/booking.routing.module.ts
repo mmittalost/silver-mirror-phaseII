@@ -9,11 +9,11 @@ import { CongratsComponent } from "./congrats/congrats.component";
 
 @NgModule({
   imports: [
-    RouterModule.forChild([
+    RouterModule.forRoot([
       {
         path: "booking",
         children: [
-          { path: "", redirectTo: "/booking/location", pathMatch: 'full' },
+          { path: "", redirectTo: "location", pathMatch: 'full' },
           {
             path: "location",
             component: LocationComponent,
@@ -40,7 +40,7 @@ import { CongratsComponent } from "./congrats/congrats.component";
           },
         ],
       },
-    ]),
+    ], {useHash: true}),
   ],
   exports: [RouterModule],
 })

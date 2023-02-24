@@ -20,8 +20,8 @@ import { RouterModule, Routes } from "@angular/router";
       // { path: "scheduling", component: SchedulingComponent },
       // { path: "review", component: ReviewComponent },
       // { path: "congrats", component: CongratsComponent },
-      { path: "", redirectTo: "/booking", pathMatch: 'full' },
-    ]),
+      { path: "", redirectTo: "/booking/location", pathMatch:'full' },
+    ],{ useHash: true }),
   ],
   exports: [RouterModule],
 })
