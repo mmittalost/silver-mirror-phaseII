@@ -4,22 +4,22 @@ import { FormsModule,ReactiveFormsModule  }   from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BookAnAppointmentComponent } from './book-an-appointment/book-an-appointment.component';
-import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
-import { LocationComponent } from './location/location.component';
-import { WhosComingComponent } from './whos-coming/whos-coming.component';
-import { ServicesComponent } from './services/services.component';
-import { SchedulingComponent } from './scheduling/scheduling.component';
-import { ReviewComponent } from './review/review.component';
-import { CongratsComponent } from './congrats/congrats.component';
+// import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
+// import { LocationComponent } from './location/location.component';
+// import { WhosComingComponent } from './_whos-coming/whos-coming.component';
+// import { ServicesComponent } from './services/services.component';
+// import { SchedulingComponent } from './_scheduling/scheduling.component';
+// import { ReviewComponent } from './review/review.component';
+// import { CongratsComponent } from './congrats/congrats.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-import { LocationGroupPipe } from './location-group.pipe';
+// import { LocationGroupPipe } from './location-group.pipe';
 import { FacialFilterPipe } from './facial-filter.pipe';
 import { MdbCheckboxModule } from 'mdb-angular-ui-kit/checkbox';
 import { ModalComponent } from './modal/modal.component';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 import { ServiceDetailModelComponent } from './service-detail-model/service-detail-model.component';
-import { CartComponent } from './cart/cart.component';
+import { CartComponent } from './_cart/cart.component';
 import { CommonModule } from '@angular/common';
 import { AppointmentComponent } from './dashboard/appointment/appointment.component';
 import { DashboardHeaderComponent } from './dashboard/dashboard-header/dashboard-header.component';
@@ -38,20 +38,21 @@ import { SharedComponentModule } from './shared-component/shared-component.modul
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { AlertComponent } from './shared-component/alert/alert.component';
-import { NgxSliderModule } from '@angular-slider/ngx-slider';
-import { TimeFilterPipe } from './scheduling/time-filter.pipe';
+// import { NgxSliderModule } from '@angular-slider/ngx-slider';
+// import { TimeFilterPipe } from './_scheduling/time-filter.pipe';
+import { BookingModule } from './booking/booking.module';
 @NgModule({
   declarations: [
     AppComponent,
     BookAnAppointmentComponent,
-    BreadcrumbsComponent,
-    LocationComponent,
-    WhosComingComponent,
-    ServicesComponent,
-    SchedulingComponent,
-    ReviewComponent,
-    CongratsComponent,
-    LocationGroupPipe,
+    // BreadcrumbsComponent,
+    // LocationComponent,
+    // WhosComingComponent,
+    // ServicesComponent,
+    // SchedulingComponent,
+    // ReviewComponent,
+    // CongratsComponent,
+    // LocationGroupPipe,
     FacialFilterPipe,
     ServiceDetailModelComponent,
     CartComponent,
@@ -69,7 +70,7 @@ import { TimeFilterPipe } from './scheduling/time-filter.pipe';
     ServiceNotificationComponent,
     ServiceAddonNotificationComponent,
     RescheduleComponent,
-    TimeFilterPipe,
+    // TimeFilterPipe,
   ],
   imports: [
     BrowserModule,
@@ -87,6 +88,7 @@ import { TimeFilterPipe } from './scheduling/time-filter.pipe';
       showForeground:true,
     }),
     DashboardModule,
+    BookingModule,
     SharedComponentModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
@@ -95,7 +97,7 @@ import { TimeFilterPipe } from './scheduling/time-filter.pipe';
       positionClass:'toast-top-right',
       tapToDismiss:true,
     }),
-    NgxSliderModule,
+    // NgxSliderModule,
   ],
   exports:[ SharedComponentModule ],
   providers: [],

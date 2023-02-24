@@ -13,7 +13,7 @@ export class SilverMirrorService {
   //apiURL:any="http://localhost:50000";
   otp:any='';
   otpMessage:any;
-  locationList$: BehaviorSubject<any> = new BehaviorSubject([]);
+  // locationList$: BehaviorSubject<any> = new BehaviorSubject([]);
   cartDetail$: BehaviorSubject<any> = new BehaviorSubject([]);
   cartDetails$: BehaviorSubject<any> = new BehaviorSubject([]);
   cartSummary$: BehaviorSubject<any> = new BehaviorSubject([]);
@@ -41,16 +41,16 @@ export class SilverMirrorService {
   cartClientInfo$:BehaviorSubject<any> = new BehaviorSubject(null);
 
   constructor(private http:HttpClient,private router:Router, private authService: AuthService) {
-    this.getLocations();
+    // this.getLocations();
    }
-   getLocations() {
-    this.http
-      .get(this.apiURL+'/get_locations')
-      .subscribe((res: any) => {
-        this.locationList$.next(res.data.locations.edges);
-        console.log(res.data);
-      });
-  }
+  //  getLocations() {
+  //   this.http
+  //     .get(this.apiURL+'/get_locations')
+  //     .subscribe((res: any) => {
+  //       this.locationList$.next(res.data.locations.edges);
+  //       console.log(res.data);
+  //     });
+  // }
 
   createCart(id:any) {
     const payload = {
@@ -236,12 +236,12 @@ export class SilverMirrorService {
   //       console.log(">>",res);
   //     });
   // }
-  selectLocation(id:any){
-    localStorage.setItem('selectedLocation',id);
-    console.log("ID",id);
-    this.createCart(id);
+  // selectLocation(id:any){
+  //   localStorage.setItem('selectedLocation',id);
+  //   console.log("ID",id);
+  //   this.createCart(id);
   
-  }
+  // }
   addItemInCart(itemId:any)
   {
     this.addonsItemId =itemId;
@@ -332,110 +332,110 @@ export class SilverMirrorService {
     return imgURL;
   }
 
-  getScheduleDates(cartId:string, locationId:string){
-    const payload = {
-      "cartID":cartId,
-      "locationID":locationId,
-      "timeZone":"EST",
-      "limit":31,
-      "clientId": localStorage.getItem('clientID')
-    }
-    return this.http.post<HttpResponse<any>>(this.apiURL + '/get_cart_bookable_dates', payload);
-}
+//   getScheduleDates(cartId:string, locationId:string){
+//     const payload = {
+//       "cartID":cartId,
+//       "locationID":locationId,
+//       "timeZone":"EST",
+//       "limit":31,
+//       "clientId": localStorage.getItem('clientID')
+//     }
+//     return this.http.post<HttpResponse<any>>(this.apiURL + '/get_cart_bookable_dates', payload);
+// }
 
-getScheduleTimes(cartId:string, date:string){
-  const payload = {
-    "cartID":cartId,
-    "searchDate":date,
-    "timeZone":"EST",
-    "clientId": localStorage.getItem('clientID')
-  }
-  return this.http.post<HttpResponse<any>>(this.apiURL + '/get_cart_bookable_times', payload);
-}
+// getScheduleTimes(cartId:string, date:string){
+//   const payload = {
+//     "cartID":cartId,
+//     "searchDate":date,
+//     "timeZone":"EST",
+//     "clientId": localStorage.getItem('clientID')
+//   }
+//   return this.http.post<HttpResponse<any>>(this.apiURL + '/get_cart_bookable_times', payload);
+// }
 
-reserveCartItems(bookableTimeId:string){
-  const payload = {
-    "cartId":localStorage.getItem('cartID'),
-    "bookableTimeId":bookableTimeId
-  }
-  return this.http.post<HttpResponse<any>>(this.apiURL + '/reserve_cart_bookable_items', payload);
-}
+// reserveCartItems(bookableTimeId:string){
+//   const payload = {
+//     "cartId":localStorage.getItem('cartID'),
+//     "bookableTimeId":bookableTimeId
+//   }
+//   return this.http.post<HttpResponse<any>>(this.apiURL + '/reserve_cart_bookable_items', payload);
+// }
 
-getCartStaffVarients(cartId:string, bookableTimeId:string, serviceId:string, locationId:string, ){
-  const payload = {
-    "cartId":cartId,
-    "bookableTimeId":bookableTimeId,
-    "serviceId":serviceId,
-    "locationId":locationId,
-    "clientId": localStorage.getItem('clientID')
-  }
-  return this.http.post<HttpResponse<any>>(this.apiURL + '/get_cart_staff_variants', payload);
-}
+// getCartStaffVarients(cartId:string, bookableTimeId:string, serviceId:string, locationId:string, ){
+//   const payload = {
+//     "cartId":cartId,
+//     "bookableTimeId":bookableTimeId,
+//     "serviceId":serviceId,
+//     "locationId":locationId,
+//     "clientId": localStorage.getItem('clientID')
+//   }
+//   return this.http.post<HttpResponse<any>>(this.apiURL + '/get_cart_staff_variants', payload);
+// }
 
-  updateItemInCart(itemId:any, staffId:string){
-    const payload = {
-      cartId:localStorage.getItem('cartID'),
-      itemGuestId:'',
-      itemId:itemId,
-      clientId:'',
-      itemStaffVariantId:staffId
-    };
-    return this.http.post(this.apiURL+'/update_item_in_cart',payload);
-  }
+  // updateItemInCart(itemId:any, staffId:string){
+  //   const payload = {
+  //     cartId:localStorage.getItem('cartID'),
+  //     itemGuestId:'',
+  //     itemId:itemId,
+  //     clientId:'',
+  //     itemStaffVariantId:staffId
+  //   };
+  //   return this.http.post(this.apiURL+'/update_item_in_cart',payload);
+  // }
 
-  tokenizeCard(card:any){
-    const tokenize_url = "https://pci.boulevard.app/cards/tokenize";
-    const payload = {
-      "card": {
-        "name": card.name,
-        "number": card.number,
-        "cvv": card.cvv,
-        "exp_month": card.expiry.substring(0,2),
-        "exp_year": card.expiry.substring(3,7),
-        "address_postal_code": card.postal_code
-      }
-    }
-    return this.http.post(tokenize_url,payload);
-  }
+  // tokenizeCard(card:any){
+  //   const tokenize_url = "https://pci.boulevard.app/cards/tokenize";
+  //   const payload = {
+  //     "card": {
+  //       "name": card.name,
+  //       "number": card.number,
+  //       "cvv": card.cvv,
+  //       "exp_month": card.expiry.substring(0,2),
+  //       "exp_year": card.expiry.substring(3,7),
+  //       "address_postal_code": card.postal_code
+  //     }
+  //   }
+  //   return this.http.post(tokenize_url,payload);
+  // }
 
-  addCartPaymentMethod(token:string){
-    const payload = {
-      "cartId": localStorage.getItem("cartID"),
-      "select":true,
-      "token":token
-    }
-    return this.http.post(this.apiURL+ '/add_cart_card_payment_method',payload);
-  }
+  // addCartPaymentMethod(token:string){
+  //   const payload = {
+  //     "cartId": localStorage.getItem("cartID"),
+  //     "select":true,
+  //     "token":token
+  //   }
+  //   return this.http.post(this.apiURL+ '/add_cart_card_payment_method',payload);
+  // }
 
-  updateClientCartInfo(client:any){
-    const payload = {
-      "cartId": localStorage.getItem("cartID"),
-      "clientInfo":{
-        "email": client.email,
-        "firstName":client.firstName,
-        "lastName":client.lastName,
-        "phoneNumber":client.mobilePhone
-      },
-      "clientNote":client.note
-    }
-    return this.http.post(this.apiURL+ '/update_cart_client_info',payload);
-  }
+  // updateClientCartInfo(client:any){
+  //   const payload = {
+  //     "cartId": localStorage.getItem("cartID"),
+  //     "clientInfo":{
+  //       "email": client.email,
+  //       "firstName":client.firstName,
+  //       "lastName":client.lastName,
+  //       "phoneNumber":client.mobilePhone
+  //     },
+  //     "clientNote":client.note
+  //   }
+  //   return this.http.post(this.apiURL+ '/update_cart_client_info',payload);
+  // }
 
-  addCartOffer(offerCode:string){
-    const payload = {
-      "cartId": localStorage.getItem("cartID"),
-      "offerCode":offerCode
-    }
-    return this.http.post(this.apiURL+ '/add_cart_offer',payload);
-  }
+  // addCartOffer(offerCode:string){
+  //   const payload = {
+  //     "cartId": localStorage.getItem("cartID"),
+  //     "offerCode":offerCode
+  //   }
+  //   return this.http.post(this.apiURL+ '/add_cart_offer',payload);
+  // }
 
-  checkoutCart(){
-    const payload = {
-      "cartId": localStorage.getItem('cartID'),
-      "clientId": this.authService.$AuthUser.value?.authId
-    }
-    return this.http.post(this.apiURL+ '/checkout_cart',payload);
-  }
+  // checkoutCart(){
+  //   const payload = {
+  //     "cartId": localStorage.getItem('cartID'),
+  //     "clientId": this.authService.$AuthUser.value?.authId
+  //   }
+  //   return this.http.post(this.apiURL+ '/checkout_cart',payload);
+  // }
   
   classAddtocatMobile = '';
   

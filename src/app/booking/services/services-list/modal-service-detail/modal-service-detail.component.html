@@ -1,0 +1,17 @@
+<div class="popup-screen"></div>
+
+<div class="popup card-details">
+	<button class="close" (click)="serviceModalRef.close()"><span class="accessibility">Close Popup</span></button>
+	
+	<img [src]="'https://blvd.silvermirror.com/assets/cover-' + service.id + '.png'" alt=""/>
+	
+	<article>
+		<h2 class="heading-6 flex-container">{{service?.name}} <span class="heading-6 small">{{sharedService.formatPrice(service.listPrice) | currency:'USD':'symbol' : '1.0-0'}}</span></h2>
+		<span class="pill fill outline">{{service?.category.replace("Facials ", "")}}</span>
+		
+		<p class="x-small skin-types"><span class="pill">Skin Type</span> All types, including rosacea or sensitive skin.</p>
+		<p class="x-small">{{service?.description}}</p>
+		
+		<button class="btn black" (click)="addService()">Add Service</button>
+	</article>
+</div>

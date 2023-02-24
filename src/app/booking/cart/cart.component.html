@@ -1,0 +1,40 @@
+<div class="cart-info">
+    <h2 class="eyebrow small flex-container">Cart <span>1 Service Added</span></h2>
+    
+    <ul class="small">
+        <li class="flex-container" *ngFor="let service of cart?.selectedItems">
+            <span class="user">Me <span class="counter gray">1</span></span>
+        
+            <span>
+                <strong>{{service.item.name}}</strong>
+                <span class="pill">30-min</span>
+            </span>
+            
+            <span class="cost">
+                {{sharedService.formatPrice(service.price) | currency:'USD':'symbol' : '1.0-0'}}
+                <button (click)="removeItem(service)" class="remove-service"><span class="accessibility">Remove Service</span></button>
+            </span>
+        </li>
+        
+        <li><span class="user empty-cart-guest">Guest 1 <span class="counter gray">0</span></span></li>
+        <li><span class="user empty-cart-guest">Guest 2 <span class="counter gray">0</span></span></li>
+        
+        <li class="flex-container">
+            <span class="pill location">Location</span>
+            <span>
+                <strong>{{cart?.location?.address?.city}} - {{cart?.location?.name}}</strong>
+                <address>{{cart?.location?.address?.line1}}</address>
+                <a *ngIf="cart?.location?.phoneNumber" href="tel:{{cart?.location?.phoneNumber}}">{{cart?.location?.phoneNumber}}</a>
+            </span>
+            
+            <!-- <span class="cost">
+                <button class="edit-location"><span class="accessibility">Edit Location</span></button>
+            </span> -->
+        </li>
+    </ul>
+    
+</div>
+	
+<!-- <a class="btn inactive" href="#">Add to Continue</a> -->
+
+<button class="btn black view-cart mobile-only">View Cart<span class="item-count">1</span></button>

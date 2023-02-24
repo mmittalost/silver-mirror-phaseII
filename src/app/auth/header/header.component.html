@@ -2,7 +2,7 @@
 <a class="accessibility" href="#main">Skip To Content</a>	
 <!--Header-->
 <header class="flex-container">
-    <a class="logo" routerLink="/"><img src="/assets/svgs/logo.svg" alt="Book an appointment with Silver Mirror Facial Bar"/></a>
+    <a class="logo" routerLink="/booking"><img src="/assets/svgs/logo.svg" alt="Book an appointment with Silver Mirror Facial Bar"/></a>
     <h1 class="heading-6 small">{{title}}</h1>
     
     <a *ngIf="!user" class="data-ui sign-in" routerLink="/auth"><span><svg width="8px" height="8px" viewBox="0 0 8 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -29,7 +29,7 @@
     </svg></span>{{user ? user.firstName : 'Sign In'}}</a>
            <ul class="loggedin-menu" *ngIf="visible && user">
             <li routerLink="/dashboard">Client Portal</li>
-            <li routerLink="/location">Book a Facial</li>
+            <li routerLink="/booking">Book a Facial</li>
             <li>Sign Out</li>
            </ul>
         

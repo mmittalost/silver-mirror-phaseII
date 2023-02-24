@@ -1,0 +1,38 @@
+<app-header title="Book an Appointment"></app-header>
+
+
+<main id="main">
+
+<section class="whos-coming">
+	<div class="container grid">
+		
+		<!--Breadcrumbs-->
+        <app-breadcrumbs class="breadcrumbs-container"></app-breadcrumbs>
+		
+		<h2 class="heading-4">Who should we expect?</h2>
+		
+		<ul class="grid">
+			<li>
+				<button [ngClass]="tab == 'me' ? 'active' : ''" class="eyebrow" (click)="tab = 'me'">Just Me</button>
+			</li>
+			
+			<li>
+				<button [ngClass]="tab == 'guest' ? 'active' : ''" class="eyebrow" (click)="tab = 'guest'">Me &amp; Guests</button>
+			</li>
+		</ul>
+		<div class="guest-counter">
+			<div *ngIf="tab == 'guest' ">
+				<label class="pill" for="guest-count">How Many Guests?</label>
+				<select id="guest-count" [(ngModel)]="guestCount" (change)="selectGuest()" #noOfguestSelected>
+					<option [value]="1">1 Guest</option>
+					<option [value]="2">2 Guests</option>
+					<option [value]="3">3 Guests</option>
+				</select>
+			</div>
+			<input  type="submit" class="btn" value="Continue" (click)="gotoServices()">
+		</div>
+		
+	</div>
+</section>
+</main>
+<app-footer></app-footer>

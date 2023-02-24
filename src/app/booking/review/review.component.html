@@ -1,0 +1,134 @@
+<app-header title="Book an Appointment"></app-header>
+
+<section class="review-flow">
+	<form class="container grid">
+		
+		<!--Breadcrumbs-->
+        <app-breadcrumbs class="breadcrumbs-container"></app-breadcrumbs>
+
+		<div class="content-container">
+			
+			<!--Credit Card-->
+			
+			<h2 class="heading-6">Payment Details</h2>
+			<p *ngIf="!(authService.$AuthUser | async)" class="xx-small">Have an account? <a class="text-link" routerLink="/auth">Login or create an account</a></p>
+
+			<label class="pill" for="card-detail-options" *ngIf="availablePaymentMethods.length">Card Details</label>
+			
+			<div class="flex-container credit-card-options" *ngIf="availablePaymentMethods.length">
+				<ul id="card-detail-options" class="x-small" *ngFor="let card of availablePaymentMethods">
+					<li class="active visa">
+						<strong>{{card?.cardBrand}} •••• {{card?.cardLast4}} <span>Expires {{card?.cardExpMonth}}/{{card?.cardExpYear}}</span></strong>
+						<span *ngIf="card?.cardIsDefault" class="pill fill small">Default</span>
+					</li>
+				</ul>
+				
+				<button class="text-link large" *ngIf="availablePaymentMethods.length" (click)="togglePaymentMethodForm = true">Add a new card</button>
+			</div>
+			
+			<form [formGroup]="paymentForm" (ngSubmit)="updatePaymentMethod()">
+
+				<ul class="grid credit-card-details">
+					<li>
+						<label class="pill" for="name">Name On The Card</label>
+						<input formControlName="name" type="text" id="name" placeholder="Name On The Card"/>
+					</li>
+					<li>
+						<label class="pill" for="card-details">Card Details</label>
+						<input maxLength="16" minLength="15" formControlName="number" type="text" id="card-details" placeholder="Card Number"/>
+					</li>
+
+					<li class="mobile-only">
+						<p class="xx-small info">Your credit card is only used to hold the reservation and won't be charged unless you cancel late or don't show up.</p>
+					</li>
+					
+					<li>
+						<label class="pill" for="card-exp">Expiration Date</label>
+						<input maxLength="7" minLength="7" formControlName="expiry" type="text" id="card-exp" placeholder="MM/YYYY"/>
+					</li>
+					
+					<li>
+						<label class="pill" for="card-cvv">CVV</label>
+						<input maxLength="3" minLength="3" formControlName="cvv" type="text" id="card-cvv" placeholder="***"/>
+					</li>
+
+					<li>
+						<label class="pill" for="postal-code">Postal Code</label>
+						<input maxLength="5" minLength="5" formControlName="postal_code" type="text" id="postal-code" placeholder="Postal Code"/>
+					</li>
+				</ul>
+				<button type="submit" class="btn black cc-btn">Apply</button>
+			</form>
+			
+			<p class="xx-small info">Your credit card is only used to hold the reservation and won't be charged unless you cancel late or don't show up.</p>
+			
+			<!--Additional Fields-->
+			<h2 class="heading-6">Additional Information</h2>
+
+			<form [formGroup]="userInfoForm" (ngSubmit)="updateUserInfo()">
+				<ul class="grid additional-info">
+					<li>
+						<label class="pill" for="first-name">First Name</label>
+						<input formControlName="firstName" type="text" id="first-name" placeholder="First Name"/>
+					</li>
+					
+					<li>
+						<label class="pill" for="last-name">Last Name</label>
+						<input formControlName="lastName" type="text" id="last-name" placeholder="Last Name"/>
+					</li>
+					
+					<li>
+						<label class="pill" for="phone">Phone Number</label>
+						<input type="tel" formControlName="mobilePhone" id="phone" placeholder="(555) 555-5555"/>
+					</li>
+					
+					<li>
+						<label class="pill" for="email">Email Address</label>
+						<input formControlName="email" type="email" id="email" placeholder="email@address.com"/>
+					</li>
+					
+					<li>
+						<label class="pill" for="notes">Notes</label>
+						<p class="xx-small">Preferences? Celebrations? Secrets you want to share? Let us know.</p>
+						<input formControlName="note" type="text" id="notes" placeholder="Write any notes for us"/>
+					</li>
+				</ul>
+			
+				
+				<div class="mobile-only flex-container promo-code">
+					<label class="pill" for="promo-code">Promo Code</label>
+					<input type="text" id="promo-code" placeholder="Enter Code"/>
+					<button class="text-link large">Apply</button>
+				</div>
+				<button type="submit" class="btn black cc-btn">Save Changes</button>
+				<h3>Disclaimer</h3>
+				<p class="xx-small">
+				By booking this appointment, you confirm that you have read and understand our cancellation and lateness policy. Any no-show or late cancellation within 24 hours of your appointment is subject to a charge of 50% of the service price.
+				<br>
+				Please be advised that we do not accept cash. The only methods of payment we accept are Visa, American Express, and Mastercard credit cards, as well as, Silver Mirror Gift Cards.
+				<br>
+				Before you arrive, please make sure to fill out your intake form ahead of your arrival. This can be found at <a class="text-link" href="https://silvermirror.com/intake/" target="_blank">SilverMirror.com/Intake</a>. This must be done before each appointment.
+				<br>
+				Please be advised that all guests must wear a mask before and after his or her facial. All guests must also submit for a distanced, touchless temperature check upon arrival.
+				<br>
+				More information on our <a class="text-link" href="https://silvermirror.com/about-us/faq-general/" target="_blank">Cancellation Policy</a>, please visit our <a class="text-link" href="https://silvermirror.com/about-us/faq-general/" target="_blank">FAQ</a>.
+			</p>
+			</form>			
+		</div>
+		
+		<!--Sidebar-->
+		<aside class="empty">
+			<app-cart [cart]="cart"></app-cart>
+
+			<div [formGroup]="couponForm" class="desktop-only flex-container promo-code">
+				<label class="pill small" for="promo-code">Promo Code</label>
+				<input formControlName="promoCode" type="text" id="promo-code" placeholder="Enter Code"/>
+				<button (click)="applyPromoCode()" type="submit" class="text-link large">Apply</button>
+			</div>
+			
+			<span (click)="checkout()"><a class="btn black">Book Now</a></span>
+	   </aside>
+		
+	</form>
+</section>
+<app-footer></app-footer>

@@ -1,0 +1,47 @@
+<app-header title="Book an Appointment"></app-header>
+
+<section class="services-flow has-guests">
+	<div class="container grid">
+		
+		<!--Breadcrumbs-->
+        <app-breadcrumbs class="breadcrumbs-container"></app-breadcrumbs>
+
+		<div class="content-container">
+			
+			<!--Services Tabs-->
+			<!-- <?php include('includes/services/services-tabs.php'); ?> -->
+            <app-services-tabs (changeTabEvent)="changeServiceTab($event)"></app-services-tabs>
+			
+			<div class="guest-different-services" *ngIf="cart?.guests?.length">
+				<input [checked]="false" id="guest-different" type="checkbox"/>
+				<label for="guest-different">My guests want different services</label>
+			</div>
+			
+			<!--Guest Tabs-->
+			<!-- <?php include('includes/schedule/guest-tabs.php'); ?> -->
+            <app-guest-tabs *ngIf="cart?.guests?.length" [guests]="cart.guests" (changeTabEvent)="changeGuestTab($event)"></app-guest-tabs>
+						
+			<!--Time Filters-->
+			<!-- <?php include('includes/services/time-filters.php'); ?> -->
+            <app-time-filters *ngIf="tabs.service.toLowerCase().includes('facial')" (changeTabEvent)="changeTimeFilterTab($event)"></app-time-filters>
+
+			<!--Mobile Tabs/Filters-->
+			<!-- <?php include('includes/services/mobile-services-tabs.php'); ?> -->
+			
+			<!--Services List-->
+			<!-- <?php include('includes/services/services-list.php'); ?> -->
+            <app-services-list *ngIf="cart?.availableCategories?.length" [services]="cart.availableCategories | filterService:tabs.service" (addServiceEvent)="addService($event)"></app-services-list>
+			
+		</div>
+		
+		<!--Sidebar-->
+		<!-- <?php include('includes/services/sidebar-guests-empty.php'); ?> -->
+        <aside *ngIf="cart">
+            <app-cart [cart]="cart"></app-cart>
+			<span (click)="continue()"><a class="btn active">Continue</a></span>
+        </aside>
+		
+	</div>
+</section>
+
+<!-- <app-footer></app-footer> -->

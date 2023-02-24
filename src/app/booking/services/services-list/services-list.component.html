@@ -1,0 +1,26 @@
+<ul class="services-list">
+	<li *ngFor="let service of services[0].availableItems" (click)="serviceDetail(service)">
+		<button (click)="addService(service)" class="add-to-cart desktop-only">
+            <img [src]="'assets/svgs/icon-accordion-open.svg'" />
+			<!-- <?php 
+				include('svgs/icon-accordion-open.svg');
+				include('svgs/icon-selected-check.svg');
+			?> -->
+					
+			<span class="accessibility">Add this service to your cart</span>
+		</button>
+			
+		<button class="flex-container open-services-pop">
+			<img [src]="'https://blvd.silvermirror.com/assets/thumb-' + service.id + '.png'" alt=""/>
+			
+			<div>
+				<h2 class="heading-6">{{service.name}}</h2>
+				<span><img style="width: 100%; aspect-ratio: auto;" [src]="'https://blvd.silvermirror.com/assets/badge-' + service.id + '.png'" /></span>
+				<p class="pill">All Types</p>
+				<span class="heading-6 small price">{{sharedService.formatPrice(service.listPrice) | currency:'USD':'symbol' : '1.0-0'}}</span>
+			</div>
+			
+			
+		</button>
+	</li>
+</ul>

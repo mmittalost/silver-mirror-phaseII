@@ -1,0 +1,11 @@
+
+
+	<a class="back-btn" href="#"><span class="accessibility">Back</span></a>
+
+	<ul class="flex-container breadcrumbs">
+		<li [ngClass]="getRouteState(steps[0].transition)"><a class="eyebrow small" [routerLink]="steps[0].transition > 1 ? '/booking/location' : null">Location</a></li>
+		<li [ngClass]="getRouteState(steps[1].transition)"><a class="eyebrow small" [routerLink]="steps[1].transition > 1 ? '/booking/whoscoming' : null">Who's Coming</a></li>
+		<li [ngClass]="getRouteState(steps[2].transition)"><a class="eyebrow small" [routerLink]="steps[2].transition > 1 ? '/booking/services' : null">Services</a></li>
+		<li [ngClass]="getRouteState(steps[3].transition)"><a class="eyebrow small" [routerLink]="steps[3].transition > 1 ? '/booking/schedule' : null">Scheduling</a></li>
+		<li [ngClass]="getRouteState(steps[4].transition)"><a class="eyebrow small" [routerLink]="steps[4].transition > 1 ? '/booking/review' : null">Review</a></li>
+	</ul>
