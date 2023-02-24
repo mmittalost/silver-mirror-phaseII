@@ -2752,6 +2752,16 @@ aside .empty-cart:before {
 .services-flow .cart-info li:last-child {
 	margin-top: 18px;
 }
+.services-flow .cart-info li.add-on:last-child {
+	margin-top: -8px;
+}
+.services-flow .cart-info li.add-on-item:last-child {
+	margin-top: 0px;
+}
+
+.cart-info .add-on-item ul {
+	gap: 10px;
+}
 
 aside .pill.location {
 	border-bottom: 1px solid rgba(64,64,64,.2);
