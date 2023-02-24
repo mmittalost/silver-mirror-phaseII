@@ -1726,6 +1726,10 @@ input[type=radio]:focus-visible {
 	background: var(--light-blue);
 	border-color: transparent;
 }
+ 
+.date-slots fieldset div.active label {
+	border: 2px solid var(--bright-blue);
+}
 
 .date-slots fieldset input:disabled + label,
 .esthetician-filter .grid input:disabled + label {
