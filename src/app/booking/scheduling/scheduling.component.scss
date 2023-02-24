@@ -1,0 +1,21 @@
+::ng-deep .ngx-slider .ngx-slider-pointer::after {
+	content: '';
+	width: 8px;
+	height: 8px;
+	position: absolute;
+	top: 4px;
+	left: 4px;
+	border-radius: 4px;
+	background: #fff;
+  }
+  
+  ::ng-deep .ngx-slider .ngx-slider-pointer {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    top: -7px;
+    background-color: #0db9f0;
+    z-index: 3;
+    border-radius: 16px;
+
+}

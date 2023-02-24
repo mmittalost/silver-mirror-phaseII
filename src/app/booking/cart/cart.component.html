@@ -8,7 +8,7 @@
             <li class="flex-container" *ngFor="let service of cart?.selectedItems">
                 <span *ngIf="cart.guest" class="user">Me <span class="counter gray">1</span></span>
             
-                <span>
+                <span class="item-info">
                     <strong>{{service.item.name}}</strong>
                     <span class="pill">30-min</span>
                 </span>
@@ -20,7 +20,7 @@
             </li>
             <span *ngIf="cart?.selectedItems?.length">
                 <li class="flex-container add-on" *ngFor="let modifier of cart?.selectedItems[0]?.selectedOptions">
-                    <span>
+                    <span class="item-info">
                         <strong>{{modifier?.name}}</strong>
                         <span class="pill fill small">Add On</span>
                     </span>
