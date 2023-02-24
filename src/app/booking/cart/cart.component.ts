@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SharedService } from 'src/app/shared-component/shared.service';
 import { SilverMirrorService } from '../../silver-mirror.service';
 import { BookingService } from '../booking.service';
@@ -11,10 +11,12 @@ import { BookingService } from '../booking.service';
 export class CartComponent {
 
   @Input() cart:any;
+  @Output() onItemRemoveEvent = new EventEmitter<string>();
 
   constructor(private bookingService:BookingService, public sharedService:SharedService) { }
 
   removeItem(item:any){
+    this.onItemRemoveEvent.emit();
     console.log("remove item : ", item);
     this.bookingService.removeItemInCart(item.id).subscribe((res:any)=>{
       if(!res.errors){
@@ -26,6 +28,40 @@ export class CartComponent {
         this.sharedService.showNotification('Errors', res.errors[0].message);
       }
     });
+  }
+
+  removeModifier(modifier:any){
+    let optionIds:Array<string | null> = this.getSelectedModifiers();
+    let index = optionIds.indexOf(modifier.id);
+    optionIds.splice(index,1);
+    console.log("Found Index : ", index, optionIds);
+
+    const payload = {
+      id: this.cart.selectedItems[0].id,
+      optionIds: [...optionIds],
+      staffId:null,
+      guestId:null
+    }
+    this.bookingService.addAddonInCart(payload).subscribe((res:any)=>{
+      if(!res.errors){
+        const title = 'Addon removed';
+        const message = 'REMOVED FROM CART';
+        this.sharedService.showNotification(title, message);
+        this.bookingService.updateCartDetail();
+      }else{
+        this.sharedService.showNotification('Errors', res.errors[0].message);
+      }
+    });
+  }
+
+  getSelectedModifiers():Array<string | null>{
+    if(this.cart.selectedItems[0].selectedOptions.length){
+      const ids = this.cart.selectedItems[0].selectedOptions.map((option:any)=> option.id);
+      console.log('Selected options : ', ids);
+      return ids;
+    }else{
+      return []
+    }
   }
 
 }

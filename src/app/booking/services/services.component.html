@@ -10,7 +10,7 @@
 			
 			<!--Services Tabs-->
 			<!-- <?php include('includes/services/services-tabs.php'); ?> -->
-            <app-services-tabs (changeTabEvent)="changeServiceTab($event)"></app-services-tabs>
+            <app-services-tabs [isAddonEnable]="cart?.selectedItems?.length" (changeTabEvent)="changeServiceTab($event)"></app-services-tabs>
 			
 			<div class="guest-different-services" *ngIf="cart?.guests?.length">
 				<input [checked]="false" id="guest-different" type="checkbox"/>
@@ -27,17 +27,18 @@
 
 			<!--Mobile Tabs/Filters-->
 			<!-- <?php include('includes/services/mobile-services-tabs.php'); ?> -->
+			<p *ngIf="tabs.service == 'Facials 50 Minutes'" class="xx-small info">All 50-minute facials are interchangable and customizable. Work with your esthetician to discuss options.</p>
 			
 			<!--Services List-->
 			<!-- <?php include('includes/services/services-list.php'); ?> -->
-            <app-services-list *ngIf="cart?.availableCategories?.length" [services]="cart.availableCategories | filterService:tabs.service" (addServiceEvent)="addService($event)"></app-services-list>
-			
+            <app-services-list *ngIf="cart?.availableCategories?.length && tabs.service != 'addon'" [services]="cart.availableCategories | filterService:tabs.service" (addServiceEvent)="addService($event)"></app-services-list>
+			<app-addons-list *ngIf="tabs.service == 'addon'" [cart]="cart"></app-addons-list>
 		</div>
 		
 		<!--Sidebar-->
 		<!-- <?php include('includes/services/sidebar-guests-empty.php'); ?> -->
-        <aside *ngIf="cart">
-            <app-cart [cart]="cart"></app-cart>
+        <aside *ngIf="cart" [ngClass]>
+            <app-cart [cart]="cart" (onItemRemoveEvent)="itemRemovedFromCart()"></app-cart>
 			<span (click)="continue()"><a class="btn active">Continue</a></span>
         </aside>
 		

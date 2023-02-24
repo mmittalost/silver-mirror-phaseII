@@ -22,6 +22,8 @@ import { CongratsComponent } from './congrats/congrats.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { ModalServiceDetailComponent } from "./services/services-list/modal-service-detail/modal-service-detail.component";
 import { ModalAddonsComponent } from './services/modal-addons/modal-addons.component';
+import { AddonsListComponent } from './services/addons-list/addons-list.component';
+import { AddonsPipe } from './services/addons-list/addons.pipe';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,7 @@ import { ModalAddonsComponent } from './services/modal-addons/modal-addons.compo
     GuestTabsComponent,
     TimeFiltersComponent,
     ServicesListComponent,
+    AddonsListComponent,
     CartComponent,
     SchedulingComponent,
     ReviewComponent,
@@ -44,6 +47,7 @@ import { ModalAddonsComponent } from './services/modal-addons/modal-addons.compo
     LocationGroupPipe,
     FilterServicePipe,
     TimeFilterPipe,
+    AddonsPipe,
 
     //Modals
     ModalServiceDetailComponent,

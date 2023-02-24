@@ -1,23 +1,40 @@
 <div class="cart-info">
     <h2 class="eyebrow small flex-container">Cart <span>1 Service Added</span></h2>
+
+    <span *ngIf="!cart?.selectedItems?.length" class="heading-6 small empty-cart">Your cart is empty</span>
     
     <ul class="small">
-        <li class="flex-container" *ngFor="let service of cart?.selectedItems">
-            <span class="user">Me <span class="counter gray">1</span></span>
-        
-            <span>
-                <strong>{{service.item.name}}</strong>
-                <span class="pill">30-min</span>
+        <span *ngIf="cart?.selectedItems?.length">
+            <li class="flex-container" *ngFor="let service of cart?.selectedItems">
+                <span *ngIf="cart.guest" class="user">Me <span class="counter gray">1</span></span>
+            
+                <span>
+                    <strong>{{service.item.name}}</strong>
+                    <span class="pill">30-min</span>
+                </span>
+                
+                <span class="cost">
+                    {{sharedService.formatPrice(service.price) | currency:'USD':'symbol' : '1.0-0'}}
+                    <button (click)="removeItem(service)" class="remove-service"><span class="accessibility">Remove Service</span></button>
+                </span>
+            </li>
+            <span *ngIf="cart?.selectedItems?.length">
+                <li class="flex-container add-on" *ngFor="let modifier of cart?.selectedItems[0]?.selectedOptions">
+                    <span>
+                        <strong>{{modifier?.name}}</strong>
+                        <span class="pill fill small">Add On</span>
+                    </span>
+                    
+                    <span class="cost">
+                        {{sharedService.formatPrice(modifier.priceDelta) | currency:'USD':'symbol' : '1.0-0'}}
+                        <button class="remove-service" (click)="removeModifier(modifier)"><span class="accessibility">Remove Addon</span></button>
+                    </span>
+                </li>
             </span>
             
-            <span class="cost">
-                {{sharedService.formatPrice(service.price) | currency:'USD':'symbol' : '1.0-0'}}
-                <button (click)="removeItem(service)" class="remove-service"><span class="accessibility">Remove Service</span></button>
-            </span>
-        </li>
-        
-        <li><span class="user empty-cart-guest">Guest 1 <span class="counter gray">0</span></span></li>
-        <li><span class="user empty-cart-guest">Guest 2 <span class="counter gray">0</span></span></li>
+            <li *ngIf="cart.guest"><span class="user empty-cart-guest">Guest 1 <span class="counter gray">0</span></span></li>
+            <!-- <li><span class="user empty-cart-guest">Guest 2 <span class="counter gray">0</span></span></li> -->
+        </span>
         
         <li class="flex-container">
             <span class="pill location">Location</span>
@@ -26,10 +43,6 @@
                 <address>{{cart?.location?.address?.line1}}</address>
                 <a *ngIf="cart?.location?.phoneNumber" href="tel:{{cart?.location?.phoneNumber}}">{{cart?.location?.phoneNumber}}</a>
             </span>
-            
-            <!-- <span class="cost">
-                <button class="edit-location"><span class="accessibility">Edit Location</span></button>
-            </span> -->
         </li>
     </ul>
     

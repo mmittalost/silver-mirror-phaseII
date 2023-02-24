@@ -45,13 +45,37 @@ export class ServicesComponent {
       this.tabs.service = 'Facials 30 Minutes';  
     }else if(ev !='addon'){
       this.tabs.service = ev;
-    }else if(ev == 'addon'){
-      console.log('addon popup');
-      this.addonModalRef = this.modalService.open(
-        ModalAddonsComponent,
-        this.modalConfig
-      );
+    }else if (ev == 'addon'){
+      console.log('1');
+      if(this.cart.selectedItems.length){
+        console.log('2');
+        this.tabs.service = 'addon';
+      }else{
+        console.log('3');
+        const title = 'Service not added';
+        const message = 'Please add a service first.';
+        this.sharedService.showNotification(title, message); 
+      }
     }
+    /*
+      * uncomment to Show addon popup on addon tab 
+    */
+    // else if(ev == 'addon'){
+    //   console.log('addon popup');
+    //   if(this.cart.selectedItems.length){
+    //     console.log(this.cart.selectedItems[0].addons);
+    //     this.modalConfig.data.selectedItem = this.cart.selectedItems;
+    //     this.addonModalRef = this.modalService.open(
+    //       ModalAddonsComponent,
+    //       this.modalConfig
+    //     );
+    //   }else{
+    //   const title = '';
+    //   const message = 'Please add a service first.';
+    //   this.sharedService.showNotification(title, message); 
+    //   }
+      
+    // }
     console.log(this.tabs);
   }
 
@@ -92,6 +116,11 @@ export class ServicesComponent {
       const message = 'Please remove existing service from cart.';
       this.sharedService.showNotification(title, message);
     }
+  }
+
+  itemRemovedFromCart(){
+    // console.log('Item Removed from cart');
+    // this.tabs.service = 'Facials 30 Minutes';
   }
 
   continue(){

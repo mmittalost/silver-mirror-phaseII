@@ -1,5 +1,5 @@
 <ul class="services-list">
-	<li *ngFor="let service of services[0].availableItems" (click)="serviceDetail(service)">
+	<li *ngFor="let service of services[0].availableItems">
 		<button (click)="addService(service)" class="add-to-cart desktop-only">
             <img [src]="'assets/svgs/icon-accordion-open.svg'" />
 			<!-- <?php 
@@ -10,7 +10,7 @@
 			<span class="accessibility">Add this service to your cart</span>
 		</button>
 			
-		<button class="flex-container open-services-pop">
+		<button class="flex-container open-services-pop" (click)="serviceDetail(service)">
 			<img [src]="'https://blvd.silvermirror.com/assets/thumb-' + service.id + '.png'" alt=""/>
 			
 			<div>

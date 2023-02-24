@@ -1,0 +1,26 @@
+<ul class="services-list">
+	<li *ngFor="let addonItem of cart?.selectedItems[0]?.addons | addons">
+		<button class="add-to-cart desktop-only" (click)="addModifier(addonItem)">
+            <img [src]="'assets/svgs/icon-accordion-open.svg'" />
+			<!-- <?php 
+				include('svgs/icon-accordion-open.svg');
+				include('svgs/icon-selected-check.svg');
+			?> -->
+					
+			<span class="accessibility">Add this addon to your cart</span>
+		</button>
+			
+		<button class="flex-container open-services-pop">
+			<img src="assets/images/signature-facial.jpg" alt=""/>
+			
+			<div>
+				<h2 class="heading-6">{{addonItem?.name}}</h2>
+				<span class="pill fill small yellow">Best Seller</span>
+				<p class="pill">All Types</p>
+				<span class="heading-6 small price">{{sharedService.formatPrice(addonItem?.priceDelta) | currency:'USD':'symbol' : '1.0-0'}}</span>
+			</div>
+			
+			
+		</button>
+	</li>
+</ul>

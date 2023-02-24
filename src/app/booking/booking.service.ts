@@ -83,6 +83,16 @@ export class BookingService {
     return this.http.post(BASE_URL+'/add_item_in_cart',payload);
   }
 
+  addAddonInCart(item:any){
+    const payload = {
+      "cartId": this.sharedService.getLocalStorageItem('cartId'),
+      "itemGuestId":item.guestId,
+      "itemId": item.id,
+      "itemOptionIds": item.optionIds
+    }
+    return this.http.post(BASE_URL+'/add_service_options_in_cart',payload);
+  }
+
   removeItemInCart(itemId:string){
     const payload = {
       "cartId":this.sharedService.getLocalStorageItem('cartId'),

@@ -5,88 +5,28 @@
 	
 	<div class="scroller">
 		<h2 class="heading-5">Targeted add-ons for a truly custom facial.</h2>
+		<span *ngFor="let addon of selectedItem[0]?.addons">
+			<h3><span>{{addon?.name}}</span></h3>
 		
-		<h3><span>Deeper Exfoliation Enhancements</span></h3>
-		
-		<ul class="grid">
-			<li>
-				<button>
-					<h4>
-						Dermaplanning
-						<span class="pill small fill yellow">Best Seller</span>
-						<span class="price">$85</span>
-					</h4>
-					
-					<p class="xx-small">Lorem ipsum dolor amet adipiscing elit maecenas varius tortor nibh. <a href="#">Learn more</a>.</p>
-				</button>
-			</li>
-			
-			<li>
-				<button class="active">
-					<h4>
-						Antioxidant Peel
-						<span class="price">$45</span>
-					</h4>
-					
-					<p class="xx-small">Lorem ipsum dolor amet adipiscing elit maecenas varius tortor nibh. <a href="#">Learn more</a>.</p>
-				</button>
-			</li>
-		</ul>
-		
-		<h3><span>CUSTOM-FOR-ALL ENHANCEMENTS</span></h3>
-		
-		<ul class="grid">
-			<li>
-				<button>
-					<h4>
-						Extra Extractions
- 						<span class="price">$25</span>
-					</h4>
-					
-					<p class="xx-small">Lorem ipsum dolor amet adipiscing elit maecenas varius tortor nibh. <a href="#">Learn more</a>.</p>
-				</button>
-			</li>
-			
-			<li>
-				<button>
-					<h4>
-						Custom Jelly Mask
-						<span class="pill small fill yellow">Best Seller</span>
-						<span class="price">$45</span>
-					</h4>
-					
-					<p class="xx-small">Lorem ipsum dolor amet adipiscing elit maecenas varius tortor nibh. <a href="#">Learn more</a>.</p>
-				</button>
-			</li>
-			
-			<li>
-				<button>
-					<h4>
-						Extra Extractions
- 						<span class="price">$25</span>
-					</h4>
-					
-					<p class="xx-small">Lorem ipsum dolor amet adipiscing elit maecenas varius tortor nibh. <a href="#">Learn more</a>.</p>
-				</button>
-			</li>
-			
-			<li>
-				<button>
-					<h4>
-						Custom Jelly Mask
-						<span class="pill small fill yellow">Best Seller</span>
-						<span class="price">$45</span>
-					</h4>
-					
-					<p class="xx-small">Lorem ipsum dolor amet adipiscing elit maecenas varius tortor nibh. <a href="#">Learn more</a>.</p>
-				</button>
-			</li>
-		</ul>
+			<ul class="grid">
+				<li *ngFor="let modifier of addon.optionGroups[0].options">
+					<button>
+						<h4>
+							{{modifier?.name}}
+							<span class="pill small fill yellow">Best Seller</span>
+							<span class="price">{{sharedService.formatPrice(modifier?.priceDelta) | currency:'USD':'symbol' : '1.0-0'}}</span>
+						</h4>
+						
+						<p class="xx-small">{{modifier.toggleDescription ? modifier?.description : modifier?.description | slice:0:75}} <a (click)="modifier.toggleDescription = !modifier.toggleDescription">Learn more</a>.</p>
+					</button>
+				</li>
+			</ul>
+		</span>
 		
 	</div>
 	
 	<div class="fixed-info">
 		<button class="btn black">Add To Cart <span class="counter">1</span></button>
-		<a class="#">No thanks, I’m not interested in add-ons</a>
+		<a (click)="addonModalRef.close()">No thanks, I’m not interested in add-ons</a>
 	</div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-services-tabs',
@@ -8,12 +8,15 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class ServicesTabsComponent {
 
   tab:string = 'facial';
+  @Input() isAddonEnable:boolean = false;
   @Output() changeTabEvent = new EventEmitter<string>();
 
   constructor() {}
 
   changeTab(tab:string){
-    this.tab = tab;
+    if(tab != 'addon' || (tab=='addon' && this.isAddonEnable)){
+      this.tab = tab;
+    }
     this.changeTabEvent.emit(tab);
   }
 }
