@@ -85,7 +85,7 @@ export class CartComponent {
     selectedService.selectedOptions.map((option:any)=>{
       optionsPrice = optionsPrice + option.priceDelta;
     });
-    return selectedService.price - optionsPrice;
+    return selectedService.lineTotal - optionsPrice;
   }
   
 

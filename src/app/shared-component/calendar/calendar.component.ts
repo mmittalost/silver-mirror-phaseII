@@ -76,7 +76,7 @@ export class CalendarComponent implements OnInit {
       for (let i = 0; i < 7; i++) {
         const day = {
           date: currentDay.date(),
-          fullDate: currentDay.format('YYYY-MM-D'),
+          fullDate: currentDay.format('YYYY-MM-DD'),
           isAvailable: this.availableDates.findIndex((date:any)=> date.date == currentDay.format('YYYY-MM-DD')) >= 0 ? true : false,
           isToday: currentDay.isSame(moment(), 'day'),
           day: currentDay.format('ddd'),

@@ -144,8 +144,16 @@ export class ServicesComponent {
   }
 
   addService(service:any){
-    // if(!this.cart.selectedItems.length){
-    if(!service.selected){
+    let selected:boolean = false;
+    this.cart.selectedItems.map((selectedItem:any)=>{
+      if(this.tabs.guest != 'me'){
+        selectedItem.guestId == this.tabs.guest.id ? selected = true : null;
+      }else{
+        selectedItem.guestId == null ? selected = true : null;
+      }
+    })
+    
+    if(!selected){
       const payload = {
         id:service.id,
         staffId:null,
