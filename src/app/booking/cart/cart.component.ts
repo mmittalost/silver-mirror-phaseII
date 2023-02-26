@@ -30,17 +30,20 @@ export class CartComponent {
     });
   }
 
-  removeModifier(modifier:any){
-    let optionIds:Array<string | null> = this.getSelectedModifiers();
+  removeModifier(modifier:any, guestId:string){
+    let selectedItems:any = this.cart.selectedItems.filter((selectedItem:any)=>{
+      return selectedItem.guestId == guestId;
+    })
+    let optionIds:Array<string | null> = this.getSelectedModifiers(selectedItems);
     let index = optionIds.indexOf(modifier.id);
     optionIds.splice(index,1);
     console.log("Found Index : ", index, optionIds);
 
     const payload = {
-      id: this.cart.selectedItems[0].id,
+      id: selectedItems[0].id,
       optionIds: [...optionIds],
       staffId:null,
-      guestId:null
+      guestId:guestId
     }
     this.bookingService.addAddonInCart(payload).subscribe((res:any)=>{
       if(!res.errors){
@@ -54,8 +57,9 @@ export class CartComponent {
     });
   }
 
-  getSelectedModifiers():Array<string | null>{
-    if(this.cart.selectedItems[0].selectedOptions.length){
+  getSelectedModifiers(selectedItems:any):Array<string | null>{
+
+    if(selectedItems[0].selectedOptions.length){
       const ids = this.cart.selectedItems[0].selectedOptions.map((option:any)=> option.id);
       console.log('Selected options : ', ids);
       return ids;
@@ -63,5 +67,6 @@ export class CartComponent {
       return []
     }
   }
+  
 
 }

@@ -1,5 +1,5 @@
 <ul class="services-list">
-	<li *ngFor="let addonItem of cart?.selectedItems[0]?.addons | addons">
+	<li *ngFor="let addonItem of cart?.selectedItems | addons:client" [ngClass]="addonItem.selected ? 'active' : ''">
 		<button class="add-to-cart desktop-only" (click)="addModifier(addonItem)">
             <img [src]="'assets/svgs/icon-accordion-open.svg'" />
 			<!-- <?php 

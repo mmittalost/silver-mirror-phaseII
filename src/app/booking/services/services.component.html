@@ -10,7 +10,7 @@
 			
 			<!--Services Tabs-->
 			<!-- <?php include('includes/services/services-tabs.php'); ?> -->
-            <app-services-tabs [isAddonEnable]="cart?.selectedItems?.length" (changeTabEvent)="changeServiceTab($event)"></app-services-tabs>
+            <app-services-tabs [reset]="resetServiceTabs" [isAddonEnable]="cart?.selectedItems?.length" (changeTabEvent)="changeServiceTab($event)"></app-services-tabs>
 			
 			<div class="guest-different-services" *ngIf="cart?.guests?.length">
 				<input [checked]="false" id="guest-different" type="checkbox"/>
@@ -23,7 +23,7 @@
 						
 			<!--Time Filters-->
 			<!-- <?php include('includes/services/time-filters.php'); ?> -->
-            <app-time-filters *ngIf="tabs.service.toLowerCase().includes('facial')" (changeTabEvent)="changeTimeFilterTab($event)"></app-time-filters>
+            <app-time-filters [reset]="resetTimeTabs" *ngIf="tabs.service.toLowerCase().includes('facial')" (changeTabEvent)="changeTimeFilterTab($event)"></app-time-filters>
 
 			<!--Mobile Tabs/Filters-->
 			<!-- <?php include('includes/services/mobile-services-tabs.php'); ?> -->
@@ -31,8 +31,8 @@
 			
 			<!--Services List-->
 			<!-- <?php include('includes/services/services-list.php'); ?> -->
-            <app-services-list *ngIf="cart?.availableCategories?.length && tabs.service != 'addon'" [services]="cart.availableCategories | filterService:tabs.service" (addServiceEvent)="addService($event)"></app-services-list>
-			<app-addons-list *ngIf="tabs.service == 'addon'" [cart]="cart"></app-addons-list>
+            <app-services-list *ngIf="cart?.availableCategories?.length && tabs.service != 'addon'" [client]="tabs.guest" [services]="cart.availableCategories | filterService:tabs.service:tabs.guest" (addServiceEvent)="addService($event)"></app-services-list>
+			<app-addons-list *ngIf="tabs.service == 'addon'" [client]="tabs.guest" [cart]="cart"></app-addons-list>
 		</div>
 		
 		<!--Sidebar-->

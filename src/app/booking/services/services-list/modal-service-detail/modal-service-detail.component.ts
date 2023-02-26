@@ -12,6 +12,7 @@ import { SharedService } from 'src/app/shared-component/shared.service';
 export class ModalServiceDetailComponent {
 
   @Input() service:any;
+  @Input() client:any;
 
   cart:any;
   cartSubscription:any;
@@ -25,11 +26,11 @@ export class ModalServiceDetailComponent {
   }
 
   addService(){
-    if(!this.cart.selectedItems.length){
+    if(!this.service.selected){
       const payload = {
         id: this.service.id,
         staffId:null,
-        guestId:null
+        guestId:this.client! == 'me' ? this.client.id : null
       }
       this.bookingService.addItemInCart(payload).subscribe((res:any)=>{
         if(!res.errors){

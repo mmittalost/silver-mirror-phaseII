@@ -1,7 +1,7 @@
 <ul class="services-list">
-	<li *ngFor="let service of services[0].availableItems">
+	<li *ngFor="let service of services[0].availableItems" [ngClass]="service.selected ? 'active' : ''">
 		<button (click)="addService(service)" class="add-to-cart desktop-only">
-            <img [src]="'assets/svgs/icon-accordion-open.svg'" />
+            <img [src]="service.selected ? 'assets/svgs/icon-selected-check.svg' : 'assets/svgs/icon-accordion-open.svg' " />
 			<!-- <?php 
 				include('svgs/icon-accordion-open.svg');
 				include('svgs/icon-selected-check.svg');

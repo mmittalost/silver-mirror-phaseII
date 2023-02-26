@@ -12,11 +12,17 @@ import { ModalAddonsComponent } from './modal-addons/modal-addons.component';
 })
 export class ServicesComponent {
 
-  tabs = {
+  tabs:{
+    timeFilters:string;
+    guest:any;
+    service:string;
+  } = {
     timeFilters: '30',
     guest:'me',
     service:'Facials 30 Minutes'
   }
+  resetServiceTabs:any;
+  resetTimeTabs:any;
   serviceFilter:string='Facials 30 Minutes'
   cart:any;
   addonModalRef!: MdbModalRef<ModalAddonsComponent> | null;
@@ -46,15 +52,20 @@ export class ServicesComponent {
     }else if(ev !='addon'){
       this.tabs.service = ev;
     }else if (ev == 'addon'){
-      console.log('1');
-      if(this.cart.selectedItems.length){
-        console.log('2');
+      let selectedItems;
+      if(this.tabs.guest != 'me'){
+        selectedItems = this.cart.selectedItems.filter((item:any)=>item.guestId == this.tabs.guest.id);
+      }else{
+        selectedItems = this.cart.selectedItems.filter((item:any)=>item.guestId == null);
+      }
+      
+      if(selectedItems.length){
         this.tabs.service = 'addon';
       }else{
-        console.log('3');
+        this.resetServicesTab();
         const title = 'Service not added';
         const message = 'Please add a service first.';
-        this.sharedService.showNotification(title, message); 
+        this.sharedService.showNotification(title, message);
       }
     }
     /*
@@ -76,11 +87,50 @@ export class ServicesComponent {
     //   }
       
     // }
-    console.log(this.tabs);
+  }
+
+  resetServicesTab(){
+    console.log("9 : ", this.tabs);
+    let currentTab:string = '';
+    if(this.tabs.service.toLowerCase().includes('facial')){
+      currentTab = 'facial';
+      this.resetTimeTab();
+    }else if(this.tabs.service == 'addon'){
+      currentTab = 'facial';
+      this.resetTimeTab();
+    }else{
+      currentTab = this.tabs.service;
+    }
+    this.resetServiceTabs = {event:true, currentTab:currentTab};
+    setTimeout(() => {
+      this.resetServiceTabs = {event:false, currentTab:currentTab};
+    }, 1000);
+  }
+
+  resetTimeTab(){
+    this.resetTimeTabs = '30';
+    setTimeout(() => {
+      this.resetTimeTabs = null;
+    }, 1000);
   }
 
   changeGuestTab(ev:any){
-    console.log(ev);
+    if(this.tabs.service == 'addon'){
+      let selectedItems;
+      if(ev != 'me'){
+        selectedItems = this.cart.selectedItems.filter((item:any)=>item.guestId == ev.id);
+      }else{
+        selectedItems = this.cart.selectedItems.filter((item:any)=>item.guestId == null);
+      }
+      if(selectedItems && selectedItems.length){
+        this.tabs.guest = ev;
+      }else{
+        this.resetServicesTab();
+        const title = 'Service not added';
+        const message = 'Please add a service first.';
+        this.sharedService.showNotification(title, message); 
+      }
+    }
     this.tabs.guest = ev;
   }
 
@@ -91,15 +141,15 @@ export class ServicesComponent {
     }else if(ev == '50'){
       this.tabs.service = 'Facials 50 Minutes'
     }
-    console.log(this.tabs);
   }
 
   addService(service:any){
-    if(!this.cart.selectedItems.length){
+    // if(!this.cart.selectedItems.length){
+    if(!service.selected){
       const payload = {
         id:service.id,
         staffId:null,
-        guestId:null
+        guestId:this.tabs.guest != 'me' ? this.tabs.guest.id : null
       }
       this.bookingService.addItemInCart(payload).subscribe((res:any)=>{
         if(!res.errors){

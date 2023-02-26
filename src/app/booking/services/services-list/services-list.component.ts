@@ -12,6 +12,7 @@ import { ModalServiceDetailComponent } from './modal-service-detail/modal-servic
 export class ServicesListComponent {
 
   @Input() services:any;
+  @Input() client:any;
   @Output() addServiceEvent = new EventEmitter<string>();
 
   serviceDetailModalRef!: MdbModalRef<ModalServiceDetailComponent> | null;
@@ -26,17 +27,16 @@ export class ServicesListComponent {
     modalClass: "modal-top-right",
   }; 
 
-  constructor(public sharedService:SharedService, private bookingService:BookingService, private modalService: MdbModalService){
-    console.log(this.services);
-  }
+  constructor(public sharedService:SharedService, private bookingService:BookingService, private modalService: MdbModalService){}
 
   addService(service:any){
-    this.addServiceEvent.emit(service); 
+      this.addServiceEvent.emit(service); 
   }
 
   serviceDetail(service: any) {
     service.category = this.services[0].name;
     this.modalConfig.data.service = service;
+    this.modalConfig.data.client = this.client;
     this.serviceDetailModalRef = this.modalService.open(
       ModalServiceDetailComponent,
       this.modalConfig

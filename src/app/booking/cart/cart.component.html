@@ -6,8 +6,8 @@
     <ul class="small">
         <li *ngIf="cart?.selectedItems?.length">
             <ul class="small">
-            <li class="flex-container" *ngFor="let service of cart?.selectedItems">
-                <span *ngIf="cart.guest" class="user">Me <span class="counter gray">1</span></span>
+            <li class="flex-container" *ngFor="let service of cart?.selectedItems | filterCartItems:'me'">
+                <span *ngIf="cart.guests" class="user">{{service.guest ? service?.guest?.label : 'me'}} <span class="counter gray">{{service.selectedOptions?.length + 1}}</span></span>
             
                 <span class="item-info">
                     <strong>{{service.item.name}}</strong>
@@ -18,8 +18,23 @@
                     {{sharedService.formatPrice(service.price) | currency:'USD':'symbol' : '1.0-0'}}
                     <button (click)="removeItem(service)" class="remove-service"><span class="accessibility">Remove Service</span></button>
                 </span>
+
+                <ul class="small">
+                    <li class="flex-container add-on" *ngFor="let modifier of service.selectedOptions">
+                        <span class="item-info">
+                            <strong>{{modifier?.name}}</strong>
+                            <span class="pill fill small">Add On</span>
+                        </span>
+                        
+                        <span class="cost">
+                            {{sharedService.formatPrice(modifier.priceDelta) | currency:'USD':'symbol' : '1.0-0'}}
+                            <button class="remove-service" (click)="removeModifier(modifier, service.guestId)"><span class="accessibility">Remove Addon</span></button>
+                        </span>
+                    </li>
+                </ul>
+
             </li>
-            <li class="add-on-item" *ngIf="cart?.selectedItems?.length">
+            <!-- <li class="add-on-item" *ngIf="cart?.selectedItems?.length">
                 <ul class="small">
                     <li class="flex-container add-on" *ngFor="let modifier of cart?.selectedItems[0]?.selectedOptions">
                         <span class="item-info">
@@ -29,11 +44,11 @@
                         
                         <span class="cost">
                             {{sharedService.formatPrice(modifier.priceDelta) | currency:'USD':'symbol' : '1.0-0'}}
-                            <button class="remove-service" (click)="removeModifier(modifier)"><span class="accessibility">Remove Addon</span></button>
+                            <button class="remove-service" (click)="removeModifier(modifier, 'me')"><span class="accessibility">Remove Addon</span></button>
                         </span>
                     </li>
                 </ul>
-            </li>
+            </li> -->
             
             <li *ngIf="cart.guest"><span class="user empty-cart-guest">Guest 1 <span class="counter gray">0</span></span></li>
             <!-- <li><span class="user empty-cart-guest">Guest 2 <span class="counter gray">0</span></span></li> -->
