@@ -1,5 +1,5 @@
 <div class="cart-info">
-    <h2 class="eyebrow small flex-container">Cart <span>1 Service Added</span></h2>
+    <h2 *ngIf="getTotalAddedServiceCount" class="eyebrow small flex-container">Cart <span>{{getTotalAddedServiceCount}} Service Added</span></h2>
 
     <span *ngIf="!cart?.selectedItems?.length" class="heading-6 small empty-cart">Your cart is empty</span>
     
@@ -15,7 +15,7 @@
                 </span>
                 
                 <span class="cost">
-                    {{sharedService.formatPrice(service.price) | currency:'USD':'symbol' : '1.0-0'}}
+                    {{sharedService.formatPrice(getServicePrice(service)) | currency:'USD':'symbol' : '1.0-0'}}
                     <button (click)="removeItem(service)" class="remove-service"><span class="accessibility">Remove Service</span></button>
                 </span>
 
@@ -54,6 +54,11 @@
             <!-- <li><span class="user empty-cart-guest">Guest 2 <span class="counter gray">0</span></span></li> -->
         </ul>
         </li>
+
+        <div class="flex-container cart-total">
+            <span class="eyebrow small">Total</span>
+            <p class="small">{{sharedService.formatPrice(this.cart?.summary?.total) | currency:'USD':'symbol' : '1.0-0'}}</p>
+        </div>
         
         <li class="flex-container">
             <span class="pill location">Location</span>

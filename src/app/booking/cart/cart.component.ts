@@ -67,6 +67,26 @@ export class CartComponent {
       return []
     }
   }
+
+  get getTotalAddedServiceCount(){
+    let selectedItems = this.cart.selectedItems;
+    let count = 0;
+    if(selectedItems && selectedItems.length){
+      selectedItems.map((selectedItem:any)=>{
+        ++count;
+        count = count + selectedItem.selectedOptions.length;
+      })
+    }
+    return count;
+  }
+
+  getServicePrice(selectedService:any){
+    let optionsPrice = 0;
+    selectedService.selectedOptions.map((option:any)=>{
+      optionsPrice = optionsPrice + option.priceDelta;
+    });
+    return selectedService.price - optionsPrice;
+  }
   
 
 }
