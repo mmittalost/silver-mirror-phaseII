@@ -25,6 +25,7 @@ import { ModalAddonsComponent } from './services/modal-addons/modal-addons.compo
 import { AddonsListComponent } from './services/addons-list/addons-list.component';
 import { AddonsPipe } from './services/addons-list/addons.pipe';
 import { FilterCartItemsPipe } from './cart/filter-cart-items.pipe';
+import { OrderGuestTabsPipe } from './services/guest-tabs/order-guest-tabs.pipe';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { FilterCartItemsPipe } from './cart/filter-cart-items.pipe';
     TimeFilterPipe,
     AddonsPipe,
     FilterCartItemsPipe,
+    OrderGuestTabsPipe,
 
     //Modals
     ModalServiceDetailComponent,
