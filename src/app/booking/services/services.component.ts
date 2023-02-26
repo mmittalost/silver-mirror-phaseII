@@ -182,8 +182,15 @@ export class ServicesComponent {
   }
 
   continue(){
+    let cartMemberCount = this.cart.guests.length + 1;
     if(this.cart.selectedItems.length){
-      this.router.navigateByUrl('/booking/schedule');
+      if(this.cart.selectedItems.length == cartMemberCount){
+        this.router.navigateByUrl('/booking/schedule');
+      }else{
+        const title = 'Service not added for member';
+        const message = 'Please add the service for all members.';
+        this.sharedService.showNotification(title, message);  
+      }
     }else{
       const title = 'Cart is empty';
       const message = 'Add service to continue';
