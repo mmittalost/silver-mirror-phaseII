@@ -30,6 +30,7 @@ export class ReviewComponent implements OnInit {
       if(cart && cart.id){
         this.cart = cart;
         this.availablePaymentMethods = cart.availablePaymentMethods;
+        this._patchCouponForm(cart.offers);
         if(cart.clientInformation){
           this._patchAdditionalInfoForm(cart.clientInformation);
         }
@@ -72,6 +73,22 @@ export class ReviewComponent implements OnInit {
     this.couponForm = this.formBuilder.group({
       promoCode: ['', Validators.required]
     });
+  }
+
+  _patchCouponForm(offers:any){
+    console.log("Patch coupon : ", offers);
+    if(offers.length){
+      let code = offers[0].code;
+      this.couponForm.patchValue({
+        promoCode: code
+      });
+      this.couponForm.disable();
+    }else{
+      this.couponForm.patchValue({
+        promoCode: ''
+      });
+      this.couponForm.enable();
+    }
   }
 
   _patchAdditionalInfoForm(user:any){
@@ -148,6 +165,17 @@ export class ReviewComponent implements OnInit {
       this.sharedService.showNotification(title, message);
     }
     console.log("Apply Promo Code TESTPROMOTIONOST", this.couponForm.value, code, this.couponForm.valid);
+  }
+
+  removePromoCode(){
+    let offerId = this.cart.offers[0].id;
+    this.bookingService.removeCartOffer(offerId).subscribe((res:any)=>{
+      if(!res.errors){
+        this.bookingService.updateCartDetail();
+      }else{
+        console.log(res.errors);
+      }
+    })
   }
 
   checkout(){

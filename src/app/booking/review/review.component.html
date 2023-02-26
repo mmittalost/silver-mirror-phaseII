@@ -123,7 +123,8 @@
 			<div [formGroup]="couponForm" class="desktop-only flex-container promo-code">
 				<label class="pill small" for="promo-code">Promo Code</label>
 				<input formControlName="promoCode" type="text" id="promo-code" placeholder="Enter Code"/>
-				<button (click)="applyPromoCode()" type="submit" class="text-link large">Apply</button>
+				<button *ngIf="!cart?.offers?.length" (click)="applyPromoCode()" type="submit" class="text-link large">Apply</button>
+				<button *ngIf="cart?.offers?.length" (click)="removePromoCode()" type="submit" class="text-link large">Remove</button>
 			</div>
 			
 			<span (click)="checkout()"><a class="btn black">Book Now</a></span>

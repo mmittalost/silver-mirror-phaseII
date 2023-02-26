@@ -200,6 +200,14 @@ export class BookingService {
     return this.http.post(BASE_URL+ '/add_cart_offer',payload);
   }
 
+  removeCartOffer(offerId:string){
+    const payload = {
+      "cartId": this.sharedService.getLocalStorageItem('cartId'),
+      "offerId":offerId
+    }
+    return this.http.post(BASE_URL+ '/remove_cart_offer',payload);
+  }
+
   checkoutCart(){
     const payload = {
       "cartId": this.sharedService.getLocalStorageItem('cartId'),
