@@ -1,0 +1,16 @@
+<div class="popup-screen"></div>
+
+<div class="popup card-details">
+	<button class="close" (click)="addonModalRef.close()"><span class="accessibility">Close Popup</span></button>
+	
+	<img style="background: #484848; object-fit: contain;" src="assets/svgs/icon-service-example.svg" alt=""/>
+	
+	<article>
+		<h2 class="heading-6 flex-container">{{addon?.name}} <span class="heading-6 small">{{sharedService.formatPrice(addon.priceDelta) | currency:'USD':'symbol' : '1.0-0'}}</span></h2>
+		
+		<p class="x-small skin-types"><span class="pill">Skin Type</span> All types, including rosacea or sensitive skin.</p>
+		<p class="x-small">{{addon?.description}}</p>
+		
+		<button class="btn black" (click)="addModifier()">Add Addon</button>
+	</article>
+</div>

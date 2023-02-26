@@ -1,44 +1,45 @@
 import { Component, Input } from '@angular/core';
-import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
+import { Observable } from 'rxjs';
+import { BookingService } from 'src/app/booking/booking.service';
 import { SharedService } from 'src/app/shared-component/shared.service';
-import { BookingService } from '../../booking.service';
-import { ModalAddonDetailComponent } from './modal-addon-detail/modal-addon-detail.component';
 
 @Component({
-  selector: 'app-addons-list',
-  templateUrl: './addons-list.component.html',
-  styleUrls: ['./addons-list.component.scss']
+  selector: 'app-modal-addon-detail',
+  templateUrl: './modal-addon-detail.component.html',
+  styleUrls: ['./modal-addon-detail.component.scss']
 })
-export class AddonsListComponent {
+export class ModalAddonDetailComponent {
 
-  @Input() cart:any;
+  @Input() addon:any;
   @Input() client:any;
 
-  serviceDetailModalRef!: MdbModalRef<ModalAddonDetailComponent> | null;
-  modalConfig: any = {
-    animation: true,
-    backdrop: true,
-    containerClass: "right",
-    data: {},
-    ignoreBackdropClick: false,
-    keyboard: true,
-    modalClass: "modal-top-right",
-  }; 
+  cart:any;
+  cartSubscription:any;
 
-  constructor(public sharedService:SharedService, private bookingService:BookingService, private modalService: MdbModalService){}
+  constructor(public sharedService:SharedService, private bookingService:BookingService, public addonModalRef: MdbModalRef<ModalAddonDetailComponent>){
+    this.cartSubscription = this.bookingService.clientCart$.subscribe((cart:any)=>{
+      if(cart){
+        this.cart = cart;
+      }
+    });
+    setTimeout(() => {
+      console.log("addon detail modal : ", this.addon);
+    }, 1000);
+  }
 
-  addModifier(modifier:any){
+  addModifier(){
     let selectedItems:any = this.cart.selectedItems.filter((selectedItem:any)=>{
       return selectedItem.guestId == this.client.id;
     })
     console.log("SELECTED ITEMS : ", selectedItems);
     let optionIds:Array<string | null> = this.getSelectedModifiers(selectedItems);
     console.log(selectedItems, optionIds);
-    let index = optionIds.indexOf(modifier.id);
+    let index = optionIds.indexOf(this.addon.id);
     if(index < 0){
       const payload = {
         id: selectedItems[0].id,
-        optionIds: [...optionIds, modifier.id],
+        optionIds: [...optionIds, this.addon.id],
         staffId:null,
         guestId: this.client != 'me' ? this.client.id : null
       }
@@ -46,6 +47,7 @@ export class AddonsListComponent {
         if(!res.errors){
           const title = 'Great Choice! Looking gorgeous';
           const message = 'ADDED TO CART';
+          this.addonModalRef.close()
           this.sharedService.showNotification(title, message);
           this.bookingService.updateCartDetail();
         }else{
@@ -67,15 +69,6 @@ export class AddonsListComponent {
     }else{
       return []
     }
-  }
-
-  addonDetail(addon: any) {
-    this.modalConfig.data.addon = addon;
-    this.modalConfig.data.client = this.client;
-    this.serviceDetailModalRef = this.modalService.open(
-      ModalAddonDetailComponent,
-      this.modalConfig
-    );
   }
 
 }
