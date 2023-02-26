@@ -27,6 +27,7 @@ import { AddonsPipe } from './services/addons-list/addons.pipe';
 import { FilterCartItemsPipe } from './cart/filter-cart-items.pipe';
 import { OrderGuestTabsPipe } from './services/guest-tabs/order-guest-tabs.pipe';
 import { ModalAddonDetailComponent } from './services/addons-list/modal-addon-detail/modal-addon-detail.component';
+import { ModalIsAddonAddedComponent } from './services/modal-is-addon-added/modal-is-addon-added.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { ModalAddonDetailComponent } from './services/addons-list/modal-addon-de
     ModalServiceDetailComponent,
     ModalAddonsComponent, // addon popup, not in use
     ModalAddonDetailComponent,
+    ModalIsAddonAddedComponent,
   ],
   imports: [
     CommonModule,

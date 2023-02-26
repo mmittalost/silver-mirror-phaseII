@@ -4,6 +4,7 @@ import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { SharedService } from 'src/app/shared-component/shared.service';
 import { BookingService } from '../booking.service';
 import { ModalAddonsComponent } from './modal-addons/modal-addons.component';
+import { ModalIsAddonAddedComponent } from './modal-is-addon-added/modal-is-addon-added.component';
 
 @Component({
   selector: 'app-services',
@@ -26,6 +27,7 @@ export class ServicesComponent {
   serviceFilter:string='Facials 30 Minutes'
   cart:any;
   addonModalRef!: MdbModalRef<ModalAddonsComponent> | null;
+  isAddonAddedModalRef!: MdbModalRef<ModalIsAddonAddedComponent> | null;
   modalConfig: any = {
     animation: true,
     backdrop: true,
@@ -181,11 +183,41 @@ export class ServicesComponent {
     // this.tabs.service = 'Facials 30 Minutes';
   }
 
+  isAnyAddonAdded(){
+    let flag = false;
+    this.cart.selectedItems.map((selectedItem:any) => {
+      if(selectedItem.selectedOptions.length > 0){
+        flag = true;
+      }
+    });
+    return flag;
+  }
+
   continue(){
     let cartMemberCount = this.cart.guests.length + 1;
     if(this.cart.selectedItems.length){
       if(this.cart.selectedItems.length == cartMemberCount){
-        this.router.navigateByUrl('/booking/schedule');
+        let flag = this.isAnyAddonAdded();
+        console.log("Is addon added : ", flag);
+        if(!flag){
+          this.addonModalRef = this.modalService.open(
+            ModalIsAddonAddedComponent,
+            this.modalConfig
+          );
+          this.addonModalRef.onClose.subscribe((choice:any)=>{
+            console.log("transfered choice : ", choice);
+            if(choice && choice.choice){
+
+              // write code to show addon list
+
+            }else{
+              console.log("Continue");
+              this.router.navigateByUrl('/booking/schedule');
+            }
+          })
+        }else{
+          this.router.navigateByUrl('/booking/schedule');
+        }
       }else{
         const title = 'Service not added for member';
         const message = 'Please add the service for all members.';
