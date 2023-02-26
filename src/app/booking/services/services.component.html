@@ -13,7 +13,7 @@
             <app-services-tabs [reset]="resetServiceTabs" [isAddonEnable]="cart?.selectedItems?.length" (changeTabEvent)="changeServiceTab($event)"></app-services-tabs>
 			
 			<div class="guest-different-services" *ngIf="cart?.guests?.length">
-				<input [checked]="false" id="guest-different" type="checkbox"/>
+				<input [checked]="true" id="guest-different" type="checkbox"/>
 				<label for="guest-different">My guests want different services</label>
 			</div>
 			
