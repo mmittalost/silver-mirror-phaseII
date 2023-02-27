@@ -16,7 +16,7 @@
                 
                 <span class="cost">
                     {{sharedService.formatPrice(getServicePrice(service)) | currency:'USD':'symbol' : '1.0-0'}}
-                    <button (click)="removeItem(service)" class="remove-service"><span class="accessibility">Remove Service</span></button>
+                    <button *ngIf="router.url == '/booking/services'" (click)="removeItem(service)" class="remove-service"><span class="accessibility">Remove Service</span></button>
                 </span>
 
                 <ul class="small">
