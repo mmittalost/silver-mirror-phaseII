@@ -2078,7 +2078,7 @@ aside {
 
 .cart-info .btn.black {
 	margin: auto auto 0;
-	max-width: max-content;
+	/*max-width: max-content;*/
 }
 
 .cart-info .btn.black:before,
@@ -3087,6 +3087,7 @@ aside .pill.location {
 .selection-confirmation .heading-6.small {
 	padding: 0 48px;
 	position: relative;
+	min-width:396px;
 }
 
 .selection-confirmation .heading-6.small:before,
@@ -5206,11 +5207,11 @@ section.congrats {
 		right: calc(-1 * var(--container-outer-padding));
 	}
 
-	.services-flow aside:not(.active) .cart-info + .btn {
+	.services-flow aside:not(.active) .cart-info + .btn, .services-flow aside:not(.active) app-cart + span {
 		display: none;
 	}
 
-	.services-flow aside.active .cart-info + .btn {
+	.services-flow aside.active .cart-info + .btn, .services-flow aside.active app-cart + span {
 		bottom: 32px;
 		left: var(--container-outer-padding);
 		position: fixed;
@@ -6291,7 +6292,7 @@ section.congrats {
 		top: 50px;
 	}
 
-	.services-flow aside.active .cart-info + .btn {
+	.services-flow aside.active .cart-info + .btn, .services-flow aside.active app-cart + span{
 		bottom: 18px;
 	}
 
