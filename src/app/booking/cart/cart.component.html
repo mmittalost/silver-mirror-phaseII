@@ -62,8 +62,15 @@
         </div>
         
         <li class="flex-container">
+            <!-- <ul class="xx-small cart-details">
+                <li>Sunday, September 18 @ 4:15 PM</li>
+                <li>Esthetician: Veronica G.</li>
+                <li>NYC - Flatiron</li>
+		    </ul> -->
             <span class="pill location">Location</span>
             <span>
+                <span *ngIf="cart?.startTime" class="pill">{{cart?.startTime | date:'EEEE, MMMM d @ h:mm a':'EST'}}</span>
+                <span *ngIf="getSelectedStaffVariant()" class="pill">Esthetician: {{getSelectedStaffVariant()}}</span>
                 <strong>{{cart?.location?.address?.city}} - {{cart?.location?.name}}</strong>
                 <address>{{cart?.location?.address?.line1}}</address>
                 <a *ngIf="cart?.location?.phoneNumber" href="tel:{{cart?.location?.phoneNumber}}">{{cart?.location?.phoneNumber}}</a>

@@ -90,6 +90,19 @@ export class CartComponent {
     });
     return selectedService.lineTotal - optionsPrice;
   }
+
+  getSelectedStaffVariant(){
+    let selectedStaff:any;
+    if(this.cart && this.cart.selectedItems && this.cart.selectedItems.length){
+      let selectedItem = this.cart.selectedItems.filter((selectedItem:any)=>{
+        return selectedItem.guestId == null;
+      });
+      if(selectedItem[0].selectedStaffVariant){
+        selectedStaff = selectedItem[0].selectedStaffVariant.staff.displayName;
+      }
+    }
+    return selectedStaff;
+  }
   
 
 }

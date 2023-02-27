@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="formGroup phone-number">
-                    <input type="tel" id="phone-number" name="phone-number" placeholder="Phone Number" formControlName="phone">
+                    <input maxLength="10" minLength="10" type="tel" id="phone-number" name="phone-number" placeholder="Phone Number" formControlName="phone">
                     <div *ngIf="submitted && form.controls.phone.errors" class="invalid-feedback">
                         <div *ngIf="form.controls.phone.errors.required">Phone is required</div>
                     </div>

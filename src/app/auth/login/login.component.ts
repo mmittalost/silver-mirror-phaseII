@@ -2,6 +2,7 @@ import { Location } from "@angular/common";
 import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { SharedService } from "src/app/shared-component/shared.service";
 import { SilverMirrorService } from "../../silver-mirror.service";
 import { AuthService } from "../auth.service";
 
@@ -23,6 +24,7 @@ export class LoginComponent {
     public silverService: SilverMirrorService,
     private router: Router,
     private formBuilder:FormBuilder,
+    private sharedService:SharedService,
     private _location: Location
   ) {
     this._buildForm();
@@ -44,7 +46,9 @@ export class LoginComponent {
     if(this.emailForm.valid){
       this.authService.getClientByEmail(this.email);
     }else{
-      alert('Invalid Email');
+      const title = 'Invalid Email';
+      const message = 'Please Enter a correct email Address.';
+      this.sharedService.showNotification(title, message);
     }
   }
 

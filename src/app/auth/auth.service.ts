@@ -36,7 +36,13 @@ export class AuthService {
           this.$otp.next(otp);
           this.sendOTPEmail(user.email, otp, user.firstName);
         } else {
-          this.router.navigate(["/auth/register"]);
+          const params:any = {
+            state:{
+              email: email
+            }
+          }
+          console.log(params);
+          this.router.navigateByUrl("/auth/register", params)
         }
       });
   }
@@ -61,10 +67,7 @@ export class AuthService {
         mobilePhone: data.phone,
       },
     };
-    this.http
-      .post(BASE_URL + "/createClient", payload)
-      .subscribe((res: any) => {
-        console.log(">>", res);
-      });
+    return this.http
+      .post(BASE_URL + "/createClient", payload);
   }
 }
