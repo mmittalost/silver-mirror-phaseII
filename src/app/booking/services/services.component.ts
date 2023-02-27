@@ -38,7 +38,7 @@ export class ServicesComponent {
     modalClass: "modal-top-right",
   };
 
-  constructor(private bookingService:BookingService, private sharedService:SharedService, private router:Router, private modalService: MdbModalService){
+  constructor(public bookingService:BookingService, private sharedService:SharedService, private router:Router, private modalService: MdbModalService){
     bookingService.updateCartDetail();
     bookingService.clientCart$.subscribe((cart)=>{
       if(cart){

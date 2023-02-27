@@ -14,7 +14,7 @@ export class CartComponent {
   @Input() cart:any;
   @Output() onItemRemoveEvent = new EventEmitter<string>();
 
-  constructor(private bookingService:BookingService, public sharedService:SharedService, public router: Router) { }
+  constructor(public bookingService:BookingService, public sharedService:SharedService, public router: Router) { }
 
   removeItem(item:any){
     this.onItemRemoveEvent.emit();

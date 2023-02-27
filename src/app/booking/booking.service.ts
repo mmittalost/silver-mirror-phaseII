@@ -17,6 +17,8 @@ export class BookingService {
   clientCart$: BehaviorSubject<any> = new BehaviorSubject([]);
   checkoutBookingResponse$: BehaviorSubject<any> = new BehaviorSubject(null);
 
+  mobileCartView:boolean = false;
+
   getLocations() {
     return this.http.get(BASE_URL+'/get_locations');
   }

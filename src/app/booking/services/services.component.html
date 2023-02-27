@@ -37,9 +37,10 @@
 		
 		<!--Sidebar-->
 		<!-- <?php include('includes/services/sidebar-guests-empty.php'); ?> -->
-        <aside *ngIf="cart" [ngClass]>
+        <aside *ngIf="cart" [ngClass]="bookingService.mobileCartView ? 'active' : '' " [ngClass] = "!cart?.selectedItems?.length ? 'empty':'' ">
             <app-cart [cart]="cart" (onItemRemoveEvent)="itemRemovedFromCart()"></app-cart>
 			<span (click)="continue()"><a class="btn active">Continue</a></span>
+			<button (click)="bookingService.mobileCartView = true" class="btn black view-cart mobile-only">View Cart<span class="item-count">{{0}}</span></button>
         </aside>
 		
 	</div>
