@@ -43,6 +43,7 @@ export class ServicesComponent {
     bookingService.clientCart$.subscribe((cart)=>{
       if(cart){
         this.cart = cart;
+        this.getMemberAddedServiceCount;
         console.log(this.cart);
       }
     })
@@ -191,6 +192,37 @@ export class ServicesComponent {
       }
     });
     return flag;
+  }
+
+  get getMemberAddedServiceCount(){
+    let count = 0;
+    if(this.cart.guests && this.cart.guests.length){
+      this.cart.guests.map((guest:any)=>{
+        if(this.cart && this.cart.selectedItems && this.cart.selectedItems.length){
+          let selectedItems = this.cart.selectedItems.filter((selectedItem:any)=>{
+            return selectedItem.guestId == guest.id
+          });
+          selectedItems.map((selectedItem:any)=>{
+            ++count;
+            count = count + selectedItem.selectedOptions.length;
+            guest.addedServiceCount = count;
+            count = 0;
+          });
+        }
+      });
+      let meAsGuest = {"label":"me", "addedServiceCount": 0};
+      let selectedItems = this.cart.selectedItems.filter((selectedItem:any)=>{
+        return selectedItem.guestId == null
+      });
+      selectedItems.map((selectedItem:any)=>{
+        ++count;
+        count = count + selectedItem.selectedOptions.length;
+        meAsGuest.addedServiceCount = count;
+        count = 0;
+      });
+      return [...this.cart.guests, meAsGuest];
+    }
+    return [];
   }
 
   continue(){

@@ -19,7 +19,7 @@
 			
 			<!--Guest Tabs-->
 			<!-- <?php include('includes/schedule/guest-tabs.php'); ?> -->
-            <app-guest-tabs *ngIf="cart?.guests?.length" [guests]="cart.guests" (changeTabEvent)="changeGuestTab($event)"></app-guest-tabs>
+            <app-guest-tabs *ngIf="cart?.guests?.length" [serviceCount]="getMemberAddedServiceCount" [guests]="cart.guests" (changeTabEvent)="changeGuestTab($event)"></app-guest-tabs>
 						
 			<!--Time Filters-->
 			<!-- <?php include('includes/services/time-filters.php'); ?> -->

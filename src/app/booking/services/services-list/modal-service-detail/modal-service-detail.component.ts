@@ -30,7 +30,7 @@ export class ModalServiceDetailComponent {
       const payload = {
         id: this.service.id,
         staffId:null,
-        guestId:this.client! == 'me' ? this.client.id : null
+        guestId:this.client != 'me' ? this.client.id : null
       }
       this.bookingService.addItemInCart(payload).subscribe((res:any)=>{
         if(!res.errors){

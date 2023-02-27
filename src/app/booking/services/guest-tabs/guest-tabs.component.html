@@ -1,8 +1,8 @@
 <ul class="guest-tabs">
 	<li (click)="changeTab('me')" [ngClass]="tab == 'me' ? 'active' : ''">
-        <button class="pill">Me <span class="counter">1</span></button>
+        <button class="pill">Me <span *ngIf="getServiceCount('me')" class="counter">{{getServiceCount('me')}}</span></button>
     </li>
 	<li (click)="changeTab(guest)" [ngClass]="tab == guest.id ? 'active' : ''" *ngFor="let guest of guests | orderGuestTabs; let i = index">
-        <button class="pill">{{guest.label}} <span class="counter">{{i+1}}</span></button>
+        <button class="pill">{{guest.label}} <span *ngIf="getServiceCount(guest.label)" class="counter">{{getServiceCount(guest.label)}}</span></button>
     </li>
 </ul>
