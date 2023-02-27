@@ -226,6 +226,7 @@ export class ServicesComponent {
   }
 
   continue(){
+    window.scrollTo(0, 0);
     let cartMemberCount = this.cart.guests.length + 1;
     if(this.cart.selectedItems.length){
       if(this.cart.selectedItems.length == cartMemberCount){

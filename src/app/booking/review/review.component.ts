@@ -211,6 +211,7 @@ export class ReviewComponent implements OnInit {
   }
 
   easyCheckout(){
+    window.scrollTo(0, 0);
     this.updatePaymentMethod().then((status:any)=>{
       if(status){
         this.updateUserInfo().then((status:any)=>{

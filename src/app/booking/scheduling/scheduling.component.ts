@@ -156,6 +156,7 @@ export class SchedulingComponent implements OnInit {
   }
 
   reserveCart(){
+    window.scrollTo(0, 0);
     const bookableTimeId = this.selectedTime?.id;
     if(bookableTimeId){
       this.bookingService.reserveCartItems(bookableTimeId).subscribe((res:any)=>{
