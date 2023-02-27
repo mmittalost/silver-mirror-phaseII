@@ -70,9 +70,14 @@
 						</li>
 					</ul>
 					
-					<ul class="actions">
-						<li><a class="btn small black" href="#">Add to Cal</a></li>
-						<li><a class="btn small black" href="#">Share</a></li>
+					<ul class="actions" style="flex-direction: column;">
+						<li (click)="toggleOptions = !toggleOptions"><a class="btn small black">Add to Cal</a></li>
+						<!-- <li><a class="btn small black" href="#">Share</a></li> -->
+						<li *ngIf="toggleOptions"><a target="_blank" [href]="appointment?.calendarLinks?.googleCalendar">Google Calendar</a></li>
+						<li *ngIf="toggleOptions"><a target="_blank" [href]="appointment?.calendarLinks?.icsDownload">ics Download</a></li>
+						<li *ngIf="toggleOptions"><a target="_blank" [href]="appointment?.calendarLinks?.microsoftOffice">Microsoft Office</a></li>
+						<li *ngIf="toggleOptions"><a target="_blank" [href]="appointment?.calendarLinks?.microsoftOutlook">Microsoft Outlook</a></li>
+						<li *ngIf="toggleOptions"><a target="_blank" [href]="appointment?.calendarLinks?.yahooCalendar">Yahoo Calendar</a></li>
 					</ul>
 				</div>
 			</li>

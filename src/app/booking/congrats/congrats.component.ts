@@ -10,6 +10,7 @@ import { BookingService } from '../booking.service';
 export class CongratsComponent {
 
   appointment:any;
+  toggleOptions:boolean = false;
 
   constructor(private bookingService:BookingService, public sharedService:SharedService){
     this.bookingService.checkoutBookingResponse$.subscribe((checkoutCart:any)=>{
