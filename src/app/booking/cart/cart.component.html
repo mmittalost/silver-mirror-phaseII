@@ -6,7 +6,7 @@
     <ul class="small">
         <li *ngIf="cart?.selectedItems?.length">
             <ul class="small">
-            <li class="flex-container" *ngFor="let service of cart?.selectedItems | filterCartItems:'me'">
+            <li class="flex-container" *ngFor="let service of cart?.selectedItems | orderCartItems">
                 <span *ngIf="cart.guests" class="user">{{service.guest ? service?.guest?.label : 'me'}} <span class="counter gray">{{service.selectedOptions?.length + 1}}</span></span>
             
                 <span class="item-info">

@@ -28,6 +28,7 @@ import { FilterCartItemsPipe } from './cart/filter-cart-items.pipe';
 import { OrderGuestTabsPipe } from './services/guest-tabs/order-guest-tabs.pipe';
 import { ModalAddonDetailComponent } from './services/addons-list/modal-addon-detail/modal-addon-detail.component';
 import { ModalIsAddonAddedComponent } from './services/modal-is-addon-added/modal-is-addon-added.component';
+import { OrderCartItemsPipe } from './cart/order-cart-items.pipe';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { ModalIsAddonAddedComponent } from './services/modal-is-addon-added/moda
     AddonsPipe,
     FilterCartItemsPipe,
     OrderGuestTabsPipe,
+    OrderCartItemsPipe,
 
     //Modals
     ModalServiceDetailComponent,
