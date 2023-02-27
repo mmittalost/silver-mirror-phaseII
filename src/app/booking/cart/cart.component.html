@@ -12,7 +12,7 @@
             
                 <span class="item-info">
                     <strong>{{service.item.name}}</strong>
-                    <span class="pill">30-min</span>
+                    <span *ngIf="sharedService.getServiceCategoryName(service, cart.availableCategories) != '' " class="pill">{{sharedService.getServiceCategoryName(service, cart.availableCategories)}}</span>
                 </span>
                 
                 <span class="cost">

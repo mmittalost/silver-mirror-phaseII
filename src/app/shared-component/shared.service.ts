@@ -32,4 +32,22 @@ export class SharedService {
     return Math.floor(price/100);
   }
 
+  getServiceCategoryName(service:any, categories:any){
+    let categoryName = '';
+    if(categories.length){
+      categories.map((category:any)=>{
+        category.availableItems.map((availableItem:any)=>{
+          if(availableItem.id == service.item.id){
+            categoryName = category.name;
+          }
+        })
+      })
+    }
+    if(categoryName.toLowerCase().includes('facial')){
+      return categoryName.replace("Facials ", "");
+    }else{
+      return '';
+    }
+  }
+
 }
