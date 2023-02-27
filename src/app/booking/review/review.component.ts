@@ -104,47 +104,79 @@ export class ReviewComponent implements OnInit {
 
   updatePaymentMethod(){
     // console.log(this.paymentForm.value);
-    if(this.paymentForm.valid){
-      this.bookingService.tokenizeCard(this.paymentForm.value).subscribe((res:any)=>{
-        console.log(res);
-        if(res.token){
-          this.bookingService.addCartPaymentMethod(res.token).subscribe((res:any)=>{
-            if(!res.errors){
-              this.bookingService.updateCartDetail();
-              this.paymentForm.reset();
-              this.togglePaymentMethodForm = false;
-            }else{
-              console.log(res.errors[0].message);
-            }
-          });
-        }
-      },err=>{
+    return new Promise((resolve, reject)=>{
+      if(this.paymentForm.valid){
+        this.bookingService.tokenizeCard(this.paymentForm.value).subscribe((res:any)=>{
+          console.log(res);
+          if(res.token){
+            this.bookingService.addCartPaymentMethod(res.token).subscribe((res:any)=>{
+              if(!res.errors){
+                // this.bookingService.updateCartDetail();
+                resolve(true);
+                this.paymentForm.reset();
+                this.togglePaymentMethodForm = false;
+              }else{
+                reject();
+                console.log(res.errors[0].message);
+              }
+            });
+          }else{
+            reject();
+          }
+        },err=>{
+          reject();
+          const title = 'Incorrect payment information';
+          const message = 'Please fill the correct card detail.';
+          this.sharedService.showNotification(title, message);
+        })
+      }else{
+        reject();
         const title = 'Incorrect payment information';
         const message = 'Please fill the correct card detail.';
         this.sharedService.showNotification(title, message);
-      })
-    }else{
-      const title = 'Incorrect payment information';
-      const message = 'Please fill the correct card detail.';
-      this.sharedService.showNotification(title, message);
-    }
+      }
+    });
   }
 
   updateUserInfo(){
     // console.log(this.userInfoForm.value);
-    if(this.userInfoForm.valid){
-      this.bookingService.updateClientCartInfo(this.userInfoForm.value).subscribe((res:any)=>{
-        if(!res.errors){
-          this.bookingService.updateCartDetail();
-        }else{
-          console.log(res.errors[0].message);
-        }
-      });
-    }else{
-      const title = 'Incorrect user information';
-      const message = 'Please fill the correct additional info.';
-      this.sharedService.showNotification(title, message);
-    }
+    return new Promise((resolve, reject)=>{
+      if(this.userInfoForm.valid){
+        this.bookingService.updateClientCartInfo(this.userInfoForm.value).subscribe((res:any)=>{
+          if(!res.errors){
+            resolve(true);
+            // this.bookingService.updateCartDetail();
+          }else{
+            reject();
+            console.log(res.errors[0].message);
+          }
+        });
+      }else{
+        reject();
+        const title = 'Incorrect user information';
+        const message = 'Please fill the correct additional info.';
+        this.sharedService.showNotification(title, message);
+      }
+    })
+  }
+
+  updateCartDetail(){
+    return new Promise((resolve, reject)=>{
+      const cartId = this.sharedService.getLocalStorageItem('cartId');
+      if(cartId){
+        this.bookingService.getCartDetail().subscribe((res:any)=>{
+          if(!res.errors){
+            resolve(true);
+            this.bookingService.clientCart$.next(res.data.cart);
+          }else{
+            reject();
+          }
+        });
+      }else{
+        reject();
+        console.log('cart does not exist!');
+      }
+    })
   }
 
   applyPromoCode(){
@@ -176,6 +208,28 @@ export class ReviewComponent implements OnInit {
         console.log(res.errors);
       }
     })
+  }
+
+  easyCheckout(){
+    this.updatePaymentMethod().then((status:any)=>{
+      if(status){
+        this.updateUserInfo().then((status:any)=>{
+          if(status){
+            this.updateCartDetail().then((status:any)=>{
+              if(status){
+                this.checkout();
+              }
+            }).catch(err=>{
+              console.log(err);
+            })
+          }
+        }).catch(err=>{
+          console.log(err);
+        });
+      }
+    }).catch(err=>{
+      console.log(err);
+    });
   }
 
   checkout(){

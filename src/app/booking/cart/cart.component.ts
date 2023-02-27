@@ -70,13 +70,15 @@ export class CartComponent {
   }
 
   get getTotalAddedServiceCount(){
-    let selectedItems = this.cart.selectedItems;
     let count = 0;
-    if(selectedItems && selectedItems.length){
-      selectedItems.map((selectedItem:any)=>{
-        ++count;
-        count = count + selectedItem.selectedOptions.length;
-      })
+    if(this.cart && this.cart.selectedItems){
+      let selectedItems = this.cart.selectedItems;
+      if(selectedItems && selectedItems.length){
+        selectedItems.map((selectedItem:any)=>{
+          ++count;
+          count = count + selectedItem.selectedOptions.length;
+        })
+      }
     }
     return count;
   }

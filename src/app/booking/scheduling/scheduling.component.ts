@@ -42,12 +42,13 @@ export class SchedulingComponent implements OnInit {
 
   ngOnInit(): void {
     this.bookingService.updateCartDetail();
+    // this.getBookableDates();
     this.bookingService.clientCart$.subscribe((cart)=>{
       if(cart && cart.id){
         this.cart = cart;
         this.selectedItems = cart.selectedItems;
         // this.ifStaffVariantSelected();
-        this.getBookableDates();
+        this.getBookableDates(); // it is making extra request need to fix it.
       }
     })
     // this.bookingService.cartDetail$.subscribe((detail:any)=>{
