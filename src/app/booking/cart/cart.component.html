@@ -5,8 +5,8 @@
     
     <ul class="small">
         <li *ngIf="cart?.selectedItems?.length">
-            <ul class="small">
-            <li class="flex-container" *ngFor="let service of cart?.selectedItems | orderCartItems">
+            <ul class="small" *ngFor="let service of cart?.selectedItems | orderCartItems">
+            <li class="flex-container">
                 <span *ngIf="cart.guests" class="user">{{service.guest ? service?.guest?.label : 'me'}} <span class="counter gray">{{service.selectedOptions?.length + 1}}</span></span>
             
                 <span class="item-info">
@@ -19,20 +19,17 @@
                     <button *ngIf="router.url == '/booking/services'" (click)="removeItem(service)" class="remove-service"><span class="accessibility">Remove Service</span></button>
                 </span>
 
-                <ul class="small">
-                    <li class="flex-container add-on" *ngFor="let modifier of service.selectedOptions">
-                        <span class="item-info">
-                            <strong>{{modifier?.name}}</strong>
-                            <span class="pill fill small">Add On</span>
-                        </span>
-                        
-                        <span class="cost">
-                            {{sharedService.formatPrice(modifier.priceDelta) | currency:'USD':'symbol' : '1.0-0'}}
-                            <button class="remove-service" (click)="removeModifier(modifier, service.guestId)"><span class="accessibility">Remove Addon</span></button>
-                        </span>
-                    </li>
-                </ul>
-
+            </li>
+            <li class="flex-container add-on" *ngFor="let modifier of service.selectedOptions">
+                <span class="item-info">
+                    <strong>{{modifier?.name}}</strong>
+                    <span class="pill fill small">Add On</span>
+                </span>
+                
+                <span class="cost">
+                    {{sharedService.formatPrice(modifier.priceDelta) | currency:'USD':'symbol' : '1.0-0'}}
+                    <button class="remove-service" (click)="removeModifier(modifier, service.guestId)"><span class="accessibility">Remove Addon</span></button>
+                </span>
             </li>
             <!-- <li class="add-on-item" *ngIf="cart?.selectedItems?.length">
                 <ul class="small">
