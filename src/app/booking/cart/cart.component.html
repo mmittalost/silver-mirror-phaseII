@@ -1,5 +1,6 @@
 <div class="cart-info">
-    <h2 class="eyebrow small flex-container">Cart <span>{{getTotalAddedServiceCount}} Service Added</span></h2>
+    <button class="close-cart mobile-only"><span class="accessibility">Close Cart</span></button>
+    <h2 class="eyebrow small flex-container"><span>Cart</span><span>{{getTotalAddedServiceCount}} Service Added</span></h2>
 
     <span *ngIf="!cart?.selectedItems?.length" class="heading-6 small empty-cart">Your cart is empty</span>
     
@@ -7,7 +8,7 @@
         <li *ngIf="cart?.selectedItems?.length">
             <ul class="small" *ngFor="let service of cart?.selectedItems | orderCartItems">
             <li class="flex-container">
-                <span *ngIf="cart.guests" class="user">{{service.guest ? service?.guest?.label : 'me'}} <span class="counter gray">{{service.selectedOptions?.length + 1}}</span></span>
+                <span *ngIf="cart.guests" class="user">{{service.guest ? service?.guest?.label : 'Me'}} <span class="counter gray">{{service.selectedOptions?.length + 1}}</span></span>
             
                 <span class="item-info">
                     <strong>{{service.item.name}}</strong>
@@ -74,4 +75,4 @@
 	
 <!-- <a class="btn inactive" href="#">Add to Continue</a> -->
 
-<button class="btn black view-cart mobile-only">View Cart<span class="item-count">1</span></button>
+<button class="btn black view-cart mobile-only">View Cart<span class="item-count">{{getTotalAddedServiceCount}}</span></button>
