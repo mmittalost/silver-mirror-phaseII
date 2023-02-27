@@ -1,5 +1,5 @@
 <div class="cart-info">
-    <h2 *ngIf="getTotalAddedServiceCount" class="eyebrow small flex-container">Cart <span>{{getTotalAddedServiceCount}} Service Added</span></h2>
+    <h2 class="eyebrow small flex-container">Cart <span>{{getTotalAddedServiceCount}} Service Added</span></h2>
 
     <span *ngIf="!cart?.selectedItems?.length" class="heading-6 small empty-cart">Your cart is empty</span>
     
@@ -53,9 +53,12 @@
             <li *ngIf="cart.guest"><span class="user empty-cart-guest">Guest 1 <span class="counter gray">0</span></span></li>
             <!-- <li><span class="user empty-cart-guest">Guest 2 <span class="counter gray">0</span></span></li> -->
         </ul>
+
+        <button class="btn black" routerLink="/booking/services" *ngIf="router.url != '/booking/services'">Add More Services</button>
+
         </li>
 
-        <div class="flex-container cart-total">
+        <div class="flex-container cart-total" *ngIf="cart?.selectedItems?.length">
             <span class="eyebrow small">Total</span>
             <p class="small">{{sharedService.formatPrice(this.cart?.summary?.total) | currency:'USD':'symbol' : '1.0-0'}}</p>
         </div>

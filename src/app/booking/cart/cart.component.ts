@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SharedService } from 'src/app/shared-component/shared.service';
 import { SilverMirrorService } from '../../silver-mirror.service';
 import { BookingService } from '../booking.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -13,7 +14,7 @@ export class CartComponent {
   @Input() cart:any;
   @Output() onItemRemoveEvent = new EventEmitter<string>();
 
-  constructor(private bookingService:BookingService, public sharedService:SharedService) { }
+  constructor(private bookingService:BookingService, public sharedService:SharedService, public router: Router) { }
 
   removeItem(item:any){
     this.onItemRemoveEvent.emit();
