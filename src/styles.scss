@@ -2913,6 +2913,10 @@ aside .pill.location {
 	overflow: auto;
 	padding: 60px;
 }
+.popup.addon-pop .scroller.addon-suggest {
+	height: 100px;
+	overflow: hidden;
+}
 
 .popup.addon-pop .scroller h2 {
 	margin-bottom: 40px;
@@ -3599,6 +3603,7 @@ section.congrats {
 	display: flex;
 	flex-direction: column;
 	gap: 30px;
+	margin-bottom:30px;
 }
 
 .login div.grid {

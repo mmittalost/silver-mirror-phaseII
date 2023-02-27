@@ -18,13 +18,12 @@
 <div class="popup-screen"></div>
 
 <div class="popup addon-pop">
+
 	<button class="close" (click)="modalRef.close()"><span class="accessibility">Close Popup</span></button>
 
-	<article>
-		
-		<p class="x-small">Are you sure, You do not want to add ADD-ON ?</p>
-
-	</article>
+	<div class="scroller addon-suggest">
+		<h2 class="heading-6">Are you sure, You do not want to add ADD-ON ?</h2>
+	</div>
 
 	<div class="fixed-info">
 		<button class="btn black" (click)="addAddon(true)">Add Addon</button>
