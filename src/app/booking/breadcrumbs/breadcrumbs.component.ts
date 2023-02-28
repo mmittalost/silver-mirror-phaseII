@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-breadcrumbs',
   templateUrl: './breadcrumbs.component.html',
@@ -17,7 +18,7 @@ export class BreadcrumbsComponent {
   ]
   route:any='';
   
-  constructor(private router: ActivatedRoute) {
+  constructor(private router: ActivatedRoute, private _location: Location) {
     this.route=this.router.url;
     router.url.subscribe((url=>{
       const path = url[0].path;
@@ -43,6 +44,10 @@ export class BreadcrumbsComponent {
       default:
         return ''
     }
+  }
+
+  navigateBack(){
+    this._location.back();
   }
 
 }

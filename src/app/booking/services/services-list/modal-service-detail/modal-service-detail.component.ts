@@ -26,7 +26,17 @@ export class ModalServiceDetailComponent {
   }
 
   addService(){
-    if(!this.service.selected){
+    console.log("GUEST : ", this.client);
+    let selected:boolean = false;
+    this.cart.selectedItems.map((selectedItem:any)=>{
+      if(this.client != 'me'){
+        selectedItem.guestId == this.client.id ? selected = true : null;
+      }else{
+        selectedItem.guestId == null ? selected = true : null;
+      }
+    })
+
+    if(!selected){
       const payload = {
         id: this.service.id,
         staffId:null,

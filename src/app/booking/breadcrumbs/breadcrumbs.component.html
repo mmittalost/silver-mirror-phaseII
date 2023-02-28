@@ -1,6 +1,6 @@
 
 
-	<a class="back-btn" href="#"><span class="accessibility">Back</span></a>
+	<a class="back-btn" (click)="navigateBack()"><span class="accessibility">Back</span></a>
 
 	<ul class="flex-container breadcrumbs">
 		<li [ngClass]="getRouteState(steps[0].transition)"><a class="eyebrow small" [routerLink]="steps[0].transition > 1 ? '/booking/location' : null">Location</a></li>

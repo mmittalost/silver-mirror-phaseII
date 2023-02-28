@@ -10,7 +10,7 @@
 			
 			<!--Services Tabs-->
 			<!-- <?php include('includes/services/services-tabs.php'); ?> -->
-            <app-services-tabs [reset]="resetServiceTabs" [isAddonEnable]="cart?.selectedItems?.length" (changeTabEvent)="changeServiceTab($event)"></app-services-tabs>
+            <app-services-tabs class="desktop-only" [reset]="resetServiceTabs" [isAddonEnable]="cart?.selectedItems?.length" (changeTabEvent)="changeServiceTab($event)"></app-services-tabs>
 			
 			<div class="guest-different-services" *ngIf="cart?.guests?.length">
 				<input [checked]="true" id="guest-different" type="checkbox"/>
@@ -21,11 +21,13 @@
 			<!-- <?php include('includes/schedule/guest-tabs.php'); ?> -->
             <app-guest-tabs *ngIf="cart?.guests?.length" [serviceCount]="getMemberAddedServiceCount" [guests]="cart.guests" (changeTabEvent)="changeGuestTab($event)"></app-guest-tabs>
 						
+			<!--Mobile Tabs/Filters-->
+			<app-services-tabs [reset]="resetServiceTabs" [isAddonEnable]="cart?.selectedItems?.length" (changeTabEvent)="changeServiceTab($event)"></app-services-tabs>
+			
 			<!--Time Filters-->
 			<!-- <?php include('includes/services/time-filters.php'); ?> -->
             <app-time-filters [reset]="resetTimeTabs" *ngIf="tabs.service.toLowerCase().includes('facial')" (changeTabEvent)="changeTimeFilterTab($event)"></app-time-filters>
 
-			<!--Mobile Tabs/Filters-->
 			<!-- <?php include('includes/services/mobile-services-tabs.php'); ?> -->
 			<p *ngIf="tabs.service == 'Facials 50 Minutes'" class="xx-small info">All 50-minute facials are interchangable and customizable. Work with your esthetician to discuss options.</p>
 			
