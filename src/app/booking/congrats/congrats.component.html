@@ -88,8 +88,10 @@
 		</ul>
 
 		<div class="flex-container">
-			<button class="btn black" routerLink="/booking">Book An Appointment</button>
-			<button *ngIf="authUser" class="btn black" routerLink="/dashboard">View My Appointments</button>
+			<div class="book-view">
+				<button class="btn black" routerLink="/booking">Book An Appointment</button>
+				<button *ngIf="authUser" class="btn black" routerLink="/dashboard">View My Appointments</button>
+			</div>
 		</div>
 		
 		<!--CTAs-->

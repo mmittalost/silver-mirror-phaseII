@@ -2485,6 +2485,9 @@ aside .btn {
 	gap: 11px;
 	margin-bottom: 20px;
 }
+.services-flow ul.time-filters.mobile-only {
+	display:none;
+}
 
 .services-flow .time-filters .pill {
 	border: none;
@@ -6902,4 +6905,26 @@ dialog {
 }
 .add-to-cal-menu.add-to-cal-pop li:hover {
 	color: var(--dark-blue);
+ }
+
+
+ .book-view {
+	gap: 20px;
+	display: inline-flex;
+	margin:30px auto;
+	padding: 0;
+  }
+
+ @media only screen and (max-width: calc(950rem/16)) {
+	.services-flow ul.time-filters.mobile-only {
+		display: flex;
+		margin-top: 15px;
+	}
+	.book-view {
+		display: table;
+		button{
+			width:100%;
+			margin-bottom:10px;
+		}
+	}
  }
