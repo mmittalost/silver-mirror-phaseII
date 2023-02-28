@@ -3336,7 +3336,7 @@ aside .pill.location {
 	top: 50%;
 	transform: translateY(-50%);
 }
-
+/*
 .cart-info ul.cart-details li:nth-of-type(1)::before {
 	background-image: url('assets/svgs/icon-clock.svg');
 	width: 12px;
@@ -3348,6 +3348,21 @@ aside .pill.location {
 }
 
 .cart-info ul.cart-details li:nth-of-type(3)::before {
+	background-image: url('assets/svgs/icon-pin.svg');
+	width: 9px;
+}
+*/
+.cart-info ul.cart-details li.time::before {
+	background-image: url('assets/svgs/icon-clock.svg');
+	width: 12px;
+}
+
+.cart-info ul.cart-details li.person::before {
+	background-image: url('assets/svgs/icon-person.svg');
+	width: 11px;
+}
+
+.cart-info ul.cart-details li.location::before {
 	background-image: url('assets/svgs/icon-pin.svg');
 	width: 9px;
 }
