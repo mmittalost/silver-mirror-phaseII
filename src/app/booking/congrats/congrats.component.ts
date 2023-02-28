@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
 import { SharedService } from '../../shared-component/shared.service';
 import { BookingService } from '../booking.service';
 
@@ -11,8 +12,12 @@ export class CongratsComponent {
 
   appointment:any;
   toggleOptions:boolean = false;
+  authUser:any;
 
-  constructor(private bookingService:BookingService, public sharedService:SharedService){
+  constructor(private bookingService:BookingService, public sharedService:SharedService, private authService:AuthService){
+    this.authService.$AuthUser.subscribe((user:any)=>{
+      this.authUser = user;
+    })
     this.bookingService.checkoutBookingResponse$.subscribe((checkoutCart:any)=>{
       if(checkoutCart){
         console.log("Checkout Response : ", checkoutCart);

@@ -219,9 +219,21 @@ export class BookingService {
     return this.http.post(BASE_URL+ '/checkout_cart',payload);
   }
 
-  checkoutComplete(){
-    this.sharedService.removeLocalStorageItem('cartId');
-    this.sharedService.removeLocalStorageItem('selectedLocation');
+  takeCartOwnership(){
+    const payload = {
+      "cartId": this.sharedService.getLocalStorageItem('cartId'),
+      "clientId": this.authService.$AuthUser.value?.authId
+    }
+    return this.http.post(BASE_URL+ '/take_cart_ownership',payload);
+  }
+
+  selectPaymentMethod(paymentMethodId:string){
+    const payload = {
+      "cartId":this.sharedService.getLocalStorageItem('cartId'),
+      "paymentMethodId":paymentMethodId,
+      "clientId": this.authService.$AuthUser.value?.authId
+    }
+    return this.http.post(BASE_URL+ '/select_cart_payment_method',payload);
   }
 
   getAppointmentDetail(aptId:string, cartId:string)

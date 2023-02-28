@@ -22,17 +22,29 @@ export class ReviewComponent implements OnInit {
   user:any = []
 
 
-  ngOnInit(): void { 
-    console.log("LoggedIn User : ", this.authService.$AuthUser.value);
+  ngOnInit(): void {
     this._buildForm();
+    this.authService.$AuthUser.subscribe((user:any)=>{
+      if(user){
+        this._patchAdditionalInfoForm(user);
+        this.bookingService.takeCartOwnership().subscribe((res:any)=>{
+          if(!res.errors){
+            this.bookingService.updateCartDetail();
+          }
+        });
+        
+      }
+    });
     this.bookingService.updateCartDetail();
+    console.log("LoggedIn User : ", this.authService.$AuthUser.value);
+    // this.bookingService.updateCartDetail();
     this.bookingService.clientCart$.subscribe((cart)=>{
       if(cart && cart.id){
         this.cart = cart;
         this.availablePaymentMethods = cart.availablePaymentMethods;
         this._patchCouponForm(cart.offers);
         if(cart.clientInformation){
-          this._patchAdditionalInfoForm(cart.clientInformation);
+          // this._patchAdditionalInfoForm(cart.clientInformation);
         }
         console.log("Cart Data : ", cart);
       }
@@ -40,13 +52,13 @@ export class ReviewComponent implements OnInit {
   }
 
   constructor(private formBuilder:FormBuilder, private bookingService:BookingService, public authService:AuthService, private router:Router, private sharedService:SharedService){
-    authService.$AuthUser.subscribe((user:any)=>{
-      if(user){
-        this.user = user;
-        this._buildForm();
-        this._patchAdditionalInfoForm(user);
-      }
-    });
+    // authService.$AuthUser.subscribe((user:any)=>{
+    //   if(user){
+    //     this.user = user;
+    //     this._buildForm();
+    //     this._patchAdditionalInfoForm(user);
+    //   }
+    // });
   }
 
   _buildForm(){
@@ -126,16 +138,27 @@ export class ReviewComponent implements OnInit {
         },err=>{
           reject();
           const title = 'Incorrect payment information';
-          const message = 'Please fill the correct card detail.';
+          const message = 'Please add correct card';
           this.sharedService.showNotification(title, message);
         })
       }else{
         reject();
         const title = 'Incorrect payment information';
-        const message = 'Please fill the correct card detail.';
+        const message = 'Please add correct card';
         this.sharedService.showNotification(title, message);
       }
     });
+  }
+
+  selectPaymentMethod(card:any){
+    this.bookingService.selectPaymentMethod(card.id).subscribe((res:any)=>{
+      if(!res.errors){
+        card.active = true;
+        this.bookingService.updateCartDetail();
+      }else{
+        console.log(res.errors)
+      }
+    })
   }
 
   updateUserInfo(){
@@ -212,25 +235,41 @@ export class ReviewComponent implements OnInit {
 
   easyCheckout(){
     window.scrollTo(0, 0);
-    this.updatePaymentMethod().then((status:any)=>{
-      if(status){
-        this.updateUserInfo().then((status:any)=>{
-          if(status){
-            this.updateCartDetail().then((status:any)=>{
-              if(status){
-                this.checkout();
-              }
-            }).catch(err=>{
-              console.log(err);
-            })
-          }
-        }).catch(err=>{
-          console.log(err);
-        });
-      }
-    }).catch(err=>{
-      console.log(err);
-    });
+    if(this.cart?.selectedItems[0]?.selectedPaymentMethod?.id){ // If payment method is selected by user
+      this.updateUserInfo().then((status:any)=>{
+        if(status){
+          this.updateCartDetail().then((status:any)=>{
+            if(status){
+              this.checkout();
+            }
+          }).catch(err=>{
+            console.log(err);
+          })
+        }
+      }).catch(err=>{
+        console.log(err);
+      });
+    }else{
+      this.updatePaymentMethod().then((status:any)=>{ // If payment method is needed to be add
+        if(status){
+          this.updateUserInfo().then((status:any)=>{
+            if(status){
+              this.updateCartDetail().then((status:any)=>{
+                if(status){
+                  this.checkout();
+                }
+              }).catch(err=>{
+                console.log(err);
+              })
+            }
+          }).catch(err=>{
+            console.log(err);
+          });
+        }
+      }).catch(err=>{
+        console.log(err);
+      });
+    }
   }
 
   checkout(){

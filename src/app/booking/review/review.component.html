@@ -17,16 +17,16 @@
 			
 			<div class="flex-container credit-card-options" *ngIf="availablePaymentMethods.length">
 				<ul id="card-detail-options" class="x-small" *ngFor="let card of availablePaymentMethods">
-					<li class="active visa">
+					<li *ngIf="card.id && card.cardLast4" [ngClass]="cart?.selectedItems[0]?.selectedPaymentMethod?.id == card?.id ? 'active' : 'inactive' " class="visa" (click)="selectPaymentMethod(card)">
 						<strong>{{card?.cardBrand}} •••• {{card?.cardLast4}} <span>Expires {{card?.cardExpMonth}}/{{card?.cardExpYear}}</span></strong>
 						<span *ngIf="card?.cardIsDefault" class="pill fill small">Default</span>
 					</li>
 				</ul>
 				
-				<button class="text-link large" *ngIf="availablePaymentMethods.length" (click)="togglePaymentMethodForm = true">Add a new card</button>
+				
 			</div>
-			
-			<form [formGroup]="paymentForm">
+			<button class="text-link large" (click)="togglePaymentMethodForm = !togglePaymentMethodForm">Add a new card</button>
+			<form [hidden]="!togglePaymentMethodForm" [formGroup]="paymentForm">
 
 				<ul class="grid credit-card-details">
 					<li>
@@ -58,9 +58,8 @@
 					</li>
 				</ul>
 				<!-- <button type="submit" class="btn black cc-btn">Apply</button> -->
+				<p class="xx-small info">Your credit card is only used to hold the reservation and won't be charged unless you cancel late or don't show up.</p>
 			</form>
-			
-			<p class="xx-small info">Your credit card is only used to hold the reservation and won't be charged unless you cancel late or don't show up.</p>
 			
 			<!--Additional Fields-->
 			<h2 class="heading-6">Additional Information</h2>
