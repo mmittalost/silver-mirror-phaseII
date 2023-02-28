@@ -1,8 +1,8 @@
-<button class="mobile-only cart-summary flex-container" *ngIf="cart?.selectedItems?.length">
+<button class="mobile-only cart-summary flex-container" *ngIf="cart?.selectedItems?.length" (click)="toggleMobileCart = !toggleMobileCart">
     <span class="eyebrow small">Summary</span>
     <span class="cost">{{sharedService.formatPrice(this.cart?.summary?.total) | currency:'USD':'symbol' : '1.0-0'}}</span>
 </button>
-<div class="cart-info">
+<div class="cart-info" [ngClass]="toggleMobileCart ? 'active' : ''">  
     <button (click)="bookingService.mobileCartView = false" class="close-cart mobile-only"><span class="accessibility">Close Cart</span></button>
     <h2 class="eyebrow small flex-container desktop-only"><span>Cart</span><span>{{getTotalAddedServiceCount}} Service Added</span></h2>
 
@@ -65,7 +65,7 @@
             <p class="small">{{sharedService.formatPrice(this.cart?.summary?.total) | currency:'USD':'symbol' : '1.0-0'}}</p>
         </div> -->
         
-        <li class="flex-container">
+        <li class="flex-container" *ngIf="!cart?.startTime">
             <span class="pill location">Location</span>
             <span>
                 <strong>{{cart?.location?.address?.city}} - {{cart?.location?.name}}</strong>
@@ -73,9 +73,9 @@
                 <a *ngIf="cart?.location?.phoneNumber" href="tel:{{cart?.location?.phoneNumber}}">{{cart?.location?.phoneNumber}}</a>
             </span>
             
-            <span class="cost">
+            <!-- <span class="cost">
                 <button class="edit-location"><span class="accessibility">Edit Location</span></button>
-            </span>
+            </span> -->
             <!-- <span>
                 <span *ngIf="cart?.startTime" class="pill">{{cart?.startTime | date:'EEEE, MMMM d @ h:mm a'}}</span>
                 <span *ngIf="getSelectedStaffVariant()" class="pill">Esthetician: {{getSelectedStaffVariant()}}</span>
@@ -91,7 +91,7 @@
         <p class="small">{{sharedService.formatPrice(this.cart?.summary?.total) | currency:'USD':'symbol' : '1.0-0'}}</p>
     </div>
 
-    <ul class="xx-small cart-details">
+    <ul class="xx-small cart-details" *ngIf="cart?.startTime">
         <li *ngIf="cart?.startTime" class="time">{{cart?.startTime | date:'EEEE, MMMM d @ h:mm a'}}</li>
         <li *ngIf="getSelectedStaffVariant()" class="person">Esthetician: {{getSelectedStaffVariant()}}</li>
         <li class="location">{{cart?.location?.address?.city}} - {{cart?.location?.name}}</li>

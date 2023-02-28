@@ -13,6 +13,7 @@ export class CartComponent {
 
   @Input() cart:any;
   @Output() onItemRemoveEvent = new EventEmitter<string>();
+  toggleMobileCart:boolean = false;
 
   constructor(public bookingService:BookingService, public sharedService:SharedService, public router: Router) { }
 

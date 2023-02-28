@@ -204,7 +204,7 @@
             </div>
 
 
-            <aside class="empty">
+            <aside [ngClass] = "!cart?.selectedItems?.length ? 'empty':'' ">
                 <app-cart [cart]="cart" ></app-cart>
                 <a class="btn" (click)="reserveCart()">Continue</a>
            </aside>

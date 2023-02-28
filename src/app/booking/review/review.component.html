@@ -115,7 +115,7 @@
 		</div>
 		
 		<!--Sidebar-->
-		<aside class="empty">
+		<aside [ngClass] = "!cart?.selectedItems?.length ? 'empty':'' ">
 			<app-cart [cart]="cart"></app-cart>
 
 			<div [formGroup]="couponForm" class="desktop-only flex-container promo-code">
