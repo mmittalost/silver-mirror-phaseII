@@ -1389,6 +1389,7 @@ footer .copyright ul {
 	height: 20px;
 	padding: 0;
 	width: 20px;
+	cursor: pointer;
 }
 
 .schedule-filters .close-filter:hover {
@@ -5976,7 +5977,7 @@ section.congrats {
 		right: -999999999px;
 	}
 
-	.schedule-filters .filter-opened .filter-pop {
+	.schedule-filters .filter-opened .filter-pop, .schedule-filters .filter-pop{
 		pointer-events: all;
 	}
 
