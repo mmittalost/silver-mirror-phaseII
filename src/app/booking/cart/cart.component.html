@@ -56,26 +56,41 @@
 
         </li>
 
-        <div class="flex-container cart-total" *ngIf="cart?.selectedItems?.length">
+        <!-- <div class="flex-container cart-total" *ngIf="cart?.selectedItems?.length">
             <span class="eyebrow small">Total</span>
             <p class="small">{{sharedService.formatPrice(this.cart?.summary?.total) | currency:'USD':'symbol' : '1.0-0'}}</p>
-        </div>
+        </div> -->
         
         <li class="flex-container">
-            <!-- <ul class="xx-small cart-details">
-                <li>Sunday, September 18 @ 4:15 PM</li>
-                <li>Esthetician: Veronica G.</li>
-                <li>NYC - Flatiron</li>
-		    </ul> -->
             <span class="pill location">Location</span>
             <span>
-                <span *ngIf="cart?.startTime" class="pill">{{cart?.startTime | date:'EEEE, MMMM d @ h:mm a':'EST'}}</span>
-                <span *ngIf="getSelectedStaffVariant()" class="pill">Esthetician: {{getSelectedStaffVariant()}}</span>
                 <strong>{{cart?.location?.address?.city}} - {{cart?.location?.name}}</strong>
                 <address>{{cart?.location?.address?.line1}}</address>
                 <a *ngIf="cart?.location?.phoneNumber" href="tel:{{cart?.location?.phoneNumber}}">{{cart?.location?.phoneNumber}}</a>
             </span>
+            
+            <span class="cost">
+                <button class="edit-location"><span class="accessibility">Edit Location</span></button>
+            </span>
+            <!-- <span>
+                <span *ngIf="cart?.startTime" class="pill">{{cart?.startTime | date:'EEEE, MMMM d @ h:mm a'}}</span>
+                <span *ngIf="getSelectedStaffVariant()" class="pill">Esthetician: {{getSelectedStaffVariant()}}</span>
+                <strong>{{cart?.location?.address?.city}} - {{cart?.location?.name}}</strong>
+                <address>{{cart?.location?.address?.line1}}</address>
+                <a *ngIf="cart?.location?.phoneNumber" href="tel:{{cart?.location?.phoneNumber}}">{{cart?.location?.phoneNumber}}</a>
+            </span> -->
         </li>
+    </ul>
+
+    <div class="flex-container cart-total" *ngIf="cart?.selectedItems?.length">
+        <span class="eyebrow small">Total</span>
+        <p class="small">{{sharedService.formatPrice(this.cart?.summary?.total) | currency:'USD':'symbol' : '1.0-0'}}</p>
+    </div>
+
+    <ul class="xx-small cart-details">
+        <li *ngIf="cart?.startTime">{{cart?.startTime | date:'EEEE, MMMM d @ h:mm a'}}</li>
+        <li *ngIf="getSelectedStaffVariant()">Esthetician: {{getSelectedStaffVariant()}}</li>
+        <li>{{cart?.location?.address?.city}} - {{cart?.location?.name}}</li>
     </ul>
     
 </div>
