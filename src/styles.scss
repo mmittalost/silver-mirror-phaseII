@@ -5639,8 +5639,8 @@ section.congrats {
 		justify-content: center;
 	}
 
-	header:not(.client-portal-header) .logo,
-	header:not(.client-portal-header) .sign-in {
+	header:not(.client-portal-header) .logo/*,
+	header:not(.client-portal-header) .sign-in*/ {
 		display: none;
 	}
 
@@ -6926,5 +6926,9 @@ dialog {
 			width:100%;
 			margin-bottom:10px;
 		}
+	}
+	.user-pop-outer {
+		position: absolute;
+		right: 30px;
 	}
  }
