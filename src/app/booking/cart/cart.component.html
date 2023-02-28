@@ -88,9 +88,9 @@
     </div>
 
     <ul class="xx-small cart-details">
-        <li *ngIf="cart?.startTime">{{cart?.startTime | date:'EEEE, MMMM d @ h:mm a'}}</li>
-        <li *ngIf="getSelectedStaffVariant()">Esthetician: {{getSelectedStaffVariant()}}</li>
-        <li>{{cart?.location?.address?.city}} - {{cart?.location?.name}}</li>
+        <li *ngIf="cart?.startTime" class="time">{{cart?.startTime | date:'EEEE, MMMM d @ h:mm a'}}</li>
+        <li *ngIf="getSelectedStaffVariant()" class="person">Esthetician: {{getSelectedStaffVariant()}}</li>
+        <li class="location">{{cart?.location?.address?.city}} - {{cart?.location?.name}}</li>
     </ul>
     
 </div>
