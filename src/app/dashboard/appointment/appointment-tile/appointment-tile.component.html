@@ -39,7 +39,7 @@
 				<a *ngIf="!appointment?.reschedulable" class="btn black small" href="#">Search Availability</a>
 				
 				<span (click)="navigateToReschedule()"><a *ngIf="appointment?.reschedulable" class="btn black small reschedule">Reschedule</a></span>
-				<span (click)="cancelAppointment()"><a *ngIf="appointment?.cancellable" class="text-link">Cancel</a></span>
+				<span (click)="cancelAppointment()"><a class="text-link">Cancel</a></span>
 		</div>
 	</li>
 </ul>

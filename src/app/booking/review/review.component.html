@@ -94,10 +94,11 @@
 				</ul>
 			
 				
-				<div class="mobile-only flex-container promo-code">
-					<label class="pill" for="promo-code">Promo Code</label>
-					<input type="text" id="promo-code" placeholder="Enter Code"/>
-					<button class="text-link large">Apply</button>
+				<div [formGroup]="couponForm" class="mobile-only flex-container promo-code">
+					<label class="pill small" for="promo-code">Promo Code</label>
+					<input formControlName="promoCode" type="text" id="promo-code" placeholder="Enter Code"/>
+					<button *ngIf="!cart?.offers?.length" (click)="applyPromoCode()" type="submit" class="text-link large">Apply</button>
+					<button *ngIf="cart?.offers?.length" (click)="removePromoCode()" type="submit" class="text-link large">Remove</button>
 				</div>
 				<!-- <button type="submit" class="btn black cc-btn">Save Changes</button> -->
 				<h3>Disclaimer</h3>
