@@ -57,7 +57,8 @@ export class LoginComponent {
     if (localStorage.getItem("otp") == this.enteredotp) {
       localStorage.removeItem("otp");
       this.authService.$otp.next(null);
-      this._location.back();
+      this.router.navigateByUrl("/dashboard", {replaceUrl: true});
+      // this._location.back();
     } else {
       alert("OTP does not match!");
     }

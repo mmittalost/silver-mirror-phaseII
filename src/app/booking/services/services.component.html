@@ -10,7 +10,7 @@
 			
 			<!--Services Tabs-->
 			<!-- <?php include('includes/services/services-tabs.php'); ?> -->
-            <app-services-tabs class="desktop-only" [reset]="resetServiceTabs" [isAddonEnable]="cart?.selectedItems?.length" (changeTabEvent)="changeServiceTab($event)"></app-services-tabs>
+            <!-- <app-services-tabs class="desktop-only" [reset]="resetServiceTabs" [isAddonEnable]="cart?.selectedItems?.length" (changeTabEvent)="changeServiceTab($event)"></app-services-tabs> -->
 			
 			<div class="guest-different-services" *ngIf="cart?.guests?.length">
 				<input [checked]="true" id="guest-different" type="checkbox"/>
