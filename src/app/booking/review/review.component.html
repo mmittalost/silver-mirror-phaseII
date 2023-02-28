@@ -11,7 +11,7 @@
 			<!--Credit Card-->
 			
 			<h2 class="heading-6">Payment Details</h2>
-			<p *ngIf="!(authService.$AuthUser | async)" class="xx-small">Have an account? <a class="text-link" routerLink="/auth">Login or create an account</a></p>
+			<!-- <p *ngIf="!(authService.$AuthUser | async)" class="xx-small">Have an account? <a class="text-link" routerLink="/auth">Login or create an account</a></p> -->
 
 			<label class="pill" for="card-detail-options" *ngIf="availablePaymentMethods.length">Card Details</label>
 			
@@ -25,8 +25,8 @@
 				
 				
 			</div>
-			<button class="text-link large" (click)="togglePaymentMethodForm = !togglePaymentMethodForm">Add a new card</button>
-			<form [hidden]="!togglePaymentMethodForm" [formGroup]="paymentForm">
+			<!-- <button class="text-link large" (click)="togglePaymentMethodForm = !togglePaymentMethodForm">Add a new card</button> -->
+			<form [formGroup]="paymentForm">
 
 				<ul class="grid credit-card-details">
 					<li>

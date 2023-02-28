@@ -7,6 +7,7 @@ import { BookingService } from '../booking.service';
 import { SharedService } from 'src/app/shared-component/shared.service';
 import { CalendarComponent } from "../../shared-component/calendar/calendar.component";
 import * as moment from "moment";
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-scheduling',
@@ -45,6 +46,13 @@ export class SchedulingComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    if(this.authService.$AuthUser.value){
+      this.bookingService.takeCartOwnership().subscribe((res:any)=>{
+        if(!res.errors){
+          this.bookingService.updateCartDetail();
+        }
+      });
+    }
     this.bookingService.updateCartDetail();
     // this.getBookableDates();
     this.bookingService.clientCart$.subscribe((cart)=>{
@@ -70,7 +78,7 @@ export class SchedulingComponent implements OnInit {
     // });
   }
 
-  constructor(private bookingService: BookingService, private router:Router, private sharedService:SharedService){}
+  constructor(private bookingService: BookingService, private router:Router, private sharedService:SharedService, private authService:AuthService){}
 
   getStaffVariantByServiceId(serviceId:string){
     console.log("Filter Staff Variants");

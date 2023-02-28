@@ -27,11 +27,11 @@ export class ReviewComponent implements OnInit {
     this.authService.$AuthUser.subscribe((user:any)=>{
       if(user){
         this._patchAdditionalInfoForm(user);
-        this.bookingService.takeCartOwnership().subscribe((res:any)=>{
-          if(!res.errors){
-            this.bookingService.updateCartDetail();
-          }
-        });
+        // this.bookingService.takeCartOwnership().subscribe((res:any)=>{
+        //   if(!res.errors){
+        //     this.bookingService.updateCartDetail();
+        //   }
+        // });
         
       }
     });
