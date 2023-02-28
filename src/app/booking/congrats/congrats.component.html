@@ -16,10 +16,10 @@
 					<ul class="small">
 						<li class="flex-container" *ngFor="let apt of appointment?.appointmentServices">
 							<span class="user">Me <span class="counter gray">{{getServicesCount()}}</span></span>
-							<span>
+							<!-- <span>
 								<strong>{{apt?.service?.name}}</strong>
 								<span class="pill">{{appointment?.duration}}-min</span>
-							</span>
+							</span> -->
 							
 							<span class="cost">
 								{{sharedService.formatPrice(getServicePrice()) | currency:'USD':'symbol' : '1.0-0'}}

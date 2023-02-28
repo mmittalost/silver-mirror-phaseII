@@ -89,7 +89,7 @@ export class CongratsComponent {
     const shareUrl = 'https://www.facebook.com/sharer/sharer.php';
     const url = encodeURIComponent('https://bookings.silvermirror.com');
     const title = encodeURIComponent(shareText);
-    const shareParams = `?u=${url}&title=${title}`;
+    const shareParams = `?u=${url}&description=${title}`;
   
     window.open(shareUrl + shareParams, '_blank');
   }

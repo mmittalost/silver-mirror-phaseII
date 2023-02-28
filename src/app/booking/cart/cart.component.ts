@@ -60,9 +60,9 @@ export class CartComponent {
   }
 
   getSelectedModifiers(selectedItems:any):Array<string | null>{
-
+    console.log("SelectedItems : ", selectedItems);
     if(selectedItems[0].selectedOptions.length){
-      const ids = this.cart.selectedItems[0].selectedOptions.map((option:any)=> option.id);
+      let ids = selectedItems[0].selectedOptions.map((option:any)=> option.id);
       console.log('Selected options : ', ids);
       return ids;
     }else{

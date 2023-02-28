@@ -14,6 +14,7 @@ export class CalendarComponent implements OnInit {
   currentMonth: moment.Moment = moment().startOf('month');
 
   @Input() availableDates = [];
+  @Input() selectedDate:any;
 
   @Output() changeMonthEvent = new EventEmitter<moment.Moment>();
   @Output() dateSelectEvent = new EventEmitter<moment.Moment>();

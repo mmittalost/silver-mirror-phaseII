@@ -13,11 +13,13 @@
     <!--Days of the Week-->    
     <div class="week-container">
         <fieldset class="flex-container" *ngFor="let week of calendar | toggleCalendar:showFullCalendar:selectedWeek">
-            <div *ngFor="let day of week" [ngClass]="day.isToday ? 'active' : ''" class="flex-container expand-tile">
-                <input (change)="selectDate(day)" [id]="day.date" [disabled]="!day.isAvailable" class="accessibility" name="weekday" type="radio"/>
-                <label [for]="day.date" class="heading-6">
-                    <span class="pill">{{day.day}}</span> {{day?.date}}
-                </label>
+            <div *ngFor="let day of week">
+                <div *ngIf="day.isCurrentMonth" [ngClass]="day.isToday ? 'active' : ''" class="flex-container expand-tile">
+                    <input [checked]="selectedDate?.fullDate == day.fullDate ? true : false" (change)="selectDate(day)" [id]="day.date" [disabled]="!day.isAvailable" class="accessibility" name="weekday" type="radio"/>
+                    <label [for]="day.date" class="heading-6">
+                        <span class="pill">{{day.day}}</span> {{day?.date}}
+                    </label>
+                </div>
             </div>
         </fieldset>
     </div>

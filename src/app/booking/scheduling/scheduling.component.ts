@@ -23,6 +23,7 @@ export class SchedulingComponent implements OnInit {
   availableTimes:BehaviorSubject<any> = new BehaviorSubject([]);
   staffVarients:BehaviorSubject<any> = new BehaviorSubject([]);
   selectedTime:any;
+  selectedDate:any;
   selectedStaff:any;
   // cartDetail:any = [];
   selectedItems:any = [];
@@ -129,6 +130,7 @@ export class SchedulingComponent implements OnInit {
   }
 
   selectDate(ev:any){
+    this.selectedDate = ev;
     this.bookingService.getScheduleTimes(ev.fullDate).subscribe((res:any)=>{
       if(!res.errors){
         this.availableTimes.next(res.data.cartBookableTimes);

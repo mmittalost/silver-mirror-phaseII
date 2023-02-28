@@ -161,7 +161,7 @@
             </ul> -->
 
             <p *ngIf="!availableTimes.value?.length" class="xx-small info">Please select an appointment date.</p>
-            <app-calendar [availableDates] = "availableDates | async" (changeMonthEvent)="monthChange($event)" (dateSelectEvent)="selectDate($event)"></app-calendar>
+            <app-calendar [selectedDate]="selectedDate" [availableDates] = "availableDates | async" (changeMonthEvent)="monthChange($event)" (dateSelectEvent)="selectDate($event)"></app-calendar>
 
 
             <div class="time-slots">
