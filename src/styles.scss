@@ -1486,7 +1486,8 @@ input[type=radio]:focus-visible {
 /*Popup - Time*/
 
 .time-filter .range-slider {
-	padding: 23px 40px 70px;
+	/*padding: 23px 40px 70px;*/
+	padding: 0px 25px 40px;
 	position: relative;
 }
 
@@ -2848,6 +2849,7 @@ aside .pill.location {
 	top: -25px;
 	transform: translate3d(0, 0, 0);
 	width: 50px;
+	z-index:999;
 }
 
 .popup .close:hover {
@@ -3699,6 +3701,7 @@ section.congrats {
 	gap: 30px;
 	grid-column: 4 / span 6;
 	grid-template-columns: repeat(6, minmax(0, 1fr));
+	margin-bottom:30px;
 }
 
 .create-account-form input[type="email"],
@@ -6833,3 +6836,54 @@ dialog {
 	max-width: 75%;
  }
 
+
+ 
+/***Add to Cal Popups***/
+
+.add-to-cal{
+	position:relative;
+ }
+
+.add-to-cal-pop {
+	background: var(--white);
+	border-radius: 12px;
+	box-shadow: 0 20px 50px rgba(0,0,0,.15);
+	display: block;
+	left: -20px;
+	position: absolute;
+	top: calc(100% + 14px);
+	width: 180px;
+	z-index: 3;
+}
+
+.add-to-cal-pop:before {
+	border-color: transparent transparent var(--white) transparent;
+	border-style: solid;
+	border-width: 0 13px 12px 13px;
+	content: '';
+	height: 0;
+	right: 30px;
+	position: absolute;
+	top: -8px;
+	width: 0;
+}
+
+
+.add-to-cal-menu.add-to-cal-pop{
+	font: 0.875rem/1.4285714286 var(--body-font);
+	letter-spacing: 0.3px;
+	font-weight: 400;
+	padding: 20px;
+	margin: 0;
+	list-style: none;
+	gap: 10px;
+}
+
+.add-to-cal-menu.add-to-cal-pop li {
+   cursor: pointer;
+   padding: 2px 0;
+   color: var(--black);
+}
+.add-to-cal-menu.add-to-cal-pop li:hover {
+	color: var(--dark-blue);
+ }

@@ -1,21 +1,75 @@
+
+:root {
+  --white: #fff;
+--off-white: #F9F9F9;
+--light-gray: #F5F5F5;
+--mid-gray: #B3B3B3;
+--gray-idle: #707070;
+--dark-gray: #404040;
+  --black: #000;
+--light-blue: #D6EBFF;
+--bright-blue: #50AAF2;
+--cta-blue: #318CD4;
+--dark-blue: #257BBF;
+--light-green: #DFFBEC;
+--light-purple: #F3E5F9;
+--light-pink: #FFEBF1;
+--bright-pink: #FFC6D5;
+--light-brow: #EEE4E8;
+--cream: #FCF7F2;
+--light-yellow: #FFF4D0;
+--bright-yellow: #FFE276;
+  --body-font: 'Averta', Arial, Helvetica, sans-serif;
+--heading-font: 'Freight Display Pro', 'freight-display-pro', Georgia, serif;
+--container-width: 90vw;
+--container-max-width: 1600px;
+--container-outer-padding: 50px;
+--container-outer-margin: calc((100vw - var(--container-width)) / 2);
+--viewport-edge: calc((var(--container-outer-margin) + var(--container-outer-padding)) * -1);
+--gap: 40px;
+--grid: repeat(12,1fr);
+}
+
 ::ng-deep .ngx-slider .ngx-slider-pointer::after {
 	content: '';
-	width: 8px;
-	height: 8px;
+	width: 8px !important;
+	height: 8px !important;
 	position: absolute;
-	top: 4px;
-	left: 4px;
-	border-radius: 4px;
-	background: #fff;
-  }
+	top: 3px !important;
+  left: 3px !important;
+	border-radius: 4px !important;
+	background: var(--bright-blue) !important;
+}
   
-  ::ng-deep .ngx-slider .ngx-slider-pointer {
+::ng-deep .ngx-slider .ngx-slider-pointer {
     cursor: pointer;
-    width: 16px;
-    height: 16px;
-    top: -7px;
-    background-color: #0db9f0;
+    width: 16px !important;
+    height: 16px !important;
+    top: -7px !important;
+    background: var(--white) !important;
+    border: 1px solid var(--bright-blue);
     z-index: 3;
-    border-radius: 16px;
-
+    border-radius: 16px !important;
+}
+::ng-deep .ngx-slider .ngx-slider-bubble {
+  cursor: default;
+  bottom: none !important;
+  padding: 1px 3px;
+  color: var(--black)!important;
+  font: 600 calc(11rem/16)/calc(14/11) var(--body-font) !important;
+  letter-spacing: 2px;
+  top: 15px !important;
+}
+::ng-deep .ngx-slider {
+  margin: 20px 0 15px !important;
+}
+::ng-deep .ngx-slider .ngx-slider-bar {
+  height: 3px !important;
+  background: var(--light-blue) !important;
+}
+::ng-deep .ngx-slider .ngx-slider-selection {
+  background: var(--bright-blue) !important;
+}
+::ng-deep .ngx-slider .ngx-slider-bubble.ngx-slider-limit {
+  color: var(--mid-gray)!important;
 }
