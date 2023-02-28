@@ -1,6 +1,10 @@
+<button class="mobile-only cart-summary flex-container" *ngIf="cart?.selectedItems?.length">
+    <span class="eyebrow small">Summary</span>
+    <span class="cost">{{sharedService.formatPrice(this.cart?.summary?.total) | currency:'USD':'symbol' : '1.0-0'}}</span>
+</button>
 <div class="cart-info">
     <button (click)="bookingService.mobileCartView = false" class="close-cart mobile-only"><span class="accessibility">Close Cart</span></button>
-    <h2 class="eyebrow small flex-container"><span>Cart</span><span>{{getTotalAddedServiceCount}} Service Added</span></h2>
+    <h2 class="eyebrow small flex-container desktop-only"><span>Cart</span><span>{{getTotalAddedServiceCount}} Service Added</span></h2>
 
     <span *ngIf="!cart?.selectedItems?.length" class="heading-6 small empty-cart">Your cart is empty</span>
     

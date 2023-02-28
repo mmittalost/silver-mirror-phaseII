@@ -5427,7 +5427,7 @@ section.congrats {
 		z-index: 1;
 	}
 
-	.review-flow aside .btn {
+	.review-flow aside .btn, .review-flow aside span .btn {
 		bottom: calc(var(--container-outer-padding) - 8px);
 		left: var(--container-outer-padding);
 		position: fixed;
