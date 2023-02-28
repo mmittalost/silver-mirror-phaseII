@@ -5636,7 +5636,8 @@ section.congrats {
 	}
 
 	header.flex-container:not(.client-portal-header) {
-		justify-content: center;
+		/*justify-content: center;*/
+		justify-content: left;
 	}
 
 	header:not(.client-portal-header) .logo/*,
@@ -5977,7 +5978,7 @@ section.congrats {
 	}
 
 	.schedule-filters .close-filter {
-		background: url(assets/svgs/icon-caret.svg) no-repeat;
+		background: url('assets/svgs/icon-caret.svg') no-repeat;
 		background-position: 100% 50%;
 		background-size: auto 12px;
 		left: 20px;
