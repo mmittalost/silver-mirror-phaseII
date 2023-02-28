@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { NotificationService } from '../../notification.service';
 import { Options, ChangeContext } from '@angular-slider/ngx-slider';
 import { BookingService } from '../booking.service';
 import { SharedService } from 'src/app/shared-component/shared.service';
+import { CalendarComponent } from "../../shared-component/calendar/calendar.component";
+import * as moment from "moment";
+
 @Component({
   selector: 'app-scheduling',
   templateUrl: './scheduling.component.html',
@@ -13,6 +16,7 @@ import { SharedService } from 'src/app/shared-component/shared.service';
 export class SchedulingComponent implements OnInit {
 
   cart:any;
+  @ViewChild(CalendarComponent) calendarComponent:any;
 
   availableDates:BehaviorSubject<any> = new BehaviorSubject([]);
   availableTimes:BehaviorSubject<any> = new BehaviorSubject([]);
@@ -97,7 +101,11 @@ export class SchedulingComponent implements OnInit {
 
   getBookableDates(){
     const locationId = this.cart.location.id;
-    this.bookingService.getScheduleDates(locationId).subscribe((res:any)=>{
+    console.log('Calendar Component : ', this.calendarComponent);
+    let currentMonth = this.calendarComponent.currentMonth;
+    let lowerRange = moment(currentMonth).startOf('month').format('YYYY-MM-DD');
+    let upperRange = moment(currentMonth).endOf('month').format('YYYY-MM-DD');
+    this.bookingService.getScheduleDates(locationId, lowerRange, upperRange).subscribe((res:any)=>{
       if(!res.errors){
         this.availableDates.next(res.data.cartBookableDates);
         console.log('available Dates : ', this.availableDates.value);

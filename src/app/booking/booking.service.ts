@@ -104,12 +104,13 @@ export class BookingService {
     return this.http.post(BASE_URL+'/remove_item_in_cart',payload);
   }
 
-  getScheduleDates(locationId:string){
+  getScheduleDates(locationId:string, lowerRange:string, upperRange:string){
     const payload = {
       "cartID":this.sharedService.getLocalStorageItem('cartId'),
       "locationID":locationId,
       "timeZone":"EST",
-      "limit":31,
+      "searchRangeLower":lowerRange,
+      "searchRangeUpper":upperRange,
       "clientId": this.authService.$AuthUser.value?.authId
     }
     return this.http.post(BASE_URL + '/get_cart_bookable_dates', payload);
