@@ -2923,7 +2923,7 @@ aside .pill.location {
 	padding: 60px;
 }
 .popup.addon-pop .scroller.addon-suggest {
-	height: 100px;
+	height: 200px;
 	overflow: hidden;
 }
 
@@ -5954,7 +5954,7 @@ section.congrats {
 	}
 
 	.time-slots fieldset label:last-of-type {
-		margin-right: var(--container-outer-padding);
+		/*margin-right: var(--container-outer-padding);*/
 	}
 
 	/*No Availability*/
@@ -6327,6 +6327,13 @@ section.congrats {
 
 	.services-list .open-services-pop img {
 		display: none;
+	}
+	.services-list .badge-img img {
+		display: flex;
+		border-radius: 10px 0;
+		bottom: 0;
+		position: absolute;
+		right: 0;
 	}
 
 	.services-list .open-services-pop > div {
@@ -7330,6 +7337,14 @@ dialog {
 	display: inline-flex;
 	margin:30px auto;
 	padding: 0;
+  }
+
+  .services-list .badge-img img{
+	aspect-ratio: auto;
+	width: inherit;
+	max-width: 98px;
+	object-fit: unset;
+	height: 17px
   }
 
  @media only screen and (max-width: calc(950rem/16)) {

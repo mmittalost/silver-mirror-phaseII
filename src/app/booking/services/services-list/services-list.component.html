@@ -15,7 +15,7 @@
 			
 			<div>
 				<h2 class="heading-6">{{service.name}}</h2>
-				<span><img style="width: 100%; aspect-ratio: auto;" [src]="'https://blvd.silvermirror.com/assets/badge-' + service.id + '.png'" /></span>
+				<span class="badge-img"><img [src]="'https://blvd.silvermirror.com/assets/badge-' + service.id + '.png'" /></span>
 				<p class="pill">All Types</p>
 				<span class="heading-6 small price">{{sharedService.formatPrice(service.listPrice) | currency:'USD':'symbol' : '1.0-0'}}</span>
 			</div>
