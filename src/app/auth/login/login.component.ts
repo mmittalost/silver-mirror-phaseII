@@ -47,7 +47,7 @@ export class LoginComponent {
       this.authService.getClientByEmail(this.email);
     }else{
       const title = 'Invalid Email';
-      const message = 'Please Enter a correct email Address.';
+      const message = 'Please enter a correct email address.';
       this.sharedService.showNotification(title, message);
     }
   }
