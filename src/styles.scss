@@ -4597,23 +4597,14 @@ section.congrats {
 	
 	.client-portal ul.portal-links {
 		flex-direction: row;
-		gap: 22px;
+		gap: 30px;
 		grid-column: 1 / -1;
+		justify-content: center;
 		margin: 0 calc(var(--container-outer-padding) * -1) 5px;
 		overflow: auto;
 		padding: 0 var(--container-outer-padding) 20px var(--container-outer-padding);
 		position: relative;
 		width: 100vw;
-	}
-	
-	.client-portal ul.portal-links:before {
-		background: rgba(179,179,179,.35);
-		bottom: 11px;
-		content: '';
-		height: 1px;
-		left: var(--container-outer-padding);
-		position: absolute;
-		width: calc(100vw - calc(var(--container-outer-padding) * 2));
 	}
 	
 	.client-portal ul.portal-links li {
@@ -4636,10 +4627,27 @@ section.congrats {
 	.client-portal .content {
 		grid-column: 1 / -1;
 		padding: 0;
+		position: relative;
+	}
+	
+	.client-portal .content:before {
+		background: rgba(179,179,179,.35);
+		content: '';
+		height: 1px;
+		left: calc(var(--viewport-edge) + var(--container-outer-padding));
+		position: absolute;
+		top: -57px;
+		width: calc(100vw - calc(var(--container-outer-padding) * 2));
+	}
+		
+	.client-portal h1,
+	.client-portal h2 {
+		text-align: center;
 	}
 	
 	.appointment-list > li {
-		padding-left: 170px;
+		padding-left: 190px;
+		padding-right: 60px;
 		position: relative;
 	}
 	
@@ -4651,9 +4659,11 @@ section.congrats {
 		left: 30px;
 		position: absolute;
 		top: 22px;
+		width: 130px;
 	}
 	
 	.appointment-list .actions {
+		padding-top: 21px;
 		width: 100%;
 	}
 	
@@ -4661,6 +4671,30 @@ section.congrats {
 		margin-left: auto;
 		margin-right: auto;
 		max-width: 335px;
+	}
+	
+	/***Account Info***/
+	
+	.account-info form {
+		padding: 0;
+	}
+	
+	.account-info form .btn {
+		margin: 0 auto;
+	}
+	
+	/***Membership***/
+	
+	.active-membership + p {
+		margin-bottom: 50px;
+		text-align: center;
+	}
+	
+	/***Purchases***/
+	
+	.purchases .orders button,
+	.purchases .accordion-content {
+		padding-left: 94px;
 	}
 
 }
@@ -5567,6 +5601,20 @@ section.congrats {
 		left: 0;
 		padding: 0 var(--container-outer-padding);
 		position: fixed;
+	}
+
+	/***Membership***/
+	
+	.client-portal ul.portal-links {
+		justify-content: start;
+	}
+	
+	.active-membership .plan-details {
+		column-gap: 40px;
+	}
+	
+	.empty-membership {
+		padding: 60px 30px;
 	}
 	
 }
@@ -6747,6 +6795,366 @@ section.congrats {
 	.create-account-form .formGroup.first-name,
 	.create-account-form .formGroup.last-name{
 		grid-column: 1/-1;
+	}
+
+	/***Appointments***/
+	
+	.text-link {
+		font-size: calc(14rem/16);
+	}
+	
+	.client-portal {
+		padding: 20px 0 30px;
+	}
+	
+	.client-portal ul.portal-links {
+    	gap: 22px;
+	}
+	
+	.client-portal ul.portal-links li {
+		font-size: calc(14rem/16);
+		letter-spacing: .3px;
+		line-height: calc(20/14);
+	}
+	
+	.client-portal .portal-links a {
+		padding-bottom: 8px;
+	}
+	
+	.client-portal .content:before {
+		top: -37px;
+	}
+	
+	.client-portal h1 {
+		font-size: calc(26rem/16);
+		letter-spacing: .4px;
+		line-height: calc(36/26);
+		margin-bottom: 30px;
+	}
+	
+	.client-portal h2 {
+		margin-bottom: 15px;
+		text-align: center;
+	}
+	
+	.client-portal .btn.black.small {
+		font: 600 calc(13rem/16)/calc(20/13) var(--body-font);
+		padding: 11px 30px;
+	}
+	
+	.client-portal.appointments .appointment-list {
+		margin: 0 calc(var(--container-outer-padding) * -1) 30px;
+		width: 100vw;
+	}
+	
+	.appointment-list > li {
+		border-radius: 0;
+		flex-direction: column;
+		padding: 18px 20px 18px;
+	}
+	
+	.appointment-list > li:before,
+	.purchases .orders button:before {
+		background: url('assets/svgs/icon-dropdown.svg') no-repeat center/100% auto;
+		content: '';
+		height: 22px;
+		position: absolute;
+		right: 20px;
+		top: 17px;
+		width: 22px;
+	}
+	
+	.appointment-list > li.active:before,
+	.purchases .orders li.active button:before {
+		transform: rotate(180deg);
+	}
+	
+	.appointment-list .date {
+		align-items: center;
+		border: none;
+		flex-wrap: wrap;
+		flex-direction: row;
+		gap: 4px;
+		height: auto;
+		justify-content: start;
+		left: 0;
+		padding: 0 30px 0 22px;
+		position: relative;
+		text-align: left;
+		top: 0;
+		width: auto;
+	}
+	
+	.appointment-list .date:before {
+		background: url('assets/svgs/icon-clock.svg') no-repeat center/100% auto;
+		content: '';
+		height: 14px;
+		left: 0;
+		position: absolute;
+		top: 4px;
+		width: 14px;
+	}
+	
+	.appointment-list .date .ui-date,
+	.appointment-list .date .heading-5,
+	.appointment-list .date .pill.fill,
+	.appointment-list .date .mobile-only {
+		background: none;
+		color: var(--black);
+		flex-shrink: 0;
+		font: 600 calc(14rem/16)/calc(20/14) var(--body-font);
+		letter-spacing: .3px;
+		margin: 0;
+		padding: 0;
+		text-transform: none;
+	}
+	
+	.appointment-list .date .mobile-only {
+		display: inline-block;
+	}
+	
+	.appointment-list .services, 
+	.appointment-list .details, 
+	.appointment-list .actions {
+		padding: 0;
+		width: 100%;
+	}
+	
+	.appointment-list li:not(.active) .services,
+	.appointment-list li:not(.active) .details,
+	.appointment-list li:not(.active) .actions {
+		display: none;
+	}
+	
+	.appointment-list .services {
+		margin-top: 20px;
+	}
+	
+	.appointment-list .details {
+		margin-top: 25px;
+	}
+	
+	.appointment-list .actions {
+		margin-top: 30px;
+		padding-bottom: 10px;
+	}
+	
+	.appointment-list .actions .reschedule {
+		margin-bottom: 16px;
+	}
+	
+	.appointment-list h3 {
+		border-bottom: 1px solid rgba(64,64,64,.2);
+		padding-bottom: 5px;
+	}
+	
+	.appointment-list ul {
+		gap: 10px;
+	}
+	
+	/***Membership***/
+	
+	.active-membership > li, 
+	.facial-credits > li {
+		flex-direction: column;
+		padding: 20px 24px 40px;
+		text-align: center;
+	}
+	
+	.active-membership > li::before, 
+	.facial-credits > li::before {
+		display: none;
+	}
+	
+	.active-membership h3,
+	.facial-credits h3 {
+		font-size: calc(28rem/16);
+		font-weight: 700;
+		letter-spacing: .4px;
+		line-height: calc(40/28);
+		margin: 0 0 -6px;
+	}
+	
+	.active-membership .plan-details {
+		flex-direction: column;
+		gap: 20px;
+		margin-top: 20px;
+	}
+	
+	.active-membership .plan-details .pill {
+		margin: 0 auto;
+	}
+
+	.active-membership .plan-details .ui-date {
+		margin-left: 0;
+	}
+	
+	.active-membership + p {
+		margin: -16px 0 40px;
+		text-align: center; 
+	}
+	
+	.active-membership + p .pill {
+		display: block;
+		margin: 0 auto 10px;
+		max-width: max-content;
+	}
+	
+	.facial-credits > li h3 > .pill {
+		margin-top: 8px;
+	}
+	
+	.facial-credits li .btn {
+		margin-top: 25px;
+	}
+	
+	.empty-membership {
+		border-radius: 0;
+		margin: -10px calc(var(--container-outer-padding) * -1) 0;
+		padding: 30px var(--container-outer-padding) 40px;
+		width: 100vw;
+	}
+	
+	.empty-membership h3 {
+    	margin-bottom: 45px;
+	}
+	
+	.empty-membership .grid {
+		gap: 50px;
+		grid-template-columns: 1fr;
+	}
+	
+	.empty-membership li {
+		position: relative;
+	}
+	
+	.empty-membership .membership-plan {
+		box-shadow: 6px 6px 30px rgba(0,0,0,.08);
+		margin: 0;
+		padding-bottom: 84px; 
+	}
+	
+	.empty-membership .membership-plan .pill.fill {
+		width: max-content;
+	}
+	
+	.empty-membership li .btn {
+		bottom: 20px;
+		left: 30px;
+		max-width: none;
+		position: absolute;
+		width: calc(100% - 60px);
+	}
+	
+	/***Account Info***/
+	
+	.account-info form {
+		margin-top: -6px;
+	}
+	
+	.account-info .column-2,
+	.account-info .column-3 {
+		width: 100%;
+	}
+	
+	.account-info .column-2.help-text {
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.account-info .column-2.help-text label {
+		order: 1;
+	}
+	
+	.account-info .column-2.help-text input {
+		order: 3;
+	}
+	
+	.account-info .column-2.help-text p {
+		margin: -8px 0 16px;
+		order: 2;
+		padding: 0;
+	}
+	
+	.account-info .column-2.help-text p:before {
+		display: none;
+	}
+	
+	/***Purchases***/
+	
+	.purchases .tabs-nav {
+		gap: 6px;
+		margin: -6px calc(var(--container-outer-padding) * -1) 10px;
+		overflow: auto;
+		padding: 0 var(--container-outer-padding) 15px var(--container-outer-padding);
+		position: relative;
+		width: 100vw;
+	}
+	
+	.purchases .tabs-nav li {
+		flex-shrink: 0;
+	}
+	
+	.purchases .orders > li {
+		border-radius: 0;
+		margin: 0 calc(var(--container-outer-padding) * -1);
+		width: 100vw;
+	}
+	
+	.purchases .orders button {
+		padding: 13px 35px 15px 35px;
+	}
+	
+	.purchases .orders .icon,
+	.purchases .products li img {
+		display: none;
+	}
+	
+	.purchases .orders .heading-6 {
+		font-size: calc(26rem/16);
+		letter-spacing: .04px;
+		line-height: calc(36/26);
+	}
+	
+	.purchases .orders .details .eyebrow {
+		display: block;
+		margin: 10px 0 0;
+	}
+	
+	.purchases .orders button .price {
+		margin: 0;
+		position: absolute;
+		right: 35px;
+		top: 59px;
+	}
+	
+	.purchases .orders .details p {
+		margin-top: 10px;
+	}
+	
+	.purchases .accordion-content {
+		margin: 0;
+		padding: 0 20px 40px;
+	}
+	
+	.purchases .products {
+		gap: 20px;
+		padding: 22px 14px 20px;
+	}
+	
+	.purchases .products li .heading-6.small, 
+	.purchases .products li .price {
+		padding: 0;
+	}
+	
+	.purchases .products li .heading-6.small {
+		font: 600 1rem/calc(26/16) var(--body-font);
+		letter-spacing: .2px;
+	}
+	
+	.purchases .totals {
+		max-width: 100%;
+		padding: 0 15px;
 	}
 
 }

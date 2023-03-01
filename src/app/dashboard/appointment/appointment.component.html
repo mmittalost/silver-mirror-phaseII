@@ -3,9 +3,7 @@
 	
 	<h2 class="eyebrow">Upcoming Appointments</h2>
 	
-	<ul class="appointment-list">
-		<app-appointment-tile *ngFor="let appt of dashboardService.$myAppointments | async | upcomingappointments" [appointment]="appt?.node"></app-appointment-tile>
-	</ul>
+	<app-appointment-tile *ngFor="let appt of dashboardService.$myAppointments | async | upcomingappointments" [appointment]="appt?.node"></app-appointment-tile>
 	
 	<h2 class="eyebrow">Past Appointments</h2>
 	
