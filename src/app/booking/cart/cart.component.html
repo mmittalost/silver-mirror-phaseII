@@ -73,9 +73,9 @@
                 <a *ngIf="cart?.location?.phoneNumber" href="tel:{{cart?.location?.phoneNumber}}">{{cart?.location?.phoneNumber}}</a>
             </span>
             
-            <!-- <span class="cost">
-                <button class="edit-location"><span class="accessibility">Edit Location</span></button>
-            </span> -->
+            <span class="cost">
+                <button class="edit-location" (click)="editLocation()"><span class="accessibility">Edit Location</span></button>
+            </span>
             <!-- <span>
                 <span *ngIf="cart?.startTime" class="pill">{{cart?.startTime | date:'EEEE, MMMM d @ h:mm a'}}</span>
                 <span *ngIf="getSelectedStaffVariant()" class="pill">Esthetician: {{getSelectedStaffVariant()}}</span>

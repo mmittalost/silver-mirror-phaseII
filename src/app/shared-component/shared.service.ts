@@ -1,12 +1,26 @@
 import { Injectable } from '@angular/core';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { Notification, NotificationService } from '../notification.service';
+import { ConfirmationAlertComponent } from './confirmation-alert/confirmation-alert.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedService {
 
-  constructor( private notificationService:NotificationService ) { }
+  confirmationAlertModalRef!: MdbModalRef<ConfirmationAlertComponent> | null;
+
+  modalConfig: any = {
+    animation: true,
+    backdrop: true,
+    containerClass: "right",
+    data: {},
+    ignoreBackdropClick: false,
+    keyboard: true,
+    modalClass: "modal-top-right",
+  };
+
+  constructor( private notificationService:NotificationService, private modalService: MdbModalService ) { }
 
   getLocalStorageItem(key:string){
     return localStorage.getItem(key);
@@ -48,6 +62,19 @@ export class SharedService {
     }else{
       return '';
     }
+  }
+
+  openConfirmationAlert(message:string){
+    this.modalConfig.data.message = message;
+    return new Promise((resolve, reject)=>{
+      this.confirmationAlertModalRef = this.modalService.open(
+        ConfirmationAlertComponent,
+        this.modalConfig
+      );
+      this.confirmationAlertModalRef.onClose.subscribe((data:any)=>{
+        resolve(data);
+      });
+    });
   }
 
 }

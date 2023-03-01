@@ -1,0 +1,15 @@
+<div class="popup-screen"></div>
+
+<div class="popup addon-pop">
+
+	<button class="close" (click)="confirmationModalRef.close()"><span class="accessibility">Close Popup</span></button>
+
+	<div class="scroller addon-suggest">
+		<h3 class="heading-6" style="text-align:center">{{message}}</h3>
+	</div>
+
+	<div class="fixed-info">
+		<button class="btn black" (click)="continue()">Continue</button>
+		<a class="#" (click)="close()">Cancel</a>
+	</div>
+</div>

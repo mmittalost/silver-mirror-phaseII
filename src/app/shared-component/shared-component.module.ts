@@ -8,6 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { AlertComponent } from './alert/alert.component';
 import { AuthModule } from '../auth/auth.module';
+import { ConfirmationAlertComponent } from './confirmation-alert/confirmation-alert.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { AuthModule } from '../auth/auth.module';
     AlertComponent,
     FooterComponent,
     CalendarComponent,
-    ToggleCalendarPipe
+    ToggleCalendarPipe,
+    ConfirmationAlertComponent
   ],
   imports: [
     // BrowserModule,
