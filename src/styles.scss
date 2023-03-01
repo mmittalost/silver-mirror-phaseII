@@ -1718,7 +1718,9 @@ input[type=radio]:focus-visible {
 	transition: all .25s ease;
 	width: 100%;
 }
-
+.date-size{
+	width:100%;
+}
 .date-slots fieldset label:hover {
 	border-color: var(--bright-blue);
 }
@@ -5834,7 +5836,7 @@ section.congrats {
 	.date-slots .week-container {
 		margin-left: 0;
 		overflow: auto;
-		padding: 0 0 0 var(--container-outer-padding);
+		padding: 0  var(--container-outer-padding);
 		position: relative;
 		width: 100vw;
 		/*Hide Scrollbar*/
@@ -5897,12 +5899,17 @@ section.congrats {
 	}
 
 	.date-slots fieldset label {
-		min-width: 48px;
-		padding: 15px 4px 19px;
+		/*min-width: 48px;
+		padding: 15px 4px 19px;*/
+		min-width: 36px;
+		padding: 7px 4px 7px;
 	}
 
 	.date-slots fieldset label:last-of-type {
-		margin-right: var(--container-outer-padding);
+		/*margin-right: var(--container-outer-padding);*/
+	}
+	.date-size .expand-tile{
+		margin-bottom: 8px !important;
 	}
 
 	.date-slots fieldset label span {
@@ -6851,6 +6858,7 @@ section.congrats {
 		border-radius: 0;
 		flex-direction: column;
 		padding: 18px 20px 18px;
+		cursor: pointer;
 	}
 	
 	.appointment-list > li:before,
