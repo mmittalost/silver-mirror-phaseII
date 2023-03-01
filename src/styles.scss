@@ -6328,6 +6328,13 @@ section.congrats {
 	.services-list .open-services-pop img {
 		display: none;
 	}
+	.services-list .badge-img img {
+		display: flex;
+		border-radius: 10px 0;
+		bottom: 0;
+		position: absolute;
+		right: 0;
+	}
 
 	.services-list .open-services-pop > div {
 		flex-direction: row;
@@ -7330,6 +7337,14 @@ dialog {
 	display: inline-flex;
 	margin:30px auto;
 	padding: 0;
+  }
+
+  .services-list .badge-img img{
+	aspect-ratio: auto;
+	width: inherit;
+	max-width: 98px;
+	object-fit: unset;
+	height: 17px
   }
 
  @media only screen and (max-width: calc(950rem/16)) {
