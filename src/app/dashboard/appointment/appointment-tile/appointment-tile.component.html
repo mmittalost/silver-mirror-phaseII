@@ -1,5 +1,5 @@
 <ul class="appointment-list">
-	<li class="flex-container">
+	<li class="flex-container" (click)="toggleMobileList = !toggleMobileList" [ngClass]="toggleMobileList ? 'active' : '' ">
 		<!--Date-->
 		
 		<div class="date">
