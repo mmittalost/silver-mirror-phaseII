@@ -14,37 +14,46 @@
 				
 				<div class="cart-info">
 					<ul class="small">
+						<li *ngIf="cart?.selectedItems?.length">
+							<ul class="small" *ngFor="let service of cart?.selectedItems | orderCartItems">
+							<li class="flex-container">
+								<span *ngIf="cart.guests" class="user">{{service.guest ? service?.guest?.label : 'Me'}} <span class="counter gray">{{service.selectedOptions?.length + 1}}</span></span>
+							
+								<span class="item-info">
+									<strong>{{service.item.name}}</strong>
+									<span *ngIf="sharedService.getServiceCategoryName(service, cart.availableCategories) != '' " class="pill">{{sharedService.getServiceCategoryName(service, cart.availableCategories)}}</span>
+								</span>
+								
+								<span class="cost">
+									{{sharedService.formatPrice(getServicePrice(service)) | currency:'USD':'symbol' : '1.0-0'}}
+								</span>
+				
+							</li>
+							<li class="flex-container add-on" *ngFor="let modifier of service.selectedOptions">
+								<span class="item-info">
+									<strong>{{modifier?.name}}</strong>
+									<span class="pill fill small">Add On</span>
+								</span>
+								
+								<span class="cost">
+									{{sharedService.formatPrice(modifier.priceDelta) | currency:'USD':'symbol' : '1.0-0'}}
+								</span>
+							</li>
+						</ul>
+						</li>
+					</ul>
+					<!-- <ul class="small">
 						<li class="flex-container" *ngFor="let apt of appointment?.appointmentServices">
 							<span class="user">Me <span class="counter gray">{{getServicesCount()}}</span></span>
-							<!-- <span>
+							<span>
 								<strong>{{apt?.service?.name}}</strong>
-								<span class="pill">{{appointment?.duration}}-min</span>
-							</span> -->
+							</span>
 							
 							<span class="cost">
 								{{sharedService.formatPrice(getServicePrice()) | currency:'USD':'symbol' : '1.0-0'}}
 							</span>
 						</li>
-						
-						<!-- <li class="flex-container add-on" *ngFor="let opt of appointment?.appointmentServiceOptions">
-							<span>
-								<strong>ADDON NAME</strong>
-								<span class="pill fill small">Add On</span>
-							</span>
-							
-							<span class="cost">{{sharedService.formatPrice(opt?.priceDelta) | currency:'USD':'symbol' : '1.0-0'}}</span>
-						</li> -->
-						
-						<!-- <li class="flex-container">
-							<span class="user">Guest 1 <span class="counter gray">1</span></span>
-							<span>
-								<strong>Just For Men Facial</strong>
-								<span class="pill">60-min</span>
-							</span>
-							
-							<span class="cost">$185</span>
-						</li> -->
-					</ul>
+					</ul> -->
 					
 					<div class="flex-container cart-total">
 						<span class="eyebrow small">Total</span>

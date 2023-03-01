@@ -11,6 +11,7 @@ import * as moment from 'moment';
 export class CongratsComponent {
 
   appointment:any;
+  cart:any;
   toggleOptions:boolean = false;
   toggleShareOptions:boolean = false;
   authUser:any;
@@ -23,8 +24,8 @@ export class CongratsComponent {
       if(checkoutCart){
         console.log("Checkout Response : ", checkoutCart);
         const aptId = checkoutCart.appointments[0].appointmentId;
-        const cartId = checkoutCart.cart.id
-        this.getAppointmentDetail(aptId, cartId);
+        this.cart = checkoutCart.cart
+        this.getAppointmentDetail(aptId, this.cart.id);
       }
     })
   }
@@ -33,19 +34,19 @@ export class CongratsComponent {
     this.bookingService.getAppointmentDetail(aptId, cartId).subscribe((res:any)=>{
       if(!res.errors){
         this.appointment = res.data.appointment;
-        this.getServicePrice();
+        // this.getServicePrice();
       }else{
         console.log(res.errors);
       }
     });
   }
 
-  getServicePrice(){
+  getServicePrice(selectedService:any){
     let optionsPrice = 0;
-    this.appointment.appointmentServiceOptions.map((option:any)=>{
+    selectedService.selectedOptions.map((option:any)=>{
       optionsPrice = optionsPrice + option.priceDelta;
     });
-    return this.appointment.appointmentServices[0].price - optionsPrice;
+    return selectedService.lineTotal - optionsPrice;
   }
 
   getServicesCount(){
