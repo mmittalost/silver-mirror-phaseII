@@ -2328,7 +2328,7 @@ aside .btn {
 	content: '';
 	height: 44px;
 	position: absolute;
-	right: -22px;
+	right: -18px;
 	top: -22px;
 	width: 44px;
 }
@@ -7346,6 +7346,13 @@ dialog {
 	object-fit: unset;
 	height: 17px
   }
+
+  app-login header .sign-in, app-register header .sign-in{
+	display: none !important;
+  }
+body.modal-open {
+	overflow: hidden;
+}
 
  @media only screen and (max-width: calc(950rem/16)) {
 	.services-flow ul.time-filters.mobile-only {
