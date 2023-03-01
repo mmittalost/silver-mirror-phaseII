@@ -105,16 +105,7 @@ export class CartComponent {
   }
 
   editLocation(){
-    const message = "If you change the location, your cart will be clear. Are you sure you want to change the location?"
-    this.sharedService.openConfirmationAlert(message).then((res:any)=>{
-      console.log(res);
-      if(res){
-        // Continue
-        this.router.navigateByUrl("/booking", {replaceUrl: true});
-      }else{
-        // On Cancel nothing to do.
-      }
-    });
+    this.router.navigateByUrl("/booking", {replaceUrl: true});
   }
   
 

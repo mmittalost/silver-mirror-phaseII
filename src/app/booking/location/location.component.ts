@@ -44,23 +44,36 @@ export class LocationComponent {
     return location && location == id ? "active" : '';
   }
 
+  createCart(id:string){
+    this.bookingService.createCart(id).subscribe((res:any)=>{
+      if(!res.errors){
+        this.sharedService.setLocalStorageItem('selectedLocation', id);
+        this.sharedService.setLocalStorageItem('cartId', res.data.createCart.cart.id);
+        this.router.navigateByUrl('/booking/whoscoming');
+        this.bookingService.updateCartDetail();
+      }else{
+        this.sharedService.showNotification("Error", res.errors[0].message);
+      }
+    });
+  }
+
   selectLocation(id:any){
     const locationId = this.sharedService.getLocalStorageItem('selectedLocation');
     console.log("ID",id);
     const cartId = this.sharedService.getLocalStorageItem('cartId');
     if(locationId == id && cartId){
       this.router.navigateByUrl('/booking/whoscoming');
-    }else{
-      this.bookingService.createCart(id).subscribe((res:any)=>{
-        if(!res.errors){
-          this.sharedService.setLocalStorageItem('selectedLocation', id);
-          this.sharedService.setLocalStorageItem('cartId', res.data.createCart.cart.id);
-          this.router.navigateByUrl('/booking/whoscoming');
-          this.bookingService.updateCartDetail();
+    }else if(locationId != id && cartId){
+      const message = "If you change the location, your cart will be clear. Are you sure you want to change the location?"
+      this.sharedService.openConfirmationAlert(message).then((res:any)=>{
+        if(res){
+          this.createCart(id);
         }else{
-          this.sharedService.showNotification("Error", res.errors[0].message);
+          this.router.navigateByUrl('/booking/whoscoming');
         }
       });
+    }else{
+      this.createCart(id);
     }
   }
 }

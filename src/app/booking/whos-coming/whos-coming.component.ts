@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
+import { SharedService } from 'src/app/shared-component/shared.service';
 import { SilverMirrorService } from '../../silver-mirror.service';
 import { BookingService } from '../booking.service';
 
@@ -15,7 +16,7 @@ export class WhosComingComponent {
   guestCount:number = 1;
   cart:any;
 
-  constructor(private router:Router, private bookingService:BookingService) {
+  constructor(private router:Router, private bookingService:BookingService, private sharedService:SharedService) {
     this.bookingService.updateCartDetail();
     bookingService.clientCart$.subscribe((cart)=>{
       this.cart = cart;
@@ -54,22 +55,50 @@ export class WhosComingComponent {
       this.bookingService.updateCartDetail();
     });
   }
- 
+
+  resetCart(){
+    const message = "If you change the members of your cart, it will result in resetting your cart."
+    let locationId = this.cart.location.id;
+    this.sharedService.openConfirmationAlert(message).then((res:any)=>{
+      if(res){
+        this.bookingService.createCart(locationId).subscribe((res:any)=>{
+          if(!res.errors){
+            this.sharedService.setLocalStorageItem('cartId', res.data.createCart.cart.id);
+            this.tab != 'me' ? this.createGuests(this.guestCount) : null;
+            this.bookingService.updateCartDetail();
+            this.router.navigateByUrl('/booking/services')
+          }else{
+            this.sharedService.showNotification("Error", res.errors[0].message);
+          }
+        });
+      }
+    });
+  }
+
   gotoServices(){
-    console.log("Tab : ", this.tab);
-    if(this.tab == 'guest'){
-      if(this.cart && this.cart.guests.length < this.guestCount){
-        this.createGuests(this.guestCount - this.cart.guests.length);
-      }else if(this.cart && this.cart.guests.length > this.guestCount){
-        this.removeGuests(this.cart.guests.length - this.guestCount);
+    let guestSet = this.sharedService.getLocalStorageItem('guestSet');
+    if(guestSet){
+      if(this.cart && this.cart.guests.length > this.guestCount){
+        this.resetCart();
+      }else if(this.cart && this.cart.guests.length < this.guestCount){
+        this.tab != 'me' ? this.createGuests(this.guestCount - this.cart.guests.length) : null;
+        this.bookingService.updateCartDetail();
+        this.router.navigateByUrl('/booking/services');
       }
-      this.router.navigateByUrl('/booking/services');
+      else if(this.tab == 'me' && this.cart.guests.length){
+        this.resetCart();
+      }else{
+        this.router.navigateByUrl('/booking/services');
+      }
     }else{
-      const guests = this.cart.guests;
-      if(guests.length){
-        this.removeGuests(guests.length);
+      if(this.tab =='guest'){
+        this.sharedService.setLocalStorageItem('guestSet', 'true');
+        this.createGuests(this.guestCount);
+        this.router.navigateByUrl('/booking/services')
+      }else{
+        this.sharedService.setLocalStorageItem('guestSet', 'true');
+        this.router.navigateByUrl('/booking/services');
       }
-      this.router.navigateByUrl('/booking/services');
     }
   }
 }
