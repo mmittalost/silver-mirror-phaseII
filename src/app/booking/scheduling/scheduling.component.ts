@@ -202,4 +202,22 @@ export class SchedulingComponent implements OnInit {
     // const date = new Date()
   }
 
+  clearStaffFilter(){
+    let staffs = this.staffVarients.value;
+    staffs.map((staff:any)=>{
+      staff.filter = false;
+    });
+    this.staffVarients.next(staffs);
+  }
+
+  clearTimeFilter(){
+    this.minValue = 9;
+    this.maxValue = 20;
+  }
+
+  closeMobileFilter(){
+    this.toggleTimeFilter = false;
+    this.toggleStaffFilter = false;
+  }
+
 }

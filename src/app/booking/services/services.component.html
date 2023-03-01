@@ -43,7 +43,7 @@
             <app-cart [cart]="cart" (onItemRemoveEvent)="itemRemovedFromCart()"></app-cart>
 			<span (click)="continue()"><a class="btn active">Continue</a></span>
 			<button (click)="bookingService.toggleMobileCart()" class="btn black view-cart mobile-only">View Cart
-				<!-- <span class="item-count">{{0}}</span> -->
+				<span class="item-count">{{getTotalAddedServiceCount}}</span>
 			</button>
         </aside>
 		
