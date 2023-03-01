@@ -2923,7 +2923,7 @@ aside .pill.location {
 	padding: 60px;
 }
 .popup.addon-pop .scroller.addon-suggest {
-	height: 100px;
+	height: 200px;
 	overflow: hidden;
 }
 
@@ -5954,7 +5954,7 @@ section.congrats {
 	}
 
 	.time-slots fieldset label:last-of-type {
-		margin-right: var(--container-outer-padding);
+		/*margin-right: var(--container-outer-padding);*/
 	}
 
 	/*No Availability*/
