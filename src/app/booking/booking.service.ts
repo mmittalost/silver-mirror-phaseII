@@ -17,7 +17,7 @@ export class BookingService {
   clientCart$: BehaviorSubject<any> = new BehaviorSubject([]);
   checkoutBookingResponse$: BehaviorSubject<any> = new BehaviorSubject(null);
 
-  mobileCartView:boolean = false;
+  mobileCartView:BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   getLocations() {
     return this.http.get(BASE_URL+'/get_locations');
@@ -244,6 +244,11 @@ export class BookingService {
       "clientId": this.authService.$AuthUser.value?.authId
     }
     return this.http.post(BASE_URL+ '/appointment_detail',payload);
+  }
+
+  toggleMobileCart(){
+    const mobileCartView = this.mobileCartView.value;
+    this.mobileCartView.next(!mobileCartView);
   }
 
 }
