@@ -60,8 +60,8 @@ export class CongratsComponent {
       address: this.appointment.location.address.line1
     }
     
-    const subject = 'Silvermirror appointment';
-    const body = `booked my facial at Silver Mirror!\n ${shareVariables.date} ${shareVariables.location} ${shareVariables.address} Join me and get 20% off your first facial with promocode FIRST20.\nURL: https://bookings.silvermirror.com`;
+    const subject = 'Silvermirror booking';
+    const body = `Booked my facial at Silver Mirror!\n ${shareVariables.date} ${shareVariables.location} ${shareVariables.address}.\n Join me and get 20% off your first facial with promocode FIRST20.\nURL: https://bookings.silvermirror.com`;
     const mailtoUrl = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailtoUrl;
   }

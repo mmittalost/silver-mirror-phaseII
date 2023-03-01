@@ -57,7 +57,7 @@ export class WhosComingComponent {
   }
 
   resetCart(){
-    const message = "If you change the members of your cart, it will result in resetting your cart."
+    const message = "If you remove guests, You will lose the added services in cart."
     let locationId = this.cart.location.id;
     this.sharedService.openConfirmationAlert(message).then((res:any)=>{
       if(res){
