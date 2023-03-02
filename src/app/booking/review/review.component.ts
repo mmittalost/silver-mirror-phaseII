@@ -256,6 +256,11 @@ export class ReviewComponent implements OnInit {
             if(status){
               this.updateCartDetail().then((status:any)=>{
                 if(status){
+                  // user auto login
+                  // const email = this.userInfoForm.value.email;
+                  // const user = this.authService.$AuthUser.value;
+                  // console.log("User to login : ", user);
+                  // !user ? this.authService.autoLogin(email) : null;
                   this.checkout();
                 }
               }).catch(err=>{
@@ -283,6 +288,7 @@ export class ReviewComponent implements OnInit {
           this.bookingService.checkoutBookingResponse$.next(res.data.checkoutCart);
           this.sharedService.removeLocalStorageItem('cartId');
           this.sharedService.removeLocalStorageItem('selectedLocation');
+          this.sharedService.removeLocalStorageItem('guestSet');
           this.bookingService.updateCartDetail();
   
         }else{

@@ -225,6 +225,20 @@ export class ServicesComponent {
     return [];
   }
 
+  get getTotalAddedServiceCount(){
+    let count = 0;
+    if(this.cart && this.cart.selectedItems){
+      let selectedItems = this.cart.selectedItems;
+      if(selectedItems && selectedItems.length){
+        selectedItems.map((selectedItem:any)=>{
+          ++count;
+          count = count + selectedItem.selectedOptions.length;
+        })
+      }
+    }
+    return count;
+  }
+
   continue(){
     window.scrollTo(0, 0);
     this.bookingService.toggleMobileCart();

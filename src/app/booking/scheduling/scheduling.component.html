@@ -84,10 +84,10 @@
                             <span class="time active chosen-end-time">5PM</span>
                             <span class="time end-time">8PM</span> -->
             
-                            <button class="text-link clear-time-range mobile-only">Clear</button>
+                            <button class="text-link clear-time-range mobile-only" (click)="clearTimeFilter()">Clear</button>
                         </div>
             
-                        <button class="btn black submit-btn mobile-only">Apply</button>
+                        <button class="btn black submit-btn mobile-only" (click)="closeMobileFilter()">Apply</button>
                     </div>
                 </li>
                 
@@ -104,7 +104,7 @@
                         
                         <ul class="grid">
                             <li *ngFor="let staff of staffVarients | async">
-                                <input checked (change)="filterStaff(staff)" [id]="'flt'+staff?.id" class="accessibility" type="checkbox"/>
+                                <input [checked]="!staff.filter" (change)="filterStaff(staff)" [id]="'flt'+staff?.id" class="accessibility" type="checkbox"/>
                                 <label [for]="'flt'+staff?.id">{{staff?.staff?.displayName}}</label>
                             </li>
                             
@@ -144,9 +144,9 @@
                             </li> -->
                         </ul>
                         
-                        <button class="text-link clear-selections">Clear</button>
+                        <button class="text-link clear-selections" (click)="clearStaffFilter()">Clear</button>
             
-                        <button class="btn black submit-btn mobile-only">Apply</button>
+                        <button class="btn black submit-btn mobile-only" (click)="closeMobileFilter()">Apply</button>
                     </div>
                 </li>
             </ul>

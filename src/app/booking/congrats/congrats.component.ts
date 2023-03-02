@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { SharedService } from '../../shared-component/shared.service';
 import { BookingService } from '../booking.service';
 import * as moment from 'moment';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-congrats',
   templateUrl: './congrats.component.html',
@@ -11,11 +12,12 @@ import * as moment from 'moment';
 export class CongratsComponent {
 
   appointment:any;
+  cart:any;
   toggleOptions:boolean = false;
   toggleShareOptions:boolean = false;
   authUser:any;
 
-  constructor(private bookingService:BookingService, public sharedService:SharedService, private authService:AuthService){
+  constructor(private bookingService:BookingService, public sharedService:SharedService, private authService:AuthService, private router:Router){
     this.authService.$AuthUser.subscribe((user:any)=>{
       this.authUser = user;
     })
@@ -23,8 +25,8 @@ export class CongratsComponent {
       if(checkoutCart){
         console.log("Checkout Response : ", checkoutCart);
         const aptId = checkoutCart.appointments[0].appointmentId;
-        const cartId = checkoutCart.cart.id
-        this.getAppointmentDetail(aptId, cartId);
+        this.cart = checkoutCart.cart
+        this.getAppointmentDetail(aptId, this.cart.id);
       }
     })
   }
@@ -33,19 +35,19 @@ export class CongratsComponent {
     this.bookingService.getAppointmentDetail(aptId, cartId).subscribe((res:any)=>{
       if(!res.errors){
         this.appointment = res.data.appointment;
-        this.getServicePrice();
+        // this.getServicePrice();
       }else{
         console.log(res.errors);
       }
     });
   }
 
-  getServicePrice(){
+  getServicePrice(selectedService:any){
     let optionsPrice = 0;
-    this.appointment.appointmentServiceOptions.map((option:any)=>{
+    selectedService.selectedOptions.map((option:any)=>{
       optionsPrice = optionsPrice + option.priceDelta;
     });
-    return this.appointment.appointmentServices[0].price - optionsPrice;
+    return selectedService.lineTotal - optionsPrice;
   }
 
   getServicesCount(){
@@ -59,8 +61,8 @@ export class CongratsComponent {
       address: this.appointment.location.address.line1
     }
     
-    const subject = 'Silvermirror appointment';
-    const body = `booked my facial at Silver Mirror!\n ${shareVariables.date} ${shareVariables.location} ${shareVariables.address} Join me and get 20% off your first facial with promocode FIRST20.\nURL: https://bookings.silvermirror.com`;
+    const subject = 'Silvermirror booking';
+    const body = `Booked my facial at Silver Mirror!\n ${shareVariables.date} ${shareVariables.location} ${shareVariables.address}.\n Join me and get 20% off your first facial with promocode FIRST20.\nURL: https://bookings.silvermirror.com`;
     const mailtoUrl = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailtoUrl;
   }
@@ -92,6 +94,14 @@ export class CongratsComponent {
     const shareParams = `?u=${url}&description=${title}`;
   
     window.open(shareUrl + shareParams, '_blank');
+  }
+
+  viewAppointment(){
+    if(!this.authUser){
+      this.router.navigateByUrl("/auth/login");
+    }else{
+      this.router.navigateByUrl("/dashboard")
+    }
   }
 
 }

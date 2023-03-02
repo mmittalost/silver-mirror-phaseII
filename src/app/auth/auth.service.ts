@@ -47,6 +47,22 @@ export class AuthService {
       });
   }
 
+  autoLogin(email: any) {
+    const payload = {
+      emails: [email],
+    };
+    this.http
+      .post(BASE_URL + "/get_client_by_email", payload)
+      .subscribe((res: any) => {
+        if (!res.erros && res.data.clients.edges.length) {
+          const user = res.data.clients.edges[0].node;
+          user.authId = user.id.replace("urn:blvd:Client:", "");
+          localStorage.setItem("AuthUser", JSON.stringify(user));
+          this.$AuthUser.next(user);
+        }
+      });
+  }
+
   sendOTPEmail(email: any, otp: string, name: any) {
     const payload = {
       email: email,
