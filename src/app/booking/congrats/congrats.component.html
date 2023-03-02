@@ -79,7 +79,7 @@
 						</li>
 					</ul>
 					
-					<ul class="actions" style="flex-direction: column;">
+					<ul class="actions">
 						<li (click)="toggleOptions = !toggleOptions" class="add-to-cal"><a class="btn small black">Add to Cal</a>
 							<ul *ngIf="toggleOptions" class="add-to-cal-menu add-to-cal-pop">
 								<li><a target="_blank" [href]="appointment?.calendarLinks?.googleCalendar">Google Calendar</a></li>
