@@ -32,7 +32,7 @@ export class CartComponent {
         }
       });
     }else{
-      const title = 'Please enable me & my guest can have different services.';
+      const title = 'Please enable my guest can have different services.';
       const message = 'Then you will be able to add/remove services.';
       this.sharedService.showNotification(title, message);
     }
@@ -66,7 +66,7 @@ export class CartComponent {
         }
       });
     }else{
-      const title = 'Please enable me & my guest can have different services.';
+      const title = 'Please enable my guest can have different services.';
       const message = 'Then you will be able to add/remove services.';
       this.sharedService.showNotification(title, message);
     }
