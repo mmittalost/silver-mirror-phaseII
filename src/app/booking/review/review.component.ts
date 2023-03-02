@@ -256,10 +256,11 @@ export class ReviewComponent implements OnInit {
             if(status){
               this.updateCartDetail().then((status:any)=>{
                 if(status){
-                  const email = this.userInfoForm.value.email;
-                  const user = this.authService.$AuthUser.value;
-                  console.log("User to login : ", user);
-                  !user ? this.authService.autoLogin(email) : null;
+                  // user auto login
+                  // const email = this.userInfoForm.value.email;
+                  // const user = this.authService.$AuthUser.value;
+                  // console.log("User to login : ", user);
+                  // !user ? this.authService.autoLogin(email) : null;
                   this.checkout();
                 }
               }).catch(err=>{

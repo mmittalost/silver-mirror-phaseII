@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { SharedService } from '../../shared-component/shared.service';
 import { BookingService } from '../booking.service';
 import * as moment from 'moment';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-congrats',
   templateUrl: './congrats.component.html',
@@ -16,7 +17,7 @@ export class CongratsComponent {
   toggleShareOptions:boolean = false;
   authUser:any;
 
-  constructor(private bookingService:BookingService, public sharedService:SharedService, private authService:AuthService){
+  constructor(private bookingService:BookingService, public sharedService:SharedService, private authService:AuthService, private router:Router){
     this.authService.$AuthUser.subscribe((user:any)=>{
       this.authUser = user;
     })
@@ -93,6 +94,14 @@ export class CongratsComponent {
     const shareParams = `?u=${url}&description=${title}`;
   
     window.open(shareUrl + shareParams, '_blank');
+  }
+
+  viewAppointment(){
+    if(!this.authUser){
+      this.router.navigateByUrl("/auth/login");
+    }else{
+      this.router.navigateByUrl("/dashboard")
+    }
   }
 
 }
