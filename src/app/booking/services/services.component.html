@@ -12,14 +12,14 @@
 			<!-- <?php include('includes/services/services-tabs.php'); ?> -->
             <!-- <app-services-tabs class="desktop-only" [reset]="resetServiceTabs" [isAddonEnable]="cart?.selectedItems?.length" (changeTabEvent)="changeServiceTab($event)"></app-services-tabs> -->
 			
-			<div class="guest-different-services" *ngIf="cart?.guests?.length">
-				<input [checked]="true" id="guest-different" type="checkbox"/>
-				<label for="guest-different">My guests want different services</label>
+			<div class="guest-different-services" *ngIf="cart?.guests?.length" (click)="canAllowDifferentService()">
+				<input [(ngModel)]="isSameServices" [checked]="isSameServices" [disabled]="isSameServices && cart?.selectedItems?.length != 1" (change)="copyItemsToGuest()" id="guest-different" type="checkbox"/>
+				<label for="guest-different">Me & my guests want different services</label>
 			</div>
 			
 			<!--Guest Tabs-->
 			<!-- <?php include('includes/schedule/guest-tabs.php'); ?> -->
-            <app-guest-tabs *ngIf="cart?.guests?.length" [serviceCount]="getMemberAddedServiceCount" [guests]="cart.guests" (changeTabEvent)="changeGuestTab($event)"></app-guest-tabs>
+            <app-guest-tabs *ngIf="cart?.guests?.length && isGuestTabVisible" [serviceCount]="getMemberAddedServiceCount" [guests]="cart.guests" (changeTabEvent)="changeGuestTab($event)"></app-guest-tabs>
 						
 			<!--Mobile Tabs/Filters-->
 			<app-services-tabs [reset]="resetServiceTabs" [isAddonEnable]="cart?.selectedItems?.length" (changeTabEvent)="changeServiceTab($event)"></app-services-tabs>
@@ -50,4 +50,4 @@
 	</div>
 </section>
 
-<!-- <app-footer></app-footer> -->
+<!-- <app-footer></app-footer> --> 

@@ -1,6 +1,6 @@
 <ul class="services-list">
 	<li *ngFor="let addonItem of cart?.selectedItems | addons:client" [ngClass]="addonItem.selected ? 'active' : ''">
-		<button class="add-to-cart desktop-only" (click)="addModifier(addonItem)">
+		<button class="add-to-cart desktop-only" (click)="addModifierForAll(addonItem)">
             <img [src]="addonItem.selected ? 'assets/svgs/icon-selected-check.svg' : 'assets/svgs/icon-accordion-open.svg' " />
 			<!-- <?php 
 				include('svgs/icon-accordion-open.svg');
@@ -23,4 +23,4 @@
 			
 		</button>
 	</li>
-</ul>
+</ul> 

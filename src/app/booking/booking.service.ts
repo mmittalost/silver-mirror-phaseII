@@ -81,7 +81,8 @@ export class BookingService {
       "cartId": this.sharedService.getLocalStorageItem('cartId'),
       "itemGuestId": item.guestId,
       "itemId": item.id,
-      "itemStaffVariantId": item.staffId
+      "itemStaffVariantId": item.staffId,
+      "itemOptionIds": item.itemOptionIds
     }
     return this.http.post(BASE_URL+'/add_item_in_cart',payload);
   }
@@ -252,3 +253,4 @@ export class BookingService {
   }
 
 }
+ 

@@ -27,9 +27,10 @@ export class AddonsListComponent {
 
   constructor(public sharedService:SharedService, private bookingService:BookingService, private modalService: MdbModalService){}
 
-  addModifier(modifier:any){
+  addModifier(modifier:any, guestId:string|null){
+    console.log("GUESSHGSHGHS : , ", guestId)
     let selectedItems:any = this.cart.selectedItems.filter((selectedItem:any)=>{
-      return selectedItem.guestId == this.client.id;
+      return selectedItem.guestId == guestId;
     })
     console.log("SELECTED ITEMS : ", selectedItems);
     let optionIds:Array<string | null> = this.getSelectedModifiers(selectedItems);
@@ -40,7 +41,8 @@ export class AddonsListComponent {
         id: selectedItems[0].id,
         optionIds: [...optionIds, modifier.id],
         staffId:null,
-        guestId: this.client != 'me' ? this.client.id : null
+        guestId: guestId
+        // this.client != 'me' ? this.client.id : null
       }
       this.bookingService.addAddonInCart(payload).subscribe((res:any)=>{
         if(!res.errors){
@@ -56,6 +58,20 @@ export class AddonsListComponent {
       const title = 'Addon already added';
       const message = 'please choose another addon to add in cart.';
       this.sharedService.showNotification(title, message);
+    }
+  }
+
+  addModifierForAll(modifier:any){
+    let isSameService = this.sharedService.getLocalStorageItem('isSameService');
+    console.log('ISSJSJHJSHJS : ', isSameService);
+    if(isSameService == 'false'){
+      this.addModifier(modifier, null);
+      let guests = this.cart.guests;
+      guests.map((guest:any)=>{
+        this.addModifier(modifier, guest.id);
+      })
+    }else{
+      this.addModifier(modifier, this.client.id)
     }
   }
 
@@ -79,3 +95,4 @@ export class AddonsListComponent {
   }
 
 }
+ 

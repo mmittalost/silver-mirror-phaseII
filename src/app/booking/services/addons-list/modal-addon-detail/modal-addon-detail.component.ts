@@ -28,9 +28,9 @@ export class ModalAddonDetailComponent {
     }, 1000);
   }
 
-  addModifier(){
+  addModifier(guestId:string|null){
     let selectedItems:any = this.cart.selectedItems.filter((selectedItem:any)=>{
-      return selectedItem.guestId == this.client.id;
+      return selectedItem.guestId == guestId;
     })
     console.log("SELECTED ITEMS : ", selectedItems);
     let optionIds:Array<string | null> = this.getSelectedModifiers(selectedItems);
@@ -41,7 +41,8 @@ export class ModalAddonDetailComponent {
         id: selectedItems[0].id,
         optionIds: [...optionIds, this.addon.id],
         staffId:null,
-        guestId: this.client != 'me' ? this.client.id : null
+        guestId: guestId
+        // this.client != 'me' ? this.client.id : null
       }
       this.bookingService.addAddonInCart(payload).subscribe((res:any)=>{
         if(!res.errors){
@@ -61,6 +62,20 @@ export class ModalAddonDetailComponent {
     }
   }
 
+  addModifierForAll(){
+    let isSameService = this.sharedService.getLocalStorageItem('isSameService');
+    console.log('ISSJSJHJSHJS : ', isSameService);
+    if(isSameService == 'false'){
+      this.addModifier(null);
+      let guests = this.cart.guests;
+      guests.map((guest:any)=>{
+        this.addModifier(guest.id);
+      })
+    }else{
+      this.addModifier(this.client.id)
+    }
+  }
+
   getSelectedModifiers(selectedItems:any):Array<string | null>{
     if(selectedItems.length && selectedItems[0].selectedOptions && selectedItems[0].selectedOptions.length){
       const ids = selectedItems[0].selectedOptions.map((option:any)=> option.id);
@@ -72,3 +87,4 @@ export class ModalAddonDetailComponent {
   }
 
 }
+ 

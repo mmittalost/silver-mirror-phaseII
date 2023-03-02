@@ -26,6 +26,8 @@ export class ServicesComponent {
   resetTimeTabs:any;
   serviceFilter:string='Facials 30 Minutes'
   cart:any;
+  isSameServices:any;
+  isGuestTabVisible:boolean = true;
   addonModalRef!: MdbModalRef<ModalAddonsComponent> | null;
   isAddonAddedModalRef!: MdbModalRef<ModalIsAddonAddedComponent> | null;
   modalConfig: any = {
@@ -39,6 +41,7 @@ export class ServicesComponent {
   };
 
   constructor(public bookingService:BookingService, private sharedService:SharedService, private router:Router, private modalService: MdbModalService){
+    this.isSameServiceLocal();
     bookingService.updateCartDetail();
     bookingService.clientCart$.subscribe((cart)=>{
       if(cart){
@@ -47,6 +50,15 @@ export class ServicesComponent {
         console.log(this.cart);
       }
     })
+  }
+
+  isSameServiceLocal(){
+    let flag = this.sharedService.getLocalStorageItem('isSameSevices');
+    if(!flag || flag == 'true'){
+      this.isSameServices = true;
+    }else if(flag == 'false'){
+      this.isSameServices = false;
+    }
   }
 
   changeServiceTab(ev:any){
@@ -237,6 +249,64 @@ export class ServicesComponent {
       }
     }
     return count;
+  }
+
+  hideGuestTabs(){
+    this.isGuestTabVisible = false;
+  }
+
+  copyItemsToGuest(){
+    console.log("Is same services : ", this.isSameServices);
+    this.sharedService.setLocalStorageItem("isSameService", this.isSameServices.toString());
+    if(!this.isSameServices && this.cart.selectedItems.length == 1){
+      this.hideGuestTabs();
+      const guests = this.cart.guests;
+      const mySelectedItems = this.cart.selectedItems.filter((selectedItem:any)=> selectedItem.guestId == null)[0];
+      let mySelectedModifiers:any = [];
+      this.cart.selectedItems.filter((selectedItem:any)=> {
+        if(selectedItem.guestId == null){
+          let ids = selectedItem.selectedOptions.map((option:any)=> option.id);
+          mySelectedModifiers = ids
+        }
+      });
+      
+      if(this.cart.selectedItems.length == 1){
+        // Add items in cart
+        guests.forEach((guest:any)=>{
+          const payload = {
+            id:mySelectedItems.item.id,
+            staffId:null,
+            guestId: guest.id,
+            itemOptionIds: mySelectedModifiers
+          }
+          this.bookingService.addItemInCart(payload).subscribe((res:any)=>{
+            if(!res.errors){
+              this.bookingService.updateCartDetail();
+            }
+          });
+        })
+      }
+      else{
+        const title = 'Sevice already added for guest';
+        const message = 'Please remove the guest services to copy my services.';
+        this.sharedService.showNotification(title, message);
+      }
+    }else{
+      this.isGuestTabVisible = true;
+    }
+  }
+
+  canAllowDifferentService(){
+    console.log("can allow different service?");
+    if(this.isSameServices && this.cart.selectedItems.length > 1){
+      const title = 'Sevice already added for guest';
+      const message = 'Please remove the guest services to copy my services.';
+      this.sharedService.showNotification(title, message);
+    }else if(this.cart.selectedItems.length < 1){
+      const title = 'You have not added any service yet.';
+      const message = 'Please add a service for yourself first.';
+      this.sharedService.showNotification(title, message);
+    }
   }
 
   continue(){

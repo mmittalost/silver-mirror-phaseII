@@ -17,45 +17,59 @@ export class CartComponent {
   constructor(public bookingService:BookingService, public sharedService:SharedService, public router: Router) { }
 
   removeItem(item:any){
-    this.onItemRemoveEvent.emit();
-    console.log("remove item : ", item);
-    this.bookingService.removeItemInCart(item.id).subscribe((res:any)=>{
-      if(!res.errors){
-        const title = 'Success';
-        const message = 'Service removed successfully.';
-        this.sharedService.showNotification(title, message);
-        this.bookingService.updateCartDetail();
-      }else{
-        this.sharedService.showNotification('Errors', res.errors[0].message);
-      }
-    });
+    let isSameService = this.sharedService.getLocalStorageItem("isSameService");
+    if(isSameService == 'true'){
+      this.onItemRemoveEvent.emit();
+      console.log("remove item : ", item);
+      this.bookingService.removeItemInCart(item.id).subscribe((res:any)=>{
+        if(!res.errors){
+          const title = 'Success';
+          const message = 'Service removed successfully.';
+          this.sharedService.showNotification(title, message);
+          this.bookingService.updateCartDetail();
+        }else{
+          this.sharedService.showNotification('Errors', res.errors[0].message);
+        }
+      });
+    }else{
+      const title = 'Please enable me & my guest can have different services.';
+      const message = 'Then you will be able to add/remove services.';
+      this.sharedService.showNotification(title, message);
+    }
   }
 
   removeModifier(modifier:any, guestId:string){
-    let selectedItems:any = this.cart.selectedItems.filter((selectedItem:any)=>{
-      return selectedItem.guestId == guestId;
-    })
-    let optionIds:Array<string | null> = this.getSelectedModifiers(selectedItems);
-    let index = optionIds.indexOf(modifier.id);
-    optionIds.splice(index,1);
-    console.log("Found Index : ", index, optionIds);
-
-    const payload = {
-      id: selectedItems[0].id,
-      optionIds: [...optionIds],
-      staffId:null,
-      guestId:guestId
-    }
-    this.bookingService.addAddonInCart(payload).subscribe((res:any)=>{
-      if(!res.errors){
-        const title = 'Addon removed';
-        const message = 'REMOVED FROM CART';
-        this.sharedService.showNotification(title, message);
-        this.bookingService.updateCartDetail();
-      }else{
-        this.sharedService.showNotification('Errors', res.errors[0].message);
+    let isSameService = this.sharedService.getLocalStorageItem("isSameService");
+    if(isSameService == 'true'){
+      let selectedItems:any = this.cart.selectedItems.filter((selectedItem:any)=>{
+        return selectedItem.guestId == guestId;
+      })
+      let optionIds:Array<string | null> = this.getSelectedModifiers(selectedItems);
+      let index = optionIds.indexOf(modifier.id);
+      optionIds.splice(index,1);
+      console.log("Found Index : ", index, optionIds);
+  
+      const payload = {
+        id: selectedItems[0].id,
+        optionIds: [...optionIds],
+        staffId:null,
+        guestId:guestId
       }
-    });
+      this.bookingService.addAddonInCart(payload).subscribe((res:any)=>{
+        if(!res.errors){
+          const title = 'Addon removed';
+          const message = 'REMOVED FROM CART';
+          this.sharedService.showNotification(title, message);
+          this.bookingService.updateCartDetail();
+        }else{
+          this.sharedService.showNotification('Errors', res.errors[0].message);
+        }
+      });
+    }else{
+      const title = 'Please enable me & my guest can have different services.';
+      const message = 'Then you will be able to add/remove services.';
+      this.sharedService.showNotification(title, message);
+    }
   }
 
   getSelectedModifiers(selectedItems:any):Array<string | null>{
@@ -110,3 +124,4 @@ export class CartComponent {
   
 
 }
+ 
