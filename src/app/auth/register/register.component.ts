@@ -16,6 +16,7 @@ export class RegisterComponent {
   form!: FormGroup;
   loading = false;
   submitted = false;
+  joinEmail:boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -40,6 +41,7 @@ export class RegisterComponent {
 
     let formValue = this.form.value;
     formValue.email = this.form.controls['email'].value;
+    formValue.joinEmail = this.joinEmail;
 
     if (this.form.invalid) {
       const title = 'Invalid Form';

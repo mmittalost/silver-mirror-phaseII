@@ -82,6 +82,7 @@ export class AuthService {
         lastName: data.lastName,
         mobilePhone: data.phone,
       },
+      joinEmail: data.joinEmail
     };
     return this.http
       .post(BASE_URL + "/createClient", payload);

@@ -33,10 +33,10 @@
                         <div *ngIf="form.controls.phone.errors.required">Phone is required</div>
                     </div>
                 </div>
-                <!--<div class="subscription-checkbox">
-                    <input type="checkbox" id="email-subscription" name="email-subscription" value="yes">
+                <div class="subscription-checkbox">
+                    <input [(ngModel)]="joinEmail" [ngModelOptions]="{standalone: true}" type="checkbox" id="email-subscription" name="email-subscription" value="yes">
                     <label for="email-subscription">Join Our Email List</label>
-                </div>-->
+                </div>
                 <input class="btn" type="submit" value="Continue">
             </form>
         </article>

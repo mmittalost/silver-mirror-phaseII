@@ -18,7 +18,7 @@ export class CartComponent {
 
   removeItem(item:any){
     let isSameService = this.sharedService.getLocalStorageItem("isSameService");
-    if(isSameService == 'true'){
+    if(isSameService == 'true' || !isSameService){
       this.onItemRemoveEvent.emit();
       console.log("remove item : ", item);
       this.bookingService.removeItemInCart(item.id).subscribe((res:any)=>{
@@ -40,7 +40,7 @@ export class CartComponent {
 
   removeModifier(modifier:any, guestId:string){
     let isSameService = this.sharedService.getLocalStorageItem("isSameService");
-    if(isSameService == 'true'){
+    if(isSameService == 'true' || !isSameService){
       let selectedItems:any = this.cart.selectedItems.filter((selectedItem:any)=>{
         return selectedItem.guestId == guestId;
       })
