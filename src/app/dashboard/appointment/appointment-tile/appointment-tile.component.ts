@@ -16,19 +16,24 @@ export class AppointmentTileComponent {
   constructor(private dashboardService: DashboardService, private router:Router, private sharedService:SharedService){}
 
   cancelAppointment(){
-    if(this.appointment?.cancellable){
-      this.dashboardService.cancelAppointment(this.appointment.id).subscribe((res:any)=>{
-        if(!res.errors){
-          this.updateAppointments();
-        }else{
-          alert(res.errors[0].message);
+    const message = "Are you sure, You want to cancel your appointment?"
+      this.sharedService.openConfirmationAlert(message).then((res:any)=>{
+        if(res){
+          if(this.appointment?.cancellable){
+            this.dashboardService.cancelAppointment(this.appointment.id).subscribe((res:any)=>{
+              if(!res.errors){
+                this.updateAppointments();
+              }else{
+                alert(res.errors[0].message);
+              }
+            })
+          }else{
+            const title = 'Appointments canceled within 24 hours are subject to 50% service fee.';
+            const message = 'Please call our team to move forward with cancellation.';
+            this.sharedService.showNotification(title, message); 
+          }
         }
-      })
-    }else{
-      const title = 'Appointments canceled within 24 hours are subject to 50% service fee.';
-      const message = 'Please call our team to move forward with cancellation.';
-      this.sharedService.showNotification(title, message); 
-    }
+      });
   }
   
     updateAppointments(){

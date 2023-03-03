@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     public silverService: SilverMirrorService,
-    private router: Router,
+    public router: Router,
     public authService: AuthService
   ) {}
   logout() {

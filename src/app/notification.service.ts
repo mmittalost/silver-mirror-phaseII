@@ -33,6 +33,6 @@ export class NotificationService {
     toast.toastRef.componentInstance.message = message;
     setTimeout(() => {
       this.toastrService.remove(toast.toastId);
-    }, 3000);
+    }, 5000);
   }
 }
