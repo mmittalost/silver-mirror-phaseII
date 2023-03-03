@@ -1,7 +1,7 @@
 <div class="date-slots">
     <div class="week-chooser">
         <button class="arrow last-week" (click)="previousMonth()"><span class="accessibility">Last Week</span></button>
-        <span class="eyebrow small">{{currentMonth.format('MMMM YYYY')}} (Week {{selectedWeek + 1}})</span>
+        <span class="eyebrow small">{{currentMonth.format('MMMM YYYY')}}</span>
         <button class="arrow next-week" (click)="nextMonth()"><span class="accessibility">Next Week</span></button>
         
         <button class="show-calendar" (click)="toggleCalendarView()"><span>{{showFullCalendar ? 'Hide' : 'Show'}} Calendar</span></button>
