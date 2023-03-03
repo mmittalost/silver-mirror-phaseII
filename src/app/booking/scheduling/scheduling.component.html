@@ -168,7 +168,7 @@
     
                 <div class="time-slot-container" *ngIf="(availableTimes | async).length">
                     <h2 class="heading-6 small">Available Time</h2>
-                    <p *ngIf="!staffVarients.value?.length" class="xx-small info">Please select an appointment time.</p>
+                    <p style="position: sticky; left:0;" *ngIf="!staffVarients.value?.length" class="xx-small info">Please select an appointment time.</p>
                     <fieldset class="flex-container">
                         <span style="display: flex;" *ngFor="let time of availableTimes | async | timeFilter:{min:minValue, max:maxValue}">
                             <input (change)="selectTime(time)" [id]="time?.id" [checked]="time.selected" class="accessibility" name="time-chooser" type="radio"/>

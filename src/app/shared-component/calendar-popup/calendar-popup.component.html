@@ -1,0 +1,33 @@
+<div class="calendar-pop">
+    <div class="flex-container calendar-heading">
+        <button class="arrow last-month" (click)="prevMonth()"><span class="accessibility">Last Month</span></button>
+        <span class="eyebrow small desktop-only">{{currentMonth.format('MMMM YYYY')}}</span>
+        <!-- <button class="mobile-only close-calendar"><p class="x-small">Sunday, September 18</p></button> -->
+        <button class="arrow next-month" (click)="nextMonth()"><span class="accessibility">Next Month</span></button>
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th class="pill">M</th>
+                <th class="pill">T</th>
+                <th class="pill">W</th>
+                <th class="pill">T</th>
+                <th class="pill">F</th>
+                <th class="pill">S</th>
+                <th class="pill">S</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr *ngFor="let week of calendar">
+                <td *ngFor="let day of week">
+                    <label>
+                        <input [checked]="selectedDate?.fullDate == day.fullDate ? true : false" [id]="'pop-'+day.fullDate" [disabled]="!day.isAvailable" (change)="selectDate(day)" class="accessibility" name="monthday" type="radio"/>
+                        <span>{{day.date}}</span>
+                    </label>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

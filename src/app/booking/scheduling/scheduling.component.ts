@@ -29,6 +29,7 @@ export class SchedulingComponent implements OnInit {
   selectedItems:any = [];
   toggleTimeFilter:boolean = false;
   toggleStaffFilter:boolean = false;
+  cacheMonths:any = [];
 
   minValue: number = 9;
   maxValue: number = 20;
@@ -112,16 +113,23 @@ export class SchedulingComponent implements OnInit {
     const locationId = this.cart.location.id;
     console.log('Calendar Component : ', this.calendarComponent);
     let currentMonth = this.calendarComponent.currentMonth;
-    let lowerRange = moment(currentMonth).startOf('month').format('YYYY-MM-DD');
-    let upperRange = moment(currentMonth).endOf('month').format('YYYY-MM-DD');
-    this.bookingService.getScheduleDates(locationId, lowerRange, upperRange).subscribe((res:any)=>{
-      if(!res.errors){
-        this.availableDates.next(res.data.cartBookableDates);
-        console.log('available Dates : ', this.availableDates.value);
-      }else{
-        alert(res.errors[0].message);
-      }
-    })
+    let indexOfCacheMonth = this.cacheMonths.findIndex((cache:any)=> cache.isSame(currentMonth));
+    console.log("indexOfCacheMonth : ", indexOfCacheMonth);
+    if(indexOfCacheMonth == -1){
+      let lowerRange = moment(currentMonth).startOf('month').format('YYYY-MM-DD');
+      let upperRange = moment(currentMonth).endOf('month').format('YYYY-MM-DD');
+      this.bookingService.getScheduleDates(locationId, lowerRange, upperRange).subscribe((res:any)=>{
+        if(!res.errors){
+          const cacheAvailableDates = this.availableDates.value;
+          this.cacheMonths.push(currentMonth);
+          console.log("CacheMonths : ", this.cacheMonths);
+          this.availableDates.next([...res.data.cartBookableDates, ...cacheAvailableDates]);
+          console.log('available Dates : ', this.availableDates.value);
+        }else{
+          alert(res.errors[0].message);
+        }
+      })
+    }
   }
 
   monthChange(ev:any){

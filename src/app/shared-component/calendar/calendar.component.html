@@ -1,22 +1,23 @@
 <div class="date-slots">
     <div class="week-chooser">
         <button class="arrow last-week" (click)="previousMonth()"><span class="accessibility">Last Week</span></button>
-        <span class="eyebrow small">{{currentMonth.format('MMMM YYYY')}}</span>
+        <span class="eyebrow small">{{currentMonth.format('MMMM YYYY')}} (Week {{selectedWeek + 1}})</span>
         <button class="arrow next-week" (click)="nextMonth()"><span class="accessibility">Next Week</span></button>
         
         <button class="show-calendar" (click)="toggleCalendarView()"><span>{{showFullCalendar ? 'Hide' : 'Show'}} Calendar</span></button>
         
         <!--Calendar Popup-->
+        <app-calendar-popup *ngIf="showFullCalendar" [selectedDate]="selectedDate" (selectDateEvent)="selectDate($event)" (nextMonthEvent)="nextMonth()" (prevMonthEvent)="previousMonth()" [currentMonth]="currentMonth"[calendar]="calendar"></app-calendar-popup>
       
     </div>
     
     <!--Days of the Week-->    
     <div class="week-container">
-        <fieldset class="flex-container" *ngFor="let week of calendar | toggleCalendar:showFullCalendar:selectedWeek">
+        <fieldset class="flex-container" *ngFor="let week of calendar | toggleCalendar:false:selectedWeek">
             <div class="date-size" *ngFor="let day of week">
-                <div *ngIf="day.isCurrentMonth" [ngClass]="day.isToday ? 'active' : ''" class="flex-container expand-tile">
-                    <input [checked]="selectedDate?.fullDate == day.fullDate ? true : false" (change)="selectDate(day)" [id]="day.date" [disabled]="!day.isAvailable" class="accessibility" name="weekday" type="radio"/>
-                    <label [for]="day.date" class="heading-6">
+                <div [ngClass]="day.isToday ? 'active' : ''" class="flex-container expand-tile">
+                    <input [checked]="selectedDate?.fullDate == day.fullDate ? true : false" (change)="selectDate(day)" [id]="day.fullDate" [disabled]="!day.isAvailable" class="accessibility" name="weekday" type="radio"/>
+                    <label [for]="day.fullDate" class="heading-6">
                         <span class="pill">{{day.day}}</span> {{day?.date}}
                     </label>
                 </div>

@@ -34,12 +34,14 @@ export class CalendarComponent implements OnInit {
   }
 
   selectDate(day:any){
-    console.log("select Date event : ", day);
+    console.log("select Date event : ", day, this.selectedWeek);
+    day.isCurrentMonth ? this.selectedWeek = day.week : this.selectedWeek = 0;
+    // this.selectedDate = day;
     this.dateSelectEvent.emit(day);
   }
 
   toggleCalendarView() {
-    this.selectedWeek = 0;
+    // this.selectedWeek = 0;
     this.showFullCalendar = !this.showFullCalendar;
   }
 
@@ -83,6 +85,7 @@ export class CalendarComponent implements OnInit {
           day: currentDay.format('ddd'),
           isDisabled: currentDay.isBefore(moment().startOf('day')),
           month: currentDay.month(),
+          week: currentDay.week() - moment(currentDay).startOf('month').week(),
           year: currentDay.year(),
           isCurrentMonth: currentDay.month() === month.month(),
           dayShortName: currentDay.format('ddd')

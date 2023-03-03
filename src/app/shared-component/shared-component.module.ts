@@ -9,6 +9,8 @@ import { RouterModule } from '@angular/router';
 import { AlertComponent } from './alert/alert.component';
 import { AuthModule } from '../auth/auth.module';
 import { ConfirmationAlertComponent } from './confirmation-alert/confirmation-alert.component';
+import { CalendarPopupComponent } from './calendar-popup/calendar-popup.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -18,11 +20,13 @@ import { ConfirmationAlertComponent } from './confirmation-alert/confirmation-al
     FooterComponent,
     CalendarComponent,
     ToggleCalendarPipe,
-    ConfirmationAlertComponent
+    ConfirmationAlertComponent,
+    CalendarPopupComponent
   ],
   imports: [
     // BrowserModule,
     CommonModule,
+    FormsModule,
     RouterModule,
     AuthModule
   ],
