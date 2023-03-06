@@ -77,4 +77,11 @@ export class SharedService {
     });
   }
 
+  removeLastTimezone(str: string): string {
+    if (str.slice(-6).match(/[+-]\d{2}:\d{2}$/)) {
+      return str.slice(0, -6); // remove the last 6 characters (-04:00)
+    }
+    return str;
+  }
+
 }

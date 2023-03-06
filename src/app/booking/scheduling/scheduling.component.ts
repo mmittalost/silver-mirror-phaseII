@@ -32,10 +32,10 @@ export class SchedulingComponent implements OnInit {
   cacheMonths:any = [];
 
   minValue: number = 9;
-  maxValue: number = 20;
+  maxValue: number = 21;
   options: Options = {
     floor: 9,
-    ceil: 20,
+    ceil: 21,
     step:1,
     noSwitching: true,
     translate: (value: number): string => {
@@ -80,7 +80,7 @@ export class SchedulingComponent implements OnInit {
     // });
   }
 
-  constructor(private bookingService: BookingService, private router:Router, private sharedService:SharedService, private authService:AuthService){}
+  constructor(private bookingService: BookingService, private router:Router, public sharedService:SharedService, private authService:AuthService){}
 
   getStaffVariantByServiceId(serviceId:string){
     console.log("Filter Staff Variants");

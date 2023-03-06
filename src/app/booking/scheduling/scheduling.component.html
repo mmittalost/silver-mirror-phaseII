@@ -172,7 +172,7 @@
                     <fieldset class="flex-container">
                         <span style="display: flex;" *ngFor="let time of availableTimes | async | timeFilter:{min:minValue, max:maxValue}">
                             <input (change)="selectTime(time)" [id]="time?.id" [checked]="time.selected" class="accessibility" name="time-chooser" type="radio"/>
-                            <label [for]="time?.id">{{time?.startTime | date:'hh:mm a':'EST'}}</label>
+                            <label [for]="time?.id">{{sharedService.removeLastTimezone(time?.startTime) | date:'hh:mm a'}}</label>
                         </span>
                     </fieldset>
                 </div>

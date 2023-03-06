@@ -109,7 +109,7 @@ export class BookingService {
     const payload = {
       "cartID":this.sharedService.getLocalStorageItem('cartId'),
       "locationID":locationId,
-      "timeZone":"EST",
+      "timeZone":"America/New_York",
       "searchRangeLower":lowerRange,
       "searchRangeUpper":upperRange,
       "clientId": this.authService.$AuthUser.value?.authId
@@ -121,7 +121,7 @@ export class BookingService {
     const payload = {
       "cartID":this.sharedService.getLocalStorageItem('cartId'),
       "searchDate":date,
-      "timeZone":"EST",
+      "timeZone":"America/New_York",
       "clientId": this.authService.$AuthUser.value?.authId
     }
     return this.http.post(BASE_URL + '/get_cart_bookable_times', payload);
