@@ -65,19 +65,7 @@ export class SchedulingComponent implements OnInit {
         this.getBookableDates(); // it is making extra request need to fix it.
       }
     })
-    // this.bookingService.cartDetail$.subscribe((detail:any)=>{
-    //   console.log("Cart Detail : ", detail);
-    //   if(detail.length){
-    //     this.cartDetail = detail;
-    //     // this.getStaffVariantByServiceId("urn:blvd:Service:09ac1b50-2dc7-47d5-ac30-c1a0f523cbdc");
-    //   }
-    // });
-    // this.bookingService.cartDetails$.subscribe((detail:any)=>{
-    //   if(detail.length){
-    //     this.selectedItems = detail;
-    //     this.ifStaffVariantSelected();
-    //   }
-    // });
+    this.cart ? this.removeStaff() : null;
   }
 
   constructor(private bookingService: BookingService, private router:Router, public sharedService:SharedService, private authService:AuthService){}
@@ -113,9 +101,10 @@ export class SchedulingComponent implements OnInit {
     const locationId = this.cart.location.id;
     console.log('Calendar Component : ', this.calendarComponent);
     let currentMonth = this.calendarComponent?.currentMonth;
-    let indexOfCacheMonth = this.cacheMonths.findIndex((cache:any)=> cache.isSame(currentMonth));
+    let indexOfCacheMonth = this.cacheMonths?.length ? this.cacheMonths.findIndex((cache:any)=> cache?.isSame(currentMonth)) : -1;
     console.log("indexOfCacheMonth : ", indexOfCacheMonth);
     if(indexOfCacheMonth == -1){
+      // this.removeStaff(); // need to check
       let lowerRange = moment(currentMonth).startOf('month').format('YYYY-MM-DD');
       let upperRange = moment(currentMonth).endOf('month').format('YYYY-MM-DD');
       this.bookingService.getScheduleDates(locationId, lowerRange, upperRange).subscribe((res:any)=>{
@@ -124,6 +113,7 @@ export class SchedulingComponent implements OnInit {
           this.cacheMonths.push(currentMonth);
           console.log("CacheMonths : ", this.cacheMonths);
           this.availableDates.next([...res.data.cartBookableDates, ...cacheAvailableDates]);
+          // this.removeStaff();/
           console.log('available Dates : ', this.availableDates.value);
         }else{
           alert(res.errors[0].message);
@@ -167,31 +157,43 @@ export class SchedulingComponent implements OnInit {
   selectStaff(staff:any){
     staff.selected = !staff.selected;
     this.selectedStaff = staff;
-    const itemId:string = this.selectedItems.length ? this.selectedItems[0].id : "";
+  }
 
-    console.log("Selected Items : ", this.selectedItems);
-    this.bookingService.updateItemInCart(itemId, this.selectedStaff.id).subscribe((res:any)=>{
-      if(!res.errors){
-        console.log(res);
-        this.bookingService.updateCartDetail();
-        // this.getBookableDates();
-      }else{
-        alert(res.errors[0].message);
-      }
-    })
+  removeStaff(){
+    return new Promise((resolve, reject)=>{
+      const itemId:string = this.selectedItems.length ? this.selectedItems[0].id : "";
+      this.bookingService.updateItemInCart(itemId, null).subscribe((res:any)=>{
+        if(!res.errors){
+          resolve(true);
+          console.log(res);
+        }else{
+          reject();
+          alert(res.errors[0].message);
+        }
+      })
+    });
   }
 
   reserveCart(){
     window.scrollTo(0, 0);
     const bookableTimeId = this.selectedTime?.id;
     if(bookableTimeId){
-      this.bookingService.reserveCartItems(bookableTimeId).subscribe((res:any)=>{
+      const itemId:string = this.selectedItems.length ? this.selectedItems[0].id : "";
+      this.bookingService.updateItemInCart(itemId, this.selectedStaff.id).subscribe((res:any)=>{
         if(!res.errors){
-          this.router.navigateByUrl('booking/review');
+          console.log(res);
+          this.bookingService.reserveCartItems(bookableTimeId).subscribe((res:any)=>{
+            if(!res.errors){
+              this.router.navigateByUrl('booking/review');
+            }else{
+              console.log(res.errors);
+            }
+          })
+          // this.getBookableDates();
         }else{
-          console.log(res.errors);
+          alert(res.errors[0].message);
         }
-      })
+      });
     }else{
       const title = 'Appointment time not selected';
       const message = 'Please choose an appointment time.';

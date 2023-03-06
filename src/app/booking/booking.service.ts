@@ -147,7 +147,7 @@ export class BookingService {
     return this.http.post(BASE_URL + '/get_cart_staff_variants', payload);
   }
 
-  updateItemInCart(itemId:any, staffId:string){
+  updateItemInCart(itemId:any, staffId:string | null){
     const payload = {
       cartId:this.sharedService.getLocalStorageItem('cartId'),
       itemGuestId:'',
