@@ -32,14 +32,14 @@
 					<li>
 						<label class="pill" for="name">Name On The Card*</label>
 						<input formControlName="name" type="text" id="name" placeholder="Name On The Card"/>
-						<div *ngIf="paymentForm.controls.name.invalid && (paymentForm.controls.name.dirty || paymentForm.controls.name.touched)">
+						<div class="required" *ngIf="paymentForm.controls.name.invalid && (paymentForm.controls.name.dirty || paymentForm.controls.name.touched)">
                             <div *ngIf="paymentForm.controls.name.errors?.required">Name is required</div>
                         </div>
 					</li>
 					<li>
 						<label class="pill" for="card-details">Card Details*</label>
 						<input maxLength="16" minLength="15" formControlName="number" type="text" id="card-details" placeholder="Card Number"/>
-						<div *ngIf="paymentForm.controls.number.invalid && (paymentForm.controls.number.dirty || paymentForm.controls.number.touched)">
+						<div class="required" *ngIf="paymentForm.controls.number.invalid && (paymentForm.controls.number.dirty || paymentForm.controls.number.touched)">
                             <div *ngIf="paymentForm.controls.number.errors?.required">Card number is required</div>
                         </div>
 					</li>
@@ -51,7 +51,7 @@
 					<li>
 						<label class="pill" for="card-exp">Expiration Date*</label>
 						<input maxLength="7" minLength="7" formControlName="expiry" type="text" id="card-exp" placeholder="MM/YYYY"/>
-						<div *ngIf="paymentForm.controls.expiry.invalid && (paymentForm.controls.expiry.dirty || paymentForm.controls.expiry.touched)">
+						<div class="required" *ngIf="paymentForm.controls.expiry.invalid && (paymentForm.controls.expiry.dirty || paymentForm.controls.expiry.touched)">
                             <div *ngIf="paymentForm.controls.expiry.errors?.required">Expiry date is required</div>
                         </div>
 					</li>
@@ -59,7 +59,7 @@
 					<li>
 						<label class="pill" for="card-cvv">CVV*</label>
 						<input maxLength="3" minLength="3" formControlName="cvv" type="text" id="card-cvv" placeholder="***"/>
-						<div *ngIf="paymentForm.controls.cvv.invalid && (paymentForm.controls.cvv.dirty || paymentForm.controls.cvv.touched)">
+						<div class="required" *ngIf="paymentForm.controls.cvv.invalid && (paymentForm.controls.cvv.dirty || paymentForm.controls.cvv.touched)">
                             <div *ngIf="paymentForm.controls.cvv.errors?.required">CVV is required</div>
                         </div>
 					</li>
@@ -67,7 +67,7 @@
 					<li>
 						<label class="pill" for="postal-code">Postal Code*</label>
 						<input maxLength="5" minLength="5" formControlName="postal_code" type="text" id="postal-code" placeholder="Postal Code"/>
-						<div *ngIf="paymentForm.controls.postal_code.invalid && (paymentForm.controls.postal_code.dirty || paymentForm.controls.postal_code.touched)">
+						<div class="required" *ngIf="paymentForm.controls.postal_code.invalid && (paymentForm.controls.postal_code.dirty || paymentForm.controls.postal_code.touched)">
                             <div *ngIf="paymentForm.controls.postal_code.errors?.required">Postal code is required</div>
                         </div>
 					</li>
@@ -84,7 +84,7 @@
 					<li>
 						<label class="pill" for="first-name">First Name*</label>
 						<input formControlName="firstName" type="text" id="first-name" placeholder="First Name"/>
-						<div *ngIf="userInfoForm.controls.firstName.invalid && (userInfoForm.controls.firstName.dirty || userInfoForm.controls.firstName.touched)">
+						<div class="required" *ngIf="userInfoForm.controls.firstName.invalid && (userInfoForm.controls.firstName.dirty || userInfoForm.controls.firstName.touched)">
                             <div *ngIf="userInfoForm.controls.firstName.errors?.required">First name is required</div>
                         </div>
 					</li>
@@ -97,7 +97,7 @@
 					<li>
 						<label class="pill" for="phone">Phone Number*</label>
 						<input type="tel" formControlName="mobilePhone" id="phone" placeholder="(555) 555-5555"/>
-						<div *ngIf="userInfoForm.controls.mobilePhone.invalid && (userInfoForm.controls.mobilePhone.dirty || userInfoForm.controls.mobilePhone.touched)">
+						<div class="required" *ngIf="userInfoForm.controls.mobilePhone.invalid && (userInfoForm.controls.mobilePhone.dirty || userInfoForm.controls.mobilePhone.touched)">
                             <div *ngIf="userInfoForm.controls.mobilePhone.errors?.required">Mobile number is required</div>
                         </div>
 					</li>
@@ -105,7 +105,7 @@
 					<li>
 						<label class="pill" for="email">Email Address*</label>
 						<input formControlName="email" type="email" id="email" placeholder="email@address.com"/>
-						<div *ngIf="userInfoForm.controls.email.invalid && (userInfoForm.controls.email.dirty || userInfoForm.controls.email.touched)">
+						<div class="required" *ngIf="userInfoForm.controls.email.invalid && (userInfoForm.controls.email.dirty || userInfoForm.controls.email.touched)">
                             <div *ngIf="userInfoForm.controls.email.errors?.required">Email is required</div>
                         </div>
 					</li>
