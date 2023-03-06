@@ -74,7 +74,7 @@ export class ReviewComponent implements OnInit {
     // userInfoForm
     this.userInfoForm = this.formBuilder.group({
       firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      lastName: [''],
       // dob: ['', Validators.required],
       email: ['', Validators.compose([Validators.required, Validators.email])],
       mobilePhone: ['', Validators.required],
