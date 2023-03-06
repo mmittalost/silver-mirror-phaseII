@@ -3168,7 +3168,7 @@ aside .pill.location {
 
 .credit-card-details.grid li:nth-child(2):before {
 	background: url('assets/svgs/icon-cc.svg') no-repeat center/100% auto;
-	bottom: 20px;
+	top: 46px;
 	content: '';
 	height: 12px;
 	left: 20px;
@@ -7389,3 +7389,8 @@ body.modal-open {
 	}
 
  }
+
+ .required {
+	font-size: 12px;
+	color: red;
+  }
