@@ -26,7 +26,7 @@ export class ServicesComponent {
   resetTimeTabs:any;
   serviceFilter:string='Facials 30 Minutes'
   cart:any;
-  isSameServices:any;
+  isSameServices:any = false;
   isGuestTabVisible:boolean = true;
   addonModalRef!: MdbModalRef<ModalAddonsComponent> | null;
   isAddonAddedModalRef!: MdbModalRef<ModalIsAddonAddedComponent> | null;
@@ -41,7 +41,6 @@ export class ServicesComponent {
   };
 
   constructor(public bookingService:BookingService, private sharedService:SharedService, private router:Router, private modalService: MdbModalService){
-    this.isSameServiceLocal();
     bookingService.updateCartDetail();
     bookingService.clientCart$.subscribe((cart)=>{
       if(cart){
@@ -52,11 +51,17 @@ export class ServicesComponent {
     })
   }
 
+  ngAfterViewInit() {
+    this.isSameServiceLocal();
+    console.log("Is view after init");
+  }
+
   isSameServiceLocal(){
-    let flag = this.sharedService.getLocalStorageItem('isSameSevices');
+    let flag = this.sharedService.getLocalStorageItem('isSameService');
     if(!flag || flag == 'true'){
       this.isSameServices = true;
     }else if(flag == 'false'){
+      console.log("FLAG IS FALSEEE");
       this.isSameServices = false;
     }
   }
