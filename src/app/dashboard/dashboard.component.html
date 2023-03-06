@@ -6,7 +6,7 @@
 		<!--Sidebar-->
 		<ul class="small portal-links">
             <li routerLink="/dashboard/appointments" [routerLinkActive]="['active']"><a>My Appointments</a></li>
-            <li routerLink="/dashboard/memberships" [routerLinkActive]="['active']"><a>Silver Mirror Membership</a></li>
+            <li [ngClass]="router.url=='/dashboard/membership-products' ? 'active' : '' " routerLink="/dashboard/memberships" [routerLinkActive]="['active']"><a>Silver Mirror Membership</a></li>
             <li><a>Purchases</a></li>
             <li routerLink="/dashboard/account" [routerLinkActive]="['active']"><a>Account Information</a></li>
             <li routerLink="/booking"><a>Book A Facial</a></li>

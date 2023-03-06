@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DashboardService } from './dashboard.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { DashboardService } from './dashboard.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(public dashboardService:DashboardService){
+  constructor(public dashboardService:DashboardService, public router: Router){
     this.dashboardService.getServices();
   }
 
