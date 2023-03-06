@@ -54,7 +54,8 @@ export class CongratsComponent {
     return this.appointment.appointmentServiceOptions.length + this.appointment.appointmentServices.length;
   }
 
-  shareViaEmail() {
+  shareViaEmail(ev:any) {
+    ev.preventDefault();
     const shareVariables = {
       date: moment(this.appointment.startAt.slice(0, -6)).format('MMMM DD, YYYY @ h:mm A'),
       location: this.appointment.location.address.city,
@@ -102,6 +103,11 @@ export class CongratsComponent {
     }else{
       this.router.navigateByUrl("/dashboard")
     }
+  }
+
+  openLink(ev:any, link:any){
+    ev.preventDefault();
+    window.open(link, '_blank');
   }
 
 }

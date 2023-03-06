@@ -82,11 +82,11 @@
 					<ul class="actions">
 						<li (click)="toggleOptions = !toggleOptions" class="add-to-cal"><a class="btn small black">Add to Cal</a>
 							<ul *ngIf="toggleOptions" class="add-to-cal-menu add-to-cal-pop">
-								<li><a target="_blank" [href]="appointment?.calendarLinks?.googleCalendar">Google Calendar</a></li>
-								<li><a target="_blank" [href]="appointment?.calendarLinks?.icsDownload">ics Download</a></li>
-								<li><a target="_blank" [href]="appointment?.calendarLinks?.microsoftOffice">Microsoft Office</a></li>
-								<li><a target="_blank" [href]="appointment?.calendarLinks?.microsoftOutlook">Microsoft Outlook</a></li>
-								<li><a target="_blank" [href]="appointment?.calendarLinks?.yahooCalendar">Yahoo Calendar</a></li>
+								<li><a target="_blank" (click)="openLink($event, appointment?.calendarLinks?.googleCalendar)" [href]="appointment?.calendarLinks?.googleCalendar">Google Calendar</a></li>
+								<li><a target="_blank" (click)="openLink($event, appointment?.calendarLinks?.icsDownload)" [href]="appointment?.calendarLinks?.icsDownload">ics Download</a></li>
+								<li><a target="_blank" (click)="openLink($event, appointment?.calendarLinks?.microsoftOffice)" [href]="appointment?.calendarLinks?.microsoftOffice">Microsoft Office</a></li>
+								<li><a target="_blank" (click)="openLink($event, appointment?.calendarLinks?.microsoftOutlook)" [href]="appointment?.calendarLinks?.microsoftOutlook">Microsoft Outlook</a></li>
+								<li><a target="_blank" (click)="openLink($event, appointment?.calendarLinks?.yahooCalendar)" [href]="appointment?.calendarLinks?.yahooCalendar">Yahoo Calendar</a></li>
 							</ul>
 						
 						</li>
@@ -94,7 +94,7 @@
 							<ul *ngIf="toggleShareOptions" class="add-to-cal-menu add-to-cal-pop">
 								<!-- <li (click)="shareOnFacebook()"><a>Facebook</a></li> -->
 								<!-- <li (click)="shareOnTwitter()"><a>Twitter</a></li> -->
-								<li (click)="shareViaEmail()"><a>Email</a></li>
+								<li (click)="shareViaEmail($event)"><a>Email</a></li>
 							</ul>
 						
 						</li>
