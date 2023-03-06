@@ -325,7 +325,12 @@ export class ServicesComponent {
           this.addonModalRef.onClose.subscribe((choice:any)=>{
             console.log("transfered choice : ", choice);
             if(choice && choice.choice){
-
+              this.changeServiceTab('addon');
+              this.resetServiceTabs = {event:true, currentTab:'addon'};
+              setTimeout(() => {
+                this.resetServiceTabs = {event:false, currentTab:'addon'};
+              }, 1000);
+              // this.tabs.service = 'addon'
               // write code to show addon list
 
             }else{

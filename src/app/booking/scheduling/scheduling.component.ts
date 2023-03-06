@@ -112,7 +112,7 @@ export class SchedulingComponent implements OnInit {
   getBookableDates(){
     const locationId = this.cart.location.id;
     console.log('Calendar Component : ', this.calendarComponent);
-    let currentMonth = this.calendarComponent.currentMonth;
+    let currentMonth = this.calendarComponent?.currentMonth;
     let indexOfCacheMonth = this.cacheMonths.findIndex((cache:any)=> cache.isSame(currentMonth));
     console.log("indexOfCacheMonth : ", indexOfCacheMonth);
     if(indexOfCacheMonth == -1){
