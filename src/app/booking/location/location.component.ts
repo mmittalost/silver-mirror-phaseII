@@ -59,7 +59,6 @@ export class LocationComponent {
 
   selectLocation(id:any){
     const locationId = this.sharedService.getLocalStorageItem('selectedLocation');
-    console.log("ID",id);
     const cartId = this.sharedService.getLocalStorageItem('cartId');
     if(locationId == id && cartId){
       this.router.navigateByUrl('/booking/whoscoming');

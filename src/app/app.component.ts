@@ -8,11 +8,7 @@ import { NotificationService } from './notification.service';
 export class AppComponent {
   title = 'silver-mirror-phaseII';
 
-  constructor(private notificationService:NotificationService) {
-    // setTimeout(() => {
-    //   this.notificationService.$notification.next({title:'Test Title', message:'Test Message!'});
-    // }, 3000);
-   }
+  constructor(private notificationService:NotificationService) { }
   
   ngOnInit() { }
 }

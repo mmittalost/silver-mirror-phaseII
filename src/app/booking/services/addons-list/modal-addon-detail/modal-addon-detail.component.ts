@@ -23,18 +23,13 @@ export class ModalAddonDetailComponent {
         this.cart = cart;
       }
     });
-    setTimeout(() => {
-      console.log("addon detail modal : ", this.addon);
-    }, 1000);
   }
 
   addModifier(guestId:string|null){
     let selectedItems:any = this.cart.selectedItems.filter((selectedItem:any)=>{
       return selectedItem.guestId == guestId;
     })
-    console.log("SELECTED ITEMS : ", selectedItems);
     let optionIds:Array<string | null> = this.getSelectedModifiers(selectedItems);
-    console.log(selectedItems, optionIds);
     let index = optionIds.indexOf(this.addon.id);
     if(index < 0){
       const payload = {
@@ -42,7 +37,6 @@ export class ModalAddonDetailComponent {
         optionIds: [...optionIds, this.addon.id],
         staffId:null,
         guestId: guestId
-        // this.client != 'me' ? this.client.id : null
       }
       this.bookingService.addAddonInCart(payload).subscribe((res:any)=>{
         if(!res.errors){
@@ -64,7 +58,6 @@ export class ModalAddonDetailComponent {
 
   addModifierForAll(){
     let isSameService = this.sharedService.getLocalStorageItem('isSameService');
-    console.log('ISSJSJHJSHJS : ', isSameService);
     if(isSameService == 'false'){
       this.addModifier(null);
       let guests = this.cart.guests;
@@ -79,7 +72,6 @@ export class ModalAddonDetailComponent {
   getSelectedModifiers(selectedItems:any):Array<string | null>{
     if(selectedItems.length && selectedItems[0].selectedOptions && selectedItems[0].selectedOptions.length){
       const ids = selectedItems[0].selectedOptions.map((option:any)=> option.id);
-      console.log('Selected options : ', ids);
       return ids;
     }else{
       return []

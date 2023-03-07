@@ -1,9 +1,7 @@
 import { Location } from "@angular/common";
 import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
 import { SharedService } from "src/app/shared-component/shared.service";
-import { SilverMirrorService } from "../../silver-mirror.service";
 import { AuthService } from "../auth.service";
 
 @Component({
@@ -21,7 +19,6 @@ export class RegisterComponent {
   constructor(
     private formBuilder: FormBuilder,
     public authService: AuthService,
-    private router: Router,
     private sharedService:SharedService,
     private _location: Location,
   ) {}
@@ -33,7 +30,6 @@ export class RegisterComponent {
       email: [{value: history.state.email ? history.state.email : "", disabled: true}, Validators.required],
       phone: ["", Validators.compose([Validators.required, Validators.maxLength(10), Validators.minLength(10)])],
     });
-    // this.form.controls.email.disable();
   }
 
   createAccount() {
@@ -57,8 +53,6 @@ export class RegisterComponent {
         const message = 'Please login to book an appointment';
         this.sharedService.showNotification(title, message);
         this._location.back();
-      }else{
-        console.log(res.errors[0].message);
       }
     });
   }

@@ -20,7 +20,6 @@ export class MembershipsComponent {
     this.dashboardService.myMembershipsList().subscribe((res:any)=>{
       if(!res.errors){
         this.$memberships.next(res.data.myMemberships.edges);
-        console.log(this.$memberships.value);
         if(!this.$memberships.value.length){
           this.router.navigateByUrl("/dashboard/membership-products");
         }

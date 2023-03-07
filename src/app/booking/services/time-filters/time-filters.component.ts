@@ -14,7 +14,6 @@ export class TimeFiltersComponent {
   constructor(){}
 
   ngOnChanges(changes: SimpleChanges){
-    console.log("reset Tabs : ", changes.reset)
     !changes.reset ? this.changeTab('30') : null;
     changes.reset && changes.reset.currentValue ? this.changeTab(changes.reset.currentValue) : null;
   }

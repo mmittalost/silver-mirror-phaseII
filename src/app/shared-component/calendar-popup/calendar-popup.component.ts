@@ -19,9 +19,7 @@ export class CalendarPopupComponent {
   constructor(private changeRef:ChangeDetectorRef){}
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("POPUP CHANGE : ", changes)
     changes.selectedDate ? this.selectedDate = changes.selectedDate.currentValue : null;
-    console.log(this.selectedDate);
     this.changeRef.detectChanges();
   }
 

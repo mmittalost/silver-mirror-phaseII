@@ -16,7 +16,6 @@ export class ModalIsAddonAddedComponent {
   }
 
   addAddon(choice:boolean){
-    console.log("addon choice : ", choice);
     this.modalRef.close({choice:choice});
   }
 

@@ -13,7 +13,6 @@ export class HeaderComponent {
   ReadMore: boolean = true;
   visible: boolean = false;
   user:any;
-  // loginStatus: boolean = false;
 
   constructor() {}
   

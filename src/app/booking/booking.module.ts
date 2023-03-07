@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BookingRoutingModule } from './booking.routing.module';
 import { LocationComponent } from './location/location.component';
 import { SharedComponentModule } from '../shared-component/shared-component.module';
-import { LocationGroupPipe } from '../location-group.pipe';
+import { LocationGroupPipe } from './location/location-group.pipe';
 import { WhosComingComponent } from './whos-coming/whos-coming.component';
 import { ServicesComponent } from './services/services.component';
 import { ServicesTabsComponent } from './services/services-tabs/services-tabs.component';

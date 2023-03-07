@@ -1,11 +1,9 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpResponse } from "@angular/common/http";
-import { BehaviorSubject, map, Observable } from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { BehaviorSubject } from "rxjs";
 import { Router } from "@angular/router";
 
 const BASE_URL = "https://blvd.silvermirror.com";
-// const CLIENT_ID = localStorage.getItem('clientID'); // himanshu.sharma@opensourcetechnologies.com
-const CLIENT_ID = "0b9b1658-d8f2-4f3e-aabc-0574ef6a8af9"; // testost1@gmail.com
 
 @Injectable({
   providedIn: "root",
@@ -41,7 +39,6 @@ export class AuthService {
               email: email
             }
           }
-          console.log(params);
           this.router.navigateByUrl("/auth/register", params)
         }
       });

@@ -22,11 +22,7 @@ export class CalendarComponent implements OnInit {
   constructor(){}
 
   ngOnInit(): void {
-    console.log(this.currentMonth);
     this.generateCalendar(this.currentMonth);
-    setTimeout(() => {
-      console.log("Calendar : ", this.calendar);
-    }, 1000);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -34,7 +30,6 @@ export class CalendarComponent implements OnInit {
   }
 
   selectDate(day:any){
-    console.log("select Date event : ", day, this.selectedWeek);
     day.isCurrentMonth ? this.selectedWeek = day.week : this.selectedWeek = 0;
     // this.selectedDate = day;
     this.dateSelectEvent.emit(day);
@@ -109,7 +104,6 @@ export class CalendarComponent implements OnInit {
       return;
     }else{
       // Go to the previous month and regenerate the calendar
-      console.log(this.selectedWeek);
       this.calendar = [];
       this.currentMonth = this.currentMonth.clone().subtract(1, 'month');
       this.generateCalendar(this.currentMonth);

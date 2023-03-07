@@ -51,10 +51,8 @@ export class DashboardService {
                       service.node.serviceOptionGroups.map((optionGroup: any) => {
                         if (optionGroup.serviceOptions.length) {
                           const match = optionGroup.serviceOptions.filter((option: any) => {
-                              /* console.log(option.id,"<====>",appointmentServiceOption.id, option.id == appointmentServiceOption.serviceOptionId) */;
                               return option.id == appointmentServiceOption.serviceOptionId
                           })
-                          console.log(match);
                           match.length ? appointmentServiceOption.name = match[0].name : null;
                         }
                       })

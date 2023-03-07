@@ -53,7 +53,6 @@ export class AppointmentTileComponent {
           appointmentId:this.appointment.id
         }
       }
-      console.log(params);
       this.router.navigateByUrl('/dashboard/reschedule', params)
     }
 

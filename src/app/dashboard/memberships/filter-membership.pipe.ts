@@ -29,7 +29,6 @@ export class MembershipServicesPipe implements PipeTransform {
           vouchers = [...vouchers, ...voucher.services]
         })
       })
-      console.log('vouchers : ',vouchers);
       return vouchers;
     }else{
       return memberships;

@@ -9,7 +9,6 @@ export class AddonsPipe implements PipeTransform {
   constructor(private bookingService:BookingService){}
 
   transform(selectedItems: Array<any>, client:any): Array<any> {
-    console.log("addons list pipe : ", selectedItems)
     let addons:any = [];
     let items:any = selectedItems.filter((selectedItem:any)=>{
       if(client != 'me'){
@@ -43,7 +42,6 @@ export class AddonsPipe implements PipeTransform {
   }
 
   isAddonAdded(options:Array<any>, selectedItems:Array<any>){
-    console.log('addon pipe', options, selectedItems)
     if(options.length){
       options.map((option:any)=>{
         selectedItems[0].selectedOptions.map((selectedOption:any)=>{

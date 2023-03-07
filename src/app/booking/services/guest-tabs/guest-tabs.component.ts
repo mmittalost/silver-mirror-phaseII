@@ -12,11 +12,7 @@ export class GuestTabsComponent {
   @Output() changeTabEvent = new EventEmitter<string>();
   tab='me';
 
-  constructor(){
-    // setTimeout(() => {
-    //     console.log('guest tabs : ', this.guests, this.serviceCount);
-    // }, 1000);
-  }
+  constructor(){ }
 
   changeTab(tab:any){
     if(tab == 'me'){

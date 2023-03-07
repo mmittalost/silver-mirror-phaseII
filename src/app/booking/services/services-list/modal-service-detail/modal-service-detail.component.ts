@@ -26,7 +26,6 @@ export class ModalServiceDetailComponent {
   }
 
   addService(){
-    console.log("GUEST : ", this.client);
     let selected:boolean = false;
     this.cart.selectedItems.map((selectedItem:any)=>{
       if(this.client != 'me'){

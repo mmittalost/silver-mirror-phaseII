@@ -71,50 +71,25 @@ export class SchedulingComponent implements OnInit {
   constructor(private bookingService: BookingService, private router:Router, public sharedService:SharedService, private authService:AuthService){}
 
   getStaffVariantByServiceId(serviceId:string){
-    console.log("Filter Staff Variants");
     this.cart.map((cart:any)=>{
       const service = cart.availableItems.filter((item:any)=>item.id == serviceId);
-      console.log("Service Found : ", service);
       service.length ? this.staffVarients.next(service[0].staffVariants) : null;
       return;
     })
-    console.log("this.staffVariants : ", this.staffVarients.value);
   }
-
-  // ifStaffVariantSelected(){
-  //   const selectedStaff = this.selectedItems.length && this.selectedItems[0].selectedStaffVariant? this.selectedItems[0]?.selectedStaffVariant?.staff : null;
-  //   console.log('Selected Staff',selectedStaff);
-  //   const staffVariants = this.staffVarients.value;
-  //   console.log('this.staff', staffVariants);
-  //   if(selectedStaff){
-  //     staffVariants.map((variant:any)=> {
-  //       if(variant.staff.id == selectedStaff.id){
-  //         variant.selected = true;
-  //       }
-  //     })
-  //   }
-  //   this.staffVarients.next(staffVariants);
-  //   console.log('this.staff', this.staffVarients.value);
-  // }
 
   getBookableDates(){
     const locationId = this.cart.location.id;
-    console.log('Calendar Component : ', this.calendarComponent);
     let currentMonth = this.calendarComponent?.currentMonth;
     let indexOfCacheMonth = this.cacheMonths?.length ? this.cacheMonths.findIndex((cache:any)=> cache?.isSame(currentMonth)) : -1;
-    console.log("indexOfCacheMonth : ", indexOfCacheMonth);
     if(indexOfCacheMonth == -1){
-      // this.removeStaff(); // need to check
       let lowerRange = moment(currentMonth).startOf('month').format('YYYY-MM-DD');
       let upperRange = moment(currentMonth).endOf('month').format('YYYY-MM-DD');
       this.bookingService.getScheduleDates(locationId, lowerRange, upperRange).subscribe((res:any)=>{
         if(!res.errors){
           const cacheAvailableDates = this.availableDates.value;
           this.cacheMonths.push(currentMonth);
-          console.log("CacheMonths : ", this.cacheMonths);
           this.availableDates.next([...res.data.cartBookableDates, ...cacheAvailableDates]);
-          // this.removeStaff();/
-          console.log('available Dates : ', this.availableDates.value);
         }else{
           alert(res.errors[0].message);
         }
@@ -124,7 +99,6 @@ export class SchedulingComponent implements OnInit {
 
   monthChange(ev:any){
     this.getBookableDates();
-    // console.log("Month Change : ", ev);
   }
 
   selectDate(ev:any){
@@ -132,7 +106,6 @@ export class SchedulingComponent implements OnInit {
     this.bookingService.getScheduleTimes(ev.fullDate).subscribe((res:any)=>{
       if(!res.errors){
         this.availableTimes.next(res.data.cartBookableTimes);
-        console.log(this.availableTimes.value);
       }else{
         alert(res.errors[0].message);
       }
@@ -165,7 +138,6 @@ export class SchedulingComponent implements OnInit {
       this.bookingService.updateItemInCart(itemId, null).subscribe((res:any)=>{
         if(!res.errors){
           resolve(true);
-          console.log(res);
         }else{
           reject();
           alert(res.errors[0].message);
@@ -179,18 +151,14 @@ export class SchedulingComponent implements OnInit {
     const bookableTimeId = this.selectedTime?.id;
     if(bookableTimeId){
       const itemId:string = this.selectedItems.length ? this.selectedItems[0].id : "";
-      if(this.selectedStaff.id){
+      if(this.selectedStaff?.id){
         this.bookingService.updateItemInCart(itemId, this.selectedStaff.id).subscribe((res:any)=>{
           if(!res.errors){
-            console.log(res);
             this.bookingService.reserveCartItems(bookableTimeId).subscribe((res:any)=>{
               if(!res.errors){
                 this.router.navigateByUrl('booking/review');
-              }else{
-                console.log(res.errors);
               }
             })
-            // this.getBookableDates();
           }else{
             alert(res.errors[0].message);
           }
@@ -199,8 +167,6 @@ export class SchedulingComponent implements OnInit {
         this.bookingService.reserveCartItems(bookableTimeId).subscribe((res:any)=>{
           if(!res.errors){
             this.router.navigateByUrl('booking/review');
-          }else{
-            console.log(res.errors);
           }
         })
       }
@@ -212,7 +178,6 @@ export class SchedulingComponent implements OnInit {
   }
 
   filterStaff(staff:any){
-    console.log(staff);
     staff.filter = !staff.filter;
   }
 

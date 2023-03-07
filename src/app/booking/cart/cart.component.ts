@@ -20,7 +20,6 @@ export class CartComponent {
     let isSameService = this.sharedService.getLocalStorageItem("isSameService");
     if(isSameService == 'true' || !isSameService){
       this.onItemRemoveEvent.emit();
-      console.log("remove item : ", item);
       this.bookingService.removeItemInCart(item.id).subscribe((res:any)=>{
         if(!res.errors){
           const title = 'Success';
@@ -47,7 +46,6 @@ export class CartComponent {
       let optionIds:Array<string | null> = this.getSelectedModifiers(selectedItems);
       let index = optionIds.indexOf(modifier.id);
       optionIds.splice(index,1);
-      console.log("Found Index : ", index, optionIds);
   
       const payload = {
         id: selectedItems[0].id,
@@ -73,10 +71,8 @@ export class CartComponent {
   }
 
   getSelectedModifiers(selectedItems:any):Array<string | null>{
-    console.log("SelectedItems : ", selectedItems);
     if(selectedItems[0].selectedOptions.length){
       let ids = selectedItems[0].selectedOptions.map((option:any)=> option.id);
-      console.log('Selected options : ', ids);
       return ids;
     }else{
       return []

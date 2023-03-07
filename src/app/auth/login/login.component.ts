@@ -3,7 +3,6 @@ import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { SharedService } from "src/app/shared-component/shared.service";
-import { SilverMirrorService } from "../../silver-mirror.service";
 import { AuthService } from "../auth.service";
 
 @Component({
@@ -21,7 +20,6 @@ export class LoginComponent {
 
   constructor(
     public authService: AuthService,
-    public silverService: SilverMirrorService,
     private router: Router,
     private formBuilder:FormBuilder,
     private sharedService:SharedService,
@@ -53,14 +51,14 @@ export class LoginComponent {
   }
 
   checkOTP() {
-    console.log(localStorage.getItem("otp"), this.enteredotp);
     if (localStorage.getItem("otp") == this.enteredotp) {
       localStorage.removeItem("otp");
       this.authService.$otp.next(null);
       this.router.navigateByUrl("/dashboard", {replaceUrl: true});
-      // this._location.back();
     } else {
-      alert("OTP does not match!");
+      const title = 'Invalid OTP';
+      const message = 'OTP does not match';
+      this.sharedService.showNotification(title, message);
     }
   }
 }

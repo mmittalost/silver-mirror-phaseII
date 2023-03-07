@@ -10,14 +10,6 @@ export class AlertComponent {
 
   @Input() message!:string;
   @Input() title!:string;
-  // title!:string;
-  // message!:string;
   
-  constructor(private toastrService:ToastrService /*private notificationService:NotificationService*/) {
-    // this.notificationService.$notification.subscribe((notification:Notification)=>{
-    //   this.title = notification.title;
-    //   this.message = notification.message;
-    //   console.log("Notification Message : ", notification);
-    // })
-  }
+  constructor(private toastrService:ToastrService) { }
 }

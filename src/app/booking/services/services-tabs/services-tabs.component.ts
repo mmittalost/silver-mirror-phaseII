@@ -15,8 +15,6 @@ export class ServicesTabsComponent {
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges){
-    console.log("reset Tabs : ", changes.reset)
-    // !changes.reset ? this.changeTab('facial') : null;
     changes.reset && changes.reset.currentValue?.event ? this.changeTab(changes.reset.currentValue.currentTab) : null;
   }
 

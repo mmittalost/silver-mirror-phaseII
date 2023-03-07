@@ -46,14 +46,12 @@ export class ServicesComponent {
       if(cart){
         this.cart = cart;
         this.getMemberAddedServiceCount;
-        console.log(this.cart);
       }
     })
   }
 
   ngAfterViewInit() {
     this.isSameServiceLocal();
-    console.log("Is view after init");
   }
 
   isSameServiceLocal(){
@@ -61,7 +59,6 @@ export class ServicesComponent {
     if(!flag || flag == 'true'){
       this.isSameServices = true;
     }else if(flag == 'false'){
-      console.log("FLAG IS FALSEEE");
       this.isSameServices = false;
       this.hideGuestTabs();
     }
@@ -89,29 +86,9 @@ export class ServicesComponent {
         this.sharedService.showNotification(title, message);
       }
     }
-    /*
-      * uncomment to Show addon popup on addon tab 
-    */
-    // else if(ev == 'addon'){
-    //   console.log('addon popup');
-    //   if(this.cart.selectedItems.length){
-    //     console.log(this.cart.selectedItems[0].addons);
-    //     this.modalConfig.data.selectedItem = this.cart.selectedItems;
-    //     this.addonModalRef = this.modalService.open(
-    //       ModalAddonsComponent,
-    //       this.modalConfig
-    //     );
-    //   }else{
-    //   const title = '';
-    //   const message = 'Please add a service first.';
-    //   this.sharedService.showNotification(title, message); 
-    //   }
-      
-    // }
   }
 
   resetServicesTab(){
-    console.log("9 : ", this.tabs);
     let currentTab:string = '';
     if(this.tabs.service.toLowerCase().includes('facial')){
       currentTab = 'facial';
@@ -198,8 +175,7 @@ export class ServicesComponent {
   }
 
   itemRemovedFromCart(){
-    // console.log('Item Removed from cart');
-    // this.tabs.service = 'Facials 30 Minutes';
+    // runs when item is removed from cart
   }
 
   isAnyAddonAdded(){
@@ -262,7 +238,6 @@ export class ServicesComponent {
   }
 
   copyItemsToGuest(){
-    console.log("Is same services : ", this.isSameServices);
     this.sharedService.setLocalStorageItem("isSameService", this.isSameServices.toString());
     if(!this.isSameServices && this.cart.selectedItems.length == 1){
       this.hideGuestTabs();
@@ -303,7 +278,6 @@ export class ServicesComponent {
   }
 
   canAllowDifferentService(){
-    console.log("can allow different service?");
     if(this.isSameServices && this.cart.selectedItems.length > 1){
       const title = 'Sevice already added for guest';
       const message = 'Please remove the guest services to copy my services.';
@@ -322,25 +296,19 @@ export class ServicesComponent {
     if(this.cart.selectedItems.length){
       if(this.cart.selectedItems.length == cartMemberCount){
         let flag = this.isAnyAddonAdded();
-        console.log("Is addon added : ", flag);
         if(!flag){
           this.addonModalRef = this.modalService.open(
             ModalIsAddonAddedComponent,
             this.modalConfig
           );
           this.addonModalRef.onClose.subscribe((choice:any)=>{
-            console.log("transfered choice : ", choice);
             if(choice && choice.choice){
               this.changeServiceTab('addon');
               this.resetServiceTabs = {event:true, currentTab:'addon'};
               setTimeout(() => {
                 this.resetServiceTabs = {event:false, currentTab:'addon'};
               }, 1000);
-              // this.tabs.service = 'addon'
-              // write code to show addon list
-
             }else{
-              console.log("Continue");
               this.router.navigateByUrl('/booking/schedule');
             }
           })

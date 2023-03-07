@@ -36,7 +36,6 @@ export class ReviewComponent implements OnInit {
       }
     });
     this.bookingService.updateCartDetail();
-    console.log("LoggedIn User : ", this.authService.$AuthUser.value);
     // this.bookingService.updateCartDetail();
     this.bookingService.clientCart$.subscribe((cart)=>{
       if(cart && cart.id){
@@ -46,7 +45,6 @@ export class ReviewComponent implements OnInit {
         if(cart.clientInformation){
           // this._patchAdditionalInfoForm(cart.clientInformation);
         }
-        console.log("Cart Data : ", cart);
       }
     })
   }
@@ -88,7 +86,6 @@ export class ReviewComponent implements OnInit {
   }
 
   _patchCouponForm(offers:any){
-    console.log("Patch coupon : ", offers);
     if(offers.length){
       let code = offers[0].code;
       this.couponForm.patchValue({
@@ -104,7 +101,6 @@ export class ReviewComponent implements OnInit {
   }
 
   _patchAdditionalInfoForm(user:any){
-    console.log("user to patch : ", user);
     this.userInfoForm.patchValue({
       firstName: user.firstName,
       lastName: user.lastName,
@@ -115,11 +111,9 @@ export class ReviewComponent implements OnInit {
   }
 
   updatePaymentMethod(){
-    // console.log(this.paymentForm.value);
     return new Promise((resolve, reject)=>{
       if(this.paymentForm.valid){
         this.bookingService.tokenizeCard(this.paymentForm.value).subscribe((res:any)=>{
-          console.log(res);
           if(res.token){
             this.bookingService.addCartPaymentMethod(res.token).subscribe((res:any)=>{
               if(!res.errors){
@@ -129,7 +123,6 @@ export class ReviewComponent implements OnInit {
                 this.togglePaymentMethodForm = false;
               }else{
                 reject();
-                console.log(res.errors[0].message);
               }
             });
           }else{
@@ -155,14 +148,11 @@ export class ReviewComponent implements OnInit {
       if(!res.errors){
         card.active = true;
         this.bookingService.updateCartDetail();
-      }else{
-        console.log(res.errors)
       }
     })
   }
 
   updateUserInfo(){
-    // console.log(this.userInfoForm.value);
     return new Promise((resolve, reject)=>{
       if(this.userInfoForm.valid){
         this.bookingService.updateClientCartInfo(this.userInfoForm.value).subscribe((res:any)=>{
@@ -171,7 +161,6 @@ export class ReviewComponent implements OnInit {
             // this.bookingService.updateCartDetail();
           }else{
             reject();
-            console.log(res.errors[0].message);
           }
         });
       }else{
@@ -197,7 +186,6 @@ export class ReviewComponent implements OnInit {
         });
       }else{
         reject();
-        console.log('cart does not exist!');
       }
     })
   }
@@ -219,7 +207,6 @@ export class ReviewComponent implements OnInit {
       const message = 'Please fill the correct promo code.';
       this.sharedService.showNotification(title, message);
     }
-    console.log("Apply Promo Code TESTPROMOTIONOST", this.couponForm.value, code, this.couponForm.valid);
   }
 
   removePromoCode(){
@@ -227,8 +214,6 @@ export class ReviewComponent implements OnInit {
     this.bookingService.removeCartOffer(offerId).subscribe((res:any)=>{
       if(!res.errors){
         this.bookingService.updateCartDetail();
-      }else{
-        console.log(res.errors);
       }
     })
   }
@@ -242,12 +227,8 @@ export class ReviewComponent implements OnInit {
             if(status){
               this.checkout();
             }
-          }).catch(err=>{
-            console.log(err);
           })
         }
-      }).catch(err=>{
-        console.log(err);
       });
     }else{
       this.updatePaymentMethod().then((status:any)=>{ // If payment method is needed to be add
@@ -256,23 +237,12 @@ export class ReviewComponent implements OnInit {
             if(status){
               this.updateCartDetail().then((status:any)=>{
                 if(status){
-                  // user auto login
-                  // const email = this.userInfoForm.value.email;
-                  // const user = this.authService.$AuthUser.value;
-                  // console.log("User to login : ", user);
-                  // !user ? this.authService.autoLogin(email) : null;
                   this.checkout();
                 }
-              }).catch(err=>{
-                console.log(err);
-              })
+              });
             }
-          }).catch(err=>{
-            console.log(err);
           });
         }
-      }).catch(err=>{
-        console.log(err);
       });
     }
   }

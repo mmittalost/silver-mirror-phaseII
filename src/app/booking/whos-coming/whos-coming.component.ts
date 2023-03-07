@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { SharedService } from 'src/app/shared-component/shared.service';
-import { SilverMirrorService } from '../../silver-mirror.service';
 import { BookingService } from '../booking.service';
 
 @Component({
@@ -28,7 +27,7 @@ export class WhosComingComponent {
    }
 
   selectGuest(){
-    console.log(this.guestCount);
+    // runs when guest is selected
   }
 
   createGuests(count:number){
@@ -36,9 +35,7 @@ export class WhosComingComponent {
     for (let index = 0; index < count; index++) {
         requests.push(this.bookingService.createGuest());
     }
-    console.log("Guest requests : ", requests);
     forkJoin(requests).subscribe(res=>{
-      console.log("Guest created");
       this.bookingService.updateCartDetail();
     });
   }
@@ -49,9 +46,7 @@ export class WhosComingComponent {
     for (let index = 0; index < count; index++) {
         requests.push(this.bookingService.removeGuest(guests[index].id));
     }
-    console.log("Guest requests : ", requests);
     forkJoin(requests).subscribe(res=>{
-      console.log("Guest created");
       this.bookingService.updateCartDetail();
     });
   }

@@ -23,7 +23,6 @@ export class CongratsComponent {
     })
     this.bookingService.checkoutBookingResponse$.subscribe((checkoutCart:any)=>{
       if(checkoutCart){
-        console.log("Checkout Response : ", checkoutCart);
         const aptId = checkoutCart.appointments[0].appointmentId;
         this.cart = checkoutCart.cart
         this.getAppointmentDetail(aptId, this.cart.id);
@@ -36,8 +35,6 @@ export class CongratsComponent {
       if(!res.errors){
         this.appointment = res.data.appointment;
         // this.getServicePrice();
-      }else{
-        console.log(res.errors);
       }
     });
   }

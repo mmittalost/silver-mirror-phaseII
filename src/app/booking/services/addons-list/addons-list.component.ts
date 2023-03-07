@@ -28,13 +28,10 @@ export class AddonsListComponent {
   constructor(public sharedService:SharedService, private bookingService:BookingService, private modalService: MdbModalService){}
 
   addModifier(modifier:any, guestId:string|null){
-    console.log("GUESSHGSHGHS : , ", guestId)
     let selectedItems:any = this.cart.selectedItems.filter((selectedItem:any)=>{
       return selectedItem.guestId == guestId;
     })
-    console.log("SELECTED ITEMS : ", selectedItems);
     let optionIds:Array<string | null> = this.getSelectedModifiers(selectedItems);
-    console.log(selectedItems, optionIds);
     let index = optionIds.indexOf(modifier.id);
     if(index < 0){
       const payload = {
@@ -42,7 +39,6 @@ export class AddonsListComponent {
         optionIds: [...optionIds, modifier.id],
         staffId:null,
         guestId: guestId
-        // this.client != 'me' ? this.client.id : null
       }
       this.bookingService.addAddonInCart(payload).subscribe((res:any)=>{
         if(!res.errors){
@@ -63,7 +59,6 @@ export class AddonsListComponent {
 
   addModifierForAll(modifier:any){
     let isSameService = this.sharedService.getLocalStorageItem('isSameService');
-    console.log('ISSJSJHJSHJS : ', isSameService);
     if(isSameService == 'false'){
       this.addModifier(modifier, null);
       let guests = this.cart.guests;
@@ -78,7 +73,6 @@ export class AddonsListComponent {
   getSelectedModifiers(selectedItems:any):Array<string | null>{
     if(selectedItems.length && selectedItems[0].selectedOptions && selectedItems[0].selectedOptions.length){
       const ids = selectedItems[0].selectedOptions.map((option:any)=> option.id);
-      console.log('Selected options : ', ids);
       return ids;
     }else{
       return []

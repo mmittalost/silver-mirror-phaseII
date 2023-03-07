@@ -11,10 +11,6 @@ export class ModalAddonsComponent {
 
   @Input() selectedItem:any = [];
 
-  constructor(public sharedService:SharedService, public addonModalRef: MdbModalRef<ModalAddonsComponent>){
-    setTimeout(() => {
-      console.log(this.selectedItem);
-    }, 1000);
-  }
+  constructor(public sharedService:SharedService, public addonModalRef: MdbModalRef<ModalAddonsComponent>){ }
 
 }

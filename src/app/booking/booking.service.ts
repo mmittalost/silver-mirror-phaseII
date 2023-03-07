@@ -71,8 +71,6 @@ export class BookingService {
           this.clientCart$.next(res.data.cart);
         }
       });
-    }else{
-      console.log('cart does not exist!');
     }
   }
 

@@ -23,11 +23,8 @@ export class NotificationService {
 
   sendNotification(title:string, message:string){
     const toast = this.toastrService.show('', '', {
-      // timeOut:3000,
       easing:'ease-in',
       easeTime:300,
-      // newestOnTop:true,
-      // enableHtml:true
     })
     toast.toastRef.componentInstance.title = title;
     toast.toastRef.componentInstance.message = message;

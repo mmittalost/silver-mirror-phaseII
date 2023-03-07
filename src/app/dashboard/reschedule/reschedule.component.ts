@@ -32,11 +32,9 @@ export class RescheduleComponent implements OnInit {
 
   getRescheduleDates(lowerRange:string, upperRange:string){
     setTimeout(() => {
-      console.log(this.appointmentId);
       this.dashboardService.getRescheduleDates(this.appointmentId.value, lowerRange, upperRange).subscribe((res:any)=>{
         if(!res.errors){
           this.availableDates.next(res.data.AppointmentRescheduleAvailableDates.availableDates);
-          console.log(res);
         }else{
           alert(res.errors[0].message);
         }
@@ -45,18 +43,15 @@ export class RescheduleComponent implements OnInit {
   }
 
   monthChange(ev:any){
-    console.log("Month Change Event : ", ev);
     const lowerRange = ev.startOf('month').format('YYYY-MM-DD');
     const upperRange = ev.endOf('month').format('YYYY-MM-D');
     this.getRescheduleDates(lowerRange, upperRange);
   }
 
   selectDate(ev:any){
-    console.log("Selected Day : ", ev);
     this.dashboardService.getRescheduleTimes(this.appointmentId.value, ev.fullDate).subscribe((res:any)=>{
       if(!res.errors){
         this.availableTimes.next(res.data.appointmentRescheduleAvailableTimes.availableTimes);
-        console.log(res);
       }else{
         alert(res.errors[0].message);
       }

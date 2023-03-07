@@ -23,7 +23,6 @@
                         <input class="btn" type="submit" value="Continue" (click)="generateOTP()">
                     </div>
                     <div [formGroup]="otpForm" class="login-form" *ngIf='authService.$otp | async'>
-                        <p *ngIf="silverService.otpMessage" style="color: green; margin-bottom: 0px;">{{silverService.otpMessage}}</p>
                         <input maxLength="6" minLength="4" formControlName="otp" type="text" id="otp" name="otp" placeholder="Enter OTP" [(ngModel)]="enteredotp">
                         <div *ngIf="otpForm.controls.otp.invalid && (otpForm.controls.otp.dirty || otpForm.controls.otp.touched)">
                             <div *ngIf="otpForm.controls.otp.errors?.required">OTP is required</div>

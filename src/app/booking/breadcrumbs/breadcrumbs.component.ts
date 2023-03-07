@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 @Component({
   selector: 'app-breadcrumbs',
@@ -22,14 +22,11 @@ export class BreadcrumbsComponent {
     this.route=this.router.url;
     router.url.subscribe((url=>{
       const path = url[0].path;
-      console.log("Activated route : ", path);
       const index = this.steps.findIndex((step) => step.step == path);
-      console.log("index of path = ", index);
       this.steps[index].transition = 3;
       for (let i = index-1; i >= 0; i--){
         this.steps[i].transition = 2;
       }
-      console.log("Step and index : ", this.steps);
     }));
   }
 

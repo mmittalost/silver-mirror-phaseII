@@ -19,7 +19,6 @@ export class FilterServicePipe implements PipeTransform {
         })
       });
       service = this.isServiceAdded(service, client);
-      console.log("Filter Service : ", service);
       return service;
     }else{
       return categories[0];
@@ -35,7 +34,6 @@ export class FilterServicePipe implements PipeTransform {
         return selectedItem.guestId == null;
       }
     });
-    // console.log("selected Items : ", selectedItems);
     services.map((availableService:any)=>{
       availableService.availableItems.map((item:any)=>{
         selectedItems.map((selectedService:any)=>{
