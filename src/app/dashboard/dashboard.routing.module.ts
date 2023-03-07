@@ -6,6 +6,7 @@ import { AppointmentComponent } from "./appointment/appointment.component";
 import { DashboardComponent } from "./dashboard.component";
 import { MembershipProductsComponent } from "./membership-products/membership-products.component";
 import { MembershipsComponent } from "./memberships/memberships.component";
+import { PurchasesComponent } from "./purchases/purchases.component";
 import { RescheduleComponent } from "./reschedule/reschedule.component";
 
 @NgModule({
@@ -35,6 +36,10 @@ import { RescheduleComponent } from "./reschedule/reschedule.component";
           {
             path: "account",
             component: AccountComponent,
+          },
+          {
+            path: "purchases",
+            component: PurchasesComponent,
           },
         ],
       },
