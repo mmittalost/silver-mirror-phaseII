@@ -63,6 +63,7 @@ export class WhosComingComponent {
       if(res){
         this.bookingService.createCart(locationId).subscribe((res:any)=>{
           if(!res.errors){
+            this.sharedService.removeLocalStorageItem('isSameService');
             this.sharedService.setLocalStorageItem('cartId', res.data.createCart.cart.id);
             this.tab != 'me' ? this.createGuests(this.guestCount) : null;
             this.bookingService.updateCartDetail();

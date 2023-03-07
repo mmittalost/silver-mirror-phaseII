@@ -179,21 +179,31 @@ export class SchedulingComponent implements OnInit {
     const bookableTimeId = this.selectedTime?.id;
     if(bookableTimeId){
       const itemId:string = this.selectedItems.length ? this.selectedItems[0].id : "";
-      this.bookingService.updateItemInCart(itemId, this.selectedStaff.id).subscribe((res:any)=>{
-        if(!res.errors){
-          console.log(res);
-          this.bookingService.reserveCartItems(bookableTimeId).subscribe((res:any)=>{
-            if(!res.errors){
-              this.router.navigateByUrl('booking/review');
-            }else{
-              console.log(res.errors);
-            }
-          })
-          // this.getBookableDates();
-        }else{
-          alert(res.errors[0].message);
-        }
-      });
+      if(this.selectedStaff.id){
+        this.bookingService.updateItemInCart(itemId, this.selectedStaff.id).subscribe((res:any)=>{
+          if(!res.errors){
+            console.log(res);
+            this.bookingService.reserveCartItems(bookableTimeId).subscribe((res:any)=>{
+              if(!res.errors){
+                this.router.navigateByUrl('booking/review');
+              }else{
+                console.log(res.errors);
+              }
+            })
+            // this.getBookableDates();
+          }else{
+            alert(res.errors[0].message);
+          }
+        });
+      }else{
+        this.bookingService.reserveCartItems(bookableTimeId).subscribe((res:any)=>{
+          if(!res.errors){
+            this.router.navigateByUrl('booking/review');
+          }else{
+            console.log(res.errors);
+          }
+        })
+      }
     }else{
       const title = 'Appointment time not selected';
       const message = 'Please choose an appointment time.';

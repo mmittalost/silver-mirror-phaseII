@@ -63,6 +63,7 @@ export class ServicesComponent {
     }else if(flag == 'false'){
       console.log("FLAG IS FALSEEE");
       this.isSameServices = false;
+      this.hideGuestTabs();
     }
   }
 
