@@ -25,7 +25,9 @@ export class AppointmentTileComponent {
               if(!res.errors){
                 this.updateAppointments();
               }else{
-                alert(res.errors[0].message);
+                const title = 'Something went wrong';
+                const message = res.errors[0].message;
+                this.sharedService.showNotification(title, message);
               }
             })
           }else{
@@ -42,7 +44,9 @@ export class AppointmentTileComponent {
         if(!res.errors){
           this.dashboardService.$myAppointments.next(res.data.myAppointments.edges);
         }else{
-          alert(res.errors[0].message);
+          const title = 'Something went wrong';
+          const message = res.errors[0].message;
+          this.sharedService.showNotification(title, message);
         }
       })
     }

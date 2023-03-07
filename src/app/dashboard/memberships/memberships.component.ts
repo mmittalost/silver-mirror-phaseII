@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { SharedService } from 'src/app/shared-component/shared.service';
 import { DashboardService } from '../dashboard.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class MembershipsComponent {
 
   $memberships:BehaviorSubject<any> = new BehaviorSubject([]);
 
-  constructor(private dashboardService:DashboardService, private router:Router){
+  constructor(private dashboardService:DashboardService, private router:Router, private sharedService:SharedService){
     this.getMembershipsList();
   }
 
@@ -24,7 +25,9 @@ export class MembershipsComponent {
           this.router.navigateByUrl("/dashboard/membership-products");
         }
       }else{
-        alert(res.errors[0].message);
+        const title = 'Something went wrong';
+        const message = res.errors[0].message;
+        this.sharedService.showNotification(title, message);
       }
     })
   }

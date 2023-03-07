@@ -3,6 +3,7 @@ import { DashboardService } from '../dashboard.service';
 import * as moment from "moment";
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { SharedService } from 'src/app/shared-component/shared.service';
 
 @Component({
   selector: 'app-reschedule',
@@ -20,11 +21,11 @@ export class RescheduleComponent implements OnInit {
     this.appointmentId.next(history.state.appointmentId);
   }
   
-  constructor(private dashboardService:DashboardService, private router:Router){
+  constructor(private dashboardService:DashboardService, private router:Router, private sharedService:SharedService){
     this.appointmentId.subscribe((aptId:string)=>{
       if(aptId != ''){
-        const lowerRange = moment().format('YYYY-MM-D');
-        const upperRange = moment().endOf('month').format('YYYY-MM-D');
+        const lowerRange = moment().format('YYYY-MM-DD');
+        const upperRange = moment().endOf('month').format('YYYY-MM-DD');
         this.getRescheduleDates(lowerRange, upperRange);
       }
     });
@@ -36,7 +37,9 @@ export class RescheduleComponent implements OnInit {
         if(!res.errors){
           this.availableDates.next(res.data.AppointmentRescheduleAvailableDates.availableDates);
         }else{
-          alert(res.errors[0].message);
+          const title = 'Something went wrong';
+          const message = res.errors[0].message;
+          this.sharedService.showNotification(title, message);
         }
       });
     }, 1000);
@@ -44,7 +47,7 @@ export class RescheduleComponent implements OnInit {
 
   monthChange(ev:any){
     const lowerRange = ev.startOf('month').format('YYYY-MM-DD');
-    const upperRange = ev.endOf('month').format('YYYY-MM-D');
+    const upperRange = ev.endOf('month').format('YYYY-MM-DD');
     this.getRescheduleDates(lowerRange, upperRange);
   }
 
@@ -53,7 +56,9 @@ export class RescheduleComponent implements OnInit {
       if(!res.errors){
         this.availableTimes.next(res.data.appointmentRescheduleAvailableTimes.availableTimes);
       }else{
-        alert(res.errors[0].message);
+        const title = 'Something went wrong';
+        const message = res.errors[0].message;
+        this.sharedService.showNotification(title, message);
       }
     });
   }
@@ -69,11 +74,15 @@ export class RescheduleComponent implements OnInit {
         if(!res.errors){
           this.router.navigateByUrl('/dashboard/appointments');
         }else{
-          alert(res.errors[0].message);
+          const title = 'Something went wrong';
+          const message = res.errors[0].message;
+          this.sharedService.showNotification(title, message);
         }
       });
     }else{
-      alert('Select the appointment time.');
+      const title = 'Choose appointment time';
+      const message = "Please select the appointment time.";
+      this.sharedService.showNotification(title, message);
     }
   }
 

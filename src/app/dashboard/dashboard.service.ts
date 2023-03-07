@@ -28,8 +28,6 @@ export class DashboardService {
         this.httpClient.get<HttpResponse<any>>(BASE_URL + '/get_services').subscribe((res:any)=>{
             if(!res.errors){
                 this.$servicesList.next(res.data.services.edges);
-            }else{
-                alert(res.errors[0].message);
             }
         });
     }
@@ -100,7 +98,7 @@ export class DashboardService {
             "appointmentId":aptId,
             "searchRangeLower":lowerRange,
             "searchRangeUpper":upperRange,
-            "timeZone":'EST'
+            "timeZone":'America/New_York'
           }
         return this.httpClient.post<HttpResponse<any>>(BASE_URL + '/appointment_reschedule_available_dates', payload);
     }
@@ -109,7 +107,7 @@ export class DashboardService {
         const payload = {
             "appointmentId":aptId,
             "date":date,
-            "timeZone":'EST'
+            "timeZone":'America/New_York'
           }
         return this.httpClient.post<HttpResponse<any>>(BASE_URL + '/appointment_reschedule_available_times', payload);
     }

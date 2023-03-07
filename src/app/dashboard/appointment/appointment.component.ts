@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { SharedService } from 'src/app/shared-component/shared.service';
 import { DashboardService } from '../dashboard.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class AppointmentComponent {
 
   cancel:boolean = false;
 
-  constructor(public dashboardService: DashboardService){
+  constructor(public dashboardService: DashboardService, private sharedService:SharedService){
     this.getAppointments();
   }
 
@@ -19,7 +20,9 @@ export class AppointmentComponent {
       if(!res.errors){
         this.dashboardService.$myAppointments.next(res.data.myAppointments.edges);
       }else{
-        alert(res.errors[0].message);
+        const title = 'Something went wrong';
+        const message = res.errors[0].message;
+        this.sharedService.showNotification(title, message);
       }
     })
   }

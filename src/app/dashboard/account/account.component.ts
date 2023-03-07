@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SharedService } from 'src/app/shared-component/shared.service';
 import { DashboardService } from '../dashboard.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class AccountComponent implements OnInit {
     this.getClientInfo();
   }
 
-  constructor(private dashboardService:DashboardService, private formBuilder:FormBuilder){
+  constructor(private dashboardService:DashboardService, private formBuilder:FormBuilder, private sharedService:SharedService){
     this.accountForm = formBuilder.group({});
   }
 
@@ -37,7 +38,8 @@ export class AccountComponent implements OnInit {
       lastName: client.lastName,
       // dob: "",
       mobilePhone: client.mobilePhone
-    })
+    });
+    this.accountForm.controls.email.disable();
   }
 
   getClientInfo(){
@@ -46,18 +48,25 @@ export class AccountComponent implements OnInit {
         const client = res.data.client;
         this._patchForm(client);
       }else{
-        alert(res.errors[0].message);
+        const title = 'Something went wrong';
+        const message = res.errors[0].message;
+        this.sharedService.showNotification(title, message);
       }
     })
   }
 
   updateClient(){
     const client = this.accountForm.value;
+    client.email = this.accountForm.controls['email'].value;
     this.dashboardService.updateClientInfo(client).subscribe((res:any)=>{
       if(!res.errors){
-        alert('Account Details Updated!');
+        const title = 'Info Updated';
+        const message = 'Your account information has been updated.';
+        this.sharedService.showNotification(title, message);
       }else{
-        alert(res.errors[0].message);
+        const title = 'Something went wrong';
+        const message = res.errors[0].message;
+        this.sharedService.showNotification(title, message);
       }
     })
   }
