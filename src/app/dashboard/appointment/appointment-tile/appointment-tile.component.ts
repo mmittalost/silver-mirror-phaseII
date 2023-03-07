@@ -11,6 +11,7 @@ import { DashboardService } from '../../dashboard.service';
 export class AppointmentTileComponent {
 
   @Input() appointment:any;
+  @Input() cancel:boolean = true;
   toggleMobileList:boolean = false;
 
   constructor(private dashboardService: DashboardService, private router:Router, private sharedService:SharedService){}

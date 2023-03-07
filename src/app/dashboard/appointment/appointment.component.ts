@@ -8,7 +8,7 @@ import { DashboardService } from '../dashboard.service';
 })
 export class AppointmentComponent {
 
-  appointmentId:string = 'urn:blvd:Appointment:b9f27937-a338-4430-92b2-e090af79780e';
+  cancel:boolean = false;
 
   constructor(public dashboardService: DashboardService){
     this.getAppointments();

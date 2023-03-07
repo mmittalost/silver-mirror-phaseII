@@ -7,7 +7,7 @@
 	
 	<h2 class="eyebrow">Past Appointments</h2>
 	
-	<app-appointment-tile *ngFor="let appt of dashboardService.$myAppointments | async | pastappointments" [appointment]="appt?.node"></app-appointment-tile>
+	<app-appointment-tile [cancel]="cancel" *ngFor="let appt of dashboardService.$myAppointments | async | pastappointments" [appointment]="appt?.node"></app-appointment-tile>
 <!-- </div> -->
 
 <!-- <app-reschedule [appointmentId]="appointmentId"></app-reschedule> -->
