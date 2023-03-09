@@ -7375,7 +7375,7 @@ body.modal-open {
 }
 
 input[type="text"]:disabled, input[type="email"]:disabled {
-	background: var(--light-blue);
+	color: var(--mid-gray);
   }
 
 @media only screen and (max-width: calc(950rem/16)) {
