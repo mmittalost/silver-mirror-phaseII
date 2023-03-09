@@ -14,7 +14,7 @@ export class AppointmentTileComponent {
   @Input() cancel:boolean = true;
   toggleMobileList:boolean = false;
 
-  constructor(private dashboardService: DashboardService, private router:Router, private sharedService:SharedService){}
+  constructor(private dashboardService: DashboardService, private router:Router, public sharedService:SharedService){}
 
   cancelAppointment(){
     const message = "Are you sure, You want to cancel your appointment?"

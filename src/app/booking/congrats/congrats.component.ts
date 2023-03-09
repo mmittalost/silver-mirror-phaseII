@@ -16,6 +16,7 @@ export class CongratsComponent {
   toggleOptions:boolean = false;
   toggleShareOptions:boolean = false;
   authUser:any;
+  staff:any;
 
   constructor(private bookingService:BookingService, public sharedService:SharedService, private authService:AuthService, private router:Router){
     this.authService.$AuthUser.subscribe((user:any)=>{
@@ -25,6 +26,9 @@ export class CongratsComponent {
       if(checkoutCart){
         const aptId = checkoutCart.appointments[0].appointmentId;
         this.cart = checkoutCart.cart
+        this.staff = this.cart.selectedItems.filter((selectedItem:any)=>{
+          return selectedItem.guestId == null
+        })[0]?.selectedStaffVariant?.staff;
         this.getAppointmentDetail(aptId, this.cart.id);
       }
     })

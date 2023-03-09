@@ -7,7 +7,7 @@
 			<span class="ui-date month">{{appointment?.startAt | date:'MMMM':'EST'}} <!-- <span class="mobile-only">uary</span> --> </span>
 			<span class="heading-5 day">{{appointment?.startAt | date:'d':'EST'}}</span>
 			<span class="ui-date year">{{appointment?.startAt | date:'y':'EST'}}</span>
-			<span class="pill fill small gray">@{{appointment?.startAt | date:'h:mm a':'EST'}}</span>
+			<span class="pill fill small gray">@{{sharedService.removeLastTimezone(appointment?.startAt) | date:'hh:mm a'}}</span>
 		</div>
 		
 		<!--Services-->
