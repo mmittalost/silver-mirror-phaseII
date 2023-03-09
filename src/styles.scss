@@ -432,6 +432,7 @@ section {
 	text-align: center;
 	text-transform: uppercase;
 	cursor: pointer;
+	white-space: nowrap;
 }
 
 .btn.small {
@@ -473,6 +474,7 @@ section {
 	margin-left: auto;
 	padding: 0;
 	position: relative;
+	cursor: pointer;
 }
 
 .text-link.large {
@@ -7352,14 +7354,27 @@ dialog {
   app-login header .sign-in, app-register header .sign-in{
 	display: none !important;
   }
-body.modal-open {
-	/*overflow: hidden;*/
-}
 .congrats .cart-info .pill.fill {
 	margin-left: 5px;
 }
 
- @media only screen and (max-width: calc(950rem/16)) {
+.required {
+	font-size: 12px;
+	color: red;
+}
+
+body.modal-open {
+	overflow: hidden;
+}
+
+.modal-content {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	z-index: 3;
+}
+
+@media only screen and (max-width: calc(950rem/16)) {
 	.services-flow ul.time-filters.mobile-only {
 		display: flex;
 		margin-top: 15px;
@@ -7375,9 +7390,9 @@ body.modal-open {
 		position: absolute;
 		right: 30px;
 	}
- }
+}
 
- @media only screen and (max-width: calc(760rem/16)) and (min-width: calc(660rem/16))  {
+@media only screen and (max-width: calc(760rem/16)) and (min-width: calc(660rem/16))  {
 
 	.popup.card-details img {
 		aspect-ratio: 475/100;
@@ -7388,9 +7403,13 @@ body.modal-open {
 		text-align: left;
 	}
 
- }
+}
 
- .required {
-	font-size: 12px;
-	color: red;
-  }
+@media only screen and (max-width: calc(650rem/16)) {
+	body.modal-open {
+		overflow: visible;
+	}
+	.modal-content {
+		position: static;
+	}
+}
