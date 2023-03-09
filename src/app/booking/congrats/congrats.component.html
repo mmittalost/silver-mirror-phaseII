@@ -57,7 +57,7 @@
 					
 					<div class="flex-container cart-total">
 						<span class="eyebrow small">Total</span>
-						<p class="small">{{sharedService.formatPrice(appointment?.appointmentServices[0]?.price) | currency:'USD':'symbol' : '1.0-0'}}</p>
+						<p class="small">{{sharedService.formatPrice(this.cart?.summary?.total) | currency:'USD':'symbol' : '1.0-0'}}</p>
 					</div>
 				</div>
 			</li>
@@ -69,7 +69,7 @@
 				
 				<div class="cart-info">
 					<ul class="x-small cart-details">
-						<li>{{appointment?.startAt | date:'EEEE, MMMM, d @ h:mm a':'EST'}}</li>
+						<li>{{cart?.startTime | date:'EEEE, MMMM d @ h:mm a'}}</li>
 						<li>Esthetician: {{appointment?.appointmentServices[0]?.staff?.displayName}}</li>
 						
 						<li>

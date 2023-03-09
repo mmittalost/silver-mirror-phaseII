@@ -74,5 +74,6 @@ export class LocationComponent {
     }else{
       this.createCart(id);
     }
+    this.sharedService.removeLocalStorageItem('isSameService');
   }
 }
