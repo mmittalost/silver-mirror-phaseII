@@ -9,12 +9,12 @@
     <table>
         <thead>
             <tr>
+                <th class="pill">S</th>
                 <th class="pill">M</th>
                 <th class="pill">T</th>
                 <th class="pill">W</th>
                 <th class="pill">T</th>
                 <th class="pill">F</th>
-                <th class="pill">S</th>
                 <th class="pill">S</th>
             </tr>
         </thead>
@@ -22,7 +22,7 @@
         <tbody>
             <tr *ngFor="let week of calendar">
                 <td *ngFor="let day of week">
-                    <label>
+                    <label class="monthday">
                         <input [checked]="selectedDate?.fullDate == day.fullDate ? true : false" [id]="'pop-'+day.fullDate" [disabled]="!day.isAvailable" (change)="selectDate(day)" class="accessibility" name="monthday" type="radio"/>
                         <span>{{day.date}}</span>
                     </label>

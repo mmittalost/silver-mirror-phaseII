@@ -180,11 +180,18 @@ export class ServicesComponent {
 
   isAnyAddonAdded(){
     let flag = false;
+    let catNames = [];
     this.cart.selectedItems.map((selectedItem:any) => {
+      const catName = this.sharedService.getServiceCategoryName(selectedItem, this.cart.availableCategories);
+      catName != '' ? catNames.push(catName) : null;
+      console.log("Cat name : ", catNames.length);
       if(selectedItem.selectedOptions.length > 0){
         flag = true;
       }
     });
+    if(!catNames.length){
+      flag = true;
+    }
     return flag;
   }
 

@@ -4,7 +4,7 @@
         <span class="eyebrow small">{{currentMonth.format('MMMM YYYY')}}</span>
         <button class="arrow next-week" (click)="nextMonth()"><span class="accessibility">Next Week</span></button>
         
-        <button class="show-calendar" (click)="toggleCalendarView()"><span>{{showFullCalendar ? 'Hide' : 'Show'}} Calendar</span></button>
+        <button class="show-calendar"><span>{{showFullCalendar ? 'Hide' : 'Show'}} Calendar</span></button>
         
         <!--Calendar Popup-->
         <app-calendar-popup *ngIf="showFullCalendar" [selectedDate]="selectedDate" (selectDateEvent)="selectDate($event)" (nextMonthEvent)="nextMonth()" (prevMonthEvent)="previousMonth()" [currentMonth]="currentMonth"[calendar]="calendar"></app-calendar-popup>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { NotificationService } from '../../notification.service';
@@ -69,7 +69,7 @@ export class SchedulingComponent implements OnInit {
   }
 
   constructor(private bookingService: BookingService, private router:Router, public sharedService:SharedService, private authService:AuthService){}
-
+  
   getStaffVariantByServiceId(serviceId:string){
     this.cart.map((cart:any)=>{
       const service = cart.availableItems.filter((item:any)=>item.id == serviceId);
