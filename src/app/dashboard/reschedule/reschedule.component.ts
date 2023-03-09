@@ -16,6 +16,7 @@ export class RescheduleComponent implements OnInit {
   availableDates:BehaviorSubject<any> = new BehaviorSubject([]);
   availableTimes:BehaviorSubject<any> = new BehaviorSubject([]);
   selectedTime:any;
+  selectedDate:any;
 
   ngOnInit(){
     this.appointmentId.next(history.state.appointmentId);
@@ -52,6 +53,7 @@ export class RescheduleComponent implements OnInit {
   }
 
   selectDate(ev:any){
+    this.selectedDate = ev;
     this.dashboardService.getRescheduleTimes(this.appointmentId.value, ev.fullDate).subscribe((res:any)=>{
       if(!res.errors){
         this.availableTimes.next(res.data.appointmentRescheduleAvailableTimes.availableTimes);

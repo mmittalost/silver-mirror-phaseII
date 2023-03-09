@@ -5,7 +5,7 @@
 
 
 
-            <app-calendar [availableDates] = "availableDates | async" (changeMonthEvent)="monthChange($event)" (dateSelectEvent)="selectDate($event)"></app-calendar>
+            <app-calendar [selectedDate]="selectedDate" [availableDates] = "availableDates | async" (changeMonthEvent)="monthChange($event)" (dateSelectEvent)="selectDate($event)"></app-calendar>
 
 
 
