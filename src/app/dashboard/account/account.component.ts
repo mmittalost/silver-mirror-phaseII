@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/auth/auth.service';
 import { SharedService } from 'src/app/shared-component/shared.service';
 import { DashboardService } from '../dashboard.service';
 
@@ -17,7 +18,7 @@ export class AccountComponent implements OnInit {
     this.getClientInfo();
   }
 
-  constructor(private dashboardService:DashboardService, private formBuilder:FormBuilder, private sharedService:SharedService){
+  constructor(private authService:AuthService, private dashboardService:DashboardService, private formBuilder:FormBuilder, private sharedService:SharedService){
     this.accountForm = formBuilder.group({});
   }
 
@@ -60,6 +61,10 @@ export class AccountComponent implements OnInit {
     client.email = this.accountForm.controls['email'].value;
     this.dashboardService.updateClientInfo(client).subscribe((res:any)=>{
       if(!res.errors){
+        const user = res.data.updateClient.client;
+        user.authId = user.id.replace("urn:blvd:Client:", "");
+        localStorage.setItem("AuthUser", JSON.stringify(user));
+        this.authService.$AuthUser.next(user);
         const title = 'Info Updated';
         const message = 'Your account information has been updated.';
         this.sharedService.showNotification(title, message);
