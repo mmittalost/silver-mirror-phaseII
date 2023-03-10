@@ -1,0 +1,5 @@
+<ul class="tabs-nav">
+    <li><button [ngClass]="activeTab == 1 ? 'pill fill' : 'pill fill outline gray'" (click)="changeTab(1)">Online Purchases</button></li>
+    <li><button [ngClass]="activeTab == 2 ? 'pill fill' : 'pill fill outline gray'" (click)="changeTab(2)">In-Store Purchases</button></li>
+</ul>
+<p>No Purchases Found.</p>

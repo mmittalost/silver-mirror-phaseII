@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class PurchasesComponent {
 
+  activeTab = 1;
+
+  changeTab(tab:number){
+    this.activeTab = tab;
+  }
+
 }
