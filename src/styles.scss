@@ -464,6 +464,18 @@ section {
 	background-color: var(--dark-gray);
 }
 
+.btn.black.outline {
+	background: var(--white);
+	border-color: var(--black);
+	color: var(--black);
+}
+
+.btn.black.outline:hover {
+	background-color: var(--dark-gray);
+	border-color: var(--dark-gray);
+	color: var(--white);
+}
+
 .text-link {
 	background: none;
 	border: none;
@@ -2858,6 +2870,7 @@ aside .pill.location {
 	transform: translate3d(0, 0, 0);
 	width: 50px;
 	z-index:999;
+	outline: none;
 }
 
 .popup .close:hover {
@@ -2915,7 +2928,7 @@ aside .pill.location {
 /*Addons*/
 
 .popup.addon-pop {
-	max-width: 990px;
+	max-width: 864px;
 }
 
 .popup.addon-pop .scroller {
@@ -2925,8 +2938,12 @@ aside .pill.location {
 	padding: 60px;
 }
 .popup.addon-pop .scroller.addon-suggest {
-	height: 200px;
+	height: auto;
 	overflow: hidden;
+	padding: 48px 40px;
+}
+.popup.addon-pop .scroller.addon-suggest h2 {
+	margin-bottom: 0px;
 }
 
 .popup.addon-pop .scroller h2 {
@@ -3049,6 +3066,17 @@ aside .pill.location {
 	gap: 12px;
 	padding: 20px 0 16px;
 }
+.popup.addon-pop .fixed-info.appointment-cancel {
+	align-items: center;
+	background: var(--white);
+	border-top: 0px solid rgba(179,179,179,.35);
+	display: flex;
+	flex-direction: row;
+	gap: 15px;
+	padding: 0px 0 16px;
+	text-align: center;
+    justify-content: center;
+}
 
 .popup.addon-pop .btn.black {
 	position: relative;
@@ -3097,7 +3125,7 @@ aside .pill.location {
 .selection-confirmation .heading-6.small {
 	padding: 0 48px;
 	position: relative;
-	min-width:396px;
+	min-width:420px;
 }
 
 .selection-confirmation .heading-6.small:before,
@@ -6492,6 +6520,11 @@ section.congrats {
 		width: 44px;
 		z-index:999;
 	}
+	.popup .close:focus-visible {
+		outline: 0px;
+		border:0;
+	}
+
 
 	.popup.addon-pop .scroller {
 		height: 100%;
@@ -7415,5 +7448,8 @@ input[type="text"]:disabled, input[type="email"]:disabled {
 	}
 	.modal-content {
 		position: static;
+	}
+	.popup.addon-pop .fixed-info.appointment-cancel {
+		flex-direction: column;
 	}
 }

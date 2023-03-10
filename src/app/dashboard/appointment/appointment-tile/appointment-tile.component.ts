@@ -17,7 +17,7 @@ export class AppointmentTileComponent {
   constructor(private dashboardService: DashboardService, private router:Router, public sharedService:SharedService){}
 
   cancelAppointment(){
-    const message = "Are you sure, You want to cancel your appointment?"
+    const message = "Are you sure you want to cancel your appointment?"
       this.sharedService.openConfirmationAlert(message).then((res:any)=>{
         if(res){
           if(this.appointment?.cancellable){

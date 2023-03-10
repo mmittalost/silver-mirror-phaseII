@@ -1,6 +1,6 @@
 <app-header title="Book an Appointment"></app-header>
 
-<section class="services-flow has-guests">
+<section class="services-flow" [ngClass]="(cart?.guests?.length && isGuestTabVisible) ? 'has-guests' : '' ">
 	<div class="container grid">
 		
 		<!--Breadcrumbs-->
