@@ -1,0 +1,11 @@
+.disabled-input {
+    pointer-events: none;
+  }
+
+input[type="checkbox"]:disabled {
+cursor: default;
+}
+
+.guest-different-services input[type=checkbox]:before{
+    cursor: default;
+}

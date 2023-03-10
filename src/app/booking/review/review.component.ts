@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/shared-component/shared.service';
 import { AuthService } from '../../auth/auth.service';
@@ -59,12 +59,47 @@ export class ReviewComponent implements OnInit {
     // });
   }
 
+  cvvValidator(control: FormControl): { [key: string]: any } | null {
+    const valid = /^\d{3,4}$/.test(control.value);
+    return valid ? null : { invalidCVV: true };
+  }
+
+  maskExpiryDate(expiryDate: string): string {
+    // Extract the month and year from the expiry date string
+    const [month, year] = expiryDate.split('/');
+  
+    // Replace the year with asterisks
+    const maskedYear = year;
+  
+    // Concatenate the masked month and year with a forward slash
+    const maskedExpiryDate = `${month}/${maskedYear}`;
+  
+    return maskedExpiryDate;
+  }
+
+  onExpiryDateInput(): void {
+    // Get the raw input value from the input field
+    const rawValue = this.paymentForm.value.expiry.replace(/\D/g, '');
+
+    // Extract the month and year components from the raw input value
+    const month = rawValue.substr(0, 2);
+    const year = rawValue.substr(2, 4);
+
+    // Mask the expiry date
+    const maskedExpiryDate = this.maskExpiryDate(`${month}/${year}`);
+
+    // Update the input field value with the masked expiry date
+    this.paymentForm.patchValue({
+      expiry:maskedExpiryDate
+    });
+  }
+
   _buildForm(){
     // PaymentForm
     this.paymentForm = this.formBuilder.group({
       name: ['', Validators.required],
       number: ['', Validators.compose([Validators.required, Validators.maxLength(16), Validators.minLength(16)])],
-      cvv: ['', Validators.compose([Validators.required, Validators.maxLength(3), Validators.minLength(3)])],
+      cvv: ['', Validators.compose([Validators.required, Validators.maxLength(4), Validators.minLength(3), this.cvvValidator])],
       expiry: ['', Validators.compose([Validators.required, Validators.maxLength(7), Validators.minLength(7)])],
       postal_code: ['', Validators.compose([Validators.required, Validators.maxLength(5), Validators.minLength(5)])],
     });
