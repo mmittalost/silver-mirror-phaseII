@@ -333,6 +333,7 @@ footer .copyright li,
 .pill.fill.small {
 	border-radius: 10px;
 	padding: 4px 10px;
+	white-space:nowrap;
 }
 
 .pill.fill.outline {
@@ -3693,7 +3694,7 @@ section.congrats {
 	border: 1px solid rgba(0, 0, 0, 0.3);
 	border-radius: 3px;
 	content: '';
-	cursor: none;
+	cursor: pointer;
 	height: 16px;
 	left: 0;
 	position: absolute;
@@ -3855,6 +3856,7 @@ section.congrats {
 
 .appointment-list .date .pill.fill {
 	margin-top: 8px;
+	white-space: nowrap;
 }
 
 .appointment-list .services,
@@ -7315,7 +7317,9 @@ dialog {
  .item-info{
 	max-width: 72%;
  }
-
+ .congrats .cart-info .item-info{
+	max-width: 100%;
+ }
 
  
 /***Add to Cal Popups***/
@@ -7409,7 +7413,22 @@ body.modal-open {
 
 input[type="text"]:disabled, input[type="email"]:disabled {
 	color: var(--mid-gray);
-  }
+}
+.text-link.large.add-new-card {
+	margin: 0 0 30px 0;
+}
+
+@media only screen and (max-width: calc(1500rem/16)) {
+	.purchases .content {
+		padding: 0 40px 30px 80px;
+	}
+}
+
+@media only screen and (max-width: calc(1250rem/16)) {
+	.purchases .content {
+		padding: 0 0px 30px 50px;
+	}
+}
 
 @media only screen and (max-width: calc(950rem/16)) {
 	.services-flow ul.time-filters.mobile-only {

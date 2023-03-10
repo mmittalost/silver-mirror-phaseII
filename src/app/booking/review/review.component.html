@@ -25,7 +25,7 @@
 				
 				
 			</div>
-			<button class="text-link large" (click)="togglePaymentMethodForm = !togglePaymentMethodForm">Add a new card</button>
+			<button class="text-link large add-new-card" (click)="togglePaymentMethodForm = !togglePaymentMethodForm">Add a new card</button>
 			<form [formGroup]="paymentForm" *ngIf="togglePaymentMethodForm">
 
 				<ul class="grid credit-card-details">
