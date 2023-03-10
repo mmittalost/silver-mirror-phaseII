@@ -13,7 +13,7 @@
             <!-- <app-services-tabs class="desktop-only" [reset]="resetServiceTabs" [isAddonEnable]="cart?.selectedItems?.length" (changeTabEvent)="changeServiceTab($event)"></app-services-tabs> -->
 			
 			<div class="guest-different-services" *ngIf="cart?.guests?.length" (click)="canAllowDifferentService()">
-				<input style="pointer-events: none;"[(ngModel)]="isSameServices" [checked]="isSameServices" [disabled]="isSameServices && cart?.selectedItems?.length != 1" (change)="copyItemsToGuest()" id="guest-different" type="checkbox"/>
+				<input [ngClass]="(isSameServices && cart?.selectedItems?.length != 1) ? 'disabled-input' : ''" [(ngModel)]="isSameServices" [checked]="isSameServices" [disabled]="isSameServices && cart?.selectedItems?.length != 1" (change)="copyItemsToGuest()" id="guest-different" type="checkbox"/>
 				<label for="guest-different">My guests want different services</label>
 			</div>
 			

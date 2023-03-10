@@ -50,7 +50,7 @@
 					
 					<li>
 						<label class="pill" for="card-exp">Expiration Date*</label>
-						<input maxLength="7" minLength="7" formControlName="expiry" type="text" id="card-exp" placeholder="MM/YYYY"/>
+						<input  maxLength="7" minLength="7" (input)="onExpiryDateInput()" formControlName="expiry" type="text" id="card-exp" placeholder="MM/YYYY"/>
 						<div class="required" *ngIf="paymentForm.controls.expiry.invalid && (paymentForm.controls.expiry.dirty || paymentForm.controls.expiry.touched)">
                             <div *ngIf="paymentForm.controls.expiry.errors?.required">Expiry date is required</div>
                         </div>
@@ -58,9 +58,10 @@
 					
 					<li>
 						<label class="pill" for="card-cvv">CVV*</label>
-						<input maxLength="3" minLength="3" formControlName="cvv" type="text" id="card-cvv" placeholder="***"/>
+						<input maxLength="4" minLength="3" formControlName="cvv" type="tel" id="card-cvv" placeholder="***"/>
 						<div class="required" *ngIf="paymentForm.controls.cvv.invalid && (paymentForm.controls.cvv.dirty || paymentForm.controls.cvv.touched)">
                             <div *ngIf="paymentForm.controls.cvv.errors?.required">CVV is required</div>
+                            <div *ngIf="paymentForm.controls.cvv.errors?.invalidCVV">Invalid CVV</div>
                         </div>
 					</li>
 
