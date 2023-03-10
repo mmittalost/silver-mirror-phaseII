@@ -143,6 +143,7 @@ export class ReviewComponent implements OnInit {
       mobilePhone: user.mobilePhone || user.phoneNumber,
       note: user.clientNote ? user.clientNote : ''
     });
+    this.userInfoForm.controls.email.disable();
   }
 
   updatePaymentMethod(){
@@ -190,7 +191,9 @@ export class ReviewComponent implements OnInit {
   updateUserInfo(){
     return new Promise((resolve, reject)=>{
       if(this.userInfoForm.valid){
-        this.bookingService.updateClientCartInfo(this.userInfoForm.value).subscribe((res:any)=>{
+        const client = this.userInfoForm.value;
+        client.email = this.userInfoForm.controls['email'].value;
+        this.bookingService.updateClientCartInfo(client).subscribe((res:any)=>{
           if(!res.errors){
             resolve(true);
             // this.bookingService.updateCartDetail();
@@ -230,6 +233,9 @@ export class ReviewComponent implements OnInit {
     if(this.couponForm.valid && code!=''){
       this.bookingService.addCartOffer(code).subscribe((res:any)=>{
         if(!res.errors){
+          const title = 'Promo code';
+          const message = 'applied successfully';
+          this.sharedService.showNotification(title, message);
           this.bookingService.updateCartDetail();
         }else{
           const title = 'Invalid promo code';
@@ -248,6 +254,9 @@ export class ReviewComponent implements OnInit {
     let offerId = this.cart.offers[0].id;
     this.bookingService.removeCartOffer(offerId).subscribe((res:any)=>{
       if(!res.errors){
+        const title = 'Promo code';
+        const message = 'removed successfully';
+        this.sharedService.showNotification(title, message);
         this.bookingService.updateCartDetail();
       }
     })
