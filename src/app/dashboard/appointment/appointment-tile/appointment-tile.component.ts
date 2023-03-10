@@ -23,6 +23,9 @@ export class AppointmentTileComponent {
           if(this.appointment?.cancellable){
             this.dashboardService.cancelAppointment(this.appointment.id).subscribe((res:any)=>{
               if(!res.errors){
+                const title = 'Appointment canceled successfully.';
+                const message = 'Your appointment has been canceled successfully.';
+                this.sharedService.showNotification(title, message);
                 this.updateAppointments();
               }else{
                 const title = 'Something went wrong';
