@@ -22,7 +22,7 @@ export class RescheduleComponent implements OnInit {
     this.appointmentId.next(history.state.appointmentId);
   }
   
-  constructor(private dashboardService:DashboardService, private router:Router, private sharedService:SharedService){
+  constructor(private dashboardService:DashboardService, private router:Router, public sharedService:SharedService){
     this.appointmentId.subscribe((aptId:string)=>{
       if(aptId != ''){
         const lowerRange = moment().format('YYYY-MM-DD');

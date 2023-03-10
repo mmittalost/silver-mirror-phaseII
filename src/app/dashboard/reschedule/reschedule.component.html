@@ -23,7 +23,7 @@
                     <fieldset class="flex-container">
                         <span style="display: flex;" *ngFor="let time of availableTimes | async">
                             <input (change)="selectTime(time)" [id]="time?.bookableTimeId" [checked]="time.selected" class="accessibility" name="time-chooser" type="radio"/>
-                            <label [for]="time?.bookableTimeId">{{time?.startTime | date:'hh:mm a':'EST'}}</label>
+                            <label [for]="time?.bookableTimeId">{{sharedService.removeLastTimezone(time?.startTime) | date:'hh:mm a'}}</label>
                         </span>
                         
                         <!-- <input id="claudia-time1130" class="accessibility" name="time-chooser" type="radio"/>
