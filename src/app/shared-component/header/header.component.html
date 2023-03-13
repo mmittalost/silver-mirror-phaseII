@@ -5,6 +5,7 @@
     <a class="logo" routerLink="/booking"><img src="/assets/svgs/logo.svg" alt="Book an appointment with Silver Mirror Facial Bar"/></a>
     <h1 [routerLink]=" title == 'Book an Appointment' ? '/booking' : null" class="heading-6 small">{{title}}</h1>
     <div class="user-pop-outer">
+        <a href="tel:(888) 677-0055">(888) 677-0055</a>
         <a *ngIf="!user && router.url !='/booking/review' && router.url !='/booking/schedule'" class="data-ui sign-in" routerLink="/auth"><span><svg width="8px" height="8px" viewBox="0 0 8 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <g transform="translate(-1328.000000, -36.000000)" fill="#000000" fill-rule="nonzero">
@@ -15,7 +16,8 @@
                     </g>
                 </g>
             </g>
-        </svg></span>{{ user ? 'Sign Out':'Sign In'}}</a>
+        </svg>
+    </span>{{ user ? 'Sign Out':'Sign In'}}</a>
         <a *ngIf="user" class="data-ui sign-in" (mouseenter) ="visible = true"  (click)="onclick()" href="javascript:void(0)"><span><svg width="8px" height="8px" viewBox="0 0 8 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <g transform="translate(-1328.000000, -36.000000)" fill="#000000" fill-rule="nonzero">

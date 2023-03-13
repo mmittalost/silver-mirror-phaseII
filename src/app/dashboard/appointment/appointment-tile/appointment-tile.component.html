@@ -35,11 +35,12 @@
 		<!--Actions-->
 		
 		<div class="actions">
-				<span *ngIf="!appointment?.reschedulable" class="pill rebook">Quick Rebook</span>
-				<a *ngIf="!appointment?.reschedulable" class="btn black small" href="#">Search Availability</a>
+				<!-- <span *ngIf="!appointment?.reschedulable" class="pill rebook">Quick Rebook</span>
+				<a *ngIf="!appointment?.reschedulable" class="btn black small" href="#">Search Availability</a> -->
 				
 				<span (click)="navigateToReschedule()"><a *ngIf="appointment?.reschedulable" class="btn black small reschedule">Reschedule</a></span>
 				<span *ngIf="cancel" (click)="cancelAppointment()"><a class="text-link">Cancel</a></span>
+				<p class="xx-small info" *ngIf="cancel">For group cancellation, Please contact our support team.</p>
 		</div>
 	</li>
 </ul>
