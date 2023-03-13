@@ -165,6 +165,9 @@
             <app-calendar [selectedDate]="selectedDate" [availableDates] = "availableDates | async" (changeMonthEvent)="monthChange($event)" (dateSelectEvent)="selectDate($event)"></app-calendar>
 
 
+            <p class="x-small no-availability" *ngIf="!(availableTimes | async).length">
+				If you are not able to see any available date. Please contact our support team.
+			</p>
             <div class="time-slots">
     
                 <div class="time-slot-container" *ngIf="(availableTimes | async).length">
