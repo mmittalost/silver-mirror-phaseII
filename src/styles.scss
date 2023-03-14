@@ -628,14 +628,14 @@ header:not(.client-portal-header) {
 	position: relative;
 }
 
-header:not(.client-portal-header) .sign-in {
+header:not(.client-portal-header) .sign-in, header:not(.client-portal-header) .phone {
 	align-items: center;
 	color: var(--black);
 	display: flex;
 	gap: 6px;
 }
 
-header:not(.client-portal-header) .sign-in span {
+header:not(.client-portal-header) .sign-in span, header:not(.client-portal-header) .phone span {
 	align-items: center;
 	background: var(--light-blue);
 	border-radius: 100%;
@@ -647,16 +647,16 @@ header:not(.client-portal-header) .sign-in span {
 	width: 22px;
 }
 
-header:not(.client-portal-header) .sign-in:hover span {
+header:not(.client-portal-header) .sign-in:hover span, header:not(.client-portal-header) .phone:hover span {
 	background-color: var(--bright-blue);
 }
 
-header:not(.client-portal-header) .sign-in path {
+header:not(.client-portal-header) .sign-in path, header:not(.client-portal-header) .phone path {
 	fill: var(--black);
 	transition: all .25s ease;
 }
 
-header:not(.client-portal-header) .sign-in:hover path {
+header:not(.client-portal-header) .sign-in:hover path, header:not(.client-portal-header) .phone:hover path {
 	fill: var(--white);
 }
 
@@ -2355,7 +2355,8 @@ aside .btn {
 
 .whos-coming h2 {
 	grid-column: 1 / -1;
-	margin: 40px 0 20px;
+	/*margin: 40px 0 20px;*/
+	margin: 0px 0 20px;
 	text-align: center;
 }
 
@@ -4005,7 +4006,8 @@ section.congrats {
 .empty-membership {
 	background: var(--light-gray);
 	border-radius: 16px;
-	padding: 60px 70px 65px;
+	/*padding: 60px 70px 65px;*/
+	padding: 60px 30px 65px;
 	text-align: center;
 }
 
@@ -4014,10 +4016,11 @@ section.congrats {
 }
 
 .empty-membership .grid {
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr;
 	list-style: none;
 	margin: 0;
 	padding: 0;
+	display:grid;
 }
 
 .empty-membership .membership-plan {
@@ -4084,6 +4087,7 @@ section.congrats {
 	list-style: none;
 	margin: 0;
 	padding: 0;
+	gap:30px;
 }
 
 /***Tabs Nav***/
@@ -5038,8 +5042,8 @@ section.congrats {
 	}
 
 	.services-flow ul.time-filters,
-	.services-flow ul.services-tabs,
-	.services-list .add-to-cart {
+	.services-flow ul.services-tabs
+	/*.services-list .add-to-cart*/ {
 		display: none;
 	}
 
@@ -5720,7 +5724,7 @@ section.congrats {
 
 	header.flex-container:not(.client-portal-header) {
 		/*justify-content: center;*/
-		justify-content: left;
+		/*justify-content: left;*/
 	}
 
 	header:not(.client-portal-header) .logo/*,
@@ -7270,6 +7274,8 @@ dialog {
 /***User Popups***/
 .user-pop-outer{
 	position:relative;
+	display: flex;
+	gap:12px;
 }
 .user-pop {
 	background: var(--white);
@@ -7443,8 +7449,15 @@ input[type="text"]:disabled, input[type="email"]:disabled {
 		}
 	}
 	.user-pop-outer {
-		position: absolute;
-		right: 30px;
+		/*position: absolute;
+		right: 30px;*/
+	}
+	.empty-membership .grid {
+		gap: 50px;
+		grid-template-columns: 1fr;
+	}
+	.purchases .content{
+		padding:0;
 	}
 }
 
@@ -7462,6 +7475,9 @@ input[type="text"]:disabled, input[type="email"]:disabled {
 }
 
 @media only screen and (max-width: calc(650rem/16)) {
+	.user-pop{
+		right:-20px;
+	}
 	body.modal-open {
 		overflow: visible;
 	}
@@ -7471,4 +7487,27 @@ input[type="text"]:disabled, input[type="email"]:disabled {
 	.popup.addon-pop .fixed-info.appointment-cancel {
 		flex-direction: column;
 	}
+
+}
+
+@media only screen and (max-width: calc(480rem/16)) {
+
+	header:not(.client-portal-header) h1 {
+		text-align: center;
+		width: 100%;
+		padding-bottom: 10px;
+	}
+	.user-pop-outer {
+		width: 100%;
+	}
+	header:not(.client-portal-header) .sign-in, header:not(.client-portal-header) .phone {
+		width: 100%;
+	}
+	header:not(.client-portal-header) .sign-in{
+		float:right;
+	}
+	.services-list, .services-list li {
+		gap: 10px;
+	}
+
 }
