@@ -55,13 +55,17 @@
 						</li>
 					</ul> -->
 					
+					<div style="margin-bottom: 16px;" class="flex-container cart-total" *ngIf="cart?.selectedItems?.length">
+						<span class="eyebrow small">Subtotal</span>
+						<p class="small">{{sharedService.formatPrice(this.cart?.summary?.subtotal) | currency:'USD':'symbol'}}</p>
+					</div>
 					<div style="margin-bottom: 16px;" class="flex-container cart-total" *ngIf="cart?.offers?.length">
 						<span class="eyebrow small">{{cart.offers[0]?.name}}</span>
-						<span class="pill fill small">Applied</span>
+						<p class="small">-{{sharedService.formatPrice(this.cart?.summary?.discountAmount) | currency:'USD':'symbol'}}</p>
 					</div>
-					<div class="flex-container cart-total">
+					<div class="flex-container cart-total" *ngIf="cart?.selectedItems?.length">
 						<span class="eyebrow small">Total</span>
-						<p class="small">{{sharedService.formatPrice(this.cart?.summary?.total) | currency:'USD':'symbol' : '1.0-0'}}</p>
+						<p class="small">{{sharedService.formatPrice(this.cart?.summary?.total) | currency:'USD':'symbol'}}</p>
 					</div>
 				</div>
 			</li>

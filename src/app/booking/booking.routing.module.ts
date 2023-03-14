@@ -6,6 +6,7 @@ import { WhosComingComponent } from "./whos-coming/whos-coming.component";
 import { SchedulingComponent } from "./scheduling/scheduling.component";
 import { ReviewComponent } from "./review/review.component";
 import { CongratsComponent } from "./congrats/congrats.component";
+import { LocationGuard } from "../guards/location.guard";
 
 @NgModule({
   imports: [
@@ -21,18 +22,22 @@ import { CongratsComponent } from "./congrats/congrats.component";
           {
             path: "whoscoming",
             component: WhosComingComponent,
+            canActivate: [LocationGuard]
           },
           {
             path: "services",
             component: ServicesComponent,
+            canActivate: [LocationGuard]
           },
           {
             path: "schedule",
             component: SchedulingComponent,
+            canActivate: [LocationGuard]
           },
           {
             path: "review",
             component: ReviewComponent,
+            canActivate: [LocationGuard]
           },
           {
             path: "congrats",

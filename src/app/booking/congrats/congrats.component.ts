@@ -48,7 +48,7 @@ export class CongratsComponent {
     selectedService.selectedOptions.map((option:any)=>{
       optionsPrice = optionsPrice + option.priceDelta;
     });
-    return selectedService.lineTotal - optionsPrice;
+    return selectedService.price - optionsPrice;
   }
 
   getServicesCount(){
