@@ -15,7 +15,7 @@
         </a>
 
         <div class="user-head">
-        <a *ngIf="!user && router.url !='/booking/review' && router.url !='/booking/schedule'" class="data-ui sign-in" routerLink="/auth"><span>
+        <a *ngIf="!user && router.url !='/booking/review' && router.url !='/booking/schedule'" class="data-ui sign-in menu-item-has-children" routerLink="/auth"><span>
             <svg width="8px" height="8px" viewBox="0 0 8 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <g transform="translate(-1328.000000, -36.000000)" fill="#000000" fill-rule="nonzero">
@@ -28,7 +28,7 @@
             </g>
         </svg>
         </span>{{ user ? 'Sign Out':'Sign In'}}</a>
-        <a *ngIf="user" class="data-ui sign-in" (mouseenter) ="visible = true"  (click)="onclick()" href="javascript:void(0)">
+        <a *ngIf="user" class="data-ui sign-in menu-item-has-children" (mouseenter) ="visible = true"  (click)="onclick()" href="javascript:void(0)">
             <span><svg width="8px" height="8px" viewBox="0 0 8 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <g transform="translate(-1328.000000, -36.000000)" fill="#000000" fill-rule="nonzero">

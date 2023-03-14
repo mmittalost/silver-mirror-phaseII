@@ -667,6 +667,20 @@ header:not(.client-portal-header) h1 {
 	transform: translate3d(-50%, -50%, 0);
 }
 
+header:not(.client-portal-header) .menu-item-has-children:after {
+	background: url('assets/svgs/icon-dropdown-caret.svg') no-repeat;
+	content: '';
+	display: inline-block;
+	height: 4px;
+	margin-left: 0px;
+	transition: all .25s ease;
+	vertical-align: middle;
+	width: 7px;
+}
+
+header:not(.client-portal-header) .menu-item-has-children:hover:after {
+	transform: rotate(-180deg);
+}
 /***Client Portal***/
 
 header.client-portal-header {
@@ -5553,11 +5567,11 @@ section.congrats {
 	.cart-info.active {
 		display: flex;
 	}
-
+/*
 	.cart-total {
 		display: none;
 	}
-
+*/
 	.cart-info ul.small {
 		margin-bottom: 0;
 		order: 2;
@@ -7282,7 +7296,7 @@ dialog {
 	border-radius: 12px;
 	box-shadow: 0 20px 50px rgba(0,0,0,.15);
 	display: block;
-	right: -30px;
+	right: -40px;
 	position: absolute;
 	top: calc(100% + 14px);
 	width: 180px;
