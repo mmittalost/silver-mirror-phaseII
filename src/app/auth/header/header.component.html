@@ -4,7 +4,17 @@
 <header class="flex-container">
     <a class="logo" routerLink="/booking"><img src="/assets/svgs/logo.svg" alt="Book an appointment with Silver Mirror Facial Bar"/></a>
     <h1 routerLink="/booking" class="heading-6 small">{{title}}</h1>
-    
+
+    <div class="user-pop-outer">
+        <a href="tel:(888) 677-0055" class="data-ui phone">
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16"> 
+                    <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/> 
+                </svg>
+            </span>
+            (888) 677-0055
+        </a>
+    <div class="user-head">
     <a *ngIf="!user" class="data-ui sign-in" routerLink="/auth"><span><svg width="8px" height="8px" viewBox="0 0 8 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
             <g transform="translate(-1328.000000, -36.000000)" fill="#000000" fill-rule="nonzero">
@@ -32,6 +42,8 @@
             <li routerLink="/booking">Book a Facial</li>
             <li>Sign Out</li>
            </ul>
+    </div>
+    </div>
         
     
 
