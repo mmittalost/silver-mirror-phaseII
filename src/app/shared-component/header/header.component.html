@@ -3,7 +3,7 @@
 <!--Header-->
 <header class="flex-container">
     <a class="logo" routerLink="/booking"><img src="/assets/svgs/logo.svg" alt="Book an appointment with Silver Mirror Facial Bar"/></a>
-    <h1 [routerLink]=" title == 'Book an Appointment' ? '/booking' : null" class="heading-6 small">{{title}}</h1>
+    <h1 [routerLink]=" mainTitle == 'Book an Appointment' ? '/booking' : null" class="heading-6 small">{{mainTitle}}</h1>
     <div class="user-pop-outer">
         <a href="tel:(888) 677-0055" class="data-ui phone">
             <span>

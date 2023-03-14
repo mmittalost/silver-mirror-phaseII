@@ -8,7 +8,7 @@ import { AuthService } from "../auth.service";
   styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent {
-  @Input() title: string = "";
+  @Input() mainTitle: string = "";
 
   ReadMore: boolean = true;
   visible: boolean = false;

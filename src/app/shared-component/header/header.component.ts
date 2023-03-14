@@ -9,7 +9,7 @@ import { AuthService } from "src/app/auth/auth.service";
   styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements OnInit {
-  @Input() title: string = "";
+  @Input() mainTitle: string = "";
 
   ReadMore: boolean = true;
   visible: boolean = false;
