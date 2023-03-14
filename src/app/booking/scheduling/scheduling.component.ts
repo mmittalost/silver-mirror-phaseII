@@ -106,6 +106,7 @@ export class SchedulingComponent implements OnInit {
     this.bookingService.getScheduleTimes(ev.fullDate).subscribe((res:any)=>{
       if(!res.errors){
         this.availableTimes.next(res.data.cartBookableTimes);
+        this.staffVarients.next([]);
       }else{
         alert(res.errors[0].message);
       }

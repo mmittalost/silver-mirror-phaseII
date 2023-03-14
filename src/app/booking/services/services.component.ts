@@ -159,7 +159,7 @@ export class ServicesComponent {
       }
       this.bookingService.addItemInCart(payload).subscribe((res:any)=>{
         if(!res.errors){
-          const title = 'Great Choice! Looking gorgeous';
+          const title = 'Great choice! Looking gorgeous…';
           const message = 'ADDED TO CART';
           this.sharedService.showNotification(title, message);
           this.bookingService.updateCartDetail();

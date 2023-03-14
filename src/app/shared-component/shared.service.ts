@@ -43,7 +43,7 @@ export class SharedService {
   }
 
   formatPrice(price:number){
-    return Math.floor(price/100);
+    return price/100;
   }
 
   getServiceCategoryName(service:any, categories:any){

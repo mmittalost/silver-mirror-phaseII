@@ -40,7 +40,7 @@ export class ModalAddonDetailComponent {
       }
       this.bookingService.addAddonInCart(payload).subscribe((res:any)=>{
         if(!res.errors){
-          const title = 'Great Choice! Looking gorgeous';
+          const title = 'Great choice! Looking gorgeous…';
           const message = 'ADDED TO CART';
           this.addonModalRef.close()
           this.sharedService.showNotification(title, message);

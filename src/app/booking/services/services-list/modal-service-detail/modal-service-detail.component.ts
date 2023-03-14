@@ -43,7 +43,7 @@ export class ModalServiceDetailComponent {
       }
       this.bookingService.addItemInCart(payload).subscribe((res:any)=>{
         if(!res.errors){
-          const title = 'Great Choice! Looking gorgeous';
+          const title = 'Great choice! Looking gorgeous…';
           const message = 'ADDED TO CART';
           this.cartSubscription.unsubscribe();
           this.serviceModalRef.close();

@@ -1,6 +1,6 @@
 <button class="mobile-only cart-summary flex-container" *ngIf="cart?.selectedItems?.length" (click)="toggleMobileCart = !toggleMobileCart">
     <span class="eyebrow small">Summary</span>
-    <span class="cost">{{sharedService.formatPrice(this.cart?.summary?.total) | currency:'USD':'symbol' : '1.0-0'}}</span>
+    <span class="cost">{{sharedService.formatPrice(this.cart?.summary?.total) | currency:'USD':'symbol'}}</span>
 </button>
 <div class="cart-info" [ngClass]="toggleMobileCart ? 'active' : ''">  
     <button (click)="bookingService.toggleMobileCart()" class="close-cart mobile-only"><span class="accessibility">Close Cart</span></button>
@@ -86,13 +86,17 @@
         </li>
     </ul>
 
+    <div class="flex-container cart-total" *ngIf="cart?.selectedItems?.length">
+        <span class="eyebrow small">Subtotal</span>
+        <p class="small">{{sharedService.formatPrice(this.cart?.summary?.subtotal) | currency:'USD':'symbol'}}</p>
+    </div>
     <div class="flex-container cart-total" *ngIf="cart?.offers?.length">
         <span class="eyebrow small">{{cart.offers[0]?.name}}</span>
-        <span class="pill fill small">Applied</span>
+        <p class="small">-{{sharedService.formatPrice(this.cart?.summary?.discountAmount) | currency:'USD':'symbol'}}</p>
     </div>
     <div class="flex-container cart-total" *ngIf="cart?.selectedItems?.length">
         <span class="eyebrow small">Total</span>
-        <p class="small">{{sharedService.formatPrice(this.cart?.summary?.total) | currency:'USD':'symbol' : '1.0-0'}}</p>
+        <p class="small">{{sharedService.formatPrice(this.cart?.summary?.total) | currency:'USD':'symbol'}}</p>
     </div>
 
     <ul class="xx-small cart-details" *ngIf="cart?.startTime && router.url == '/booking/review'">
